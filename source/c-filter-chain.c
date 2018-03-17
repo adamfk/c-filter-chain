@@ -37,7 +37,7 @@ fc_Type FilterChain_filter(FilterChain* fc, fc_Type input)
 
 
 
-#define PassThrough_ftable ECAT(fc_PassThrough_ftable_, fc_Type)
+#define PassThrough_ftable FC_MAKE_NAME(PassThrough_ftable)
 
 const BlockFunctionTable PassThrough_ftable = {
   .filter = (GenericBlock_filter_t)PassThrough_filter,
@@ -64,8 +64,7 @@ void PassThrough_filter(PassThrough* passThrough, fc_Type input)
 }
 
 
-
-#define IirLowPass1_ftable ECAT(fc_IirLowPass1_ftable_, fc_Type)
+#define IirLowPass1_ftable FC_MAKE_NAME(fc_IirLowPass1_ftable)
 
 const BlockFunctionTable IirLowPass1_ftable = {
   .filter = (GenericBlock_filter_t)IirLowPass1_filter,

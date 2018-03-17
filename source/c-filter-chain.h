@@ -5,20 +5,24 @@
 
 #define fc_Type FILTER_CHAIN_TYPE
 
-#define ECAT1(arg_1, arg_2)    arg_1 ## arg_2
-#define ECAT2(arg_1, arg_2)    ECAT1(arg_1, arg_2)
-#define ECAT3(arg_1, arg_2)    ECAT2(arg_1, arg_2)
-#define ECAT4(arg_1, arg_2)    ECAT3(arg_1, arg_2)
-#define ECAT5(arg_1, arg_2)    ECAT4(arg_1, arg_2)
-#define ECAT6(arg_1, arg_2)    ECAT5(arg_1, arg_2)
-#define ECAT7(arg_1, arg_2)    ECAT6(arg_1, arg_2)
-#define ECAT8(arg_1, arg_2)    ECAT7(arg_1, arg_2)
-#define ECAT(arg_1, arg_2)     ECAT8(arg_1, arg_2)
+//expand macro and concatenate
+#define ECAT1(arg_1, arg_2, arg_3, arg_4)    arg_1 ## arg_2 ## arg_3 ## arg_4
+#define ECAT2(arg_1, arg_2, arg_3, arg_4)    ECAT1(arg_1, arg_2, arg_3, arg_4)
+#define ECAT3(arg_1, arg_2, arg_3, arg_4)    ECAT2(arg_1, arg_2, arg_3, arg_4)
+#define ECAT4(arg_1, arg_2, arg_3, arg_4)    ECAT3(arg_1, arg_2, arg_3, arg_4)
+#define ECAT5(arg_1, arg_2, arg_3, arg_4)    ECAT4(arg_1, arg_2, arg_3, arg_4)
+#define ECAT6(arg_1, arg_2, arg_3, arg_4)    ECAT5(arg_1, arg_2, arg_3, arg_4)
+#define ECAT7(arg_1, arg_2, arg_3, arg_4)    ECAT6(arg_1, arg_2, arg_3, arg_4)
+#define ECAT8(arg_1, arg_2, arg_3, arg_4)    ECAT7(arg_1, arg_2, arg_3, arg_4)
+#define ECAT( arg_1, arg_2, arg_3, arg_4)    ECAT8(arg_1, arg_2, arg_3, arg_4)
 
 
-#define GenericBlock ECAT(fcb_GenericBlock_, fc_Type)
-#define GenericBlock_filter_t ECAT(fcb_GenericBlock_filter_t, fc_Type)
-#define GenericBlock_setup_t ECAT(fcb_GenericBlock_setup_t, fc_Type)
+#define FC_MAKE_NAME(name) ECAT(fc, FILTER_CHAIN_NAME_PREFIX, _, name)
+#define FCB_MAKE_NAME(name) ECAT(fcb, FILTER_CHAIN_NAME_PREFIX, _, name)
+
+#define GenericBlock          FCB_MAKE_NAME(GenericBlock)
+#define GenericBlock_filter_t FCB_MAKE_NAME(GenericBlock_filter_t)
+#define GenericBlock_setup_t  FCB_MAKE_NAME(GenericBlock_setup_t)
 
 
 //need to forward declare GenericBlock for other declarations.
@@ -29,7 +33,7 @@ typedef void(*GenericBlock_setup_t)(GenericBlock* block);
 
  
 
-#define BlockFunctionTable ECAT(fc_BlockFunctionTable_, fc_Type)
+#define BlockFunctionTable FC_MAKE_NAME(BlockFunctionTable)
 typedef struct BlockFunctionTable
 {
   GenericBlock_filter_t filter;
@@ -49,9 +53,9 @@ struct GenericBlock
 
 
 
-#define FilterChain ECAT(fc_FilterChain_, fc_Type)
-#define FilterChain_setup    ECAT(fc_FilterChain_setup_, fc_Type)
-#define FilterChain_filter    ECAT(fc_FilterChain_filter_, fc_Type)
+#define FilterChain         FC_MAKE_NAME(FilterChain)
+#define FilterChain_setup   FC_MAKE_NAME(FilterChain_setup)
+#define FilterChain_filter  FC_MAKE_NAME(FilterChain_filter)
 
 typedef struct FilterChain
 {
@@ -65,10 +69,10 @@ fc_Type FilterChain_filter(FilterChain* fc, fc_Type input);
 
 
 
-#define PassThrough ECAT(fcb_PassThroughBlock_, fc_Type)
-#define PassThrough_new    ECAT(fcb_PassThroughBlock_new_, fc_Type)
-#define PassThrough_filter ECAT(fcb_PassThroughBlock_filter_, fc_Type)
-#define PassThrough_setup  ECAT(fcb_PassThroughBlock_setup_, fc_Type)
+#define PassThrough        FCB_MAKE_NAME(PassThrough)
+#define PassThrough_new    FCB_MAKE_NAME(PassThrough_new)
+#define PassThrough_filter FCB_MAKE_NAME(PassThrough_filter)
+#define PassThrough_setup  FCB_MAKE_NAME(PassThrough_setup)
 
 
 typedef struct PassThrough
@@ -78,8 +82,8 @@ typedef struct PassThrough
 
 
 void PassThrough_new(PassThrough* block);
-void PassThrough_filter(PassThrough* block, fc_Type input);
 void PassThrough_setup(PassThrough* block);
+void PassThrough_filter(PassThrough* block, fc_Type input);
 
 
 
@@ -87,10 +91,10 @@ void PassThrough_setup(PassThrough* block);
 
 
 
-#define IirLowPass1 ECAT(fcb_IirLowPass1_, fc_Type)
-#define IirLowPass1_new ECAT(fcb_IirLowPass1_new_, fc_Type)
-#define IirLowPass1_filter ECAT(fcb_IirLowPass1_filter_, fc_Type)
-#define IirLowPass1_setup ECAT(fcb_IirLowPass1_setup_, fc_Type)
+#define IirLowPass1        FCB_MAKE_NAME(IirLowPass1)
+#define IirLowPass1_new    FCB_MAKE_NAME(IirLowPass1_new)
+#define IirLowPass1_filter FCB_MAKE_NAME(IirLowPass1_filter)
+#define IirLowPass1_setup  FCB_MAKE_NAME(IirLowPass1_setup)
 
 
 /**
@@ -104,8 +108,8 @@ typedef struct IirLowPass1
 
 
 void IirLowPass1_new(IirLowPass1* block);
-void IirLowPass1_filter(IirLowPass1* block, fc_Type input);
 void IirLowPass1_setup(IirLowPass1* block);
+void IirLowPass1_filter(IirLowPass1* block, fc_Type input);
 
 
 

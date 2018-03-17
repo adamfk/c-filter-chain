@@ -16,32 +16,32 @@
 int main(void) {
 
 
-  fcb_PassThroughBlock_int32_t p32;
-  fcb_PassThroughBlock_new_int32_t(&p32);
+  fcb32_PassThrough p32;
+  fcb32_PassThrough_new(&p32);
 
-  fcb_IirLowPass1_int32_t iir32;
-  fcb_IirLowPass1_new_int32_t(&iir32);
+  fcb32_IirLowPass1 iir32;
+  fcb32_IirLowPass1_new(&iir32);
   iir32.new_ratio = 0.20f;
 
-  fc_FilterChain_int32_t fc32 = { 0 };
-  fcb_GenericBlock_int32_t* blocks[] = {
+  fc32_FilterChain filter_chain = { 0 };
+  fcb32_GenericBlock* blocks[] = {
     &iir32.block,
     &p32.block,
   };
 
-  fc32.blocks = &blocks[0];
-  fc32.block_count = COUNT_OF(blocks);
-  fc_FilterChain_setup_int32_t(&fc32);
+  filter_chain.blocks = &blocks[0];
+  filter_chain.block_count = COUNT_OF(blocks);
+  fc32_FilterChain_setup(&filter_chain);
 
   for (size_t i = 0; i < 50; i++)
   {
-    int32_t output = fc_FilterChain_filter_int32_t(&fc32, 1000);
+    int32_t output = fc32_FilterChain_filter(&filter_chain, 1000);
     printf("step %i, output %d\n", i, output);
   }
 
 
 
-  fcb_IirLowPass1_int8_t iir8;
-  fcb_IirLowPass1_new_int8_t(&iir8);
+  fcb32_IirLowPass1 iir8;
+  fcb32_IirLowPass1_new(&iir8);
 
 }
