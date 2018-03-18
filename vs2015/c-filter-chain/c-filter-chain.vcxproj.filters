@@ -15,13 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\i32-filter-chain.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\i8-filter-chain.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\i32-filter-chain.gtest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

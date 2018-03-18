@@ -3,6 +3,10 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define fc_Type FILTER_CHAIN_TYPE
 
 //expand macro and concatenate
@@ -113,3 +117,12 @@ void IirLowPass1_filter(IirLowPass1* block, fc_Type input);
 
 
 
+
+
+
+
+
+
+#ifdef __cplusplus
+}
+#endif
