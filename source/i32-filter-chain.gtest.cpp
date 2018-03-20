@@ -16,6 +16,20 @@
 #define COUNT_OF(x) ((sizeof(x)/sizeof(0[x])) / ((size_t)(!(sizeof(x) % sizeof(0[x])))))
 
 
+static void test_chain_against_array(fc32_FilterChain* filter_chain, int32_t const * inputs, int32_t const * expected_outputs, size_t length, int32_t error_tolerance)
+{
+  int32_t input;
+  int32_t expected;
+  int32_t output;
+
+  for (size_t i = 0; i < length; i++)
+  {
+    input = inputs[i];
+    expected = expected_outputs[i];
+    output = fc32_FilterChain_filter(filter_chain, input);
+    EXPECT_NEAR(expected, output, error_tolerance);
+  }
+}
 
 
 TEST(FilterChain_i32, OnePassthrough) {
@@ -83,40 +97,12 @@ TEST(FilterChain_i32, OneIirPrecalc) {
   filter_chain.block_count = COUNT_OF(blocks);
   fc32_FilterChain_setup(&filter_chain);
 
-  const int32_t input = 100;
-  const int32_t error_tol = 1;
-  int32_t expected;
-  int32_t output = 0;
 
-  int32_t expected_outputs[] = {
-    20,
-    36,
-    49,
-    59,
-    67,
-    74,
-    79,
-    83,
-    87,
-    89,
-    91,
-    93,
-    95,
-    96,
-    96,
-    97,
-    98,
-    98,
-    99,
-  };
-
-  for (size_t i = 0; i < COUNT_OF(expected_outputs); i++)
-  {
-    expected = expected_outputs[i];
-    output = fc32_FilterChain_filter(&filter_chain, input);
-    EXPECT_NEAR(expected, output, error_tol);
-  }
-
+  const int32_t error_tolerance = 1;
+  const int32_t inputs[] =           { 100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100, };
+  const int32_t expected_outputs[] = { 20,  36, 49, 59, 67, 74, 79, 83, 87, 89, 91, 93, 95, 96, 96, 97, 98, 98, 99, };
+  const size_t length = COUNT_OF(expected_outputs);
+  test_chain_against_array(&filter_chain, inputs, expected_outputs, length, error_tolerance);
 }
 
 
@@ -177,22 +163,13 @@ TEST(FilterChain_i32, DownSamplerPassthrough) {
   top_filter_chain.block_count = COUNT_OF(top_filter_blocks);
   fc32_FilterChain_setup(&top_filter_chain);
 
-  const int32_t error_tol = 0;
+  const int32_t error_tolerance = 0;
   const int32_t inputs[] =           {1,2,3,4,5,6,7,8,9,10};
   const int32_t expected_outputs[] = {0,2,2,4,4,6,6,8,8,10};
-  int32_t input;
-  int32_t expected;
-  int32_t output = 0;
-  
-  for (size_t i = 0; i < COUNT_OF(expected_outputs); i++)
-  {
-    input = inputs[i];
-    expected = expected_outputs[i];
-    output = fc32_FilterChain_filter(&top_filter_chain, input);
-    EXPECT_NEAR(expected, output, error_tol);
-  }
-
+  const size_t length = COUNT_OF(expected_outputs);
+  test_chain_against_array(&top_filter_chain, inputs, expected_outputs, length, error_tolerance);
 }
+
 
 
 
