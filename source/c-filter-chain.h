@@ -119,6 +119,27 @@ void IirLowPass1_filter(IirLowPass1* block, fc_Type input);
 
 
 
+#define DownSampler        FCB_MAKE_NAME(DownSampler)
+#define DownSampler_new    FCB_MAKE_NAME(DownSampler_new)
+#define DownSampler_filter FCB_MAKE_NAME(DownSampler_filter)
+#define DownSampler_setup  FCB_MAKE_NAME(DownSampler_setup)
+
+
+/**
+* Structure for a single order low pass IIR filter
+*/
+typedef struct DownSampler
+{
+  GenericBlock block;      //!< MUST BE FIRST FIELD IN STRUCT TO ALLOW CASTING FROM PARENT TYPE
+  FilterChain sub_chain;   //!< the filter chain that receives the downsampled input to this block
+  uint16_t sample_every_x; //!< How often to sample input. If 1, it will sample every input. One based!
+  uint16_t sample_count;   //!< When this counts up to #sample_every_x, it will sample and reset count
+} DownSampler;
+
+
+void DownSampler_new(DownSampler* block);
+void DownSampler_setup(DownSampler* block);
+void DownSampler_filter(DownSampler* block, fc_Type input);
 
 
 

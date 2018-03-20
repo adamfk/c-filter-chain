@@ -154,6 +154,49 @@ TEST(FilterChain_i32, OneIirDynamicCalc) {
 
 
 
+TEST(FilterChain_i32, DownSamplerPassthrough) {
+
+  fcb32_PassThrough downsampled_p1;
+  fcb32_PassThrough_new(&downsampled_p1);
+
+  fcb32_DownSampler down_sampler;
+  fcb32_DownSampler_new(&down_sampler);
+  down_sampler.sample_every_x = 2;  //downsample by 2
+  fcb32_GenericBlock* downsampled_blocks[] = {
+    &downsampled_p1.block,
+  };
+  down_sampler.sub_chain.blocks = &downsampled_blocks[0];
+  down_sampler.sub_chain.block_count = COUNT_OF(downsampled_blocks);
+
+
+  fc32_FilterChain top_filter_chain = { 0 };
+  fcb32_GenericBlock* top_filter_blocks[] = {
+    &down_sampler.block,
+  };
+  top_filter_chain.blocks = &top_filter_blocks[0];
+  top_filter_chain.block_count = COUNT_OF(top_filter_blocks);
+  fc32_FilterChain_setup(&top_filter_chain);
+
+  const int32_t error_tol = 0;
+  const int32_t inputs[] =           {1,2,3,4,5,6,7,8,9,10};
+  const int32_t expected_outputs[] = {0,2,2,4,4,6,6,8,8,10};
+  int32_t input;
+  int32_t expected;
+  int32_t output = 0;
+  
+  for (size_t i = 0; i < COUNT_OF(expected_outputs); i++)
+  {
+    input = inputs[i];
+    expected = expected_outputs[i];
+    output = fc32_FilterChain_filter(&top_filter_chain, input);
+    EXPECT_NEAR(expected, output, error_tol);
+  }
+
+}
+
+
+
+
 int main(int argc, char** argv) {
   ::testing::InitGoogleMock(&argc, argv);
   int result = RUN_ALL_TESTS();

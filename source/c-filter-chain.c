@@ -64,6 +64,8 @@ void PassThrough_filter(PassThrough* passThrough, fc_Type input)
 }
 
 
+
+
 #define IirLowPass1_ftable FC_MAKE_NAME(fc_IirLowPass1_ftable)
 
 const BlockFunctionTable IirLowPass1_ftable = {
@@ -97,5 +99,41 @@ void IirLowPass1_filter(IirLowPass1* iir, fc_Type input)
 }
 
 
+
+//###################################################################33
+
+
+#define DownSampler_ftable FC_MAKE_NAME(DownSampler_ftable)
+
+const BlockFunctionTable DownSampler_ftable = {
+  .filter = (GenericBlock_filter_t)DownSampler_filter,
+  .setup = (GenericBlock_setup_t)DownSampler_setup,
+};
+
+
+void DownSampler_new(DownSampler* down_sampler)
+{
+  ZERO_STRUCT(*down_sampler);
+  down_sampler->block.function_table = &DownSampler_ftable;
+}
+
+
+void DownSampler_setup(DownSampler* down_sampler)
+{
+  down_sampler->block.output = 0;
+  FilterChain_setup(&down_sampler->sub_chain);
+}
+
+
+void DownSampler_filter(DownSampler* down_sampler, fc_Type input)
+{
+  down_sampler->sample_count++;
+
+  if (down_sampler->sample_count >= down_sampler->sample_every_x)
+  {
+    down_sampler->block.output = FilterChain_filter(&down_sampler->sub_chain, input);
+    down_sampler->sample_count = 0;
+  }
+}
 
 
