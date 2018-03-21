@@ -171,6 +171,37 @@ TEST(FilterChain_i32, DownSamplerPassthrough) {
 }
 
 
+TEST(FilterChain_i32, DownSamplerIir) {
+
+  fcb32_IirLowPass1 downsampled_iir;
+  fcb32_IirLowPass1_new(&downsampled_iir);
+  downsampled_iir.new_ratio = 0.5;
+
+  fcb32_DownSampler down_sampler;
+  fcb32_DownSampler_new(&down_sampler);
+  down_sampler.sample_every_x = 2;  //downsample by 2
+  fcb32_GenericBlock* downsampled_blocks[] = {
+    &downsampled_iir.block,
+  };
+  down_sampler.sub_chain.blocks = &downsampled_blocks[0];
+  down_sampler.sub_chain.block_count = COUNT_OF(downsampled_blocks);
+
+
+  fc32_FilterChain top_filter_chain = { 0 };
+  fcb32_GenericBlock* top_filter_blocks[] = {
+    &down_sampler.block,
+  };
+  top_filter_chain.blocks = &top_filter_blocks[0];
+  top_filter_chain.block_count = COUNT_OF(top_filter_blocks);
+  fc32_FilterChain_setup(&top_filter_chain);
+
+  const int32_t error_tolerance = 0;
+  const int32_t inputs[] =           { 100, 100,100, 100,100, 100,100, 100,100, 100 };
+  //                       samples = { no,  yes,no,  yes,no,  yes,no,  yes,no,  yes,};
+  const int32_t expected_outputs[] = { 0,   50,50,   75,75,   88,88,   94,94,   97 };
+  const size_t length = COUNT_OF(expected_outputs);
+  test_chain_against_array(&top_filter_chain, inputs, expected_outputs, length, error_tolerance);
+}
 
 
 
