@@ -14,6 +14,13 @@
 #define ZERO_STRUCT(my_struct)  memset(&(my_struct), 0, sizeof(my_struct));
 
 
+/**
+ * Cast away const to reduce compiler warning. We want user code to see it as const
+ * but we also need to return it on failure.
+ */
+#define CF_ALLOCATE_FAIL_PTR ((void*)CF_ALLOCATE_FAIL_PTR)
+
+
 static void* malloc_then_func_or_ret_fail_ptr(size_t size, void(*success_function)(void* allocated_object))
 {
   void* p = cfc_Malloc(size);
