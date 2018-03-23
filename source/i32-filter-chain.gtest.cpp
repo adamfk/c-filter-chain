@@ -1,4 +1,4 @@
-
+#include "gtest-stuff.hpp"
 
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
@@ -7,11 +7,17 @@
 
 using ::testing::_;
 using ::testing::Invoke;
+using ::testing::Return;
+using ::testing::ReturnNull;
+using ::testing::DoDefault;
+using ::testing::AtLeast;
 
 
 //TODO create general macros file
 
 //TODO consider making a filter chain extend the GenericBlock class
+
+//TODO consider throwing error if MockHeap had to free any dangling memory in its destructor
 
 /**
 * Macro for getting the size of an array that is known at compile time. Code from Google's Chromium project.
@@ -25,10 +31,35 @@ using ::testing::Invoke;
 #include <stdexcept>
 
 
+
+
+
 /**
- * tracks allocations and their sizes
+ * tracks allocations and their sizes. Purposely not using array or list as we shouldn't care how elements were inserted, just that they were.
  */
 std::unordered_map<void*, size_t> heap_allocations;
+
+class Allocation {
+public:
+  void* pointer;
+  size_t size;
+};
+
+
+Allocation* get_first_allocation()
+{
+  if (heap_allocations.size() == 0) {
+    return NULL;
+  }
+
+  std::unordered_map<void*, size_t>::iterator iterator;
+  iterator = heap_allocations.begin(); //setup iterator at start
+  Allocation* allocation = new Allocation();
+  allocation->pointer = iterator->first;
+  allocation->size = iterator->second;
+  return allocation;
+}
+
 
 class Heap
 {
@@ -51,7 +82,6 @@ public:
     void* ptr = malloc(size);
     heap_allocations[ptr] = size;
     return ptr;
-    return NULL;
   }
 
   virtual void xFree(void* ptr) {
@@ -66,10 +96,11 @@ public:
   }
 
   virtual void reset() {
-    std::unordered_map<void*, size_t>::iterator it;
 
-    for (it = heap_allocations.begin(); it != heap_allocations.end(); it++) {
-      xFree(it->first);
+    //have to be careful iterating over a map while removing elements from it
+    while (heap_allocations.size() > 0) {
+      Allocation* allocation = get_first_allocation();
+      xFree(allocation->pointer);
     }
   }
 };
@@ -92,6 +123,11 @@ public:
     ON_CALL(*this, xFree(_))
       .WillByDefault(Invoke(&fake_, &FakeHeap::xFree));
   }
+
+  void DoDefaultXMalloc(size_t size) {
+    fake_.xMalloc(size);
+  }
+
 private:
   FakeHeap fake_;  // Keeps an instance of the fake in the mock.
 
@@ -99,22 +135,18 @@ private:
 
 MockHeap* mockHeapPtr;
 
-extern "C" {
 
-  void* xMalloc(size_t size) {
-    void* ptr = mockHeapPtr->xMalloc(size);
-    return ptr;
-    return NULL;
-  }
+void* xMalloc(size_t size) {
+  void* ptr = mockHeapPtr->xMalloc(size);
+  return ptr;
+}
 
-  void xFree(void* ptr) {
-    mockHeapPtr->xFree(ptr);
-  }
+void xFree(void* ptr) {
+  mockHeapPtr->xFree(ptr);
 }
 
 
-#define CFC_MALLOC_FUNC xMalloc
-#define CFC_FREE_FUNC xFree
+
 #include "i32-filter-chain.h"
 
 
@@ -310,6 +342,9 @@ TEST(FilterChain_i32, DownSamplerIir) {
 
 
 TEST(FilterChain_i32, MallocDownSamplerIir) {
+  MockHeap mockHeap;
+  mockHeap.DelegateToFake();
+  mockHeapPtr = &mockHeap;
 
   fc32_FilterChain* filter_chain = fc32_FilterChain_malloc(0,
     fcb32_DownSampler_new_malloc(0, 2, 
@@ -333,16 +368,102 @@ TEST(FilterChain_i32, MallocDownSamplerIir) {
 }
 
 
-TEST(FilterChain_i32, TodoDestructorTests) {
+TEST(FilterChain_i32, TestHeapMocking) {
+  {
+    MockHeap mockHeap;
+    mockHeap.DelegateToFake();
+    mockHeapPtr = &mockHeap;
+
+    fcb32_PassThrough* p = fcb32_PassThrough_new_malloc();
+    //NOTE! purposely don't destruct filter above
+
+    ASSERT_EQ(heap_allocations.size(), 1);
+  }
+  //mockHeap has now gone out of scope, assert that it cleaned up
+  ASSERT_EQ(heap_allocations.size(), 0);
+}
+
+
+TEST(FilterChain_i32, TestHeapMocking3) {
   MockHeap mockHeap;
+  mockHeap.DelegateToFake();
   mockHeapPtr = &mockHeap;
 
-  //FAIL();
+  //see if we can NULL the 3rd returned malloc
+  EXPECT_CALL(mockHeap, xMalloc(_)).Times(3)
+    .WillOnce(DoDefault())
+    .WillOnce(ReturnNull())
+    .WillOnce(DoDefault());
+  fcb32_PassThrough* p1 = fcb32_PassThrough_new_malloc();
+  fcb32_PassThrough* p2 = fcb32_PassThrough_new_malloc(); //RETURN NULL HERE!
+  fcb32_PassThrough* p3 = fcb32_PassThrough_new_malloc();
+
+  ASSERT_EQ(heap_allocations.size(), 2);
+
+  EXPECT_NE(p1, CF_ALLOCATE_FAIL_PTR); //NOT equal
+  EXPECT_EQ(p2, CF_ALLOCATE_FAIL_PTR);
+  EXPECT_NE(p3, CF_ALLOCATE_FAIL_PTR); //NOT equal
 }
 
-TEST(FilterChain_i32, TodoMallocFailureTests) {
-  //FAIL();
+
+TEST(FilterChain_i32, MallocSimpleTest) {
+  MockHeap mockHeap;
+  mockHeap.DelegateToFake();
+  
+  fcb32_PassThrough* p_filter;
+  int expected_size = sizeof(*p_filter);
+
+  EXPECT_CALL(mockHeap, xMalloc(expected_size)).Times(1);
+  p_filter = fcb32_PassThrough_new_malloc();
+  ASSERT_EQ(heap_allocations.size(), 1);
+  Allocation* allocation = get_first_allocation();
+  ASSERT_EQ(allocation->size, sizeof(*p_filter));
 }
+
+
+TEST(FilterChain_i32, MallocFailurePassThroughFilter) {
+  MockHeap mockHeap;
+  mockHeap.DelegateToFake();
+  mockHeapPtr = &mockHeap;
+  fcb32_PassThrough* p_filter;
+  int expected_size = sizeof(*p_filter);
+
+  EXPECT_CALL(mockHeap, xMalloc(_)).Times(1).WillOnce(Return(nullptr));
+  p_filter = fcb32_PassThrough_new_malloc();
+  EXPECT_EQ(CF_ALLOCATE_FAIL_PTR, p_filter);
+}
+
+
+//TODO test all objects for malloc failure
+
+TEST(FilterChain_i32, MallocFailureInChain1) {
+  MockHeap mockHeap;
+  mockHeap.DelegateToFake();
+  mockHeapPtr = &mockHeap;
+
+
+  EXPECT_CALL(mockHeap, xMalloc(_)).Times(AtLeast(3))
+    .WillOnce(DoDefault())  //0.42 IIR
+    .WillOnce(ReturnNull()) //0.41 IIR  //RETURN NULL
+    .WillRepeatedly(DoDefault()) //rest of filters
+    ;
+
+  EXPECT_CALL(mockHeap, xFree(_)).Times(AtLeast(1));
+
+  fc32_FilterChain* filter_chain = fc32_FilterChain_malloc(0,
+    fcb32_DownSampler_new_malloc(0, 2,
+      fcb32_IirLowPass1_new_malloc(0.40f),
+      fcb32_IirLowPass1_new_malloc(0.41f),
+      fcb32_IirLowPass1_new_malloc(0.42f),
+      NULL
+    ),
+    NULL
+  );
+
+  EXPECT_EQ(filter_chain, CF_ALLOCATE_FAIL_PTR);
+  EXPECT_EQ(heap_allocations.size(), 0);
+}
+
 
 
 int main(int argc, char** argv) {

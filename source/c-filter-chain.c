@@ -163,6 +163,10 @@ FilterChain* FilterChain_malloc(uint8_t dummy, ...)
     va_start(list, dummy);
     success = FilterChain_malloc_inner(filter_chain, list);
     va_end(list);
+
+    if (!success) {
+      cfc_Free(filter_chain);
+    }
   }
 
   if (!success) {
@@ -282,7 +286,11 @@ void IirLowPass1_new(IirLowPass1* iir)
 IirLowPass1* IirLowPass1_new_malloc(float new_ratio)
 {
   IirLowPass1* p = malloc_then_func_or_ret_fail_ptr(sizeof(IirLowPass1), IirLowPass1_new);
-  p->new_ratio = new_ratio;
+  
+  if (p != CF_ALLOCATE_FAIL_PTR) {
+    p->new_ratio = new_ratio;
+  }
+
   return p;
 }
 
@@ -354,7 +362,7 @@ DownSampler* DownSampler_new_malloc(uint16_t sample_offset, uint16_t sample_ever
 {
   bool inner_malloc_success;
   va_list list;
-  DownSampler* down_sampler = CF_ALLOCATE_FAIL_PTR;
+  DownSampler* down_sampler;
 
   down_sampler = malloc_then_func_or_ret_fail_ptr(sizeof(DownSampler), DownSampler_new);
   if (down_sampler == CF_ALLOCATE_FAIL_PTR) {
@@ -369,7 +377,8 @@ DownSampler* DownSampler_new_malloc(uint16_t sample_offset, uint16_t sample_ever
   va_end(list);
 
   if (!inner_malloc_success) {
-    goto done;
+    cfc_Free(down_sampler);
+    down_sampler = CF_ALLOCATE_FAIL_PTR;
   }
 
  done:
