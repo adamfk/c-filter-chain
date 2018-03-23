@@ -8,13 +8,15 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
+#define cfc_Malloc CFC_MALLOC_FUNC
+#define cfc_Free CFC_FREE_FUNC
 
 #define ZERO_STRUCT(my_struct)  memset(&(my_struct), 0, sizeof(my_struct));
 
 
 static void* malloc_then_func_or_ret_fail_ptr(size_t size, void(*success_function)(void* allocated_object))
 {
-  void* p = malloc(size);
+  void* p = cfc_Malloc(size);
 
   if (p == NULL) {
     p = CF_ALLOCATE_FAIL_PTR;
@@ -107,7 +109,7 @@ bool FilterChain_malloc_inner(FilterChain* filter_chain, va_list block_list)
   //TODO consider using a C99 variable sized array on stack so that we don't have to split va_end calls
 
   //try to block array
-  block_array = malloc(block_count * sizeof(block_array[0]));
+  block_array = cfc_Malloc(block_count * sizeof(block_array[0]));
   if (block_array == NULL) {
     va_end(block_list); //NOTE!
     goto done;
@@ -127,7 +129,7 @@ bool FilterChain_malloc_inner(FilterChain* filter_chain, va_list block_list)
 
 failure_free_all:
   destruct_blocks(block_array, block_count);
-  free(block_array);
+  cfc_Free(block_array);
 done:
   return success;
 }
@@ -153,7 +155,7 @@ FilterChain* FilterChain_malloc(uint8_t dummy, ...)
   bool success = true;
   va_list list;
 
-  filter_chain = malloc(sizeof(*filter_chain));
+  filter_chain = cfc_Malloc(sizeof(*filter_chain));
   if (filter_chain == NULL) {
     success = false;
   }
@@ -174,13 +176,13 @@ FilterChain* FilterChain_malloc(uint8_t dummy, ...)
 void FilterChain_destruct_inner(FilterChain* fc)
 {
   destruct_blocks(fc->blocks, fc->block_count);
-  free(fc->blocks);
+  cfc_Free(fc->blocks);
 }
 
 void FilterChain_destruct(FilterChain* fc)
 {
   FilterChain_destruct_inner(fc);
-  free(fc);
+  cfc_Free(fc);
 }
 
 
@@ -241,7 +243,7 @@ PassThrough* PassThrough_new_malloc()
 
 void PassThrough_destruct(PassThrough* block)
 {
-  free(block);
+  cfc_Free(block);
 }
 
 
@@ -286,7 +288,7 @@ IirLowPass1* IirLowPass1_new_malloc(float new_ratio)
 
 void IirLowPass1_destruct(IirLowPass1* p)
 {
-  free(p);
+  cfc_Free(p);
 }
 
 void IirLowPass1_setup(IirLowPass1* iir)
@@ -378,7 +380,7 @@ DownSampler* DownSampler_new_malloc(uint16_t sample_offset, uint16_t sample_ever
 void DownSampler_destruct(DownSampler* down_sampler)
 {
   FilterChain_destruct_inner(&down_sampler->sub_chain);
-  free(down_sampler);
+  cfc_Free(down_sampler);
 }
 
 

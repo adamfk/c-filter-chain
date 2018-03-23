@@ -24,6 +24,15 @@ extern void const * const CF_ALLOCATE_FAIL_PTR;
 
 #define fc_Type FILTER_CHAIN_TYPE
 
+
+#ifndef CFC_MALLOC_FUNC
+#  define CFC_MALLOC_FUNC malloc
+#  ifndef CFC_FREE_FUNC
+#    define CFC_FREE_FUNC free
+#  endif
+#endif
+
+
 //expand macro and concatenate
 #define ECAT1(arg_1, arg_2, arg_3, arg_4)    arg_1 ## arg_2 ## arg_3 ## arg_4
 #define ECAT2(arg_1, arg_2, arg_3, arg_4)    ECAT1(arg_1, arg_2, arg_3, arg_4)
