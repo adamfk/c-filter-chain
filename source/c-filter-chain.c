@@ -1,4 +1,27 @@
 
+/*
+TODO document max filters in a FilterChain_malloc() call to be 127 based off of https://stackoverflow.com/questions/9034787/function-parameters-max-number
+  Not sure if this applies to varargs as well.
+
+TODO fail if more than 127
+
+TODO create error call back for alerting
+
+TODO consider a different construction technique based on lists.
+  Con: more memory
+  Bah... it doesn't get away from nesting problem as shown below.
+    FilterChain_add(fc, fcb32_IirLowPass1_new_malloc() );
+    FilterChain_add(fc, fcb32_SomeFilter_new_malloc() );
+    FilterChain_add(fc, fcb32_DownSampler_new_malloc(0, 2,
+      fcb32_IirLowPass1_new_malloc( ),
+      fcb32_IirLowPass1_new_malloc( ),
+      NULL,
+    ) );
+
+
+*/
+
+
 //don't include header if already done by the file that includes this file
 #ifndef C_FILTER_CHAIN_C_SKIP_HEADER_INCLUDE
 #include "c-filter-chain.h"
