@@ -123,7 +123,7 @@
     <ClCompile Include="..\..\source\i8-filter-chain.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\source\gtest-stuff.hpp" />
+    <ClInclude Include="..\..\source\user-stuff.h" />
     <ClInclude Include="..\..\source\i32-filter-chain.h" />
     <ClInclude Include="..\..\source\i8-filter-chain.h" />
   </ItemGroup>

@@ -35,7 +35,7 @@
     <ClInclude Include="..\..\source\i8-filter-chain.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\gtest-stuff.hpp">
+    <ClInclude Include="..\..\source\user-stuff.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
