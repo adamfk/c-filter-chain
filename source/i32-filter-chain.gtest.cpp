@@ -46,18 +46,16 @@ public:
 };
 
 
-Allocation* get_first_allocation()
+void get_first_allocation_or_throw(Allocation& allocation)
 {
   if (heap_allocations.size() == 0) {
-    return NULL;
+    throw std::out_of_range("it is empty");
   }
 
   std::unordered_map<void*, size_t>::iterator iterator;
   iterator = heap_allocations.begin(); //setup iterator at start
-  Allocation* allocation = new Allocation();
-  allocation->pointer = iterator->first;
-  allocation->size = iterator->second;
-  return allocation;
+  allocation.pointer = iterator->first;
+  allocation.size = iterator->second;
 }
 
 
@@ -99,8 +97,9 @@ public:
 
     //have to be careful iterating over a map while removing elements from it
     while (heap_allocations.size() > 0) {
-      Allocation* allocation = get_first_allocation();
-      xFree(allocation->pointer);
+      Allocation allocation;
+      get_first_allocation_or_throw(allocation);
+      xFree(allocation.pointer);
     }
   }
 };
@@ -416,8 +415,9 @@ TEST(FilterChain_i32, MallocSimpleTest) {
   EXPECT_CALL(mockHeap, xMalloc(expected_size)).Times(1);
   p_filter = fcb32_PassThrough_new_malloc();
   ASSERT_EQ(heap_allocations.size(), 1);
-  Allocation* allocation = get_first_allocation();
-  ASSERT_EQ(allocation->size, sizeof(*p_filter));
+  Allocation allocation;
+  get_first_allocation_or_throw(allocation);
+  ASSERT_EQ(allocation.size, sizeof(*p_filter));
 }
 
 
