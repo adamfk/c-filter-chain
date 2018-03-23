@@ -1,9 +1,13 @@
 
-#include "i32-filter-chain.h"
 
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 #include <stdio.h>
+#include <stdlib.h>
+
+using ::testing::_;
+using ::testing::Invoke;
+
 
 //TODO create general macros file
 
@@ -16,6 +20,102 @@
 * Helps guard against taking the size of a pointer to an array and some other C++ stuff;
 */
 #define COUNT_OF(x) ((sizeof(x)/sizeof(0[x])) / ((size_t)(!(sizeof(x) % sizeof(0[x])))))
+
+#include <unordered_map>
+#include <stdexcept>
+
+
+/**
+ * tracks allocations and their sizes
+ */
+std::unordered_map<void*, size_t> heap_allocations;
+
+class Heap
+{
+public:
+  virtual ~Heap() { }
+  virtual void* xMalloc(size_t size) = 0;
+  virtual void xFree(void* ptr) = 0;
+};
+
+
+class FakeHeap : Heap
+{
+public:
+
+  virtual ~FakeHeap() {
+    reset();
+  }
+
+  virtual void* xMalloc(size_t size) {
+    void* ptr = malloc(size);
+    heap_allocations[ptr] = size;
+    return ptr;
+    return NULL;
+  }
+
+  virtual void xFree(void* ptr) {
+    size_t removed = heap_allocations.erase(ptr);
+    if (removed == 0) {
+      throw std::out_of_range("nothing found to free");
+    }
+    if (removed > 1) {
+      throw std::out_of_range("too many found to free");
+    }
+    free(ptr);
+  }
+
+  virtual void reset() {
+    std::unordered_map<void*, size_t>::iterator it;
+
+    for (it = heap_allocations.begin(); it != heap_allocations.end(); it++) {
+      xFree(it->first);
+    }
+  }
+};
+
+
+class MockHeap : public Heap {
+public:
+  MOCK_METHOD1(xMalloc, void*(size_t size));
+  MOCK_METHOD1(xFree, void(void* ptr));
+  //MOCK_METHOD0(reset, void());
+
+
+  //https://github.com/google/googletest/blob/master/googlemock/docs/CookBook.md#delegating-calls-to-a-fake
+
+  // Delegates the default actions of the methods to a FakeFoo object.
+  // This must be called *before* the custom ON_CALL() statements.
+  void DelegateToFake() {
+    ON_CALL(*this, xMalloc(_))
+      .WillByDefault(Invoke(&fake_, &FakeHeap::xMalloc));
+    ON_CALL(*this, xFree(_))
+      .WillByDefault(Invoke(&fake_, &FakeHeap::xFree));
+  }
+private:
+  FakeHeap fake_;  // Keeps an instance of the fake in the mock.
+
+};
+
+MockHeap* mockHeapPtr;
+
+extern "C" {
+
+  void* xMalloc(size_t size) {
+    void* ptr = mockHeapPtr->xMalloc(size);
+    return ptr;
+    return NULL;
+  }
+
+  void xFree(void* ptr) {
+    mockHeapPtr->xFree(ptr);
+  }
+}
+
+
+#define CFC_MALLOC_FUNC xMalloc
+#define CFC_FREE_FUNC xFree
+#include "i32-filter-chain.h"
 
 
 static void test_chain_against_array(fc32_FilterChain* filter_chain, int32_t const * inputs, int32_t const * expected_outputs, size_t length, int32_t error_tolerance)
@@ -234,11 +334,14 @@ TEST(FilterChain_i32, MallocDownSamplerIir) {
 
 
 TEST(FilterChain_i32, TodoDestructorTests) {
-  FAIL();
+  MockHeap mockHeap;
+  mockHeapPtr = &mockHeap;
+
+  //FAIL();
 }
 
 TEST(FilterChain_i32, TodoMallocFailureTests) {
-  FAIL();
+  //FAIL();
 }
 
 
