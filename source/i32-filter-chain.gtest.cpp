@@ -345,7 +345,7 @@ TEST(FilterChain_i32, MallocDownSamplerIir) {
   mockHeap.DelegateToFake();
   mockHeapPtr = &mockHeap;
 
-  fc32_FilterChain* filter_chain = fc32_FilterChain_malloc(0,
+  fc32_FilterChain* filter_chain = fc32_FilterChain_malloc(
     fcb32_DownSampler_new_malloc(0, 2, 
       fcb32_IirLowPass1_new_malloc(0.5),
       NULL
@@ -450,7 +450,7 @@ TEST(FilterChain_i32, MallocFailureInChain1) {
 
   EXPECT_CALL(mockHeap, xFree(_)).Times(AtLeast(1));
 
-  fc32_FilterChain* filter_chain = fc32_FilterChain_malloc(0,
+  fc32_FilterChain* filter_chain = fc32_FilterChain_malloc(
     fcb32_DownSampler_new_malloc(0, 2,
       fcb32_IirLowPass1_new_malloc(0.40f),
       fcb32_IirLowPass1_new_malloc(0.41f),

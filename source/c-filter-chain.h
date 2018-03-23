@@ -105,10 +105,9 @@ void FilterChain_setup(FilterChain* fc);
 
 /**
  * varargs MUST BE NULL TERMINATED!
- * TODO use dummy as first GenericBlock
  */
-FilterChain* FilterChain_malloc(uint8_t dummy, ...);
-bool FilterChain_malloc_inner(FilterChain* filter_chain, va_list block_list);
+FilterChain* FilterChain_malloc(void* first_generic_block, ...);
+bool FilterChain_malloc_inner(FilterChain* filter_chain, void* first_block, va_list block_list);
 void FilterChain_destruct(FilterChain* fc);
 void FilterChain_destruct_inner(FilterChain* fc);
 fc_Type FilterChain_filter(FilterChain* fc, fc_Type input);

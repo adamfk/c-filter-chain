@@ -51,28 +51,45 @@ static uint16_t count_null_term_var_arg_ptrs(va_list list)
 
 
 /**
- * Returns true if found sign of a block allocation failure.
- * Copies all blocks regardless of block allocation failure detection.
- */
-static bool test_and_copy_arg_blocks(GenericBlock** block_array, va_list block_list, size_t block_count)
+* Returns true if found sign of a block allocation failure.
+* Copies block regardless of block allocation failure detection.
+*/
+static bool test_and_copy_block(GenericBlock** store_at, GenericBlock* block)
 {
-  bool passed_block_allocate_fail = false;
-  GenericBlock* block;
+  bool allocate_fail_found;
 
-  for (size_t i = 0; i < block_count; i++)
-  {
-    block = va_arg(block_list, GenericBlock*);
-    if (block == CF_ALLOCATE_FAIL_PTR)
-    {
-      //mark flag, BUT MUST CONTINUE!
-      //we need to copy all in case of one allocation failure
-      //so that we can destruct them all
-      passed_block_allocate_fail = true;
-    }
-    block_array[i] = block;
+  if (block == CF_ALLOCATE_FAIL_PTR) {
+    allocate_fail_found = true;
+  } else {
+    allocate_fail_found = false;
   }
 
-  return passed_block_allocate_fail;
+  *store_at = block;
+
+  return allocate_fail_found;
+}
+
+
+/**
+ * Returns true if found sign of a block allocation failure.
+ * Copies all blocks regardless of block allocation failure detection.
+ * REQUIRES THAT first_block is not NULL.
+ */
+static bool test_and_copy_blocks(GenericBlock** store_in, GenericBlock* first_block, va_list block_list, size_t total_block_count)
+{
+  bool allocate_fail_found = false;
+  GenericBlock* block;
+  size_t store_index = 0;
+
+  allocate_fail_found |= test_and_copy_block(&store_in[store_index++], first_block);
+
+  while (store_index < total_block_count)
+  {
+    block = va_arg(block_list, GenericBlock*);
+    allocate_fail_found |= test_and_copy_block(&store_in[store_index++], block);
+  }
+
+  return allocate_fail_found;
 }
 
 
@@ -96,38 +113,43 @@ static void destruct_blocks(GenericBlock** blocks, size_t block_count)
 
 /**
  * va_list MUST BE NULL TERMINATED!
- * You have to va_start the list before calling this.
+ * You have to va_start() the list before calling this.
+ * TODO: fail if first generic block NULL? There is zero point to an empty chain
  * Returns success
  */
-bool FilterChain_malloc_inner(FilterChain* filter_chain, va_list block_list)
+bool FilterChain_malloc_inner(FilterChain* filter_chain, void* first_block, va_list block_list)
 {
   bool success = false;
-  bool passed_block_allocate_fail = false;
-  uint16_t block_count;  //TODO make a typedef for chain blocks count size
-  GenericBlock** block_array;
+  bool child_allocate_fail = false;
+  uint16_t total_block_count = 0;      //TODO make a typedef for chain blocks count size
+  GenericBlock** block_array = NULL;
 
-  va_list list_for_counting;
+  if (first_block != NULL)
+  {
+    va_list list_for_counting;
+    total_block_count += 1;  //+1 for `first_block`
 
-  //copy the list to count var args
-  va_copy(list_for_counting, block_list); //NOTE!
-  block_count = count_null_term_var_arg_ptrs(list_for_counting);
-  va_end(list_for_counting); //NOTE!
+    //copy the list to count var args
+    va_copy(list_for_counting, block_list); //NOTE!
+    total_block_count += count_null_term_var_arg_ptrs(list_for_counting);
+    va_end(list_for_counting); //NOTE!
 
-  //TODO consider using a C99 variable sized array on stack so that we don't have to split va_end calls
+    //TODO consider using a C99 variable sized array on stack so that we don't have to multiple `va_end(block_list)` calls
 
-  //try to block array
-  block_array = cfc_Malloc(block_count * sizeof(block_array[0]));
-  if (block_array == NULL) {
-    va_end(block_list); //NOTE!
-    goto done;
+    //try to allocate block array
+    block_array = cfc_Malloc(total_block_count * sizeof(block_array[0]));
+    if (block_array == NULL) {
+      va_end(block_list); //NOTE!
+      goto done;
+    }
+    child_allocate_fail = test_and_copy_blocks(block_array, first_block, block_list, total_block_count);
   }
-  passed_block_allocate_fail = test_and_copy_arg_blocks(block_array, block_list, block_count);
   va_end(block_list); //NOTE!
 
   filter_chain->blocks = block_array;
-  filter_chain->block_count = block_count;
+  filter_chain->block_count = total_block_count;
 
-  if (passed_block_allocate_fail) {
+  if (child_allocate_fail) {
     goto failure_free_all;
   }
 
@@ -135,7 +157,7 @@ bool FilterChain_malloc_inner(FilterChain* filter_chain, va_list block_list)
   goto done;
 
 failure_free_all:
-  destruct_blocks(block_array, block_count);
+  destruct_blocks(block_array, total_block_count);
   cfc_Free(block_array);
 done:
   return success;
@@ -145,8 +167,7 @@ done:
 
 /**
  * varargs MUST BE NULL TERMINATED!
- * @dummy is not used, but required for using var args.
- * Variable arguments should all be of type GenericBlock* or NULL.
+ * Arguments should all be of type GenericBlock* or NULL.
  * 
  * Could do this nicer if used C99 compound literal, but then no cpp support
  * which is very useful for testing and cpp devs.
@@ -156,7 +177,7 @@ done:
  * 
  * Returns #CF_ALLOCATE_FAIL_PTR if this or a passed block failed allocation.
  */
-FilterChain* FilterChain_malloc(uint8_t dummy, ...)
+FilterChain* FilterChain_malloc(void* first_block, ...)
 {
   FilterChain* filter_chain;
   bool success = true;
@@ -167,8 +188,8 @@ FilterChain* FilterChain_malloc(uint8_t dummy, ...)
     success = false;
   }
   else {
-    va_start(list, dummy);
-    success = FilterChain_malloc_inner(filter_chain, list);
+    va_start(list, first_block);
+    success = FilterChain_malloc_inner(filter_chain, first_block, list);
     va_end(list);
 
     if (!success) {
@@ -365,7 +386,7 @@ void DownSampler_filter(DownSampler* down_sampler, fc_Type input)
  * varargs MUST BE NULL TERMINATED!
  * SEE #FilterChain_new_malloc for usage.
  */
-DownSampler* DownSampler_new_malloc(uint16_t sample_offset, uint16_t sample_every_x, ...)
+DownSampler* DownSampler_new_malloc(uint16_t sample_offset, uint16_t sample_every_x, void* first_block, ...)
 {
   bool inner_malloc_success;
   va_list list;
@@ -379,8 +400,8 @@ DownSampler* DownSampler_new_malloc(uint16_t sample_offset, uint16_t sample_ever
   down_sampler->sample_every_x = sample_every_x;
   down_sampler->sample_count = sample_offset;
 
-  va_start(list, sample_every_x);
-  inner_malloc_success = FilterChain_malloc_inner(&down_sampler->sub_chain, list);
+  va_start(list, first_block);
+  inner_malloc_success = FilterChain_malloc_inner(&down_sampler->sub_chain, first_block, list);
   va_end(list);
 
   if (!inner_malloc_success) {
