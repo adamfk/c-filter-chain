@@ -7,6 +7,8 @@
 
 //TODO create general macros file
 
+//TODO consider making a filter chain extend the GenericBlock class
+
 /**
 * Macro for getting the size of an array that is known at compile time. Code from Google's Chromium project.
 * Taken from http://stackoverflow.com/questions/4415524/common-array-length-macro-for-c
@@ -51,6 +53,7 @@ TEST(FilterChain_i32, OnePassthrough) {
     int32_t output = fc32_FilterChain_filter(&filter_chain, input);
     EXPECT_EQ(output, input);
   }
+
 }
 
 
@@ -203,6 +206,40 @@ TEST(FilterChain_i32, DownSamplerIir) {
   test_chain_against_array(&top_filter_chain, inputs, expected_outputs, length, error_tolerance);
 }
 
+
+
+
+TEST(FilterChain_i32, MallocDownSamplerIir) {
+
+  fc32_FilterChain* filter_chain = fc32_FilterChain_malloc(0,
+    fcb32_DownSampler_new_malloc(0, 2, 
+      fcb32_IirLowPass1_new_malloc(0.5),
+      NULL
+    ),
+    NULL
+  );
+
+  EXPECT_NE(filter_chain, CF_ALLOCATE_FAIL_PTR);
+  fc32_FilterChain_setup(filter_chain);
+
+  const int32_t error_tolerance = 0;
+  const int32_t inputs[] = { 100, 100,100, 100,100, 100,100, 100,100, 100 };
+  //                       samples = { no,  yes,no,  yes,no,  yes,no,  yes,no,  yes,};
+  const int32_t expected_outputs[] = { 0,   50,50,   75,75,   88,88,   94,94,   97 };
+  const size_t length = COUNT_OF(expected_outputs);
+  test_chain_against_array(filter_chain, inputs, expected_outputs, length, error_tolerance);
+
+  fc32_FilterChain_destruct(filter_chain);
+}
+
+
+TEST(FilterChain_i32, TodoDestructorTests) {
+  FAIL();
+}
+
+TEST(FilterChain_i32, TodoMallocFailureTests) {
+  FAIL();
+}
 
 
 int main(int argc, char** argv) {

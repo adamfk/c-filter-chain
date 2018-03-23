@@ -24,6 +24,9 @@
     <ClCompile Include="..\..\source\i32-filter-chain.gtest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\c-filter-chain-global.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\i32-filter-chain.h">
