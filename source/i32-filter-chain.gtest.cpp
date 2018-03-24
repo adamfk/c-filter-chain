@@ -34,56 +34,57 @@ using ::testing::AtLeast;
 
 
 
-/**
- * tracks allocations and their sizes. Purposely not using array or list as we shouldn't care how elements were inserted, just that they were.
- */
-std::unordered_map<void*, size_t> heap_allocations;
 
-class Allocation {
-public:
-  void* pointer;
+
+struct Allocation {
+  void* address;
   size_t size;
 };
 
 
-void get_first_allocation_or_throw(Allocation& allocation)
-{
-  if (heap_allocations.size() == 0) {
-    throw std::out_of_range("it is empty");
-  }
-
-  std::unordered_map<void*, size_t>::iterator iterator;
-  iterator = heap_allocations.begin(); //setup iterator at start
-  allocation.pointer = iterator->first;
-  allocation.size = iterator->second;
-}
-
 
 class Heap
 {
-public:
-  virtual ~Heap() { }
-  virtual void* xMalloc(size_t size) = 0;
-  virtual void xFree(void* ptr) = 0;
-};
+  /**
+   * tracks allocations and their sizes. 
+   * Purposely not using array or list as we shouldn't care how elements were inserted, just that they were.
+   */
+  std::unordered_map<void*, size_t> allocations;
 
-
-class FakeHeap : Heap
-{
 public:
 
-  virtual ~FakeHeap() {
-    reset();
+  virtual ~Heap() {
+    freeAll();
   }
 
-  virtual void* xMalloc(size_t size) {
+
+  /**
+   * Returns a copy
+   */
+  Allocation peakFirstAllocationOrThrow()
+  {
+    Allocation allocation;
+
+    if (allocations.size() == 0) {
+      throw std::out_of_range("it is empty");
+    }
+
+    std::unordered_map<void*, size_t>::iterator iterator;
+    iterator = allocations.begin();
+    allocation.address = iterator->first;
+    allocation.size = iterator->second;
+    return allocation;
+  }
+
+  void* xMalloc(size_t size) {
     void* ptr = malloc(size);
-    heap_allocations[ptr] = size;
+    allocations[ptr] = size;
     return ptr;
   }
 
-  virtual void xFree(void* ptr) {
-    size_t removed = heap_allocations.erase(ptr);
+
+  void xFree(void* ptr) {
+    size_t removed = allocations.erase(ptr);
     if (removed == 0) {
       throw std::out_of_range("nothing found to free");
     }
@@ -93,55 +94,87 @@ public:
     free(ptr);
   }
 
-  virtual void reset() {
+
+  size_t getAllocationCount() {
+    return allocations.size();
+  }
+
+
+  void freeAll() {
 
     //have to be careful iterating over a map while removing elements from it
-    while (heap_allocations.size() > 0) {
-      Allocation allocation;
-      get_first_allocation_or_throw(allocation);
-      xFree(allocation.pointer);
+    while (allocations.size() > 0) {
+      Allocation allocation = peakFirstAllocationOrThrow();
+      xFree(allocation.address);
     }
   }
+
 };
 
 
+/**
+ * We aren't passing the MockHeap around via an interface as all the calls originate from C.
+ * There is no need for virtual methods in the base class.
+ */
 class MockHeap : public Heap {
+  MockHeap** c_reference;
+
 public:
   MOCK_METHOD1(xMalloc, void*(size_t size));
   MOCK_METHOD1(xFree, void(void* ptr));
-  //MOCK_METHOD0(reset, void());
 
 
-  //https://github.com/google/googletest/blob/master/googlemock/docs/CookBook.md#delegating-calls-to-a-fake
+  virtual ~MockHeap() {
+    *c_reference = nullptr;
+  }
 
-  // Delegates the default actions of the methods to a FakeFoo object.
+  MockHeap(MockHeap** c_reference) : Heap() {
+    this->c_reference = c_reference;
+    *c_reference = this;
+    delegateToFakeByDefault();
+  }
+
+  // Delegates the default actions of the methods to the fake object.
   // This must be called *before* the custom ON_CALL() statements.
-  void DelegateToFake() {
+  // See https://github.com/google/googletest/blob/master/googlemock/docs/CookBook.md#delegating-calls-to-a-fake
+  void delegateToFakeByDefault() {
     ON_CALL(*this, xMalloc(_))
-      .WillByDefault(Invoke(&fake_, &FakeHeap::xMalloc));
+      .WillByDefault(Invoke(this, &Heap::xMalloc));
     ON_CALL(*this, xFree(_))
-      .WillByDefault(Invoke(&fake_, &FakeHeap::xFree));
+      .WillByDefault(Invoke(this, &Heap::xFree));
   }
-
-  void DoDefaultXMalloc(size_t size) {
-    fake_.xMalloc(size);
-  }
-
-private:
-  FakeHeap fake_;  // Keeps an instance of the fake in the mock.
 
 };
 
-MockHeap* mockHeapPtr;
+static MockHeap* mockHeapPtr;
 
+class MockHeapNotSetup : public std::exception {
+
+};
+
+
+static void throwIfMockNotSetup() {
+  if (mockHeapPtr == nullptr) {
+    throw MockHeapNotSetup();
+  }
+}
 
 void* xMalloc(size_t size) {
+  throwIfMockNotSetup();
   void* ptr = mockHeapPtr->xMalloc(size);
   return ptr;
 }
 
 void xFree(void* ptr) {
+  throwIfMockNotSetup();
   mockHeapPtr->xFree(ptr);
+}
+
+TEST(TestSetup, MockNotSetup) {
+  ASSERT_THROW(xMalloc(12), MockHeapNotSetup);
+  ASSERT_THROW(xFree(nullptr), MockHeapNotSetup);
+  MockHeap mockHeap(&mockHeapPtr);
+  ASSERT_NO_THROW(xMalloc(12), MockHeapNotSetup);
 }
 
 
@@ -341,9 +374,7 @@ TEST(FilterChain_i32, DownSamplerIir) {
 
 
 TEST(FilterChain_i32, MallocDownSamplerIir) {
-  MockHeap mockHeap;
-  mockHeap.DelegateToFake();
-  mockHeapPtr = &mockHeap;
+  MockHeap mockHeap(&mockHeapPtr);
 
   fc32_FilterChain* filter_chain = fc32_FilterChain_malloc(
     fcb32_DownSampler_new_malloc(0, 2, 
@@ -367,29 +398,12 @@ TEST(FilterChain_i32, MallocDownSamplerIir) {
 }
 
 
-TEST(FilterChain_i32, TestHeapMocking) {
-  {
-    MockHeap mockHeap;
-    mockHeap.DelegateToFake();
-    mockHeapPtr = &mockHeap;
-
-    fcb32_PassThrough* p = fcb32_PassThrough_new_malloc();
-    //NOTE! purposely don't destruct filter above
-
-    ASSERT_EQ(heap_allocations.size(), 1);
-  }
-  //mockHeap has now gone out of scope, assert that it cleaned up
-  ASSERT_EQ(heap_allocations.size(), 0);
-}
-
 
 TEST(FilterChain_i32, TestHeapMocking3) {
-  MockHeap mockHeap;
-  mockHeap.DelegateToFake();
-  mockHeapPtr = &mockHeap;
+  MockHeap heap(&mockHeapPtr);
 
   //see if we can NULL the 3rd returned malloc
-  EXPECT_CALL(mockHeap, xMalloc(_)).Times(3)
+  EXPECT_CALL(heap, xMalloc(_)).Times(3)
     .WillOnce(DoDefault())
     .WillOnce(ReturnNull())
     .WillOnce(DoDefault());
@@ -397,7 +411,7 @@ TEST(FilterChain_i32, TestHeapMocking3) {
   fcb32_PassThrough* p2 = fcb32_PassThrough_new_malloc(); //RETURN NULL HERE!
   fcb32_PassThrough* p3 = fcb32_PassThrough_new_malloc();
 
-  ASSERT_EQ(heap_allocations.size(), 2);
+  ASSERT_EQ(heap.getAllocationCount(), 2);
 
   EXPECT_NE(p1, CF_ALLOCATE_FAIL_PTR); //NOT equal
   EXPECT_EQ(p2, CF_ALLOCATE_FAIL_PTR);
@@ -406,49 +420,44 @@ TEST(FilterChain_i32, TestHeapMocking3) {
 
 
 TEST(FilterChain_i32, MallocSimpleTest) {
-  MockHeap mockHeap;
-  mockHeap.DelegateToFake();
+  MockHeap heap(&mockHeapPtr);
   
   fcb32_PassThrough* p_filter;
   int expected_size = sizeof(*p_filter);
 
-  EXPECT_CALL(mockHeap, xMalloc(expected_size)).Times(1);
+  EXPECT_CALL(heap, xMalloc(expected_size)).Times(1);
   p_filter = fcb32_PassThrough_new_malloc();
-  ASSERT_EQ(heap_allocations.size(), 1);
-  Allocation allocation;
-  get_first_allocation_or_throw(allocation);
+  ASSERT_EQ(heap.getAllocationCount(), 1);
+  Allocation allocation = heap.peakFirstAllocationOrThrow();
   ASSERT_EQ(allocation.size, sizeof(*p_filter));
 }
 
 
 TEST(FilterChain_i32, MallocFailurePassThroughFilter) {
-  MockHeap mockHeap;
-  mockHeap.DelegateToFake();
-  mockHeapPtr = &mockHeap;
+  MockHeap heap(&mockHeapPtr);
+
   fcb32_PassThrough* p_filter;
   int expected_size = sizeof(*p_filter);
 
-  EXPECT_CALL(mockHeap, xMalloc(_)).Times(1).WillOnce(Return(nullptr));
+  EXPECT_CALL(heap, xMalloc(_)).Times(1).WillOnce(Return(nullptr));
   p_filter = fcb32_PassThrough_new_malloc();
   EXPECT_EQ(CF_ALLOCATE_FAIL_PTR, p_filter);
 }
 
 
+
 //TODO test all objects for malloc failure
 
 TEST(FilterChain_i32, MallocFailureInChain1) {
-  MockHeap mockHeap;
-  mockHeap.DelegateToFake();
-  mockHeapPtr = &mockHeap;
+  MockHeap heap(&mockHeapPtr);
 
-
-  EXPECT_CALL(mockHeap, xMalloc(_)).Times(AtLeast(3))
+  EXPECT_CALL(heap, xMalloc(_)).Times(AtLeast(3))
     .WillOnce(DoDefault())  //0.42 IIR
     .WillOnce(ReturnNull()) //0.41 IIR  //RETURN NULL
     .WillRepeatedly(DoDefault()) //rest of filters
     ;
 
-  EXPECT_CALL(mockHeap, xFree(_)).Times(AtLeast(1));
+  EXPECT_CALL(heap, xFree(_)).Times(AtLeast(1));
 
   fc32_FilterChain* filter_chain = fc32_FilterChain_malloc(
     fcb32_DownSampler_new_malloc(0, 2,
@@ -461,7 +470,7 @@ TEST(FilterChain_i32, MallocFailureInChain1) {
   );
 
   EXPECT_EQ(filter_chain, CF_ALLOCATE_FAIL_PTR);
-  EXPECT_EQ(heap_allocations.size(), 0);
+  EXPECT_EQ(heap.getAllocationCount(), 0);
 }
 
 
