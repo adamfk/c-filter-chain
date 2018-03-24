@@ -176,7 +176,7 @@ TEST(TestSetup, MockNotSetup) {
   ASSERT_THROW(xMalloc(12), MockHeapNotSetup);
   ASSERT_THROW(xFree(nullptr), MockHeapNotSetup);
   MockHeap mockHeap(&mockHeapPtr);
-  ASSERT_NO_THROW(xMalloc(12), MockHeapNotSetup);
+  ASSERT_NO_THROW(xMalloc(12));
 }
 
 
