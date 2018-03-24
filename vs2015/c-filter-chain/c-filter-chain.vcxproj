@@ -117,11 +117,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\source\c-filter-chain-global.c" />
+    <ClCompile Include="..\..\source\c-test.c" />
     <ClCompile Include="..\..\source\i32-filter-chain.c" />
     <ClCompile Include="..\..\source\i32-filter-chain.gtest.cpp" />
     <ClCompile Include="..\..\source\i8-filter-chain.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\source\user-stuff.h" />
     <ClInclude Include="..\..\source\i32-filter-chain.h" />
     <ClInclude Include="..\..\source\i8-filter-chain.h" />
   </ItemGroup>
