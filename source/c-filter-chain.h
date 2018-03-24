@@ -14,6 +14,17 @@
 
 
 #ifdef __cplusplus
+#  define LIST_START(prefix) &vector<fcb ## prefix ## _GenericBlock*> {
+#  define LIST_END  NULL, }[0]
+#else
+#  define LIST_START(prefix) (fcb## prefix ## _GenericBlock*[]) { //starts a compound literal
+#  define LIST_END  NULL, }
+#endif
+
+
+
+
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -103,11 +114,8 @@ typedef struct FilterChain
 
 void FilterChain_setup(FilterChain* fc);
 
-/**
- * varargs MUST BE NULL TERMINATED!
- */
-FilterChain* FilterChain_malloc(void* first_generic_block, ...);
-bool FilterChain_malloc_inner(FilterChain* filter_chain, void* first_block, va_list block_list);
+FilterChain* FilterChain_malloc(GenericBlock** block_list);
+bool FilterChain_malloc_inner(FilterChain* filter_chain, GenericBlock** block_list);
 void FilterChain_destruct(FilterChain* fc);
 void FilterChain_destruct_inner(FilterChain* fc);
 fc_Type FilterChain_filter(FilterChain* fc, fc_Type input);
@@ -144,12 +152,13 @@ void PassThrough_filter(PassThrough* block, fc_Type input);
 
 
 
-#define IirLowPass1             FCB_MAKE_NAME(IirLowPass1)
-#define IirLowPass1_new         FCB_MAKE_NAME(IirLowPass1_new)
-#define IirLowPass1_new_malloc  FCB_MAKE_NAME(IirLowPass1_new_malloc)
-#define IirLowPass1_destruct    FCB_MAKE_NAME(IirLowPass1_destruct)
-#define IirLowPass1_filter      FCB_MAKE_NAME(IirLowPass1_filter)
-#define IirLowPass1_setup       FCB_MAKE_NAME(IirLowPass1_setup)
+#define IirLowPass1               FCB_MAKE_NAME(IirLowPass1)
+#define IirLowPass1_new           FCB_MAKE_NAME(IirLowPass1_new)
+#define IirLowPass1_new_malloc    FCB_MAKE_NAME(IirLowPass1_new_malloc)
+#define IirLowPass1_new_malloc_gb FCB_MAKE_NAME(IirLowPass1_new_malloc_gb)
+#define IirLowPass1_destruct      FCB_MAKE_NAME(IirLowPass1_destruct)
+#define IirLowPass1_filter        FCB_MAKE_NAME(IirLowPass1_filter)
+#define IirLowPass1_setup         FCB_MAKE_NAME(IirLowPass1_setup)
 
 /**
  * Structure for a single order low pass IIR filter
@@ -163,6 +172,7 @@ typedef struct IirLowPass1
 
 void IirLowPass1_new(IirLowPass1* block);
 IirLowPass1* IirLowPass1_new_malloc(float new_ratio);
+GenericBlock* IirLowPass1_new_malloc_gb(float new_ratio);
 void IirLowPass1_destruct(IirLowPass1* block);
 void IirLowPass1_setup(IirLowPass1* block);
 void IirLowPass1_filter(IirLowPass1* block, fc_Type input);
@@ -171,12 +181,13 @@ void IirLowPass1_filter(IirLowPass1* block, fc_Type input);
 //###################################################################33
 
 
-#define DownSampler            FCB_MAKE_NAME(DownSampler)
-#define DownSampler_new        FCB_MAKE_NAME(DownSampler_new)
-#define DownSampler_new_malloc FCB_MAKE_NAME(DownSampler_new_malloc)
-#define DownSampler_destruct   FCB_MAKE_NAME(DownSampler_destruct)
-#define DownSampler_filter     FCB_MAKE_NAME(DownSampler_filter)
-#define DownSampler_setup      FCB_MAKE_NAME(DownSampler_setup)
+#define DownSampler               FCB_MAKE_NAME(DownSampler)
+#define DownSampler_new           FCB_MAKE_NAME(DownSampler_new)
+#define DownSampler_new_malloc    FCB_MAKE_NAME(DownSampler_new_malloc)
+#define DownSampler_new_malloc_gb FCB_MAKE_NAME(DownSampler_new_malloc_gb)
+#define DownSampler_destruct      FCB_MAKE_NAME(DownSampler_destruct)
+#define DownSampler_filter        FCB_MAKE_NAME(DownSampler_filter)
+#define DownSampler_setup         FCB_MAKE_NAME(DownSampler_setup)
 
 
 /**
@@ -192,7 +203,8 @@ typedef struct DownSampler
 
 
 void DownSampler_new(DownSampler* block);
-DownSampler* DownSampler_new_malloc(uint16_t sample_offset, uint16_t sample_every_x, ...);
+DownSampler* DownSampler_new_malloc(uint16_t sample_offset, uint16_t sample_every_x, GenericBlock** block_list);
+GenericBlock* DownSampler_new_malloc_gb(uint16_t sample_offset, uint16_t sample_every_x, GenericBlock** block_list);
 void DownSampler_setup(DownSampler* block);
 void DownSampler_filter(DownSampler* block, fc_Type input);
 void DownSampler_destruct(DownSampler* block);

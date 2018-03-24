@@ -12,6 +12,8 @@ using ::testing::ReturnNull;
 using ::testing::DoDefault;
 using ::testing::AtLeast;
 
+using std::vector;
+
 
 //TODO create general macros file
 
@@ -377,11 +379,13 @@ TEST(FilterChain_i32, MallocDownSamplerIir) {
   MockHeap mockHeap(&mockHeapPtr);
 
   fc32_FilterChain* filter_chain = fc32_FilterChain_malloc(
-    fcb32_DownSampler_new_malloc(0, 2, 
-      fcb32_IirLowPass1_new_malloc(0.5),
-      NULL
+    LIST_START(32)
+    fcb32_DownSampler_new_malloc_gb(0, 2,
+      LIST_START(32)
+      fcb32_IirLowPass1_new_malloc_gb(0.5),
+      LIST_END
     ),
-    NULL
+    LIST_END
   );
 
   EXPECT_NE(filter_chain, CF_ALLOCATE_FAIL_PTR);
@@ -460,13 +464,15 @@ TEST(FilterChain_i32, MallocFailureInChain1) {
   EXPECT_CALL(heap, xFree(_)).Times(AtLeast(1));
 
   fc32_FilterChain* filter_chain = fc32_FilterChain_malloc(
-    fcb32_DownSampler_new_malloc(0, 2,
-      fcb32_IirLowPass1_new_malloc(0.40f),
-      fcb32_IirLowPass1_new_malloc(0.41f),
-      fcb32_IirLowPass1_new_malloc(0.42f),
-      NULL
+    LIST_START(32)
+    fcb32_DownSampler_new_malloc_gb(0, 2,
+      LIST_START(32)
+      fcb32_IirLowPass1_new_malloc_gb(0.40f),
+      fcb32_IirLowPass1_new_malloc_gb(0.41f),
+      fcb32_IirLowPass1_new_malloc_gb(0.42f),
+      LIST_END
     ),
-    NULL
+    LIST_END
   );
 
   EXPECT_EQ(filter_chain, CF_ALLOCATE_FAIL_PTR);
