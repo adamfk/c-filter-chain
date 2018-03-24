@@ -23,6 +23,14 @@
 
 
 
+#define fc_TRACER_ENABLE 1
+
+#if fc_TRACER_ENABLE == 1
+#define fc_TRACER_ARGS char const* const file_name, uint32_t const line
+#else
+#define fc_TRACER_ARGS
+#endif
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -139,7 +147,7 @@ typedef struct PassThrough
 
 
 void PassThrough_new(PassThrough* block);
-PassThrough* PassThrough_new_malloc();
+PassThrough* PassThrough_new_malloc(fc_TRACER_ARGS);
 void PassThrough_destruct(PassThrough* block);
 void PassThrough_setup(PassThrough* block);
 fc_Type PassThrough_filter(PassThrough* block, fc_Type input);

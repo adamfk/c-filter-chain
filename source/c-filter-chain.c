@@ -255,10 +255,12 @@ void PassThrough_new(PassThrough* passThrough)
 }
 
 
+
+
 /**
  * Returns #CF_ALLOCATE_FAIL_PTR on allocate failure.
  */
-PassThrough* PassThrough_new_malloc()
+PassThrough* PassThrough_new_malloc(fc_TRACER_ARGS)
 {
   PassThrough* p = malloc_then_func_or_ret_fail_ptr(sizeof(PassThrough), PassThrough_new);
   return p;

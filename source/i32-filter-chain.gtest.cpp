@@ -401,7 +401,7 @@ TEST(FilterChain_i32, MallocDownSamplerIir) {
   fc32_FilterChain_destruct(filter_chain);
 }
 
-
+#define fc_TRACER __FILE__, __LINE__
 
 TEST(FilterChain_i32, TestHeapMocking3) {
   MockHeap heap(&mockHeapPtr);
@@ -411,9 +411,9 @@ TEST(FilterChain_i32, TestHeapMocking3) {
     .WillOnce(DoDefault())
     .WillOnce(ReturnNull())
     .WillOnce(DoDefault());
-  fcb32_PassThrough* p1 = fcb32_PassThrough_new_malloc();
-  fcb32_PassThrough* p2 = fcb32_PassThrough_new_malloc(); //RETURN NULL HERE!
-  fcb32_PassThrough* p3 = fcb32_PassThrough_new_malloc();
+  fcb32_PassThrough* p1 = fcb32_PassThrough_new_malloc(fc_TRACER);
+  fcb32_PassThrough* p2 = fcb32_PassThrough_new_malloc(fc_TRACER); //RETURN NULL HERE!
+  fcb32_PassThrough* p3 = fcb32_PassThrough_new_malloc(fc_TRACER);
 
   ASSERT_EQ(heap.getAllocationCount(), 2);
 
@@ -430,7 +430,7 @@ TEST(FilterChain_i32, MallocSimpleTest) {
   int expected_size = sizeof(*p_filter);
 
   EXPECT_CALL(heap, xMalloc(expected_size)).Times(1);
-  p_filter = fcb32_PassThrough_new_malloc();
+  p_filter = fcb32_PassThrough_new_malloc(fc_TRACER);
   ASSERT_EQ(heap.getAllocationCount(), 1);
   Allocation allocation = heap.peakFirstAllocationOrThrow();
   ASSERT_EQ(allocation.size, sizeof(*p_filter));
@@ -444,7 +444,7 @@ TEST(FilterChain_i32, MallocFailurePassThroughFilter) {
   int expected_size = sizeof(*p_filter);
 
   EXPECT_CALL(heap, xMalloc(_)).Times(1).WillOnce(Return(nullptr));
-  p_filter = fcb32_PassThrough_new_malloc();
+  p_filter = fcb32_PassThrough_new_malloc(fc_TRACER);
   EXPECT_EQ(CF_ALLOCATE_FAIL_PTR, p_filter);
 }
 
