@@ -228,8 +228,7 @@ fc_Type FilterChain_filter(FilterChain* fc, fc_Type input)
   for (size_t i = 0; i < fc->block_count; i++)
   {
     GenericBlock* block = fc->blocks[i];
-    block->function_table->filter(block, input); //TODOLOW could have blocks not store output as some may not need to remember anything. Nice having outputs per block though for quick tracing, but that could probably be handled by another function fine anyway.
-    output = block->output;
+    output = block->function_table->filter(block, input);
     input = output;
   }
 
@@ -274,13 +273,12 @@ void PassThrough_destruct(PassThrough* block)
 
 void PassThrough_setup(PassThrough* passThrough)
 {
-  passThrough->block.output = 0;
 }
 
 
-void PassThrough_filter(PassThrough* passThrough, fc_Type input)
+fc_Type PassThrough_filter(PassThrough* passThrough, fc_Type input)
 {
-  passThrough->block.output = input;
+  return input;
 }
 
 
@@ -328,7 +326,7 @@ void IirLowPass1_destruct(IirLowPass1* p)
 
 void IirLowPass1_setup(IirLowPass1* iir)
 {
-  iir->block.output = 0;
+  iir->last_output = 0;
 }
 
 
@@ -336,11 +334,13 @@ void IirLowPass1_setup(IirLowPass1* iir)
  * Note that if this is an integer based IIR, the rounding errors can be substantial if the input
  * is small. Test with a step function and see if it reaches 100%.
  */
-void IirLowPass1_filter(IirLowPass1* iir, fc_Type input)
+fc_Type IirLowPass1_filter(IirLowPass1* iir, fc_Type input)
 {
-  fc_Type last_output = iir->block.output;
-  double output = iir->new_ratio * input + (1 - iir->new_ratio) * last_output;  //TODO rewrite in efficient form. TODO use generic type numerator and denominator instead of floating point
-  iir->block.output = (fc_Type)(output + 0.5); //TODO make rounding type generic
+  fc_Type result;
+  double output = iir->new_ratio * input + (1 - iir->new_ratio) * iir->last_output;  //TODO rewrite in efficient form. TODO use generic type numerator and denominator instead of floating point
+  result = (fc_Type)(output + 0.5); //TODO make rounding type generic
+  iir->last_output = result;
+  return result;
 }
 
 
@@ -365,20 +365,22 @@ void DownSampler_new(DownSampler* down_sampler)
 
 void DownSampler_setup(DownSampler* down_sampler)
 {
-  down_sampler->block.output = 0;
+  down_sampler->latched_output = 0;
   FilterChain_setup(&down_sampler->sub_chain);
 }
 
 
-void DownSampler_filter(DownSampler* down_sampler, fc_Type input)
+fc_Type DownSampler_filter(DownSampler* down_sampler, fc_Type input)
 {
   down_sampler->sample_count++;
 
   if (down_sampler->sample_count >= down_sampler->sample_every_x)
   {
-    down_sampler->block.output = FilterChain_filter(&down_sampler->sub_chain, input);
+    down_sampler->latched_output = FilterChain_filter(&down_sampler->sub_chain, input);
     down_sampler->sample_count = 0;
   }
+
+  return down_sampler->latched_output;
 }
 
 /**

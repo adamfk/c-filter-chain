@@ -70,7 +70,7 @@ extern void const * const CF_ALLOCATE_FAIL_PTR;
 //need to forward declare GenericBlock for other declarations.
 typedef struct GenericBlock GenericBlock;
 
-typedef void(*GenericBlock_filter_t)(GenericBlock* block, fc_Type input);
+typedef fc_Type(*GenericBlock_filter_t)(GenericBlock* block, fc_Type input);
 typedef void(*GenericBlock_setup_t)(GenericBlock* block);
 typedef void(*GenericBlock_destruct_t)(GenericBlock* block);
 
@@ -91,7 +91,6 @@ typedef struct BlockFunctionTable
 struct GenericBlock
 {
   BlockFunctionTable const * function_table;
-  fc_Type output;
 };
 
 
@@ -143,7 +142,7 @@ void PassThrough_new(PassThrough* block);
 PassThrough* PassThrough_new_malloc();
 void PassThrough_destruct(PassThrough* block);
 void PassThrough_setup(PassThrough* block);
-void PassThrough_filter(PassThrough* block, fc_Type input);
+fc_Type PassThrough_filter(PassThrough* block, fc_Type input);
 
 
 
@@ -167,6 +166,7 @@ typedef struct IirLowPass1
 {
   GenericBlock block;  //!< MUST BE FIRST FIELD IN STRUCT TO ALLOW CASTING FROM PARENT TYPE
   float new_ratio;
+  fc_Type last_output;
 } IirLowPass1;
 
 
@@ -175,7 +175,7 @@ IirLowPass1* IirLowPass1_new_malloc(float new_ratio);
 GenericBlock* IirLowPass1_new_malloc_gb(float new_ratio);
 void IirLowPass1_destruct(IirLowPass1* block);
 void IirLowPass1_setup(IirLowPass1* block);
-void IirLowPass1_filter(IirLowPass1* block, fc_Type input);
+fc_Type IirLowPass1_filter(IirLowPass1* block, fc_Type input);
 
 
 //###################################################################33
@@ -199,6 +199,7 @@ typedef struct DownSampler
   FilterChain sub_chain;   //!< the filter chain that receives the downsampled input to this block
   uint16_t sample_every_x; //!< How often to sample input. If 1, it will sample every input. One based!
   uint16_t sample_count;   //!< When this counts up to #sample_every_x, it will sample and reset count
+  fc_Type latched_output;  //!< keeps outputting the same value between downsamples
 } DownSampler;
 
 
@@ -206,7 +207,7 @@ void DownSampler_new(DownSampler* block);
 DownSampler* DownSampler_new_malloc(uint16_t sample_offset, uint16_t sample_every_x, GenericBlock** block_list);
 GenericBlock* DownSampler_new_malloc_gb(uint16_t sample_offset, uint16_t sample_every_x, GenericBlock** block_list);
 void DownSampler_setup(DownSampler* block);
-void DownSampler_filter(DownSampler* block, fc_Type input);
+fc_Type DownSampler_filter(DownSampler* block, fc_Type input);
 void DownSampler_destruct(DownSampler* block);
 
 
