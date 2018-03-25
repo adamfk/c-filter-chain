@@ -203,7 +203,7 @@ static void test_chain_against_array(fc32_FilterChain* filter_chain, int32_t con
 TEST(FilterChain_i32, OnePassthrough) {
 
   fcb32_PassThrough p;
-  fcb32_PassThrough_new(&p);
+  fcb32_PassThrough_ctor(&p);
 
   fc32_FilterChain filter_chain = { 0 };
   fcb32_GenericBlock* filter_blocks[] = {
@@ -226,10 +226,10 @@ TEST(FilterChain_i32, OnePassthrough) {
 TEST(FilterChain_i32, TwoPassthrough) {
 
   fcb32_PassThrough p1;
-  fcb32_PassThrough_new(&p1);
+  fcb32_PassThrough_ctor(&p1);
 
   fcb32_PassThrough p2;
-  fcb32_PassThrough_new(&p2);
+  fcb32_PassThrough_ctor(&p2);
 
 
   fc32_FilterChain filter_chain = { 0 };
@@ -254,7 +254,7 @@ TEST(FilterChain_i32, TwoPassthrough) {
 TEST(FilterChain_i32, OneIirPrecalc) {
 
   fcb32_IirLowPass1 iir1;
-  fcb32_IirLowPass1_new(&iir1);
+  fcb32_IirLowPass1_ctor(&iir1);
   iir1.new_ratio = 0.2f;
 
 
@@ -279,7 +279,7 @@ TEST(FilterChain_i32, OneIirPrecalc) {
 TEST(FilterChain_i32, OneIirDynamicCalc) {
 
   fcb32_IirLowPass1 iir1;
-  fcb32_IirLowPass1_new(&iir1);
+  fcb32_IirLowPass1_ctor(&iir1);
   iir1.new_ratio = 0.3f;
 
 
@@ -312,10 +312,10 @@ TEST(FilterChain_i32, OneIirDynamicCalc) {
 TEST(FilterChain_i32, DownSamplerPassthrough) {
 
   fcb32_PassThrough downsampled_p1;
-  fcb32_PassThrough_new(&downsampled_p1);
+  fcb32_PassThrough_ctor(&downsampled_p1);
 
   fcb32_DownSampler down_sampler;
-  fcb32_DownSampler_new(&down_sampler);
+  fcb32_DownSampler_ctor(&down_sampler);
   down_sampler.sample_every_x = 2;  //downsample by 2
   fcb32_GenericBlock* downsampled_blocks[] = {
     &downsampled_p1.block,
@@ -343,11 +343,11 @@ TEST(FilterChain_i32, DownSamplerPassthrough) {
 TEST(FilterChain_i32, DownSamplerIir) {
 
   fcb32_IirLowPass1 downsampled_iir;
-  fcb32_IirLowPass1_new(&downsampled_iir);
+  fcb32_IirLowPass1_ctor(&downsampled_iir);
   downsampled_iir.new_ratio = 0.5;
 
   fcb32_DownSampler down_sampler;
-  fcb32_DownSampler_new(&down_sampler);
+  fcb32_DownSampler_ctor(&down_sampler);
   down_sampler.sample_every_x = 2;  //downsample by 2
   fcb32_GenericBlock* downsampled_blocks[] = {
     &downsampled_iir.block,

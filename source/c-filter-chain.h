@@ -125,7 +125,7 @@ fc_Type FilterChain_filter(FilterChain* fc, fc_Type input);
 
 
 #define PassThrough             FCB_MAKE_NAME(PassThrough)
-#define PassThrough_new         FCB_MAKE_NAME(PassThrough_new)
+#define PassThrough_ctor         FCB_MAKE_NAME(PassThrough_ctor)
 #define PassThrough_new_malloc  FCB_MAKE_NAME(PassThrough_new_malloc)
 #define PassThrough_destruct    FCB_MAKE_NAME(PassThrough_destruct)
 #define PassThrough_filter      FCB_MAKE_NAME(PassThrough_filter)
@@ -138,7 +138,7 @@ typedef struct PassThrough
 } PassThrough;
 
 
-void PassThrough_new(PassThrough* block);
+void PassThrough_ctor(PassThrough* block);
 PassThrough* PassThrough_new_malloc();
 void PassThrough_destruct(PassThrough* block);
 void PassThrough_setup(PassThrough* block);
@@ -152,7 +152,7 @@ fc_Type PassThrough_filter(PassThrough* block, fc_Type input);
 
 
 #define IirLowPass1               FCB_MAKE_NAME(IirLowPass1)
-#define IirLowPass1_new           FCB_MAKE_NAME(IirLowPass1_new)
+#define IirLowPass1_ctor           FCB_MAKE_NAME(IirLowPass1_ctor)
 #define IirLowPass1_new_malloc    FCB_MAKE_NAME(IirLowPass1_new_malloc)
 #define IirLowPass1_new_malloc_gb FCB_MAKE_NAME(IirLowPass1_new_malloc_gb)
 #define IirLowPass1_destruct      FCB_MAKE_NAME(IirLowPass1_destruct)
@@ -170,7 +170,7 @@ typedef struct IirLowPass1
 } IirLowPass1;
 
 
-void IirLowPass1_new(IirLowPass1* block);
+void IirLowPass1_ctor(IirLowPass1* block);
 IirLowPass1* IirLowPass1_new_malloc(float new_ratio);
 GenericBlock* IirLowPass1_new_malloc_gb(float new_ratio);
 void IirLowPass1_destruct(IirLowPass1* block);
@@ -182,7 +182,7 @@ fc_Type IirLowPass1_filter(IirLowPass1* block, fc_Type input);
 
 
 #define DownSampler               FCB_MAKE_NAME(DownSampler)
-#define DownSampler_new           FCB_MAKE_NAME(DownSampler_new)
+#define DownSampler_ctor           FCB_MAKE_NAME(DownSampler_ctor)
 #define DownSampler_new_malloc    FCB_MAKE_NAME(DownSampler_new_malloc)
 #define DownSampler_new_malloc_gb FCB_MAKE_NAME(DownSampler_new_malloc_gb)
 #define DownSampler_destruct      FCB_MAKE_NAME(DownSampler_destruct)
@@ -203,7 +203,7 @@ typedef struct DownSampler
 } DownSampler;
 
 
-void DownSampler_new(DownSampler* block);
+void DownSampler_ctor(DownSampler* block);
 DownSampler* DownSampler_new_malloc(uint16_t sample_offset, uint16_t sample_every_x, GenericBlock** block_list);
 GenericBlock* DownSampler_new_malloc_gb(uint16_t sample_offset, uint16_t sample_every_x, GenericBlock** block_list);
 void DownSampler_setup(DownSampler* block);

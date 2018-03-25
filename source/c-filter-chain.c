@@ -248,7 +248,7 @@ const BlockFunctionTable PassThrough_ftable = {
 };
 
 
-void PassThrough_new(PassThrough* passThrough)
+void PassThrough_ctor(PassThrough* passThrough)
 {
   ZERO_STRUCT(*passThrough);
   passThrough->block.function_table = &PassThrough_ftable;
@@ -260,7 +260,7 @@ void PassThrough_new(PassThrough* passThrough)
  */
 PassThrough* PassThrough_new_malloc()
 {
-  PassThrough* p = malloc_then_func_or_ret_fail_ptr(sizeof(PassThrough), PassThrough_new);
+  PassThrough* p = malloc_then_func_or_ret_fail_ptr(sizeof(PassThrough), PassThrough_ctor);
   return p;
 }
 
@@ -296,7 +296,7 @@ const BlockFunctionTable IirLowPass1_ftable = {
 };
 
 
-void IirLowPass1_new(IirLowPass1* iir)
+void IirLowPass1_ctor(IirLowPass1* iir)
 {
   ZERO_STRUCT(*iir);
   iir->block.function_table = &IirLowPass1_ftable;
@@ -304,7 +304,7 @@ void IirLowPass1_new(IirLowPass1* iir)
 
 IirLowPass1* IirLowPass1_new_malloc(float new_ratio)
 {
-  IirLowPass1* p = malloc_then_func_or_ret_fail_ptr(sizeof(IirLowPass1), IirLowPass1_new);
+  IirLowPass1* p = malloc_then_func_or_ret_fail_ptr(sizeof(IirLowPass1), IirLowPass1_ctor);
   
   if (p != CF_ALLOCATE_FAIL_PTR) {
     p->new_ratio = new_ratio;
@@ -356,7 +356,7 @@ const BlockFunctionTable DownSampler_ftable = {
 };
 
 
-void DownSampler_new(DownSampler* down_sampler)
+void DownSampler_ctor(DownSampler* down_sampler)
 {
   ZERO_STRUCT(*down_sampler);
   down_sampler->block.function_table = &DownSampler_ftable;
@@ -392,7 +392,7 @@ DownSampler* DownSampler_new_malloc(uint16_t sample_offset, uint16_t sample_ever
   bool inner_malloc_success;
   DownSampler* down_sampler;
 
-  down_sampler = malloc_then_func_or_ret_fail_ptr(sizeof(DownSampler), DownSampler_new);
+  down_sampler = malloc_then_func_or_ret_fail_ptr(sizeof(DownSampler), DownSampler_ctor);
   if (down_sampler == CF_ALLOCATE_FAIL_PTR) {
     goto done;
   }
