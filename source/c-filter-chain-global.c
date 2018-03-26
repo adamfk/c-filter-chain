@@ -1,3 +1,4 @@
+#include "c-filter-chain-common.h"
 
 /**
  * This is a special pointer value to indicate an allocation failure.
@@ -5,3 +6,5 @@
  * value to be able to detect a nested allocation failure.
  */
 void const * const CF_ALLOCATE_FAIL_PTR = &(int) {2};
+
+

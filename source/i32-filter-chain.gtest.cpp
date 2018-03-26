@@ -1,5 +1,7 @@
 #include "user-stuff.h"
 
+#include "fc_Mallocator.h"
+
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 #include <stdio.h>
@@ -20,6 +22,12 @@ using std::vector;
 //TODO consider making a filter chain extend the GenericBlock class
 
 //TODO consider throwing error if MockHeap had to free any dangling memory in its destructor
+
+
+fc_BuilderConfig mbc = {
+  &fc_Mallocator,
+};
+
 
 /**
 * Macro for getting the size of an array that is known at compile time. Code from Google's Chromium project.
@@ -377,12 +385,14 @@ TEST(FilterChain_i32, DownSamplerIir) {
 
 TEST(FilterChain_i32, MallocDownSamplerIir) {
   MockHeap mockHeap(&mockHeapPtr);
+  fc_BuilderConfig* bc = &mbc;
 
-  fc32_FilterChain* filter_chain = fc32_FilterChain_malloc(
+
+  fc32_FilterChain* filter_chain = fc32_FilterChain_new(bc,
     LIST_START(32)
-    fcb32_DownSampler_new_malloc_gb(0, 2,
+    fcb32_DownSampler_new_gb(bc, 0, 2,
       LIST_START(32)
-      fcb32_IirLowPass1_new_malloc_gb(0.5),
+      fcb32_IirLowPass1_new_gb(bc, 0.5),
       LIST_END
     ),
     LIST_END
@@ -405,15 +415,16 @@ TEST(FilterChain_i32, MallocDownSamplerIir) {
 
 TEST(FilterChain_i32, TestHeapMocking3) {
   MockHeap heap(&mockHeapPtr);
+  fc_BuilderConfig* bc = &mbc;
 
   //see if we can NULL the 3rd returned malloc
   EXPECT_CALL(heap, xMalloc(_)).Times(3)
     .WillOnce(DoDefault())
     .WillOnce(ReturnNull())
     .WillOnce(DoDefault());
-  fcb32_PassThrough* p1 = fcb32_PassThrough_new_malloc();
-  fcb32_PassThrough* p2 = fcb32_PassThrough_new_malloc(); //RETURN NULL HERE!
-  fcb32_PassThrough* p3 = fcb32_PassThrough_new_malloc();
+  fcb32_PassThrough* p1 = fcb32_PassThrough_new(bc);
+  fcb32_PassThrough* p2 = fcb32_PassThrough_new(bc); //RETURN NULL HERE!
+  fcb32_PassThrough* p3 = fcb32_PassThrough_new(bc);
 
   ASSERT_EQ(heap.getAllocationCount(), 2);
 
@@ -425,12 +436,13 @@ TEST(FilterChain_i32, TestHeapMocking3) {
 
 TEST(FilterChain_i32, MallocSimpleTest) {
   MockHeap heap(&mockHeapPtr);
-  
+  fc_BuilderConfig* bc = &mbc;
+
   fcb32_PassThrough* p_filter;
   int expected_size = sizeof(*p_filter);
 
   EXPECT_CALL(heap, xMalloc(expected_size)).Times(1);
-  p_filter = fcb32_PassThrough_new_malloc();
+  p_filter = fcb32_PassThrough_new(bc);
   ASSERT_EQ(heap.getAllocationCount(), 1);
   Allocation allocation = heap.peakFirstAllocationOrThrow();
   ASSERT_EQ(allocation.size, sizeof(*p_filter));
@@ -439,12 +451,13 @@ TEST(FilterChain_i32, MallocSimpleTest) {
 
 TEST(FilterChain_i32, MallocFailurePassThroughFilter) {
   MockHeap heap(&mockHeapPtr);
+  fc_BuilderConfig* bc = &mbc;
 
   fcb32_PassThrough* p_filter;
   int expected_size = sizeof(*p_filter);
 
   EXPECT_CALL(heap, xMalloc(_)).Times(1).WillOnce(Return(nullptr));
-  p_filter = fcb32_PassThrough_new_malloc();
+  p_filter = fcb32_PassThrough_new(bc);
   EXPECT_EQ(CF_ALLOCATE_FAIL_PTR, p_filter);
 }
 
@@ -454,6 +467,7 @@ TEST(FilterChain_i32, MallocFailurePassThroughFilter) {
 
 TEST(FilterChain_i32, MallocFailureInChain1) {
   MockHeap heap(&mockHeapPtr);
+  fc_BuilderConfig* bc = &mbc;
 
   EXPECT_CALL(heap, xMalloc(_)).Times(AtLeast(3))
     .WillOnce(DoDefault())  //0.42 IIR
@@ -463,13 +477,15 @@ TEST(FilterChain_i32, MallocFailureInChain1) {
 
   EXPECT_CALL(heap, xFree(_)).Times(AtLeast(1));
 
-  fc32_FilterChain* filter_chain = fc32_FilterChain_malloc(
+  fcb32_IirLowPass1* iir_ref;
+
+  fc32_FilterChain* filter_chain = fc32_FilterChain_new(bc,
     LIST_START(32)
-    fcb32_DownSampler_new_malloc_gb(0, 2,
+    fcb32_DownSampler_new_gb(bc, 0, 2,
       LIST_START(32)
-      fcb32_IirLowPass1_new_malloc_gb(0.40f),
-      fcb32_IirLowPass1_new_malloc_gb(0.41f),
-      fcb32_IirLowPass1_new_malloc_gb(0.42f),
+      (GenericBlock*)(iir_ref = fcb32_IirLowPass1_new(bc, 0.40f)),  //NOTE how to get a reference to a filter
+      fcb32_IirLowPass1_new_gb(bc, 0.41f),
+      fcb32_IirLowPass1_new_gb(bc, 0.42f),
       LIST_END
     ),
     LIST_END

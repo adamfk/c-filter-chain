@@ -1,5 +1,7 @@
 #pragma once
 
+#define fc_MALLOC_FUNC xMalloc
+#define fc_FREE_FUNC xFree
 
 #ifdef __cplusplus
 extern "C" {

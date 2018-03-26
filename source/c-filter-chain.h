@@ -11,6 +11,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "user-stuff.h"
+#include "c-filter-chain-common.h"
 
 
 #ifdef __cplusplus
@@ -38,12 +39,9 @@ extern void const * const CF_ALLOCATE_FAIL_PTR;
 #define fc_Type FILTER_CHAIN_TYPE
 
 
-#ifndef CFC_MALLOC_FUNC
-#  define CFC_MALLOC_FUNC malloc
-#  ifndef CFC_FREE_FUNC
-#    define CFC_FREE_FUNC free
-#  endif
-#endif
+
+
+
 
 
 //expand macro and concatenate
@@ -91,6 +89,13 @@ typedef struct BlockFunctionTable
 struct GenericBlock
 {
   BlockFunctionTable const * function_table;
+
+  /**
+   * TODO: rewrite code so that we don't need this helper field.
+   * Currently needed to use proper allocator for freeing memory on destruction, but this
+   * could be done by filter chains via if the BuilderConfig is passed to `_setup` method.
+   */
+  const fc_BuilderConfig* builder_config;
 };
 
 
@@ -99,22 +104,26 @@ struct GenericBlock
 #define FilterChain                FC_MAKE_NAME(FilterChain)
 #define FilterChain_setup          FC_MAKE_NAME(FilterChain_setup)
 #define FilterChain_filter         FC_MAKE_NAME(FilterChain_filter)
-#define FilterChain_malloc         FC_MAKE_NAME(FilterChain_malloc)
-#define FilterChain_malloc_inner   FC_MAKE_NAME(FilterChain_malloc_inner)
+#define FilterChain_new         FC_MAKE_NAME(FilterChain_new)
+#define FilterChain_new_inner   FC_MAKE_NAME(FilterChain_new_inner)
 #define FilterChain_destruct       FC_MAKE_NAME(FilterChain_destruct)
 #define FilterChain_destruct_inner FC_MAKE_NAME(FilterChain_destruct_inner)
 
 
+/**
+ * Assumes same allocation method for both FilterChain and `blocks` field.
+ */
 typedef struct FilterChain
 {
-  GenericBlock **blocks; //!< array of pointers to blocks
+  GenericBlock block;    //!< MUST BE FIRST FIELD IN STRUCT TO ALLOW CASTING FROM PARENT TYPE
+  GenericBlock **blocks; //!< array of pointers to blocks. DO NOT manually adjust if auto allocated via "new()" methods.
   uint16_t block_count;
 } FilterChain;
 
 void FilterChain_setup(FilterChain* fc);
 
-FilterChain* FilterChain_malloc(GenericBlock** block_list);
-bool FilterChain_malloc_inner(FilterChain* filter_chain, GenericBlock** block_list);
+FilterChain* FilterChain_new(fc_BuilderConfig* bc, GenericBlock** block_list);
+bool FilterChain_new_inner(fc_BuilderConfig* bc, FilterChain* filter_chain, GenericBlock** block_list);
 void FilterChain_destruct(FilterChain* fc);
 void FilterChain_destruct_inner(FilterChain* fc);
 fc_Type FilterChain_filter(FilterChain* fc, fc_Type input);
@@ -126,7 +135,7 @@ fc_Type FilterChain_filter(FilterChain* fc, fc_Type input);
 
 #define PassThrough             FCB_MAKE_NAME(PassThrough)
 #define PassThrough_ctor         FCB_MAKE_NAME(PassThrough_ctor)
-#define PassThrough_new_malloc  FCB_MAKE_NAME(PassThrough_new_malloc)
+#define PassThrough_new  FCB_MAKE_NAME(PassThrough_new)
 #define PassThrough_destruct    FCB_MAKE_NAME(PassThrough_destruct)
 #define PassThrough_filter      FCB_MAKE_NAME(PassThrough_filter)
 #define PassThrough_setup       FCB_MAKE_NAME(PassThrough_setup)
@@ -139,7 +148,7 @@ typedef struct PassThrough
 
 
 void PassThrough_ctor(PassThrough* block);
-PassThrough* PassThrough_new_malloc();
+PassThrough* PassThrough_new(fc_BuilderConfig* bc);
 void PassThrough_destruct(PassThrough* block);
 void PassThrough_setup(PassThrough* block);
 fc_Type PassThrough_filter(PassThrough* block, fc_Type input);
@@ -153,8 +162,8 @@ fc_Type PassThrough_filter(PassThrough* block, fc_Type input);
 
 #define IirLowPass1               FCB_MAKE_NAME(IirLowPass1)
 #define IirLowPass1_ctor           FCB_MAKE_NAME(IirLowPass1_ctor)
-#define IirLowPass1_new_malloc    FCB_MAKE_NAME(IirLowPass1_new_malloc)
-#define IirLowPass1_new_malloc_gb FCB_MAKE_NAME(IirLowPass1_new_malloc_gb)
+#define IirLowPass1_new    FCB_MAKE_NAME(IirLowPass1_new)
+#define IirLowPass1_new_gb FCB_MAKE_NAME(IirLowPass1_new_gb)
 #define IirLowPass1_destruct      FCB_MAKE_NAME(IirLowPass1_destruct)
 #define IirLowPass1_filter        FCB_MAKE_NAME(IirLowPass1_filter)
 #define IirLowPass1_setup         FCB_MAKE_NAME(IirLowPass1_setup)
@@ -171,8 +180,8 @@ typedef struct IirLowPass1
 
 
 void IirLowPass1_ctor(IirLowPass1* block);
-IirLowPass1* IirLowPass1_new_malloc(float new_ratio);
-GenericBlock* IirLowPass1_new_malloc_gb(float new_ratio);
+IirLowPass1* IirLowPass1_new(fc_BuilderConfig* bc, float new_ratio);
+GenericBlock* IirLowPass1_new_gb(fc_BuilderConfig* bc, float new_ratio);
 void IirLowPass1_destruct(IirLowPass1* block);
 void IirLowPass1_setup(IirLowPass1* block);
 fc_Type IirLowPass1_filter(IirLowPass1* block, fc_Type input);
@@ -183,8 +192,8 @@ fc_Type IirLowPass1_filter(IirLowPass1* block, fc_Type input);
 
 #define DownSampler               FCB_MAKE_NAME(DownSampler)
 #define DownSampler_ctor           FCB_MAKE_NAME(DownSampler_ctor)
-#define DownSampler_new_malloc    FCB_MAKE_NAME(DownSampler_new_malloc)
-#define DownSampler_new_malloc_gb FCB_MAKE_NAME(DownSampler_new_malloc_gb)
+#define DownSampler_new    FCB_MAKE_NAME(DownSampler_new)
+#define DownSampler_new_gb FCB_MAKE_NAME(DownSampler_new_gb)
 #define DownSampler_destruct      FCB_MAKE_NAME(DownSampler_destruct)
 #define DownSampler_filter        FCB_MAKE_NAME(DownSampler_filter)
 #define DownSampler_setup         FCB_MAKE_NAME(DownSampler_setup)
@@ -204,8 +213,8 @@ typedef struct DownSampler
 
 
 void DownSampler_ctor(DownSampler* block);
-DownSampler* DownSampler_new_malloc(uint16_t sample_offset, uint16_t sample_every_x, GenericBlock** block_list);
-GenericBlock* DownSampler_new_malloc_gb(uint16_t sample_offset, uint16_t sample_every_x, GenericBlock** block_list);
+DownSampler* DownSampler_new(fc_BuilderConfig* bc, uint16_t sample_offset, uint16_t sample_every_x, GenericBlock** block_list);
+GenericBlock* DownSampler_new_gb(fc_BuilderConfig* bc, uint16_t sample_offset, uint16_t sample_every_x, GenericBlock** block_list);
 void DownSampler_setup(DownSampler* block);
 fc_Type DownSampler_filter(DownSampler* block, fc_Type input);
 void DownSampler_destruct(DownSampler* block);

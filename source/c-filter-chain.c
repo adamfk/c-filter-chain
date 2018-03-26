@@ -1,6 +1,6 @@
 
 /*
-TODO document max filters in a FilterChain_malloc() call to be 127 based off of https://stackoverflow.com/questions/9034787/function-parameters-max-number
+TODO document max filters in a FilterChain_new() call to be 127 based off of https://stackoverflow.com/questions/9034787/function-parameters-max-number
   Not sure if this applies to varargs as well.
 
 TODO fail if more than 127
@@ -10,11 +10,11 @@ TODO create error call back for alerting
 TODO consider a different construction technique based on lists.
   Con: more memory
   Bah... it doesn't get away from nesting problem as shown below.
-    FilterChain_add(fc, fcb32_IirLowPass1_new_malloc() );
-    FilterChain_add(fc, fcb32_SomeFilter_new_malloc() );
-    FilterChain_add(fc, fcb32_DownSampler_new_malloc(0, 2,
-      fcb32_IirLowPass1_new_malloc( ),
-      fcb32_IirLowPass1_new_malloc( ),
+    FilterChain_add(fc, fcb32_IirLowPass1_new() );
+    FilterChain_add(fc, fcb32_SomeFilter_new() );
+    FilterChain_add(fc, fcb32_DownSampler_new(0, 2,
+      fcb32_IirLowPass1_new( ),
+      fcb32_IirLowPass1_new( ),
       NULL,
     ) );
 
@@ -30,8 +30,6 @@ TODO consider a different construction technique based on lists.
 #include <string.h>
 #include <stdlib.h>
 
-#define cfc_Malloc CFC_MALLOC_FUNC
-#define cfc_Free CFC_FREE_FUNC
 
 #define ZERO_STRUCT(my_struct)  memset(&(my_struct), 0, sizeof(my_struct));
 
@@ -43,18 +41,45 @@ TODO consider a different construction technique based on lists.
 #define CF_ALLOCATE_FAIL_PTR ((void*)CF_ALLOCATE_FAIL_PTR)
 
 
-static void* malloc_then_func_or_ret_fail_ptr(size_t size, void(*success_function)(void* allocated_object))
+ //TODOLOW put into xGenericBlock
+static void free_generic_block(GenericBlock* gb)
 {
-  void* p = cfc_Malloc(size);
+  if (gb->builder_config && gb->builder_config->allocator) {
+    fc_free(gb->builder_config->allocator, gb);
+  }
+}
 
-  if (p == NULL) {
-    p = CF_ALLOCATE_FAIL_PTR;
+
+static void free_my(GenericBlock* gb, void* address)
+{
+  if (gb->builder_config && gb->builder_config->allocator) {
+    fc_free(gb->builder_config->allocator, address);
+  }
+}
+
+
+
+static void GenericBlock_ctor(GenericBlock* gb, fc_BuilderConfig* bc)
+{
+  gb->builder_config = bc;
+}
+
+
+static void* alloc_gb_then_func_or_ret_fail_ptr(fc_BuilderConfig* bc, size_t size, void(*success_function)(void* allocated_object))
+{
+  GenericBlock* gb = fc_allocate(bc->allocator, size);
+
+  if (gb == NULL) {
+    gb = CF_ALLOCATE_FAIL_PTR;
   }
   else {
-    success_function(p);
+    gb->builder_config = bc;
+    if (success_function) {
+      success_function(gb);
+    }
   }
 
-  return p;
+  return gb;
 }
 
 
@@ -132,7 +157,7 @@ static void destruct_blocks(GenericBlock** blocks, size_t block_count)
  * TODO: fail if an empty chain?
  * Returns success
  */
-bool FilterChain_malloc_inner(FilterChain* filter_chain, GenericBlock** block_list)
+bool FilterChain_new_inner(fc_BuilderConfig* bc, FilterChain* filter_chain, GenericBlock** block_list)
 {
   bool success = false;
   bool child_allocate_fail = false;
@@ -142,7 +167,7 @@ bool FilterChain_malloc_inner(FilterChain* filter_chain, GenericBlock** block_li
   total_block_count = count_list_size(block_list);
 
   //try to allocate block array
-  block_array = cfc_Malloc(total_block_count * sizeof(block_array[0]));
+  block_array = fc_allocate(bc->allocator, total_block_count * sizeof(block_array[0]));
 
   if (block_array != NULL) 
   {
@@ -150,7 +175,7 @@ bool FilterChain_malloc_inner(FilterChain* filter_chain, GenericBlock** block_li
 
     if (child_allocate_fail) {
       destruct_blocks(block_array, total_block_count);
-      cfc_Free(block_array);
+      fc_free(bc->allocator, block_array);
     } 
     else {
       filter_chain->blocks = block_array;
@@ -173,20 +198,21 @@ bool FilterChain_malloc_inner(FilterChain* filter_chain, GenericBlock** block_li
  * 
  * Returns #CF_ALLOCATE_FAIL_PTR if this or a passed block failed allocation.
  */
-FilterChain* FilterChain_malloc(GenericBlock** block_list)
+FilterChain* FilterChain_new(fc_BuilderConfig* bc, GenericBlock** block_list)
 {
   FilterChain* filter_chain;
   bool success = true;
 
-  filter_chain = cfc_Malloc(sizeof(*filter_chain));
-  if (filter_chain == NULL) {
+  filter_chain = alloc_gb_then_func_or_ret_fail_ptr(bc, sizeof(*filter_chain), NULL);
+  if (filter_chain == CF_ALLOCATE_FAIL_PTR) {
     success = false;
+    //FIXME: can't stop here. Need to destruct block_list entries as well
   }
   else {
-    success = FilterChain_malloc_inner(filter_chain, block_list);
+    success = FilterChain_new_inner(bc, filter_chain, block_list);
 
     if (!success) {
-      cfc_Free(filter_chain);
+      fc_free(bc->allocator, filter_chain);
     }
   }
 
@@ -201,13 +227,16 @@ FilterChain* FilterChain_malloc(GenericBlock** block_list)
 void FilterChain_destruct_inner(FilterChain* fc)
 {
   destruct_blocks(fc->blocks, fc->block_count);
-  cfc_Free(fc->blocks);
+  
+  //below call is safe because fc will not an allocator if it was statically allocated.
+  free_my(&fc->block, fc->blocks);
 }
+
 
 void FilterChain_destruct(FilterChain* fc)
 {
   FilterChain_destruct_inner(fc);
-  cfc_Free(fc);
+  free_generic_block(&fc->block);
 }
 
 
@@ -258,16 +287,16 @@ void PassThrough_ctor(PassThrough* passThrough)
 /**
  * Returns #CF_ALLOCATE_FAIL_PTR on allocate failure.
  */
-PassThrough* PassThrough_new_malloc()
+PassThrough* PassThrough_new(fc_BuilderConfig* bc)
 {
-  PassThrough* p = malloc_then_func_or_ret_fail_ptr(sizeof(PassThrough), PassThrough_ctor);
+  PassThrough* p = alloc_gb_then_func_or_ret_fail_ptr(bc, sizeof(PassThrough), PassThrough_ctor);
   return p;
 }
 
 
 void PassThrough_destruct(PassThrough* block)
 {
-  cfc_Free(block);
+  free_generic_block(&block->block);
 }
 
 
@@ -302,9 +331,9 @@ void IirLowPass1_ctor(IirLowPass1* iir)
   iir->block.function_table = &IirLowPass1_ftable;
 }
 
-IirLowPass1* IirLowPass1_new_malloc(float new_ratio)
+IirLowPass1* IirLowPass1_new(fc_BuilderConfig* bc, float new_ratio)
 {
-  IirLowPass1* p = malloc_then_func_or_ret_fail_ptr(sizeof(IirLowPass1), IirLowPass1_ctor);
+  IirLowPass1* p = alloc_gb_then_func_or_ret_fail_ptr(bc, sizeof(IirLowPass1), IirLowPass1_ctor);
   
   if (p != CF_ALLOCATE_FAIL_PTR) {
     p->new_ratio = new_ratio;
@@ -313,15 +342,15 @@ IirLowPass1* IirLowPass1_new_malloc(float new_ratio)
   return p;
 }
 
-GenericBlock* IirLowPass1_new_malloc_gb(float new_ratio)
+GenericBlock* IirLowPass1_new_gb(fc_BuilderConfig* bc, float new_ratio)
 {
-  IirLowPass1* result = IirLowPass1_new_malloc(new_ratio);
-  return &result->block;
+  IirLowPass1* result = IirLowPass1_new(bc, new_ratio);
+  return (GenericBlock*)result;
 }
 
 void IirLowPass1_destruct(IirLowPass1* p)
 {
-  cfc_Free(p);
+  free_generic_block(&p->block);
 }
 
 void IirLowPass1_setup(IirLowPass1* iir)
@@ -384,26 +413,26 @@ fc_Type DownSampler_filter(DownSampler* down_sampler, fc_Type input)
 }
 
 /**
- * varargs MUST BE NULL TERMINATED!
- * SEE #FilterChain_new_malloc for usage.
+ * block_list MUST BE NULL TERMINATED!
+ * SEE #FilterChain_new for usage.
  */
-DownSampler* DownSampler_new_malloc(uint16_t sample_offset, uint16_t sample_every_x, GenericBlock** block_list)
+DownSampler* DownSampler_new(fc_BuilderConfig* bc, uint16_t sample_offset, uint16_t sample_every_x, GenericBlock** block_list)
 {
   bool inner_malloc_success;
   DownSampler* down_sampler;
 
-  down_sampler = malloc_then_func_or_ret_fail_ptr(sizeof(DownSampler), DownSampler_ctor);
+  down_sampler = alloc_gb_then_func_or_ret_fail_ptr(bc, sizeof(DownSampler), DownSampler_ctor);
   if (down_sampler == CF_ALLOCATE_FAIL_PTR) {
-    goto done;
+    goto done;  //FIXME: can't exit early because it needs to destruct all the block_list elements as well
   }
 
   down_sampler->sample_every_x = sample_every_x;
   down_sampler->sample_count = sample_offset;
 
-  inner_malloc_success = FilterChain_malloc_inner(&down_sampler->sub_chain, block_list);
+  inner_malloc_success = FilterChain_new_inner(bc, &down_sampler->sub_chain, block_list);
 
   if (!inner_malloc_success) {
-    cfc_Free(down_sampler);
+    free_generic_block(&down_sampler->block);
     down_sampler = CF_ALLOCATE_FAIL_PTR;
   }
 
@@ -411,16 +440,16 @@ DownSampler* DownSampler_new_malloc(uint16_t sample_offset, uint16_t sample_ever
   return down_sampler;
 }
 
-GenericBlock* DownSampler_new_malloc_gb(uint16_t sample_offset, uint16_t sample_every_x, GenericBlock** block_list)
+GenericBlock* DownSampler_new_gb(fc_BuilderConfig* bc, uint16_t sample_offset, uint16_t sample_every_x, GenericBlock** block_list)
 {
-  return (GenericBlock*)DownSampler_new_malloc(sample_offset, sample_every_x, block_list);
+  return (GenericBlock*)DownSampler_new(bc, sample_offset, sample_every_x, block_list);
 }
 
 
 void DownSampler_destruct(DownSampler* down_sampler)
 {
   FilterChain_destruct_inner(&down_sampler->sub_chain);
-  cfc_Free(down_sampler);
+  free_generic_block(&down_sampler->block);
 }
 
 

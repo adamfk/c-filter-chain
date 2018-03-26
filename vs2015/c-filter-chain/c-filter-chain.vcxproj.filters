@@ -30,6 +30,9 @@
     <ClCompile Include="..\..\source\c-test.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\fc_Mallocator.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\i32-filter-chain.h">
@@ -39,6 +42,12 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\user-stuff.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\c-filter-chain-common.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\fc_Mallocator.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
