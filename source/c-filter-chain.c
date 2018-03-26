@@ -65,6 +65,7 @@ static void GenericBlock_ctor(GenericBlock* gb, fc_BuilderConfig* bc)
 }
 
 
+//TODO rework this function. It does too much and usage becomes unclear.
 static void* alloc_gb_then_func_or_ret_fail_ptr(fc_BuilderConfig* bc, size_t size, void(*success_function)(void* allocated_object))
 {
   GenericBlock* gb = fc_allocate(bc->allocator, size);
@@ -73,10 +74,10 @@ static void* alloc_gb_then_func_or_ret_fail_ptr(fc_BuilderConfig* bc, size_t siz
     gb = CF_ALLOCATE_FAIL_PTR;
   }
   else {
-    gb->builder_config = bc;
     if (success_function) {
       success_function(gb);
     }
+    gb->builder_config = bc;  //success function usually zeros struct. Need to apply after.
   }
 
   return gb;
