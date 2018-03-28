@@ -328,13 +328,13 @@ TEST(FilterChain_i32, DownSamplerPassthrough) {
   fcb32_GenericBlock* downsampled_blocks[] = {
     &downsampled_p1.block,
   };
-  down_sampler.sub_chain.blocks = &downsampled_blocks[0];
-  down_sampler.sub_chain.block_count = COUNT_OF(downsampled_blocks);
+  down_sampler.base_fc_instance.blocks = &downsampled_blocks[0];
+  down_sampler.base_fc_instance.block_count = COUNT_OF(downsampled_blocks);
 
 
   fc32_FilterChain top_filter_chain = { 0 };
   fcb32_GenericBlock* top_filter_blocks[] = {
-    &down_sampler.block,
+    &down_sampler.base_fc_instance.block,
   };
   top_filter_chain.blocks = &top_filter_blocks[0];
   top_filter_chain.block_count = COUNT_OF(top_filter_blocks);
@@ -360,13 +360,13 @@ TEST(FilterChain_i32, DownSamplerIir) {
   fcb32_GenericBlock* downsampled_blocks[] = {
     &downsampled_iir.block,
   };
-  down_sampler.sub_chain.blocks = &downsampled_blocks[0];
-  down_sampler.sub_chain.block_count = COUNT_OF(downsampled_blocks);
+  down_sampler.base_fc_instance.blocks = &downsampled_blocks[0];
+  down_sampler.base_fc_instance.block_count = COUNT_OF(downsampled_blocks);
 
 
   fc32_FilterChain top_filter_chain = { 0 };
   fcb32_GenericBlock* top_filter_blocks[] = {
-    &down_sampler.block,
+    &down_sampler.base_fc_instance.block,
   };
   top_filter_chain.blocks = &top_filter_blocks[0];
   top_filter_chain.block_count = COUNT_OF(top_filter_blocks);
@@ -408,7 +408,7 @@ TEST(FilterChain_i32, MallocDownSamplerIir) {
   const size_t length = COUNT_OF(expected_outputs);
   test_chain_against_array(filter_chain, inputs, expected_outputs, length, error_tolerance);
 
-  fc32_FilterChain_destruct(filter_chain);
+  fc32_FilterChain_destruct(NULL, filter_chain);
 }
 
 

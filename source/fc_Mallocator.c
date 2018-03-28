@@ -19,11 +19,15 @@ const fc_AbstractAllocator fc_Mallocator = {
 
 static void fc_Mallocator_free(fc_AbstractAllocator const* const allocator, void* address)
 {
-  fc_FREE_FUNC(address);
+  (void)allocator;
+  if (address) {
+    fc_FREE_FUNC(address);
+  }
 }
 
 static void* fc_Mallocator_allocate(fc_AbstractAllocator const * const allocator, size_t object_size)
 {
+  (void)allocator;
   void* address = fc_MALLOC_FUNC(object_size);
   return address;
 }
