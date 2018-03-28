@@ -102,6 +102,7 @@ struct GenericBlock
 
 
 #define FilterChain                FC_MAKE_NAME(FilterChain)
+#define FilterChain_ctor           FC_MAKE_NAME(FilterChain_setup)
 #define FilterChain_setup          FC_MAKE_NAME(FilterChain_setup)
 #define FilterChain_filter         FC_MAKE_NAME(FilterChain_filter)
 #define FilterChain_new         FC_MAKE_NAME(FilterChain_new)
@@ -122,6 +123,7 @@ typedef struct FilterChain
 
 void FilterChain_setup(FilterChain* fc);
 
+void FilterChain_ctor(FilterChain* filter_chain);
 FilterChain* FilterChain_new(fc_BuilderConfig* bc, GenericBlock** block_list);
 bool FilterChain_new_inner(fc_BuilderConfig* bc, FilterChain* filter_chain, GenericBlock** block_list);
 void FilterChain_destruct(FilterChain* fc);

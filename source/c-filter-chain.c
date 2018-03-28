@@ -153,6 +153,24 @@ static void destruct_blocks(GenericBlock** blocks, size_t block_count)
 //####################################################################
 
 
+
+#define FilterChain_ftable FC_MAKE_NAME(FilterChain_ftable)
+
+const BlockFunctionTable FilterChain_ftable = {
+  .filter = (GenericBlock_filter_t)FilterChain_filter,
+  .setup = (GenericBlock_setup_t)FilterChain_setup,
+  .destruct = (GenericBlock_destruct_t)FilterChain_destruct,
+};
+
+
+void FilterChain_ctor(FilterChain* fc)
+{
+  ZERO_STRUCT(*fc);
+  fc->block.function_table = &FilterChain_ftable;
+}
+
+
+
 /**
  * blocks array MUST BE NULL TERMINATED!
  * TODO: fail if an empty chain?
