@@ -27,10 +27,8 @@ struct fc_AbstractAllocator_
   void*(*allocate)(fc_AbstractAllocator const * const allocator, size_t object_size);
 };
 
-#define fc_allocate(allocator, size) allocator->allocate(allocator, size)
-#define fc_free(allocator, address) allocator->free(allocator, address)
-
-
+void* fc_allocate(fc_AbstractAllocator const * const allocator, size_t size);
+void fc_free(fc_AbstractAllocator const * const allocator, void* address);
 
 typedef struct fc_BuilderConfig_
 {

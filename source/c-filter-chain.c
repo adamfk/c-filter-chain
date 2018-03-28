@@ -70,14 +70,15 @@ static uint16_t count_list_size(void** list)
 
 
 //TODOLOW move to common 
-static void GenericBlock_destruct(const fc_AbstractAllocator* allocator, GenericBlock* block)
+void fc_destruct_and_free_block(const fc_AbstractAllocator* allocator, GenericBlock* block)
 {
   if (block != NULL && block != CF_ALLOCATE_FAIL_PTR)
   {
-    if (block->function_table->destruct) {
-      block->function_table->destruct(allocator, block);
-    } else {
-      //this is a simple block and it can just be freed
+    if (block->function_table->destruct_fields) {
+      block->function_table->destruct_fields(allocator, block);
+    }
+
+    if (allocator) {
       fc_free(allocator, block);
     }
   }
@@ -90,7 +91,7 @@ static void destruct_block_array(const fc_AbstractAllocator* allocator, GenericB
   for (size_t i = 0; i < block_count; i++)
   {
     GenericBlock* block = blocks[i];
-    GenericBlock_destruct(allocator, block);
+    fc_destruct_and_free_block(allocator, block);
   }
 }
 
@@ -101,7 +102,7 @@ static void fc_destruct_gb_list(const fc_AbstractAllocator* allocator, GenericBl
   GenericBlock* block = block_list[i];
   while (block != NULL)
   {
-    GenericBlock_destruct(allocator, block);
+    fc_destruct_and_free_block(allocator, block);
     block = block_list[++i];
   }
 
@@ -159,7 +160,7 @@ static bool test_and_copy_blocks(GenericBlock** store_in, void** list, uint16_t 
 const BlockFunctionTable FilterChain_ftable = {
   .filter = (GenericBlock_filter_t)FilterChain_filter,
   .setup = (GenericBlock_setup_t)FilterChain_setup,
-  .destruct = (GenericBlock_destruct_t)FilterChain_destruct,
+  .destruct_fields = (GenericBlock_destruct_fields_t)FilterChain_destruct_fields,
 };
 
 
@@ -259,7 +260,7 @@ FilterChain* FilterChain_new(fc_BuilderConfig* bc, GenericBlock** block_list)
 
 
 
-void FilterChain_destruct(fc_AbstractAllocator const * allocator, FilterChain* fc)
+void FilterChain_destruct_fields(fc_AbstractAllocator const * allocator, FilterChain* fc)
 {
   allocator = NULL; //ignore passed in allocator as we have our own
 
@@ -269,7 +270,12 @@ void FilterChain_destruct(fc_AbstractAllocator const * allocator, FilterChain* f
 
   destruct_block_array(allocator, fc->blocks, fc->block_count);
   fc_free(allocator, fc->blocks);
-  fc_free(allocator, fc);
+}
+
+
+void FilterChain_destruct_entire(FilterChain* fc)
+{
+  fc_destruct_and_free_block(fc->builder_config->allocator, &fc->block);
 }
 
 
@@ -306,7 +312,7 @@ fc_Type FilterChain_filter(FilterChain* fc, fc_Type input)
 const BlockFunctionTable PassThrough_ftable = {
   .filter = (GenericBlock_filter_t)PassThrough_filter,
   .setup = (GenericBlock_setup_t)PassThrough_setup,
-  //.destruct = (GenericBlock_destruct_t)PassThrough_destruct, //uses default destructor
+  //.destruct_fields = (GenericBlock_destruct_t)PassThrough_destruct, //uses default destructor
 };
 
 
@@ -351,7 +357,7 @@ fc_Type PassThrough_filter(PassThrough* passThrough, fc_Type input)
 const BlockFunctionTable IirLowPass1_ftable = {
   .filter = (GenericBlock_filter_t)IirLowPass1_filter,
   .setup = (GenericBlock_setup_t)IirLowPass1_setup,
-  //.destruct = (GenericBlock_destruct_t)IirLowPass1_destruct, //uses default
+  //.destruct_fields = (GenericBlock_destruct_t)IirLowPass1_destruct, //uses default
 };
 
 
@@ -407,7 +413,7 @@ fc_Type IirLowPass1_filter(IirLowPass1* iir, fc_Type input)
 const BlockFunctionTable DownSampler_ftable = {
   .filter = (GenericBlock_filter_t)DownSampler_filter,
   .setup = (GenericBlock_setup_t)DownSampler_setup,
-  .destruct = (GenericBlock_destruct_t)FilterChain_destruct,  //use FilterChain destructor
+  .destruct_fields = (GenericBlock_destruct_fields_t)FilterChain_destruct_fields,  //use FilterChain destructor
 };
 
 

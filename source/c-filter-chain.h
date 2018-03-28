@@ -59,10 +59,13 @@ extern void const * const CF_ALLOCATE_FAIL_PTR;
 #define FC_MAKE_NAME(name) ECAT(fc, FILTER_CHAIN_NAME_PREFIX, _, name)
 #define FCB_MAKE_NAME(name) ECAT(fcb, FILTER_CHAIN_NAME_PREFIX, _, name)
 
-#define GenericBlock             FCB_MAKE_NAME(GenericBlock)
-#define GenericBlock_filter_t    FCB_MAKE_NAME(GenericBlock_filter_t)
-#define GenericBlock_setup_t     FCB_MAKE_NAME(GenericBlock_setup_t)
-#define GenericBlock_destruct_t  FCB_MAKE_NAME(GenericBlock_destruct_t)
+#define GenericBlock                    FCB_MAKE_NAME(GenericBlock)
+#define GenericBlock_filter_t           FCB_MAKE_NAME(GenericBlock_filter_t)
+#define GenericBlock_setup_t            FCB_MAKE_NAME(GenericBlock_setup_t)
+#define GenericBlock_destruct_fields_t  FCB_MAKE_NAME(GenericBlock_destruct_fields_t)
+
+
+#define fc_destruct_and_free_block  FC_MAKE_NAME(fc_destruct_and_free_block)
 
 
 //need to forward declare GenericBlock for other declarations.
@@ -70,7 +73,7 @@ typedef struct GenericBlock GenericBlock;
 
 typedef fc_Type(*GenericBlock_filter_t)(GenericBlock* block, fc_Type input);
 typedef void(*GenericBlock_setup_t)(GenericBlock* block);
-typedef void(*GenericBlock_destruct_t)(fc_AbstractAllocator const * allocator, GenericBlock* block);
+typedef void(*GenericBlock_destruct_fields_t)(fc_AbstractAllocator const * allocator, GenericBlock* block);
 
  
 
@@ -79,7 +82,13 @@ typedef struct BlockFunctionTable
 {
   GenericBlock_filter_t filter;
   GenericBlock_setup_t setup;
-  GenericBlock_destruct_t destruct; //!< Only `GenericBlock_destruct( )` should call as allowed to be NULL for default freeing of block.
+
+  /**
+   * User code should not call directly. Use `fc_destruct_and_free_block( )` instead.
+   * This function should destruct & de-allocate all the fields within a GenericBlock instance, but should not
+   * free the memory to the block itself as that is handled by `fc_destruct_and_free_block( )`.
+   */
+  GenericBlock_destruct_fields_t destruct_fields;
 } BlockFunctionTable;
 
 
@@ -92,6 +101,10 @@ struct GenericBlock
 };
 
 
+void fc_destruct_and_free_block(fc_AbstractAllocator const * allocator, GenericBlock* block);
+
+//###############################################################
+
 
 
 #define FilterChain                  FC_MAKE_NAME(FilterChain)
@@ -100,7 +113,8 @@ struct GenericBlock
 #define FilterChain_filter           FC_MAKE_NAME(FilterChain_filter)
 #define FilterChain_new              FC_MAKE_NAME(FilterChain_new)
 #define FilterChain_allocate_fields  FC_MAKE_NAME(FilterChain_allocate_fields)
-#define FilterChain_destruct         FC_MAKE_NAME(FilterChain_destruct)
+#define FilterChain_destruct_fields  FC_MAKE_NAME(FilterChain_destruct_fields)
+#define FilterChain_destruct_entire  FC_MAKE_NAME(FilterChain_destruct_entire)
 
 
 //TODOLOW create a convenience class AllocatedBlock that combines an allocator and a single block.
@@ -135,12 +149,25 @@ typedef struct FilterChain
 } FilterChain;
 
 void FilterChain_setup(FilterChain* fc);
-
 void FilterChain_ctor(FilterChain* filter_chain);
-FilterChain* FilterChain_new(fc_BuilderConfig* bc, GenericBlock** block_list);
-bool FilterChain_allocate_fields(fc_BuilderConfig* bc, FilterChain* filter_chain, GenericBlock** block_list);
-void FilterChain_destruct(fc_AbstractAllocator const * allocator, FilterChain* fc);
 fc_Type FilterChain_filter(FilterChain* fc, fc_Type input);
+
+FilterChain* FilterChain_new(fc_BuilderConfig* bc, GenericBlock** block_list);
+
+/**
+ * user code should generally not call.
+ */
+bool FilterChain_allocate_fields(fc_BuilderConfig* bc, FilterChain* filter_chain, GenericBlock** block_list);
+
+/**
+ * user code should prefer to call `FilterChain_destruct_entire( )` instead.
+ */
+void FilterChain_destruct_fields(fc_AbstractAllocator const * allocator, FilterChain* fc);
+
+/**
+ * Will destruct fields and free self.
+ */
+void FilterChain_destruct_entire(FilterChain* fc);
 
 
 //###################################################################33

@@ -384,7 +384,7 @@ TEST(FilterChain_i32, DownSamplerIir) {
 
 
 TEST(FilterChain_i32, MallocDownSamplerIir) {
-  MockHeap mockHeap(&mockHeapPtr);
+  MockHeap heap(&mockHeapPtr);
   fc_BuilderConfig* bc = &mbc;
 
 
@@ -408,7 +408,9 @@ TEST(FilterChain_i32, MallocDownSamplerIir) {
   const size_t length = COUNT_OF(expected_outputs);
   test_chain_against_array(filter_chain, inputs, expected_outputs, length, error_tolerance);
 
-  fc32_FilterChain_destruct(NULL, filter_chain);
+  fc32_FilterChain_destruct_entire(filter_chain);
+
+  ASSERT_EQ(heap.getAllocationCount(), 0);
 }
 
 
