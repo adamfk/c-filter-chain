@@ -119,6 +119,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\source\c-filter-chain-global.c" />
     <ClCompile Include="..\..\source\c-test.c" />
+    <ClCompile Include="..\..\source\fc_CountAllocator.c" />
     <ClCompile Include="..\..\source\fc_Mallocator.c" />
     <ClCompile Include="..\..\source\i32-filter-chain.c" />
     <ClCompile Include="..\..\source\i32-filter-chain.gtest.cpp" />
@@ -126,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\c-filter-chain-common.h" />
+    <ClInclude Include="..\..\source\fc_CountAllocator.h" />
     <ClInclude Include="..\..\source\fc_Mallocator.h" />
     <ClInclude Include="..\..\source\user-stuff.h" />
     <ClInclude Include="..\..\source\i32-filter-chain.h" />

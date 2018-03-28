@@ -1,6 +1,7 @@
 #include "user-stuff.h"
 
 #include "fc_Mallocator.h"
+#include "fc_CountAllocator.h"
 
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
@@ -102,6 +103,22 @@ public:
       throw std::out_of_range("too many found to free");
     }
     free(ptr);
+  }
+
+
+  size_t sumAllocationBytes() {
+    size_t result = 0;
+
+    std::unordered_map<void*, size_t>::iterator it;
+    it = allocations.begin();
+    for (it = allocations.begin(); it != allocations.end(); it++)
+    {
+      void* address = it->first;
+      size_t size = it->second;
+      result += size;
+    }
+
+    return result;
   }
 
 
@@ -497,6 +514,78 @@ TEST(FilterChain_i32, MallocFailureInChain1) {
   EXPECT_EQ(heap.getAllocationCount(), 0);
 }
 
+
+
+TEST(FilterChain_i32, DetermineSizeWithoutAllocating) {
+  MockHeap heap(&mockHeapPtr);
+  fc_CountAllocator count_allocator;
+  fc_CountAllocator_ctor(&count_allocator, &fc_Mallocator);
+  fc_BuilderConfig counting_bc;
+  counting_bc.allocator = &count_allocator.base_instance;
+
+  fc_BuilderConfig* bc = &counting_bc;
+
+  EXPECT_CALL(heap, xMalloc(_)).WillRepeatedly(ReturnNull());
+
+  size_t expected_total_size = 0;
+  size_t inner_blocks_count = 0;
+
+  inner_blocks_count = 4;
+  expected_total_size += sizeof(fc32_FilterChain) + sizeof(fcb32_DownSampler) + 3 * sizeof(fcb32_IirLowPass1);
+  expected_total_size += sizeof(void*) * inner_blocks_count;
+
+  fc32_FilterChain* filter_chain = fc32_FilterChain_new(bc,
+      LIST_START(32)
+      fcb32_DownSampler_new_gb(bc, 0, 2,
+          LIST_START(32)
+          fcb32_IirLowPass1_new_gb(bc, 0.40f),
+          fcb32_IirLowPass1_new_gb(bc, 0.41f),
+          fcb32_IirLowPass1_new_gb(bc, 0.42f),
+          LIST_END
+      ),
+      LIST_END
+  );
+
+  EXPECT_EQ(count_allocator.requested_bytes, expected_total_size);
+  EXPECT_EQ(heap.getAllocationCount(), 0);
+}
+
+
+TEST(FilterChain_i32, DetermineSizeWhileAllocating) {
+  MockHeap heap(&mockHeapPtr);
+  fc_CountAllocator count_allocator;
+  fc_CountAllocator_ctor(&count_allocator, &fc_Mallocator);
+  fc_BuilderConfig counting_bc;
+  counting_bc.allocator = &count_allocator.base_instance;
+
+  fc_BuilderConfig* bc = &counting_bc;
+
+  EXPECT_CALL(heap, xMalloc(_)).Times(AtLeast(4));
+
+  size_t expected_total_size = 0;
+  size_t inner_blocks_count = 0;
+
+  inner_blocks_count = 4;
+  expected_total_size += sizeof(fc32_FilterChain) + sizeof(fcb32_DownSampler) + 3 * sizeof(fcb32_IirLowPass1);
+  expected_total_size += sizeof(void*) * inner_blocks_count;
+
+  fc32_FilterChain* filter_chain = fc32_FilterChain_new(bc,
+    LIST_START(32)
+    fcb32_DownSampler_new_gb(bc, 0, 2,
+      LIST_START(32)
+      fcb32_IirLowPass1_new_gb(bc, 0.40f),
+      fcb32_IirLowPass1_new_gb(bc, 0.41f),
+      fcb32_IirLowPass1_new_gb(bc, 0.42f),
+      LIST_END
+    ),
+    LIST_END
+  );
+
+  EXPECT_NE(filter_chain, CF_ALLOCATE_FAIL_PTR);
+
+  EXPECT_EQ(count_allocator.requested_bytes, expected_total_size);
+  EXPECT_EQ(heap.sumAllocationBytes(), expected_total_size);
+}
 
 
 int main(int argc, char** argv) {

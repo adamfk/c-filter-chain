@@ -16,7 +16,7 @@ void* fc_allocate(fc_AbstractAllocator const * const allocator, size_t size)
     return (void*)CF_ALLOCATE_FAIL_PTR;
   }
 
-  result = allocator->allocate(allocator, size);
+  result = allocator->vtable->allocate(allocator, size);
   return result;
 }
 
@@ -24,5 +24,5 @@ void fc_free(fc_AbstractAllocator const * const allocator, void* address) {
   if (!allocator) {
     return;
   }
-  allocator->free(allocator, address);
+  allocator->vtable->free(allocator, address);
 }

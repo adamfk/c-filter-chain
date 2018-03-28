@@ -9,13 +9,21 @@
 #  endif 
 #endif 
 
+
 static void fc_Mallocator_free(fc_AbstractAllocator const* const allocator, void* address);
 static void* fc_Mallocator_allocate(fc_AbstractAllocator const * const allocator, size_t object_size);
 
-const fc_AbstractAllocator fc_Mallocator = {
+
+const fc_AbstractAllocatorVtable fc_MallocatorVtable = {
   .free = fc_Mallocator_free,
   .allocate = fc_Mallocator_allocate,
 };
+
+
+const fc_AbstractAllocator fc_Mallocator = {
+  .vtable = &fc_MallocatorVtable,
+};
+
 
 static void fc_Mallocator_free(fc_AbstractAllocator const* const allocator, void* address)
 {
@@ -24,6 +32,7 @@ static void fc_Mallocator_free(fc_AbstractAllocator const* const allocator, void
     fc_FREE_FUNC(address);
   }
 }
+
 
 static void* fc_Mallocator_allocate(fc_AbstractAllocator const * const allocator, size_t object_size)
 {

@@ -11,10 +11,7 @@ extern "C" {
 
 typedef struct fc_AbstractAllocator_ fc_AbstractAllocator;
 
-/**
- * This is an abstract Allocator class.
- */
-struct fc_AbstractAllocator_
+typedef struct fc_AbstractAllocatorVtable_
 {
   /**
    * Allowed to be NULL for implementations that don't allow freeing.
@@ -25,6 +22,15 @@ struct fc_AbstractAllocator_
    * Must be defined.
    */
   void*(*allocate)(fc_AbstractAllocator const * const allocator, size_t object_size);
+} fc_AbstractAllocatorVtable;
+
+
+/**
+ * This is an abstract Allocator class.
+ */
+struct fc_AbstractAllocator_
+{
+  fc_AbstractAllocatorVtable const * vtable;
 };
 
 void* fc_allocate(fc_AbstractAllocator const * const allocator, size_t size);

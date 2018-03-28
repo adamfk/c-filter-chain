@@ -42,6 +42,17 @@ TODO consider a different construction technique based on lists.
 
 
  
+static bool is_bad_ptr(const void* ptr)
+{
+  bool is_bad = (ptr == NULL) || (ptr == CF_ALLOCATE_FAIL_PTR);
+  return is_bad;
+}
+
+static bool is_ok_ptr(const void* ptr)
+{
+  bool is_ok = !is_bad_ptr(ptr);
+  return is_ok;
+}
 
 
 static void* allocate_or_ret_fail_ptr(fc_BuilderConfig* bc, size_t size)
@@ -72,7 +83,7 @@ static uint16_t count_list_size(void** list)
 //TODOLOW move to common 
 void fc_destruct_and_free_block(const fc_AbstractAllocator* allocator, GenericBlock* block)
 {
-  if (block != NULL && block != CF_ALLOCATE_FAIL_PTR)
+  if (is_ok_ptr(block))
   {
     if (block->function_table->destruct_fields) {
       block->function_table->destruct_fields(allocator, block);
@@ -173,6 +184,7 @@ void FilterChain_ctor(FilterChain* fc)
 
 
 /**
+ * NOTE! `self` is allowed be NULL or fail pointer.
  * blocks list MUST BE NULL TERMINATED!
  * TODO: fail if an empty chain?
  * Returns success
@@ -186,31 +198,37 @@ bool FilterChain_allocate_fields(fc_BuilderConfig* bc, FilterChain* self, Generi
 
   const fc_AbstractAllocator* allocator = bc->allocator;
 
-  self->builder_config = bc;
 
   total_block_count = count_list_size(block_list);
 
   //try to allocate block array
+  //NOTE: we specifically want to try and allocate before checking for bad `self` as this allows
+  // checking how big the chain would actually be.
   block_array = fc_allocate(allocator, total_block_count * sizeof(block_array[0]));
 
   if (!block_array) {
-    goto destroy_block_list;
+    goto fail_destroy_block_list;
+  }
+
+  if (is_bad_ptr(self)) {
+    goto fail_destroy_block_list;
   }
 
   child_allocate_fail = test_and_copy_blocks(block_array, block_list, total_block_count);
 
   if (child_allocate_fail) {
     fc_free(allocator, block_array);
-    goto destroy_block_list;
+    goto fail_destroy_block_list;
   }
 
+  self->builder_config = bc;
   self->blocks = block_array;
   self->block_count = total_block_count;
   success = true;
   goto done;
 
 
-destroy_block_list:
+fail_destroy_block_list:
   fc_destruct_gb_list(allocator, block_list);
 
 done:
@@ -237,21 +255,17 @@ FilterChain* FilterChain_new(fc_BuilderConfig* bc, GenericBlock** block_list)
 
   self = allocate_or_ret_fail_ptr(bc, sizeof(*self));
 
-  if (self == CF_ALLOCATE_FAIL_PTR) {
-    success = false;
-    //can't let `FilterChain_allocate_fields` destruct list as we don't even have a FilterChain object
-    fc_destruct_gb_list(bc->allocator, block_list);
-  }
-  else {
+  if (is_ok_ptr(self)) {
     FilterChain_ctor(self);
-    success = FilterChain_allocate_fields(bc, self, block_list);
-
-    if (!success) {
-      fc_free(bc->allocator, self);
-    }
   }
 
-  if (!success) {
+  //Intentionally try to allocate fields even if above allocation failed.
+  //This allows determining total required size with an empty allocator that just sums requests.
+  success = FilterChain_allocate_fields(bc, self, block_list);
+
+  //if allocated self, but fields failed
+  if (is_ok_ptr(self) && !success) {
+    fc_free(bc->allocator, self);
     self = CF_ALLOCATE_FAIL_PTR;
   }
 
@@ -329,7 +343,7 @@ void PassThrough_ctor(PassThrough* passThrough)
 PassThrough* PassThrough_new(fc_BuilderConfig* bc)
 {
   PassThrough* p = allocate_or_ret_fail_ptr(bc, sizeof(PassThrough));
-  if (p != CF_ALLOCATE_FAIL_PTR) {
+  if (is_ok_ptr(p)) {
     PassThrough_ctor(p);
   }
   return p;
@@ -371,7 +385,7 @@ IirLowPass1* IirLowPass1_new(fc_BuilderConfig* bc, float new_ratio)
 {
   IirLowPass1* p = allocate_or_ret_fail_ptr(bc, sizeof(IirLowPass1));
 
-  if (p != CF_ALLOCATE_FAIL_PTR) {
+  if (is_ok_ptr(p)) {
     IirLowPass1_ctor(p);
     p->new_ratio = new_ratio;
   }
@@ -446,6 +460,13 @@ fc_Type DownSampler_filter(DownSampler* down_sampler, fc_Type input)
   return down_sampler->latched_output;
 }
 
+
+FilterChain* DownSampler_cast_to_fc(DownSampler* self)
+{
+  FilterChain* base_fc = (FilterChain*)self; //OK because `base_fc_instance` is first member in struct.
+  return base_fc;
+}
+
 /**
  * block_list MUST BE NULL TERMINATED!
  * SEE #FilterChain_new for usage.
@@ -453,27 +474,24 @@ fc_Type DownSampler_filter(DownSampler* down_sampler, fc_Type input)
 DownSampler* DownSampler_new(fc_BuilderConfig* bc, uint16_t sample_offset, uint16_t sample_every_x, GenericBlock** block_list)
 {
   DownSampler* self;
-
   self = allocate_or_ret_fail_ptr(bc, sizeof(DownSampler));
 
-  if (self == CF_ALLOCATE_FAIL_PTR) {
-    fc_destruct_gb_list(bc->allocator, block_list);
-    goto done;
-  } 
+  if (is_ok_ptr(self)) {
+    DownSampler_ctor(self);
+    self->sample_every_x = sample_every_x;
+    self->sample_count = sample_offset;
+  }
 
-  DownSampler_ctor(self);
+  //Intentially try allocating fields even if above failed.
+  //See `FilterChain_new( )` for details.
+  FilterChain* base_fc = DownSampler_cast_to_fc(self);
+  bool inner_malloc_success = FilterChain_allocate_fields(bc, base_fc, block_list);
 
-  self->sample_every_x = sample_every_x;
-  self->sample_count = sample_offset;
-
-  bool inner_malloc_success = FilterChain_allocate_fields(bc, &self->base_fc_instance, block_list);
-
-  if (!inner_malloc_success) {
+  if (is_ok_ptr(self) && !inner_malloc_success) {
     fc_free(bc->allocator, self);
     self = CF_ALLOCATE_FAIL_PTR;
   }
 
- done:
   return self;
 }
 

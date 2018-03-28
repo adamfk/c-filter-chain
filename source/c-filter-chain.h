@@ -233,6 +233,10 @@ fc_Type IirLowPass1_filter(IirLowPass1* block, fc_Type input);
 #define DownSampler_new_gb FCB_MAKE_NAME(DownSampler_new_gb)
 #define DownSampler_filter        FCB_MAKE_NAME(DownSampler_filter)
 #define DownSampler_setup         FCB_MAKE_NAME(DownSampler_setup)
+#define DownSampler_cast_to_fc    FCB_MAKE_NAME(DownSampler_cast_to_fc)
+
+
+
 
 #define fc_Extends(field_declaration) field_declaration;
 
@@ -255,6 +259,7 @@ DownSampler* DownSampler_new(fc_BuilderConfig* bc, uint16_t sample_offset, uint1
 GenericBlock* DownSampler_new_gb(fc_BuilderConfig* bc, uint16_t sample_offset, uint16_t sample_every_x, GenericBlock** block_list);
 void DownSampler_setup(DownSampler* block);
 fc_Type DownSampler_filter(DownSampler* block, fc_Type input);
+FilterChain* DownSampler_cast_to_fc(DownSampler* self);
 
 
 
