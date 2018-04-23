@@ -1,6 +1,7 @@
 
 #define Delay_vtable FC_MAKE_NAME(Delay_vtable)
 
+//TODO make static?
 const IBlockVirtualTable Delay_vtable = {
   .step = Delay_step,
   .preload = Delay_preload,
@@ -55,31 +56,6 @@ Delay* Delay_new(fc_Builder* bc, uint16_t history_depth)
 }
 
 
-void Delay_destruct_fields(Delay* self, fc_IAllocator const * allocator)
-{
-  fc_free(allocator, self->previous_samples);
-}
-
-
-void Delay_preload(Delay* self, fc_Type input)
-{
-  for (size_t i = 0; i < self->saved_sample_length; i++) {
-    self->previous_samples[i] = input;
-  }
-}
-
-
-
-
-fc_Type Delay_step(Delay* self, fc_Type input)
-{
-  fc_Type output = self->previous_samples[self->saved_sample_length - 1];
-
-  shift_queue(self->previous_samples, self->saved_sample_length, input);
-  return output;
-}
-
-
 /**
  * Class method.
  * Use to check if an IBlock is a Delay block.
@@ -88,4 +64,35 @@ bool Delay_Test_type(IBlock* some_block)
 {
   bool result = some_block->vtable->step == Delay_vtable.step;
   return result;
+}
+
+
+//#########################################################################################################
+// IBlock interface methods
+//#########################################################################################################
+
+void Delay_preload(void* vself, fc_Type input)
+{
+  Delay* self = (Delay*)vself;
+
+  for (size_t i = 0; i < self->saved_sample_length; i++) {
+    self->previous_samples[i] = input;
+  }
+}
+
+
+fc_Type Delay_step(void* vself, fc_Type input)
+{
+  Delay* self = (Delay*)vself;
+  fc_Type output = self->previous_samples[self->saved_sample_length - 1];
+
+  shift_queue(self->previous_samples, self->saved_sample_length, input);
+  return output;
+}
+
+
+void Delay_destruct_fields(void* vself, fc_IAllocator const * allocator)
+{
+  Delay* self = (Delay*)vself;
+  fc_free(allocator, self->previous_samples);
 }

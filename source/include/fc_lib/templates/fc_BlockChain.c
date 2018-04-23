@@ -117,43 +117,51 @@ BlockChain* BlockChain_new(fc_Builder* bc, IBlock** block_list)
 }
 
 
-
-void BlockChain_destruct_fields(BlockChain* fc, fc_IAllocator const * allocator)
-{
-  allocator = NULL; //ignore passed in allocator as we have our own
-
-  if (fc->builder_config) {
-    allocator = fc->builder_config->allocator;
-  }
-
-  destruct_block_array(allocator, fc->blocks, fc->block_count);
-  fc_free(allocator, fc->blocks);
-}
-
-
 void BlockChain_destruct_entire(BlockChain* fc)
 {
   fc_destruct_and_free(&fc->block, fc->builder_config->allocator);
 }
 
 
-void BlockChain_preload(BlockChain* fc, fc_Type input)
+//#########################################################################################################
+// IBlock interface methods
+//#########################################################################################################
+
+void BlockChain_destruct_fields(void* vself, fc_IAllocator const * allocator)
 {
-  for (size_t i = 0; i < fc->block_count; i++)
+  BlockChain* self = (BlockChain*)vself;
+
+  allocator = NULL; //ignore passed in allocator as we have our own
+
+  if (self->builder_config) {
+    allocator = self->builder_config->allocator;
+  }
+
+  destruct_block_array(allocator, self->blocks, self->block_count);
+  fc_free(allocator, self->blocks);
+}
+
+
+void BlockChain_preload(void* vself, fc_Type input)
+{
+  BlockChain* self = (BlockChain*)vself;
+
+  for (size_t i = 0; i < self->block_count; i++)
   {
-    IBlock* block = fc->blocks[i];
+    IBlock* block = self->blocks[i];
     IBlock_preload(block, input);
   }
 }
 
 
-fc_Type BlockChain_step(BlockChain* fc, fc_Type input)
+fc_Type BlockChain_step(void* vself, fc_Type input)
 {
   fc_Type output = 0;
+  BlockChain* self = (BlockChain*)vself;
 
-  for (size_t i = 0; i < fc->block_count; i++)
+  for (size_t i = 0; i < self->block_count; i++)
   {
-    IBlock* block = fc->blocks[i];
+    IBlock* block = self->blocks[i];
     output = IBlock_step(block, input);
     input = output;
   }
@@ -163,13 +171,15 @@ fc_Type BlockChain_step(BlockChain* fc, fc_Type input)
 
 
 
-void BlockChain_visit(BlockChain* fc, fc_IVisitor* visitor)
+void BlockChain_visit(void* vself, fc_IVisitor* visitor)
 {
-  fc_IVisitor_visit(visitor, &fc->block);
+  BlockChain* self = (BlockChain*)vself;
 
-  for (size_t i = 0; i < fc->block_count; i++)
+  fc_IVisitor_visit(visitor, &self->block);
+
+  for (size_t i = 0; i < self->block_count; i++)
   {
-    IBlock* block = fc->blocks[i];
+    IBlock* block = self->blocks[i];
     IBlock_run_visitor(block, visitor);
   }
 }

@@ -15,6 +15,7 @@ void IirAccelAsymLowPass_ctor(IirAccelAsymLowPass* iir)
   iir->block.vtable = &IirAccelAsymLowPass_vtable;
 }
 
+
 IirAccelAsymLowPass* IirAccelAsymLowPass_new(fc_Builder* bc, float higher_ratio, float lower_ratio)
 {
   IirAccelAsymLowPass* p = allocate_or_ret_fail_ptr(bc, sizeof(IirAccelAsymLowPass));
@@ -30,18 +31,14 @@ IirAccelAsymLowPass* IirAccelAsymLowPass_new(fc_Builder* bc, float higher_ratio,
   return p;
 }
 
+
 IBlock* IirAccelAsymLowPass_new_iblock(fc_Builder* bc, float higher_ratio, float lower_ratio)
 {
   IirAccelAsymLowPass* result = IirAccelAsymLowPass_new(bc, higher_ratio, lower_ratio);
   return (IBlock*)result;
 }
 
-void IirAccelAsymLowPass_preload(IirAccelAsymLowPass* iir, fc_Type input)
-{
-  iir->last_output = input;
-  iir->cur_higher_ratio = iir->higher_ratio;
-  iir->cur_lower_ratio = iir->lower_ratio;
-}
+
 
 
 static void adjust_coefficients(bool reset, float* cur_ratio, float normal_ratio, float ratio_limit)
@@ -58,24 +55,54 @@ static void adjust_coefficients(bool reset, float* cur_ratio, float normal_ratio
 }
 
 
+
+
 /**
-* Note that if this is an integer based IIR, the rounding errors can be substantial if the input
-* is small. Test with a step function and see if it reaches 100%.
-*/
-fc_Type IirAccelAsymLowPass_step(IirAccelAsymLowPass* iir, fc_Type input)
+ * Class method.
+ * Use to check if an IBlock is a IirAccelAsymLowPass block.
+ */
+bool IirAccelAsymLowPass_Test_type(IBlock* some_block)
 {
+  bool result = some_block->vtable->step == IirAccelAsymLowPass_vtable.step;
+  return result;
+}
+
+
+
+
+
+//#########################################################################################################
+// IBlock interface methods
+//#########################################################################################################
+
+void IirAccelAsymLowPass_preload(void* vself, fc_Type input)
+{
+  IirAccelAsymLowPass* self = (IirAccelAsymLowPass*)vself;
+  self->last_output = input;
+  self->cur_higher_ratio = self->higher_ratio;
+  self->cur_lower_ratio = self->lower_ratio;
+}
+
+
+/**
+ * Note that if this is an integer based IIR, the rounding errors can be substantial if the input
+ * is small. Test with a step function and see if it reaches 100%.
+ */
+fc_Type IirAccelAsymLowPass_step(void* vself, fc_Type input)
+{
+  IirAccelAsymLowPass* self = (IirAccelAsymLowPass*)vself;
   fc_Type result;
   float new_ratio;
 
-  if (iir->lower_ratio > iir->higher_ratio) {
+  if (self->lower_ratio > self->higher_ratio) {
     //this is a decaying min hold.
     //it already drops fast, but rises slow.
     //we accelerate the rising.
 
-    bool reset_ratio = input < iir->last_output;
-    float normal_ratio = iir->higher_ratio;
-    float* accelerated_ratio = &iir->cur_higher_ratio;
-    float ratio_limit = iir->lower_ratio;
+    bool reset_ratio = input < self->last_output;
+    float normal_ratio = self->higher_ratio;
+    float* accelerated_ratio = &self->cur_higher_ratio;
+    float ratio_limit = self->lower_ratio;
 
     adjust_coefficients(reset_ratio, accelerated_ratio, normal_ratio, ratio_limit);
   }
@@ -85,34 +112,24 @@ fc_Type IirAccelAsymLowPass_step(IirAccelAsymLowPass* iir, fc_Type input)
     //it already rises fast, but drops slow.
     //we accelerate the drop.
 
-    bool reset_ratio = input > iir->last_output;
-    float normal_ratio = iir->lower_ratio;
-    float* accelerated_ratio = &iir->cur_lower_ratio;
-    float ratio_limit = iir->higher_ratio;
+    bool reset_ratio = input > self->last_output;
+    float normal_ratio = self->lower_ratio;
+    float* accelerated_ratio = &self->cur_lower_ratio;
+    float ratio_limit = self->higher_ratio;
 
     adjust_coefficients(reset_ratio, accelerated_ratio, normal_ratio, ratio_limit);
   }
 
 
-  if (input > iir->last_output) {
-    new_ratio = iir->cur_higher_ratio;
+  if (input > self->last_output) {
+    new_ratio = self->cur_higher_ratio;
   }
   else {
-    new_ratio = iir->cur_lower_ratio;
+    new_ratio = self->cur_lower_ratio;
   }
 
-  double output = new_ratio * input + (1 - new_ratio) * iir->last_output;  //TODO rewrite in efficient form. TODO use generic type numerator and denominator instead of floating point
+  double output = new_ratio * input + (1 - new_ratio) * self->last_output;  //TODO rewrite in efficient form. TODO use generic type numerator and denominator instead of floating point
   result = (fc_Type)(output + 0.5); //TODO make rounding type generic. and respects negative numbers.
-  iir->last_output = result;
-  return result;
-}
-
-/**
- * Class method.
- * Use to check if an IBlock is a IirAccelAsymLowPass block.
- */
-bool IirAccelAsymLowPass_Test_type(IBlock* some_block)
-{
-  bool result = some_block->vtable->step == IirAccelAsymLowPass_vtable.step;
+  self->last_output = result;
   return result;
 }

@@ -27,11 +27,20 @@ typedef struct IirAccelAsymLowPass
 void IirAccelAsymLowPass_ctor(IirAccelAsymLowPass* block);
 IirAccelAsymLowPass* IirAccelAsymLowPass_new(fc_Builder* bc, float higher_ratio, float lower_ratio);
 IBlock* IirAccelAsymLowPass_new_iblock(fc_Builder* bc, float higher_ratio, float lower_ratio);
-void IirAccelAsymLowPass_preload(IirAccelAsymLowPass* block, fc_Type input);
-fc_Type IirAccelAsymLowPass_step(IirAccelAsymLowPass* block, fc_Type input);
 
 /**
  * Class method.
  * Use to check if an IBlock is a IirAccelAsymLowPass block.
  */
 bool IirAccelAsymLowPass_Test_type(IBlock* some_block);
+
+
+
+//#########################################################################################################
+// IBlock interface methods
+//#########################################################################################################
+
+void IirAccelAsymLowPass_preload(void* self, fc_Type input);
+fc_Type IirAccelAsymLowPass_step(void* self, fc_Type input);
+
+

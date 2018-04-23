@@ -5,17 +5,9 @@
   This class is ONLY used for comparing against via the `_Test_type()` methods.
 */
 
-static void NotABlock_preload(NotABlock* passThrough, int32_t input)
-{
-  (void)passThrough; (void)input;
-}
-
-
-static int32_t NotABlock_step(NotABlock* passThrough, int32_t input)
-{
-  (void)passThrough; (void)input;
-  return 0;
-}
+//prototypes
+static void NotABlock_preload(void* self, int32_t input);
+static int32_t NotABlock_step(void* self, int32_t input);
 
 
 static void NotABlock_destruct_fields(NotABlock* self, fc_IAllocator const * allocator)
@@ -46,4 +38,19 @@ void NotABlock_ctor(NotABlock* self)
 
 
 
+//#########################################################################################################
+// IBlock interface methods
+//#########################################################################################################
 
+
+static void NotABlock_preload(void* self, int32_t input)
+{
+  (void)self; (void)input;
+}
+
+
+static int32_t NotABlock_step(void* self, int32_t input)
+{
+  (void)self; (void)input;
+  return 0;
+}

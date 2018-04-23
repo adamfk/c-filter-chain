@@ -45,10 +45,7 @@ typedef struct BlockChain
 
 
 
-
-void BlockChain_preload(BlockChain* fc, fc_Type input);
 void BlockChain_ctor(BlockChain* filter_chain);
-fc_Type BlockChain_step(BlockChain* fc, fc_Type input);
 
 BlockChain* BlockChain_new(fc_Builder* bc, IBlock** block_list);
 
@@ -58,19 +55,27 @@ BlockChain* BlockChain_new(fc_Builder* bc, IBlock** block_list);
 bool BlockChain_allocate_fields(fc_Builder* bc, BlockChain* filter_chain, IBlock** block_list);
 
 /**
- * user code should prefer to call `BlockChain_destruct_entire( )` instead.
- */
-void BlockChain_destruct_fields(BlockChain* fc, fc_IAllocator const * allocator);
-
-/**
  * Will destruct fields and free self.
  */
 void BlockChain_destruct_entire(BlockChain* fc);
 
-void BlockChain_visit(BlockChain* fc, fc_IVisitor* visitor);
-
-
 bool BlockChain_Test_type(IBlock* some_block);
 
+
+
+//##################################################################
+// IBlock interface methods
+//##################################################################
+
+void BlockChain_preload(void* self, fc_Type input);
+
+fc_Type BlockChain_step(void* self, fc_Type input);
+
+/**
+ * user code should prefer to call `BlockChain_destruct_entire( )` instead.
+ */
+void BlockChain_destruct_fields(void* self, fc_IAllocator const * allocator);
+
+void BlockChain_visit(void* self, fc_IVisitor* visitor);
 
 

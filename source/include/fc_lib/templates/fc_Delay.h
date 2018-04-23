@@ -21,13 +21,21 @@ typedef struct Delay
 
 void Delay_ctor(Delay* block);
 Delay* Delay_new(fc_Builder* bc, uint16_t history_depth);
-void Delay_destruct_fields(Delay* self, fc_IAllocator const * allocator);
-void Delay_preload(Delay* block, fc_Type input);
-fc_Type Delay_step(Delay* block, fc_Type input);
-
 
 /**
  * Class method.
  * Use to check if an IBlock is a Delay block.
  */
 bool Delay_Test_type(IBlock* some_block);
+
+
+
+//#########################################################################################################
+// IBlock interface methods
+//#########################################################################################################
+
+void Delay_destruct_fields(void* self, fc_IAllocator const * allocator);
+void Delay_preload(void* self, fc_Type input);
+fc_Type Delay_step(void* self, fc_Type input);
+
+

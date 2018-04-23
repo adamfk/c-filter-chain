@@ -35,33 +35,6 @@ IBlock* IirAsymLowPass_new_iblock(fc_Builder* bc, float higher_ratio, float lowe
   return (IBlock*)result;
 }
 
-void IirAsymLowPass_preload(IirAsymLowPass* iir, fc_Type input)
-{
-  iir->last_output = input;
-}
-
-
-/**
-* Note that if this is an integer based IIR, the rounding errors can be substantial if the input
-* is small. Test with a step function and see if it reaches 100%.
-*/
-fc_Type IirAsymLowPass_step(IirAsymLowPass* iir, fc_Type input)
-{
-  fc_Type result;
-  float new_ratio;
-
-  if (input > iir->last_output) {
-    new_ratio = iir->higher_ratio;
-  }
-  else {
-    new_ratio = iir->lower_ratio;
-  }
-
-  double output = new_ratio * input + (1 - new_ratio) * iir->last_output;  //TODO rewrite in efficient form. TODO use generic type numerator and denominator instead of floating point
-  result = (fc_Type)(output + 0.5); //TODO make rounding type generic. and respects negative numbers.
-  iir->last_output = result;
-  return result;
-}
 
 /**
  * Class method.
@@ -73,3 +46,39 @@ bool IirAsymLowPass_Test_type(void* some_block)
   bool result = block->vtable->step == IirAsymLowPass_vtable.step;
   return result;
 }
+
+
+//#########################################################################################################
+// IBlock interface methods
+//#########################################################################################################
+
+void IirAsymLowPass_preload(void* vself, fc_Type input)
+{
+  IirAsymLowPass* self = (IirAsymLowPass*)vself;
+  self->last_output = input;
+}
+
+
+/**
+* Note that if this is an integer based IIR, the rounding errors can be substantial if the input
+* is small. Test with a step function and see if it reaches 100%.
+*/
+fc_Type IirAsymLowPass_step(void* vself, fc_Type input)
+{
+  IirAsymLowPass* self = (IirAsymLowPass*)vself;
+  fc_Type result;
+  float new_ratio;
+
+  if (input > self->last_output) {
+    new_ratio = self->higher_ratio;
+  }
+  else {
+    new_ratio = self->lower_ratio;
+  }
+
+  double output = new_ratio * input + (1 - new_ratio) * self->last_output;  //TODO rewrite in efficient form. TODO use generic type numerator and denominator instead of floating point
+  result = (fc_Type)(output + 0.5); //TODO make rounding type generic. and respects negative numbers.
+  self->last_output = result;
+  return result;
+}
+

@@ -24,10 +24,6 @@ typedef struct Median
 void Median_ctor(Median* block);
 Median* Median_new(fc_Builder* bc, uint16_t length);
 IBlock* Median_new_iblock(fc_Builder* bc, uint16_t length);
-void Median_destruct_fields(Median* self, fc_IAllocator const * allocator);
-void Median_preload(Median* block, fc_Type input);
-fc_Type Median_step(Median* block, fc_Type input);
-
 
 /**
  * Class method.
@@ -37,6 +33,19 @@ bool Median_Test_type(void* some_block);
 
 
 
+//#########################################################################################################
+// IBlock interface methods
+//#########################################################################################################
+
+void Median_destruct_fields(void* self, fc_IAllocator const * allocator);
+void Median_preload(void* self, fc_Type input);
+fc_Type Median_step(void* self, fc_Type input);
+
+
+
+//#########################################################################################################
+// Unit testing stuff
+//#########################################################################################################
 
 //The following methods are useful for unit testing using generic C++ code.
 //THESE functions must be static because they are defined in a header

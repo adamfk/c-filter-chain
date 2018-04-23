@@ -1,9 +1,9 @@
 
-#define PassThrough             FC_MAKE_NAME(PassThrough)
-#define PassThrough_ctor         FC_MAKE_NAME(PassThrough_ctor)
-#define PassThrough_new     FC_MAKE_NAME(PassThrough_new)
-#define PassThrough_new_iblock  FC_MAKE_NAME(PassThrough_new_iblock)
-#define PassThrough_step      FC_MAKE_NAME(PassThrough_step)
+#define PassThrough               FC_MAKE_NAME(PassThrough)
+#define PassThrough_ctor          FC_MAKE_NAME(PassThrough_ctor)
+#define PassThrough_new           FC_MAKE_NAME(PassThrough_new)
+#define PassThrough_new_iblock    FC_MAKE_NAME(PassThrough_new_iblock)
+#define PassThrough_step          FC_MAKE_NAME(PassThrough_step)
 #define PassThrough_preload       FC_MAKE_NAME(PassThrough_preload)
 
 #define PassThrough_Test_type     FC_MAKE_NAME(PassThrough_Test_type)
@@ -18,8 +18,6 @@ typedef struct PassThrough
 void PassThrough_ctor(PassThrough* block);
 PassThrough* PassThrough_new(fc_Builder* bc);
 IBlock* PassThrough_new_iblock(fc_Builder* bc);
-void PassThrough_preload(PassThrough* block, fc_Type input);
-fc_Type PassThrough_step(PassThrough* block, fc_Type input);
 
 /**
  * Class method.
@@ -29,6 +27,18 @@ bool PassThrough_Test_type(void* some_iblock);
 
 
 
+//#########################################################################################################
+// IBlock interface methods
+//#########################################################################################################
+
+void PassThrough_preload(void* block, fc_Type input);
+fc_Type PassThrough_step(void* block, fc_Type input);
+
+
+
+//#########################################################################################################
+// Unit testing stuff
+//#########################################################################################################
 
 
 //The following methods are useful for unit testing using generic C++ code.

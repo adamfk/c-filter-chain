@@ -72,25 +72,44 @@ Median* Median_new(fc_Builder* bc, uint16_t length)
 }
 
 
-void Median_destruct_fields(Median* self, fc_IAllocator const * allocator)
+/**
+ * Class method.
+ * Use to check if an IBlock is a Median block.
+ */
+bool Median_Test_type(void* some_block)
 {
+  IBlock* block = (IBlock*)some_block;
+  bool result = block->vtable->step == Median_vtable.step;
+  return result;
+}
+
+
+//#########################################################################################################
+// IBlock interface methods
+//#########################################################################################################
+
+
+void Median_destruct_fields(void* vself, fc_IAllocator const * allocator)
+{
+  Median* self = (Median*)vself;
   fc_free(allocator, self->previous_samples);
 }
 
 
-void Median_preload(Median* self, fc_Type input)
+void Median_preload(void* vself, fc_Type input)
 {
+  Median* self = (Median*)vself;
+
   for (size_t i = 0; i < self->saved_sample_length; i++) {
     self->previous_samples[i] = input;
   }
 }
 
 
-
-
-
-fc_Type Median_step(Median* self, fc_Type input)
+fc_Type Median_step(void* vself, fc_Type input)
 {
+  Median* self = (Median*)vself;
+
   fc_Type output;
   fc_Type* sorted_samples = self->working_buffer->buffer;
   uint16_t filter_length = self->saved_sample_length + 1;
@@ -124,14 +143,3 @@ fc_Type Median_step(Median* self, fc_Type input)
   return output;
 }
 
-
-/**
- * Class method.
- * Use to check if an IBlock is a Median block.
- */
-bool Median_Test_type(void* some_block)
-{
-  IBlock* block = (IBlock*)some_block;
-  bool result = block->vtable->step == Median_vtable.step;
-  return result;
-}

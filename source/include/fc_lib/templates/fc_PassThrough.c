@@ -35,19 +35,6 @@ IBlock* PassThrough_new_iblock(fc_Builder* bc) {
 }
 
 
-void PassThrough_preload(PassThrough* passThrough, fc_Type input)
-{
-  (void)passThrough; (void)input;
-}
-
-
-fc_Type PassThrough_step(PassThrough* passThrough, fc_Type input)
-{
-  (void)passThrough; (void)input;
-  return input;
-}
-
-
 /**
  * Class method.
  * Use to check if an IBlock is a PassThrough block.
@@ -57,5 +44,23 @@ bool PassThrough_Test_type(void* some_block)
   IBlock* block = (IBlock*)some_block;
   bool result = block->vtable->step == PassThrough_vtable.step;
   return result;
+}
+
+
+
+//#########################################################################################################
+// IBlock interface methods
+//#########################################################################################################
+
+void PassThrough_preload(void* self, fc_Type input)
+{
+  (void)self; (void)input;
+}
+
+
+fc_Type PassThrough_step(void* self, fc_Type input)
+{
+  (void)self; (void)input;
+  return input;
 }
 

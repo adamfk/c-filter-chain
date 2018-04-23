@@ -24,10 +24,6 @@ typedef struct IirLowPass
 void IirLowPass_ctor(IirLowPass* block);
 IirLowPass* IirLowPass_new(fc_Builder* bc, float new_ratio);
 IBlock* IirLowPass_new_iblock(fc_Builder* bc, float new_ratio);
-void IirLowPass_preload(IirLowPass* block, fc_Type input);
-fc_Type IirLowPass_step(IirLowPass* block, fc_Type input);
-
-
 
 /**
  * Class method.
@@ -35,3 +31,11 @@ fc_Type IirLowPass_step(IirLowPass* block, fc_Type input);
  */
 bool IirLowPass_Test_type(IBlock* some_block);
 
+
+
+//#########################################################################################################
+// IBlock interface methods
+//#########################################################################################################
+
+void IirLowPass_preload(void* self, fc_Type input);
+fc_Type IirLowPass_step(void* self, fc_Type input);

@@ -19,32 +19,12 @@ void DownSampler_ctor(DownSampler* down_sampler)
 }
 
 
-void DownSampler_preload(DownSampler* down_sampler, fc_Type input)
-{
-  down_sampler->latched_output = input;
-  BlockChain_preload(&down_sampler->base_fc_instance, input);
-}
-
-
-fc_Type DownSampler_step(DownSampler* down_sampler, fc_Type input)
-{
-  down_sampler->sample_count++;
-
-  if (down_sampler->sample_count >= down_sampler->sample_every_x)
-  {
-    down_sampler->latched_output = BlockChain_step(&down_sampler->base_fc_instance, input);
-    down_sampler->sample_count = 0;
-  }
-
-  return down_sampler->latched_output;
-}
-
-
 BlockChain* DownSampler_cast_to_fc(DownSampler* self)
 {
   BlockChain* base_fc = (BlockChain*)self; //OK because `base_fc_instance` is first member in struct.
   return base_fc;
 }
+
 
 /**
  * block_list MUST BE NULL TERMINATED!
@@ -74,10 +54,12 @@ DownSampler* DownSampler_new(fc_Builder* bc, uint16_t sample_offset, uint16_t sa
   return self;
 }
 
+
 IBlock* DownSampler_new_iblock(fc_Builder* bc, uint16_t sample_offset, uint16_t sample_every_x, IBlock** block_list)
 {
   return (IBlock*)DownSampler_new(bc, sample_offset, sample_every_x, block_list);
 }
+
 
 /**
  * Class method.
@@ -88,3 +70,30 @@ bool DownSampler_Test_type(IBlock* some_block)
   bool result = some_block->vtable->step == DownSampler_vtable.step;
   return result;
 }
+
+
+
+//#########################################################################################################
+// IBlock interface methods
+//#########################################################################################################
+
+void DownSampler_preload(DownSampler* down_sampler, fc_Type input)
+{
+  down_sampler->latched_output = input;
+  BlockChain_preload(&down_sampler->base_fc_instance, input);
+}
+
+
+fc_Type DownSampler_step(DownSampler* down_sampler, fc_Type input)
+{
+  down_sampler->sample_count++;
+
+  if (down_sampler->sample_count >= down_sampler->sample_every_x)
+  {
+    down_sampler->latched_output = BlockChain_step(&down_sampler->base_fc_instance, input);
+    down_sampler->sample_count = 0;
+  }
+
+  return down_sampler->latched_output;
+}
+

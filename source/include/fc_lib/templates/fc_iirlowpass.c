@@ -33,26 +33,6 @@ IBlock* IirLowPass_new_iblock(fc_Builder* bc, float new_ratio)
   return (IBlock*)result;
 }
 
-void IirLowPass_preload(IirLowPass* iir, fc_Type input)
-{
-  iir->last_output = input;
-}
-
-
-/**
-* Note that if this is an integer based IIR, the rounding errors can be substantial if the input
-* is small. Test with a step function and see if it reaches 100%.
-*/
-fc_Type IirLowPass_step(IirLowPass* iir, fc_Type input)
-{
-  fc_Type result;
-  double output = iir->new_ratio * input + (1 - iir->new_ratio) * iir->last_output;  //TODO rewrite in efficient form. TODO use generic type numerator and denominator instead of floating point
-  result = (fc_Type)(output + 0.5); //TODO make rounding type generic. and respects negative numbers.
-  iir->last_output = result;
-  return result;
-}
-
-
 /**
  * Class method.
  * Use to check if an IBlock is a IirLowPass.
@@ -61,5 +41,31 @@ bool IirLowPass_Test_type(IBlock* some_block)
 {
   bool result = some_block->vtable->step == IirLowPass_vtable.step;
   return result;
+}
+
+
+//#########################################################################################################
+// IBlock interface methods
+//#########################################################################################################
+
+/**
+ * Note that if this is an integer based IIR, the rounding errors can be substantial if the input
+ * is small. Test with a step function and see if it reaches 100%.
+ */
+fc_Type IirLowPass_step(void* vself, fc_Type input)
+{
+  IirLowPass* self = (IirLowPass*)vself;
+  fc_Type result;
+  double output = self->new_ratio * input + (1 - self->new_ratio) * self->last_output;  //TODO rewrite in efficient form. TODO use generic type numerator and denominator instead of floating point
+  result = (fc_Type)(output + 0.5); //TODO make rounding type generic. and respects negative numbers.
+  self->last_output = result;
+  return result;
+}
+
+
+void IirLowPass_preload(void* vself, fc_Type input)
+{
+  IirLowPass* self = (IirLowPass*)vself;
+  self->last_output = input;
 }
 

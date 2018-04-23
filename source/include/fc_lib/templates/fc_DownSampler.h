@@ -31,8 +31,6 @@ typedef struct DownSampler
 void DownSampler_ctor(DownSampler* block);
 DownSampler* DownSampler_new(fc_Builder* bc, uint16_t sample_offset, uint16_t sample_every_x, IBlock** block_list);
 IBlock* DownSampler_new_iblock(fc_Builder* bc, uint16_t sample_offset, uint16_t sample_every_x, IBlock** block_list);
-void DownSampler_preload(DownSampler* block, fc_Type input);
-fc_Type DownSampler_step(DownSampler* block, fc_Type input);
 BlockChain* DownSampler_cast_to_fc(DownSampler* self);
 
 /**
@@ -40,3 +38,13 @@ BlockChain* DownSampler_cast_to_fc(DownSampler* self);
  * Use to check if an IBlock is a DownSampler block.
  */
 bool DownSampler_Test_type(IBlock* some_block);
+
+
+//#########################################################################################################
+// IBlock interface methods
+//#########################################################################################################
+
+void DownSampler_preload(DownSampler* block, fc_Type input);
+fc_Type DownSampler_step(DownSampler* block, fc_Type input);
+
+
