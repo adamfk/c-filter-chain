@@ -10,7 +10,8 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "fc_default_config.h"
+
+#include "fc_default_config.h"  //TODO: decide if that should be in here or in each type file like "fc32_lib.h"
 
 #include "fc_lib/fc_common.h"
 #include "fc_lib/fc_macros.h"

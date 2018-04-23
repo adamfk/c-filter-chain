@@ -11,7 +11,7 @@ c-filter-chain
 * use smart pointers. leaking memory in test code when creating IMetaNewx objects
 
 
-## Dummy Variables
+## Dummy Variables - OUTDATED!
 The c++ test code often uses dummy variables to make a unique function/method signature for a type T so that
 c++ method/function overloading will pick the right one.
 
