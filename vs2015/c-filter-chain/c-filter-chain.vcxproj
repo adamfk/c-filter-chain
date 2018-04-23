@@ -166,6 +166,7 @@
     <ClInclude Include="..\..\source\templates\fc_template_root.h" />
     <ClInclude Include="..\..\test\all_types.h" />
     <ClInclude Include="..\..\test\BasicTests.hpp" />
+    <ClInclude Include="..\..\test\fc_default_config.h" />
     <ClInclude Include="..\..\test\test_helper.h" />
     <ClInclude Include="..\..\test\MetaNewx.hpp" />
     <ClInclude Include="..\..\test\MockHeap.hpp" />

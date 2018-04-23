@@ -191,6 +191,9 @@
     <ClInclude Include="..\..\test\test_helper.h">
       <Filter>Source Files\test</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\test\fc_default_config.h">
+      <Filter>Source Files\test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\source\templates\fc_cpp_helper.ipp">
