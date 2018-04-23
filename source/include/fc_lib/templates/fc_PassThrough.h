@@ -56,7 +56,7 @@ extern "C++" {
   }
 
   #define CppHelperFilterType     PassThrough
-  #include "fc_cpp_helper.ipp"
+  #include "fc_lib/templates/fc_cpp_helper.ipp"
 
 }
 

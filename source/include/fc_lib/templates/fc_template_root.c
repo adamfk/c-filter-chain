@@ -32,8 +32,8 @@ TODO consider a different construction technique based on lists.
 
 #include <string.h>
 #include <stdlib.h>
-#include "fc_allocate.h"
-#include "fc_macros.h"
+#include "fc_lib/fc_allocate.h"
+#include "fc_lib/fc_macros.h"
 
 
 /**
@@ -177,15 +177,15 @@ static void destruct_no_fields(IBlock* block, fc_IAllocator const * allocator)
 
 //####################################################################
 
-#include "fc_IBlock.c"
-#include "fc_BlockChain.c"
-#include "fc_PassThrough.c"
-#include "fc_IirLowPass.c"
-#include "fc_Delay.c"
-#include "fc_Median.c"
-#include "fc_IirAsymLowPass.c"
-#include "fc_IirAccelAsymLowPass.c"
-#include "fc_DownSampler.c"
+#include "fc_lib/templates/fc_IBlock.c"
+#include "fc_lib/templates/fc_BlockChain.c"
+#include "fc_lib/templates/fc_PassThrough.c"
+#include "fc_lib/templates/fc_IirLowPass.c"
+#include "fc_lib/templates/fc_Delay.c"
+#include "fc_lib/templates/fc_Median.c"
+#include "fc_lib/templates/fc_IirAsymLowPass.c"
+#include "fc_lib/templates/fc_IirAccelAsymLowPass.c"
+#include "fc_lib/templates/fc_DownSampler.c"
 
 
 

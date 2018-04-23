@@ -66,7 +66,7 @@ extern "C++" {
 
   //TODO rename CppHelperFilterType to CppHelperBlockType
   #define CppHelperFilterType     Median
-  #include "fc_cpp_helper.ipp"
+  #include "fc_lib/templates/fc_cpp_helper.ipp"
 }
 
 #endif

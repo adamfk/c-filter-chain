@@ -8,5 +8,5 @@
 #define FILTER_CHAIN_NAME_PREFIX flt
 #define FILTER_CHAIN_TYPE float
 
-#include "fc_template_root.h"
+#include "fc_lib/templates/fc_template_root.h"
 

@@ -2,8 +2,8 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <stdbool.h>
-#include "fc_macros.h"
-#include "fc_IAllocator.h"
+#include "fc_lib/fc_macros.h"
+#include "fc_lib/fc_IAllocator.h"
 
 fc_BEGIN_C_DECLS
 

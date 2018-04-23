@@ -2,10 +2,10 @@
 
 #include <stddef.h>
 #include <stdint.h>
-#include "fc_macros.h"
-#include "fc_IAllocator.h"
-#include "fc_Builder.h"
-#include "fc_IVisitor.h"
+#include "fc_lib/fc_macros.h"
+#include "fc_lib/fc_IAllocator.h"
+#include "fc_lib/fc_Builder.h"
+#include "fc_lib/fc_IVisitor.h"
 
 
 fc_BEGIN_C_DECLS

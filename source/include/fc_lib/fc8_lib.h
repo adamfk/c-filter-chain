@@ -8,5 +8,5 @@
 #define FILTER_CHAIN_NAME_PREFIX 8
 #define FILTER_CHAIN_TYPE int8_t
 
-#include "fc_template_root.h"
+#include "fc_lib/templates/fc_template_root.h"
 

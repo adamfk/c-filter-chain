@@ -11,10 +11,11 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "fc_default_config.h"
-#include "fc_common.h"
-#include "fc_macros.h"
-#include "fc_IVisitor.h"
-#include "fc_WorkingBuffer.h"
+
+#include "fc_lib/fc_common.h"
+#include "fc_lib/fc_macros.h"
+#include "fc_lib/fc_IVisitor.h"
+#include "fc_lib/fc_WorkingBuffer.h"
 
 
 #ifdef __cplusplus
@@ -54,16 +55,16 @@
 
 fc_BEGIN_C_DECLS
 
-#include "fc_IBlock.h"
-#include "fc_BlockChain.h"
-#include "fc_Delay.h"
-#include "fc_Median.h"
-#include "fc_IirAsymLowPass.h"
-#include "fc_IirAccelAsymLowPass.h"
-#include "fc_DownSampler.h"
-#include "fc_IirLowPass.h"
+#include "fc_lib/templates/fc_IBlock.h"
+#include "fc_lib/templates/fc_BlockChain.h"
+#include "fc_lib/templates/fc_Delay.h"
+#include "fc_lib/templates/fc_Median.h"
+#include "fc_lib/templates/fc_IirAsymLowPass.h"
+#include "fc_lib/templates/fc_IirAccelAsymLowPass.h"
+#include "fc_lib/templates/fc_DownSampler.h"
+#include "fc_lib/templates/fc_IirLowPass.h"
 
-#include "fc_PassThrough.h"
+#include "fc_lib/templates/fc_PassThrough.h"
 
 
 fc_END_C_DECLS
