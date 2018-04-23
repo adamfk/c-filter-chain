@@ -44,7 +44,7 @@ bool DownSampler_Test_type(IBlock* some_block);
 // IBlock interface methods
 //#########################################################################################################
 
-void DownSampler_preload(DownSampler* block, fc_Type input);
-fc_Type DownSampler_step(DownSampler* block, fc_Type input);
+void DownSampler_preload(void* block, fc_Type input);
+fc_Type DownSampler_step(void* block, fc_Type input);
 
 
