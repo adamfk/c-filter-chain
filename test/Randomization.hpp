@@ -28,7 +28,7 @@ public:
     init_seed_if_needed();
     const PrimitiveType max = std::numeric_limits<PrimitiveType>::max();
     const PrimitiveType min = std::numeric_limits<PrimitiveType>::min();
-    double range = max - min;
+    double range = 1.0 * max - min;           //mult by 1.0 to convert to double and avoid integer overflow issues.
     double temp = range * rand() / RAND_MAX;
     temp += min;
     PrimitiveType result = (PrimitiveType)temp;
