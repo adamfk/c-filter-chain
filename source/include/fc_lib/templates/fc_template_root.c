@@ -126,7 +126,7 @@ static bool test_and_copy_block(IBlock** store_at, IBlock* block)
  * Copies all blocks regardless of block allocation failure detection.
  * REQUIRES THAT first_block is not NULL.
  */
-static bool test_and_copy_blocks(IBlock** store_in, void** list, uint16_t count)
+static bool test_and_copy_blocks(IBlock** store_in, IBlock** list, uint16_t count)
 {
   bool allocate_fail_found = false;
 
