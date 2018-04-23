@@ -77,23 +77,25 @@ bool DownSampler_Test_type(IBlock* some_block)
 // IBlock interface methods
 //#########################################################################################################
 
-void DownSampler_preload(DownSampler* down_sampler, fc_Type input)
+void DownSampler_preload(void* vself, fc_Type input)
 {
-  down_sampler->latched_output = input;
-  BlockChain_preload(&down_sampler->base_fc_instance, input);
+  DownSampler* self = (DownSampler*)vself;
+  self->latched_output = input;
+  BlockChain_preload(&self->base_fc_instance, input);
 }
 
 
-fc_Type DownSampler_step(DownSampler* down_sampler, fc_Type input)
+fc_Type DownSampler_step(void* vself, fc_Type input)
 {
-  down_sampler->sample_count++;
+  DownSampler* self = (DownSampler*)vself;
+  self->sample_count++;
 
-  if (down_sampler->sample_count >= down_sampler->sample_every_x)
+  if (self->sample_count >= self->sample_every_x)
   {
-    down_sampler->latched_output = BlockChain_step(&down_sampler->base_fc_instance, input);
-    down_sampler->sample_count = 0;
+    self->latched_output = BlockChain_step(&self->base_fc_instance, input);
+    self->sample_count = 0;
   }
 
-  return down_sampler->latched_output;
+  return self->latched_output;
 }
 

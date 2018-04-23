@@ -43,20 +43,22 @@ TODO consider a different construction technique based on lists.
 #define fc_ALLOCATE_FAIL_PTR ((void*)fc_ALLOCATE_FAIL_PTR)
 
 
-
+ //TODO move to common
 static void* allocate_or_ret_fail_ptr(fc_Builder* bc, size_t size)
 {
-  void* gb = fc_allocate(bc->allocator, size);
+  void* obj = fc_allocate(bc->allocator, size);
 
-  if (gb == NULL) {
-    gb = fc_ALLOCATE_FAIL_PTR;
+  if (obj == NULL) {
+    obj = fc_ALLOCATE_FAIL_PTR;
   }
 
-  return gb;
+  return obj;
 }
 
 
-static uint16_t count_list_size(void** list)
+
+//TODO move to common?
+static uint16_t count_list_size(IBlock** list)
 {
   uint16_t count = 0;
   void* ptr = list[count];
@@ -160,16 +162,16 @@ static void swap(fc_Type *xp, fc_Type *yp)
  * Blocks should use this implementation when they contain no other block that need to be
  * visisted as well.
  */
-static void simple_run_visitor(IBlock* block, fc_IVisitor* visitor)
+static void simple_run_visitor(void* self, fc_IVisitor* visitor)
 {
-  fc_IVisitor_visit(visitor, block);
+  fc_IVisitor_visit(visitor, self);
 }
 
 
-static void destruct_no_fields(IBlock* block, fc_IAllocator const * allocator)
+static void destruct_no_fields(void* self, fc_IAllocator const * allocator)
 {
   //do nothing
-  (void)block;
+  (void)self;
   (void)allocator;
 }
 
