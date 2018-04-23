@@ -1,0 +1,90 @@
+
+
+#define DownSampler_vtable FC_MAKE_NAME(DownSampler_vtable)
+
+const IBlockVirtualTable DownSampler_vtable = {
+  .step = DownSampler_step,
+  .preload = DownSampler_preload,
+  .destruct_fields = BlockChain_destruct_fields,  //inherit from parent
+  .run_visitor = BlockChain_visit, //inherit from parent
+};
+
+
+
+void DownSampler_ctor(DownSampler* down_sampler)
+{
+  fc_ZERO_STRUCT(*down_sampler);
+  BlockChain_ctor(&down_sampler->base_fc_instance); //construct super class
+  down_sampler->base_fc_instance.block.vtable = &DownSampler_vtable;
+}
+
+
+void DownSampler_preload(DownSampler* down_sampler, fc_Type input)
+{
+  down_sampler->latched_output = input;
+  BlockChain_preload(&down_sampler->base_fc_instance, input);
+}
+
+
+fc_Type DownSampler_step(DownSampler* down_sampler, fc_Type input)
+{
+  down_sampler->sample_count++;
+
+  if (down_sampler->sample_count >= down_sampler->sample_every_x)
+  {
+    down_sampler->latched_output = BlockChain_step(&down_sampler->base_fc_instance, input);
+    down_sampler->sample_count = 0;
+  }
+
+  return down_sampler->latched_output;
+}
+
+
+BlockChain* DownSampler_cast_to_fc(DownSampler* self)
+{
+  BlockChain* base_fc = (BlockChain*)self; //OK because `base_fc_instance` is first member in struct.
+  return base_fc;
+}
+
+/**
+ * block_list MUST BE NULL TERMINATED!
+ * SEE #BlockChain_new for usage.
+ */
+DownSampler* DownSampler_new(fc_Builder* bc, uint16_t sample_offset, uint16_t sample_every_x, IBlock** block_list)
+{
+  DownSampler* self;
+  self = allocate_or_ret_fail_ptr(bc, sizeof(DownSampler));
+
+  if (is_ok_ptr(self)) {
+    DownSampler_ctor(self);
+    self->sample_every_x = sample_every_x;
+    self->sample_count = sample_offset;
+  }
+
+  //Intentially try allocating fields even if above failed.
+  //See `BlockChain_new( )` for details.
+  BlockChain* base_fc = DownSampler_cast_to_fc(self);
+  bool inner_malloc_success = BlockChain_allocate_fields(bc, base_fc, block_list);
+
+  if (is_ok_ptr(self) && !inner_malloc_success) {
+    fc_free(bc->allocator, self);
+    self = fc_ALLOCATE_FAIL_PTR;
+  }
+
+  return self;
+}
+
+IBlock* DownSampler_new_iblock(fc_Builder* bc, uint16_t sample_offset, uint16_t sample_every_x, IBlock** block_list)
+{
+  return (IBlock*)DownSampler_new(bc, sample_offset, sample_every_x, block_list);
+}
+
+/**
+ * Class method.
+ * Use to check if an IBlock is a DownSampler block.
+ */
+bool DownSampler_Test_type(IBlock* some_block)
+{
+  bool result = some_block->vtable->step == DownSampler_vtable.step;
+  return result;
+}

@@ -1,16 +1,14 @@
 #pragma once
-#include "c-filter-chain-common.h"
+#include "fc_common.h"
+#include "fc_macros.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+fc_BEGIN_C_DECLS
 
 /**
-  * This is just a wrapper around malloc()/free(). It doesn't have any object data
-  * so you can just use this const one.
-  */
-extern const fc_AbstractAllocator fc_Mallocator;
+ * This is just a wrapper around malloc()/free() as optionally over-ridden in fc_config.h.
+ * It doesn't have any object data so you can just use this const one.
+ */
+extern const fc_IAllocator fc_Mallocator;
 
-#ifdef __cplusplus
-}
-#endif
+
+fc_END_C_DECLS
