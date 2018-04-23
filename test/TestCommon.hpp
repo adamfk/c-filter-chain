@@ -15,12 +15,12 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
-#include "fc_common.h"
+#include "fc_lib/fc_common.h"
 #include "fc_default_config.h"
 
-#include "fc_allocate.h"
-#include "fc_Mallocator.h"
-#include "fc_CountAllocator.h"
+#include "fc_lib/fc_allocate.h"
+#include "fc_lib/fc_Mallocator.h"
+#include "fc_lib/fc_CountAllocator.h"
 
 #include "MockHeap.hpp"
 #include "visitors.hpp"

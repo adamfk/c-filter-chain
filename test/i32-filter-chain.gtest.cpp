@@ -1,8 +1,8 @@
 #include "fc_default_config.h"
 
-#include "fc_allocate.h"
-#include "fc_Mallocator.h"
-#include "fc_CountAllocator.h"
+#include "fc_lib/fc_allocate.h"
+#include "fc_lib/fc_Mallocator.h"
+#include "fc_lib/fc_CountAllocator.h"
 
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
@@ -42,7 +42,7 @@ using ::testing::AtLeast;
 //
 //
 //
-//#include "fc32_lib.h"
+//#include "fc_lib/fc32_lib.h"
 //
 //
 //static void test_chain_against_array(fc32_BlockChain* filter_chain, int32_t const * inputs, int32_t const * expected_outputs, size_t length, int32_t error_tolerance)

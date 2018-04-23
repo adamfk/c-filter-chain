@@ -1,5 +1,5 @@
 #include "TestCommon.hpp"
-#include "fc_macros.h"
+#include "fc_lib/fc_macros.h"
 #include "all_types.h"
 
 //TODO remove

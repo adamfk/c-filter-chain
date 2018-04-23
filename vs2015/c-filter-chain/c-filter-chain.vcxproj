@@ -75,7 +75,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../../source/templates;../../test;../../test/googletest/googlemock/include;../../test/googletest/googletest/include;../../source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../source/include;../../test;../../test/googletest/googlemock/include;../../test/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PreprocessorDefinitions>fc_UNIT_TESTING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -118,23 +118,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\source\fcflt_lib.c" />
-    <ClCompile Include="..\..\source\fc_allocate.c" />
-    <ClCompile Include="..\..\source\fc_Builder.c" />
-    <ClCompile Include="..\..\source\fc_common.c" />
-    <ClCompile Include="..\..\source\fc_CountAllocator.c" />
-    <ClCompile Include="..\..\source\fc_IAllocator.c" />
-    <ClCompile Include="..\..\source\fc_IVisitor.c" />
-    <ClCompile Include="..\..\source\fc_macros.h" />
-    <ClCompile Include="..\..\source\fc_Mallocator.c" />
-    <ClCompile Include="..\..\source\fc32_lib.c" />
-    <ClCompile Include="..\..\source\i32-filter-chain.gtest.cpp" />
-    <ClCompile Include="..\..\source\fc8_lib.c" />
-    <ClCompile Include="..\..\source\templates\fc_IirAsymLowPass.gtest.cpp" />
-    <ClCompile Include="..\..\source\templates\fc_Median.gtest.cpp" />
-    <ClCompile Include="..\..\source\templates\fc_PassThrough.gtest.cpp" />
+    <ClCompile Include="..\..\source\include\fc_lib\fc32_lib.c" />
+    <ClCompile Include="..\..\source\include\fc_lib\fc8_lib.c" />
+    <ClCompile Include="..\..\source\include\fc_lib\fcflt_lib.c" />
+    <ClCompile Include="..\..\source\include\fc_lib\fc_allocate.c" />
+    <ClCompile Include="..\..\source\include\fc_lib\fc_Builder.c" />
+    <ClCompile Include="..\..\source\include\fc_lib\fc_common.c" />
+    <ClCompile Include="..\..\source\include\fc_lib\fc_CountAllocator.c" />
+    <ClCompile Include="..\..\source\include\fc_lib\fc_IAllocator.c" />
+    <ClCompile Include="..\..\source\include\fc_lib\fc_IVisitor.c" />
+    <ClCompile Include="..\..\source\include\fc_lib\fc_Mallocator.c" />
+    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_IirAsymLowPass.gtest.cpp" />
+    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_Median.gtest.cpp" />
+    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_PassThrough.gtest.cpp" />
     <ClCompile Include="..\..\test\BasicTests.cpp" />
     <ClCompile Include="..\..\test\c-test.c" />
+    <ClCompile Include="..\..\test\i32-filter-chain.gtest.cpp" />
     <ClCompile Include="..\..\test\MockHeap.cpp" />
     <ClCompile Include="..\..\test\NotABlock.c" />
     <ClCompile Include="..\..\test\Randomization.cpp" />
@@ -142,28 +141,28 @@
     <ClCompile Include="..\..\test\visitors.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\source\fcflt_lib.h" />
-    <ClInclude Include="..\..\source\fc_allocate.h" />
-    <ClInclude Include="..\..\source\fc_Builder.h" />
-    <ClInclude Include="..\..\source\fc_common.h" />
-    <ClInclude Include="..\..\source\fc_CountAllocator.h" />
-    <ClInclude Include="..\..\source\fc_default_config.h" />
-    <ClInclude Include="..\..\source\fc_IAllocator.h" />
-    <ClInclude Include="..\..\source\fc_IVisitor.h" />
-    <ClInclude Include="..\..\source\fc_Mallocator.h" />
-    <ClInclude Include="..\..\source\fc_WorkingBuffer.h" />
-    <ClInclude Include="..\..\source\fc32_lib.h" />
-    <ClInclude Include="..\..\source\fc8_lib.h" />
-    <ClInclude Include="..\..\source\templates\fc_Delay.h" />
-    <ClInclude Include="..\..\source\templates\fc_DownSampler.h" />
-    <ClInclude Include="..\..\source\templates\fc_BlockChain.h" />
-    <ClInclude Include="..\..\source\templates\fc_IBlock.h" />
-    <ClInclude Include="..\..\source\templates\fc_IirAccelAsymLowPass.h" />
-    <ClInclude Include="..\..\source\templates\fc_IirAsymLowPass.h" />
-    <ClInclude Include="..\..\source\templates\fc_IirLowPass.h" />
-    <ClInclude Include="..\..\source\templates\fc_Median.h" />
-    <ClInclude Include="..\..\source\templates\fc_PassThrough.h" />
-    <ClInclude Include="..\..\source\templates\fc_template_root.h" />
+    <ClInclude Include="..\..\source\include\fc_lib\fc32_lib.h" />
+    <ClInclude Include="..\..\source\include\fc_lib\fc8_lib.h" />
+    <ClInclude Include="..\..\source\include\fc_lib\fcflt_lib.h" />
+    <ClInclude Include="..\..\source\include\fc_lib\fc_allocate.h" />
+    <ClInclude Include="..\..\source\include\fc_lib\fc_Builder.h" />
+    <ClInclude Include="..\..\source\include\fc_lib\fc_common.h" />
+    <ClInclude Include="..\..\source\include\fc_lib\fc_CountAllocator.h" />
+    <ClInclude Include="..\..\source\include\fc_lib\fc_IAllocator.h" />
+    <ClInclude Include="..\..\source\include\fc_lib\fc_IVisitor.h" />
+    <ClInclude Include="..\..\source\include\fc_lib\fc_macros.h" />
+    <ClInclude Include="..\..\source\include\fc_lib\fc_Mallocator.h" />
+    <ClInclude Include="..\..\source\include\fc_lib\fc_WorkingBuffer.h" />
+    <ClInclude Include="..\..\source\include\fc_lib\templates\fc_BlockChain.h" />
+    <ClInclude Include="..\..\source\include\fc_lib\templates\fc_Delay.h" />
+    <ClInclude Include="..\..\source\include\fc_lib\templates\fc_DownSampler.h" />
+    <ClInclude Include="..\..\source\include\fc_lib\templates\fc_IBlock.h" />
+    <ClInclude Include="..\..\source\include\fc_lib\templates\fc_IirAccelAsymLowPass.h" />
+    <ClInclude Include="..\..\source\include\fc_lib\templates\fc_IirAsymLowPass.h" />
+    <ClInclude Include="..\..\source\include\fc_lib\templates\fc_IirLowPass.h" />
+    <ClInclude Include="..\..\source\include\fc_lib\templates\fc_Median.h" />
+    <ClInclude Include="..\..\source\include\fc_lib\templates\fc_PassThrough.h" />
+    <ClInclude Include="..\..\source\include\fc_lib\templates\fc_template_root.h" />
     <ClInclude Include="..\..\test\all_types.h" />
     <ClInclude Include="..\..\test\BasicTests.hpp" />
     <ClInclude Include="..\..\test\fc_default_config.h" />
@@ -178,7 +177,8 @@
     <ClInclude Include="..\..\test\visitors.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\source\templates\fc_cpp_helper.ipp" />
+    <None Include="..\..\source\include\fc_lib\templates\fc_cpp_helper.ipp" />
+    <None Include="..\..\source\include\fc_lib\templates\README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

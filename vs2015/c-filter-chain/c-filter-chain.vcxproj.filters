@@ -16,41 +16,17 @@
     <Filter Include="Source Files\test">
       <UniqueIdentifier>{2da695de-597f-45d2-b286-07af8017ab18}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\templates">
+    <Filter Include="Source Files\fc_lib">
+      <UniqueIdentifier>{e3141c2e-d52e-4a63-a4f8-ba1cbef66f08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fc_lib\templates">
       <UniqueIdentifier>{2ef3d74f-86c9-4a70-ac2a-1c9640a20aa7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\templates\blocks">
+    <Filter Include="Source Files\fc_lib\templates\blocks">
       <UniqueIdentifier>{a485db73-a9ba-48f2-9c7f-bdb0f51cad92}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\source\i32-filter-chain.gtest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\fc_Mallocator.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\fc_CountAllocator.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\fc_macros.h">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\fc_allocate.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\fc_Builder.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\fc_common.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\fc_IVisitor.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\fc_IAllocator.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\test\TestCommon.cpp">
       <Filter>Source Files\test</Filter>
     </ClCompile>
@@ -60,88 +36,64 @@
     <ClCompile Include="..\..\test\c-test.c">
       <Filter>Source Files\test</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\templates\fc_PassThrough.gtest.cpp">
-      <Filter>Source Files\templates\blocks</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\test\visitors.cpp">
       <Filter>Source Files\test</Filter>
     </ClCompile>
     <ClCompile Include="..\..\test\NotABlock.c">
       <Filter>Source Files\test</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\templates\fc_IirAsymLowPass.gtest.cpp">
-      <Filter>Source Files\templates\blocks</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\templates\fc_Median.gtest.cpp">
-      <Filter>Source Files\templates\blocks</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\test\BasicTests.cpp">
       <Filter>Source Files\test</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\fcflt_lib.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\fc8_lib.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\fc32_lib.c">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\test\Randomization.cpp">
       <Filter>Source Files\test</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\include\fc_lib\fc_allocate.c">
+      <Filter>Source Files\fc_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\include\fc_lib\fc_Builder.c">
+      <Filter>Source Files\fc_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\include\fc_lib\fc_common.c">
+      <Filter>Source Files\fc_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\include\fc_lib\fc_CountAllocator.c">
+      <Filter>Source Files\fc_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\include\fc_lib\fc_IAllocator.c">
+      <Filter>Source Files\fc_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\include\fc_lib\fc_IVisitor.c">
+      <Filter>Source Files\fc_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\include\fc_lib\fc_Mallocator.c">
+      <Filter>Source Files\fc_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\include\fc_lib\fc8_lib.c">
+      <Filter>Source Files\fc_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\include\fc_lib\fc32_lib.c">
+      <Filter>Source Files\fc_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\include\fc_lib\fcflt_lib.c">
+      <Filter>Source Files\fc_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_IirAsymLowPass.gtest.cpp">
+      <Filter>Source Files\fc_lib\templates\blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_Median.gtest.cpp">
+      <Filter>Source Files\fc_lib\templates\blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_PassThrough.gtest.cpp">
+      <Filter>Source Files\fc_lib\templates\blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\test\i32-filter-chain.gtest.cpp">
+      <Filter>Source Files\test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\source\fc_Mallocator.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\fc_CountAllocator.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\fc_common.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\fc_IAllocator.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\fc_allocate.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\fc_Builder.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\fc_default_config.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\test\test_config.h">
       <Filter>Source Files\test</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\templates\fc_template_root.h">
-      <Filter>Source Files\templates</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\fc_IVisitor.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\fc_WorkingBuffer.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\templates\fc_BlockChain.h">
-      <Filter>Source Files\templates\blocks</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\templates\fc_Delay.h">
-      <Filter>Source Files\templates\blocks</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\templates\fc_DownSampler.h">
-      <Filter>Source Files\templates\blocks</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\templates\fc_IBlock.h">
-      <Filter>Source Files\templates\blocks</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\templates\fc_Median.h">
-      <Filter>Source Files\templates\blocks</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\templates\fc_PassThrough.h">
-      <Filter>Source Files\templates\blocks</Filter>
     </ClInclude>
     <ClInclude Include="..\..\test\TestCommon.hpp">
       <Filter>Source Files\test</Filter>
@@ -155,32 +107,14 @@
     <ClInclude Include="..\..\test\NotABlock.h">
       <Filter>Source Files\test</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\templates\fc_IirLowPass.h">
-      <Filter>Source Files\templates\blocks</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\templates\fc_IirAsymLowPass.h">
-      <Filter>Source Files\templates\blocks</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\templates\fc_IirAccelAsymLowPass.h">
-      <Filter>Source Files\templates\blocks</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\test\BasicTests.hpp">
       <Filter>Source Files\test</Filter>
     </ClInclude>
     <ClInclude Include="..\..\test\numeric_utils.hpp">
       <Filter>Source Files\test</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\fcflt_lib.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\test\all_types.h">
       <Filter>Source Files\test</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\fc8_lib.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\fc32_lib.h">
-      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\test\MetaNewx.hpp">
       <Filter>Source Files\test</Filter>
@@ -194,10 +128,79 @@
     <ClInclude Include="..\..\test\fc_default_config.h">
       <Filter>Source Files\test</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\include\fc_lib\fc_allocate.h">
+      <Filter>Source Files\fc_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\fc_lib\fc_Builder.h">
+      <Filter>Source Files\fc_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\fc_lib\fc_common.h">
+      <Filter>Source Files\fc_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\fc_lib\fc_CountAllocator.h">
+      <Filter>Source Files\fc_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\fc_lib\fc_IAllocator.h">
+      <Filter>Source Files\fc_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\fc_lib\fc_IVisitor.h">
+      <Filter>Source Files\fc_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\fc_lib\fc_macros.h">
+      <Filter>Source Files\fc_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\fc_lib\fc_Mallocator.h">
+      <Filter>Source Files\fc_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\fc_lib\fc_WorkingBuffer.h">
+      <Filter>Source Files\fc_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\fc_lib\fc8_lib.h">
+      <Filter>Source Files\fc_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\fc_lib\fc32_lib.h">
+      <Filter>Source Files\fc_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\fc_lib\fcflt_lib.h">
+      <Filter>Source Files\fc_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\fc_lib\templates\fc_BlockChain.h">
+      <Filter>Source Files\fc_lib\templates\blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\fc_lib\templates\fc_Delay.h">
+      <Filter>Source Files\fc_lib\templates\blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\fc_lib\templates\fc_DownSampler.h">
+      <Filter>Source Files\fc_lib\templates\blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\fc_lib\templates\fc_IBlock.h">
+      <Filter>Source Files\fc_lib\templates\blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\fc_lib\templates\fc_IirAccelAsymLowPass.h">
+      <Filter>Source Files\fc_lib\templates\blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\fc_lib\templates\fc_IirAsymLowPass.h">
+      <Filter>Source Files\fc_lib\templates\blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\fc_lib\templates\fc_IirLowPass.h">
+      <Filter>Source Files\fc_lib\templates\blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\fc_lib\templates\fc_Median.h">
+      <Filter>Source Files\fc_lib\templates\blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\fc_lib\templates\fc_PassThrough.h">
+      <Filter>Source Files\fc_lib\templates\blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\fc_lib\templates\fc_template_root.h">
+      <Filter>Source Files\fc_lib\templates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\source\templates\fc_cpp_helper.ipp">
-      <Filter>Source Files\templates\blocks</Filter>
+    <None Include="..\..\source\include\fc_lib\templates\fc_cpp_helper.ipp">
+      <Filter>Source Files\fc_lib\templates\blocks</Filter>
+    </None>
+    <None Include="..\..\source\include\fc_lib\templates\README.md">
+      <Filter>Source Files\fc_lib\templates</Filter>
     </None>
   </ItemGroup>
 </Project>

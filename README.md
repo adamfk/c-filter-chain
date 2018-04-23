@@ -2,7 +2,6 @@ c-filter-chain
 
 ## TODO
 * Add `override` keyword to more methods that override base methods
-* Single include path! Everything relative from there.
 * rename to BuildContext/RunContext
 * Visitor Enter/exit
 * error marking for bad setups

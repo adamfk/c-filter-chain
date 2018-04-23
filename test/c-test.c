@@ -1,5 +1,5 @@
 #include "all_types.h"
-#include "fc_Mallocator.h"
+#include "fc_lib/fc_Mallocator.h"
 
 //TODO test from CPP to ensure that it agrees
 fc32_BlockChain* buildChain1(void)
