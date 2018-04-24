@@ -1,4 +1,5 @@
 #pragma once
+#include <string.h> //for memset
 
 #define fc_ZERO_STRUCT(my_struct)  memset(&(my_struct), 0, sizeof(my_struct));
 
