@@ -4,7 +4,7 @@
 //TODO test from CPP to ensure that it agrees
 fc32_BlockChain* buildChain1(void)
 {
-  fc_Builder* bc = &(fc_Builder){ //compound literal. vs2015 will build, but intellisense shows error.
+  fc_BuildCtx* bc = &(fc_BuildCtx){ //compound literal. vs2015 will build, but intellisense shows error.
     .allocator = &fc_Mallocator,
   };
 

@@ -16,7 +16,7 @@ void IirAsymLowPass_ctor(IirAsymLowPass* iir)
   iir->block.vtable = &IirAsymLowPass_vtable;
 }
 
-IirAsymLowPass* IirAsymLowPass_new(fc_Builder* bc, float higher_ratio, float lower_ratio)
+IirAsymLowPass* IirAsymLowPass_new(fc_BuildCtx* bc, float higher_ratio, float lower_ratio)
 {
   IirAsymLowPass* p = allocate_or_ret_fail_ptr(bc, sizeof(IirAsymLowPass));
 
@@ -29,7 +29,7 @@ IirAsymLowPass* IirAsymLowPass_new(fc_Builder* bc, float higher_ratio, float low
   return p;
 }
 
-IBlock* IirAsymLowPass_new_iblock(fc_Builder* bc, float higher_ratio, float lower_ratio)
+IBlock* IirAsymLowPass_new_iblock(fc_BuildCtx* bc, float higher_ratio, float lower_ratio)
 {
   IirAsymLowPass* result = IirAsymLowPass_new(bc, higher_ratio, lower_ratio);
   return (IBlock*)result;

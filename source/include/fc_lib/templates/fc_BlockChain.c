@@ -33,7 +33,7 @@ bool BlockChain_Test_type(IBlock* some_block)
  * TODO: fail if an empty chain?
  * Returns success
  */
-bool BlockChain_allocate_fields(fc_Builder* bc, BlockChain* self, IBlock** block_list)
+bool BlockChain_allocate_fields(fc_BuildCtx* bc, BlockChain* self, IBlock** block_list)
 {
   bool success = false;
   bool child_allocate_fail = false;
@@ -92,7 +92,7 @@ done:
  * 
  * Returns #fc_ALLOCATE_FAIL_PTR if this or a passed block failed allocation.
  */
-BlockChain* BlockChain_new(fc_Builder* bc, IBlock** block_list)
+BlockChain* BlockChain_new(fc_BuildCtx* bc, IBlock** block_list)
 {
   BlockChain* self;
   bool success = true;

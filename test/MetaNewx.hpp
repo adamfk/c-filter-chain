@@ -11,7 +11,7 @@ using StepFunc = std::function<void(BlockType* block)>;
 
 //essentially a templated typedef
 template <typename BlockType>
-using Ctor = std::function<BlockType*(fc_Builder*)>;
+using Ctor = std::function<BlockType*(fc_BuildCtx*)>;
 
 
 

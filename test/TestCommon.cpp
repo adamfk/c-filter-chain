@@ -3,7 +3,7 @@
 #include "all_types.h"
 
 //TODO remove
-fc_Builder test_malloc_builder = {
+fc_BuildCtx test_malloc_builder = {
   &fc_Mallocator,
 };
 

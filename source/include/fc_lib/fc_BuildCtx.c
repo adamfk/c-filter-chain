@@ -1,6 +1,6 @@
-#include "fc_lib/fc_Builder.h"
+#include "fc_lib/fc_BuildCtx.h"
 
-void fc_Builder_update_minimum_working_buffer(fc_Builder* bc, uint32_t required_size) {
+void fc_BuildCtx_update_minimum_working_buffer(fc_BuildCtx* bc, uint32_t required_size) {
   if (required_size > bc->min_working_buffer_size) {
     bc->min_working_buffer_size = required_size;
   }
@@ -8,7 +8,7 @@ void fc_Builder_update_minimum_working_buffer(fc_Builder* bc, uint32_t required_
 
 
 //TODO decide on should all Builder's have a working buffer instead of a pointer to one?
-bool fc_Builder_allocate_working_buffer(fc_Builder* bc) 
+bool fc_BuildCtx_allocate_working_buffer(fc_BuildCtx* bc) 
 {
   bool success = false;
 

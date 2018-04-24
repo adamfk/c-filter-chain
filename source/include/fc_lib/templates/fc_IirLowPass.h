@@ -22,8 +22,8 @@ typedef struct IirLowPass
 
 
 void IirLowPass_ctor(IirLowPass* block);
-IirLowPass* IirLowPass_new(fc_Builder* bc, float new_ratio);
-IBlock* IirLowPass_new_iblock(fc_Builder* bc, float new_ratio);
+IirLowPass* IirLowPass_new(fc_BuildCtx* bc, float new_ratio);
+IBlock* IirLowPass_new_iblock(fc_BuildCtx* bc, float new_ratio);
 
 /**
  * Class method.

@@ -38,7 +38,7 @@ typedef struct BlockChain
   /**
    * Allows passing destructor to contained blocks.
    */
-  const fc_Builder* builder_config;
+  const fc_BuildCtx* builder_config;
   IBlock **blocks; //!< array of pointers to blocks. DO NOT manually adjust if auto allocated via "new()" methods.
   uint16_t block_count;
 } BlockChain;
@@ -47,12 +47,12 @@ typedef struct BlockChain
 
 void BlockChain_ctor(BlockChain* filter_chain);
 
-BlockChain* BlockChain_new(fc_Builder* bc, IBlock** block_list);
+BlockChain* BlockChain_new(fc_BuildCtx* bc, IBlock** block_list);
 
 /**
  * user code should generally not call.
  */
-bool BlockChain_allocate_fields(fc_Builder* bc, BlockChain* filter_chain, IBlock** block_list);
+bool BlockChain_allocate_fields(fc_BuildCtx* bc, BlockChain* filter_chain, IBlock** block_list);
 
 /**
  * Will destruct fields and free self.

@@ -115,11 +115,11 @@ public:
     auto ctorGroup = new MedianCtorGroup<BlockType>();
     
     ctorGroup->ctors = {
-      [=](fc_Builder* bc) {
+      [=](fc_BuildCtx* bc) {
         sfcg_SET_LOCATION_INFO(*ctorGroup);
         return CppMedian_new<BlockType>(bc, filter_length);
       },
-      [=](fc_Builder* bc) {
+      [=](fc_BuildCtx* bc) {
         sfcg_SET_LOCATION_INFO(*ctorGroup);
         return CppMedian_new_iblock<BlockType>(bc, filter_length);
       },
@@ -144,15 +144,15 @@ private:
     auto ctorGroup = new MedianCtorGroup<BlockType>();
 
     ctorGroup->ctors = {
-      [=](fc_Builder* bc) {
+      [=](fc_BuildCtx* bc) {
         sfcg_SET_LOCATION_INFO(*ctorGroup);
         return CppMedian_new<BlockType>(bc, filter_length);
       },
-      [=](fc_Builder* bc) {
+      [=](fc_BuildCtx* bc) {
         sfcg_SET_LOCATION_INFO(*ctorGroup);
         return CppMedian_new_iblock<BlockType>(bc, filter_length);
       },
-      [=](fc_Builder* bc) {
+      [=](fc_BuildCtx* bc) {
         sfcg_SET_LOCATION_INFO(*ctorGroup);
 
         //vanilla method of setting it up
@@ -162,7 +162,7 @@ private:
         block->saved_sample_length = filter_length - 1;
         block->previous_samples = (PrimitiveType*)fc_IAllocator_allocate(bc->allocator, sizeof(PrimitiveType)*block->saved_sample_length);
         size_t wb_size = sizeof(PrimitiveType) * filter_length;
-        fc_Builder_update_minimum_working_buffer(bc, wb_size);
+        fc_BuildCtx_update_minimum_working_buffer(bc, wb_size);
         return block;
       },
     };

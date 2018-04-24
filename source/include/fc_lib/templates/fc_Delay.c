@@ -20,7 +20,7 @@ void Delay_ctor(Delay* self)
 /**
 * Returns #fc_ALLOCATE_FAIL_PTR on allocate failure.
 */
-Delay* Delay_new(fc_Builder* bc, uint16_t history_depth)
+Delay* Delay_new(fc_BuildCtx* bc, uint16_t history_depth)
 {
   bool success = true;
   fc_Type* array;

@@ -16,11 +16,11 @@ The c++ test code often uses dummy variables to make a unique function/method si
 c++ method/function overloading will pick the right one.
 
 ```c++
-static fc8_PassThrough* CppPassThrough_new(fc8_PassThrough const * dummy, fc_Builder* builder) {
+static fc8_PassThrough* CppPassThrough_new(fc8_PassThrough const * dummy, fc_BuildCtx* builder) {
   return fc8_PassThrough_new(bc);
 }
 
-static fc32_PassThrough* CppPassThrough_new(fc32_PassThrough const * dummy, fc_Builder* builder) {
+static fc32_PassThrough* CppPassThrough_new(fc32_PassThrough const * dummy, fc_BuildCtx* builder) {
   return fc32_PassThrough_new(bc);
 }  
 ```
@@ -32,7 +32,7 @@ template <typename T> class PassThroughTester : public BasicTester<T>
 {
   //build a PassThrough object using the correct `_new()` function
   //based on the type T being tested right now.
-  virtual T* build_new_block(DummyT dummy, fc_Builder* mb) {
+  virtual T* build_new_block(DummyT dummy, fc_BuildCtx* mb) {
     return CppPassThrough_new(dummy, mb);
   }
   ...
@@ -65,7 +65,7 @@ The dummy variables could be removed with template meta programming, but this ma
 too high for the target audience of embedded `c` programmers. This library is already complex enough as it is.
 
 One of the main problem spots is trying to implement
-`T* CppPassThrough_new(fc_Builder* builder)` functions as this requires return type specialization. 
+`T* CppPassThrough_new(fc_BuildCtx* builder)` functions as this requires return type specialization. 
 
 A solution is given in this stack overflow question:
 https://stackoverflow.com/questions/15911890/overriding-return-type-in-function-template-specialization

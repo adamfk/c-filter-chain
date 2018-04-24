@@ -24,7 +24,7 @@ static size_t Median_calc_buffer_size(uint16_t filter_length)
 }
 
 
-IBlock* Median_new_iblock(fc_Builder* bc, uint16_t length)
+IBlock* Median_new_iblock(fc_BuildCtx* bc, uint16_t length)
 {
   return (IBlock*) Median_new(bc, length);
 }
@@ -33,7 +33,7 @@ IBlock* Median_new_iblock(fc_Builder* bc, uint16_t length)
 /**
 * Returns #fc_ALLOCATE_FAIL_PTR on allocate failure.
 */
-Median* Median_new(fc_Builder* bc, uint16_t length)
+Median* Median_new(fc_BuildCtx* bc, uint16_t length)
 {
   uint16_t saved_sample_length = length - 1;  //-1 because we save one less than length of median filter as it has access to the input
   bool success = true;
@@ -56,7 +56,7 @@ Median* Median_new(fc_Builder* bc, uint16_t length)
     self->working_buffer = bc->working_buffer;
     self->saved_sample_length = saved_sample_length;
     self->previous_samples = array;
-    fc_Builder_update_minimum_working_buffer(bc, Median_calc_buffer_size(length));
+    fc_BuildCtx_update_minimum_working_buffer(bc, Median_calc_buffer_size(length));
   }
   else {
     //some part failed

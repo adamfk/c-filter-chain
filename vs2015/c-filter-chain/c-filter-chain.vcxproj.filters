@@ -51,7 +51,7 @@
     <ClCompile Include="..\..\source\include\fc_lib\fc_allocate.c">
       <Filter>Source Files\fc_lib</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\include\fc_lib\fc_Builder.c">
+    <ClCompile Include="..\..\source\include\fc_lib\fc_BuildCtx.c">
       <Filter>Source Files\fc_lib</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\include\fc_lib\fc_common.c">
@@ -131,7 +131,7 @@
     <ClInclude Include="..\..\source\include\fc_lib\fc_allocate.h">
       <Filter>Source Files\fc_lib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\include\fc_lib\fc_Builder.h">
+    <ClInclude Include="..\..\source\include\fc_lib\fc_BuildCtx.h">
       <Filter>Source Files\fc_lib</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\include\fc_lib\fc_common.h">

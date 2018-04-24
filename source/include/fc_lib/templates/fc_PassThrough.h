@@ -16,8 +16,8 @@ typedef struct PassThrough
 
 
 void PassThrough_ctor(PassThrough* block);
-PassThrough* PassThrough_new(fc_Builder* bc);
-IBlock* PassThrough_new_iblock(fc_Builder* bc);
+PassThrough* PassThrough_new(fc_BuildCtx* bc);
+IBlock* PassThrough_new_iblock(fc_BuildCtx* bc);
 
 /**
  * Class method.
@@ -49,19 +49,19 @@ extern "C++" {
 #ifndef _fc_CPP_TEST_PASSTHROUGH_INCLUDE_GUARD
 #define _fc_CPP_TEST_PASSTHROUGH_INCLUDE_GUARD
   template <typename BlockType>
-  static BlockType* CppPassThrough_new(fc_Builder* bc);
+  static BlockType* CppPassThrough_new(fc_BuildCtx* bc);
 
   template <typename BlockType>
-  static BlockType* CppPassThrough_new_iblock(fc_Builder* bc);
+  static BlockType* CppPassThrough_new_iblock(fc_BuildCtx* bc);
 #endif
 
   template <>
-  static PassThrough* CppPassThrough_new(fc_Builder* bc) {
+  static PassThrough* CppPassThrough_new(fc_BuildCtx* bc) {
     return PassThrough_new(bc);
   }
 
   template <>
-  static PassThrough* CppPassThrough_new_iblock(fc_Builder* bc) {
+  static PassThrough* CppPassThrough_new_iblock(fc_BuildCtx* bc) {
     return (PassThrough*)PassThrough_new_iblock(bc);
   }
 

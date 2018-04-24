@@ -122,7 +122,7 @@
     <ClCompile Include="..\..\source\include\fc_lib\fc8_lib.c" />
     <ClCompile Include="..\..\source\include\fc_lib\fcflt_lib.c" />
     <ClCompile Include="..\..\source\include\fc_lib\fc_allocate.c" />
-    <ClCompile Include="..\..\source\include\fc_lib\fc_Builder.c" />
+    <ClCompile Include="..\..\source\include\fc_lib\fc_BuildCtx.c" />
     <ClCompile Include="..\..\source\include\fc_lib\fc_common.c" />
     <ClCompile Include="..\..\source\include\fc_lib\fc_CountAllocator.c" />
     <ClCompile Include="..\..\source\include\fc_lib\fc_IAllocator.c" />
@@ -145,7 +145,7 @@
     <ClInclude Include="..\..\source\include\fc_lib\fc8_lib.h" />
     <ClInclude Include="..\..\source\include\fc_lib\fcflt_lib.h" />
     <ClInclude Include="..\..\source\include\fc_lib\fc_allocate.h" />
-    <ClInclude Include="..\..\source\include\fc_lib\fc_Builder.h" />
+    <ClInclude Include="..\..\source\include\fc_lib\fc_BuildCtx.h" />
     <ClInclude Include="..\..\source\include\fc_lib\fc_common.h" />
     <ClInclude Include="..\..\source\include\fc_lib\fc_CountAllocator.h" />
     <ClInclude Include="..\..\source\include\fc_lib\fc_IAllocator.h" />

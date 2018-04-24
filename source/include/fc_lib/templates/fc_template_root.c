@@ -44,7 +44,7 @@ TODO consider a different construction technique based on lists.
 
 
  //TODO move to common
-static void* allocate_or_ret_fail_ptr(fc_Builder* bc, size_t size)
+static void* allocate_or_ret_fail_ptr(fc_BuildCtx* bc, size_t size)
 {
   void* obj = fc_allocate(bc->allocator, size);
 

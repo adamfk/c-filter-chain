@@ -7,13 +7,13 @@ static float expected_lower_ratio;
 /**
  * Type of a function to create a new filter
  */
-typedef std::function<fc32_IirAsymLowPass*(fc_Builder*)> new32_func_t;
+typedef std::function<fc32_IirAsymLowPass*(fc_BuildCtx*)> new32_func_t;
 
-static new32_func_t new_block32_func = [](fc_Builder* mb) {
+static new32_func_t new_block32_func = [](fc_BuildCtx* mb) {
   return fc32_IirAsymLowPass_new(mb, expected_higher_ratio, expected_lower_ratio);
 };
 
-static new32_func_t new_gb_block32_func = [](fc_Builder* mb) {
+static new32_func_t new_gb_block32_func = [](fc_BuildCtx* mb) {
   return (fc32_IirAsymLowPass*)fc32_IirAsymLowPass_new_iblock(mb, expected_higher_ratio, expected_lower_ratio);
 };
 
@@ -56,7 +56,7 @@ TEST(fc32_IirAsymLowPass, _ctor) {
 
 TEST(fc32_IirAsymLowPass, _step_0_coefficients)
 {
-  TestCommon::run_with_mb( [](fc_Builder* mb) {
+  TestCommon::run_with_mb( [](fc_BuildCtx* mb) {
     const int32_t init_value = 6468;
     fc32_IirAsymLowPass* p1 = fc32_IirAsymLowPass_new(mb, 0, 0);
     fc32_IirAsymLowPass_preload(p1, init_value);
@@ -68,7 +68,7 @@ TEST(fc32_IirAsymLowPass, _step_0_coefficients)
 
 
 TEST(fc32_IirAsymLowPass, _step_climb_only) {
-  TestCommon::run_with_mb([](fc_Builder* mb) {
+  TestCommon::run_with_mb([](fc_BuildCtx* mb) {
     const int32_t init_value = 10;
     fc32_IirAsymLowPass* p1 = fc32_IirAsymLowPass_new(mb, 0.5f, 0);
     fc32_IirAsymLowPass_preload(p1, init_value);
@@ -88,7 +88,7 @@ TEST(fc32_IirAsymLowPass, _step_climb_only) {
 
 
 TEST(fc32_IirAsymLowPass, _new_step_fall_only) {
-  TestCommon::run_with_mb([](fc_Builder* mb) {
+  TestCommon::run_with_mb([](fc_BuildCtx* mb) {
     const int32_t init_value = 50;
     fc32_IirAsymLowPass* p1 = fc32_IirAsymLowPass_new(mb, 0, 0.5f);
     fc32_IirAsymLowPass_preload(p1, init_value);

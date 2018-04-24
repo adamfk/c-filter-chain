@@ -19,11 +19,11 @@ typedef struct Median
   fc_WorkingBuffer* working_buffer;
 } Median;
 
-//TODO put working buffer into to fc_Builder?
+//TODO put working buffer into to fc_BuildCtx?
 
 void Median_ctor(Median* block);
-Median* Median_new(fc_Builder* bc, uint16_t length);
-IBlock* Median_new_iblock(fc_Builder* bc, uint16_t length);
+Median* Median_new(fc_BuildCtx* bc, uint16_t length);
+IBlock* Median_new_iblock(fc_BuildCtx* bc, uint16_t length);
 
 /**
  * Class method.
@@ -55,20 +55,20 @@ extern "C++" {
 #ifndef _fc_CPP_TEST_MEDIAN_INCLUDE_GUARD
 #define _fc_CPP_TEST_MEDIAN_INCLUDE_GUARD
   template <typename BlockType>
-  static BlockType* CppMedian_new(fc_Builder* bc, uint16_t length);
+  static BlockType* CppMedian_new(fc_BuildCtx* bc, uint16_t length);
 
   template <typename BlockType>
-  static BlockType* CppMedian_new_iblock(fc_Builder* bc, uint16_t length);
+  static BlockType* CppMedian_new_iblock(fc_BuildCtx* bc, uint16_t length);
 #endif
 
 
   template <>
-  static Median* CppMedian_new<Median>(fc_Builder* bc, uint16_t length) {
+  static Median* CppMedian_new<Median>(fc_BuildCtx* bc, uint16_t length) {
     return Median_new(bc, length);
   }
 
   template <>
-  static Median* CppMedian_new_iblock<Median>(fc_Builder* bc, uint16_t length) {
+  static Median* CppMedian_new_iblock<Median>(fc_BuildCtx* bc, uint16_t length) {
     return (Median*)Median_new_iblock(bc, length);
   }
 

@@ -35,15 +35,15 @@ public:
     auto ctorGroup = new PassThroughCtorGrp<BlockType>();
     
     ctorGroup->ctors = {
-      [=](fc_Builder* bc) {
+      [=](fc_BuildCtx* bc) {
         sfcg_SET_LOCATION_INFO(*ctorGroup);
         return CppPassThrough_new<BlockType>(bc);
       },
-      [=](fc_Builder* bc) {
+      [=](fc_BuildCtx* bc) {
         sfcg_SET_LOCATION_INFO(*ctorGroup);
         return CppPassThrough_new_iblock<BlockType>(bc);
       },
-      [=](fc_Builder* bc) {
+      [=](fc_BuildCtx* bc) {
         sfcg_SET_LOCATION_INFO(*ctorGroup);
         //vanilla method of setting it up
         BlockType* block = (BlockType*)fc_IAllocator_allocate(bc->allocator, sizeof(BlockType));
@@ -76,11 +76,11 @@ public:
     auto ctorGroup = new PassThroughCtorGrp<BlockType>();
 
     ctorGroup->ctors = {
-      [=](fc_Builder* bc) {
+      [=](fc_BuildCtx* bc) {
         sfcg_SET_LOCATION_INFO(*ctorGroup);
         return CppPassThrough_new<BlockType>(bc);
       },
-      [=](fc_Builder* bc) {
+      [=](fc_BuildCtx* bc) {
         sfcg_SET_LOCATION_INFO(*ctorGroup);
         return CppPassThrough_new_iblock<BlockType>(bc);
       },
@@ -116,7 +116,7 @@ INSTANTIATE_TYPED_TEST_CASE_P(PassThrough, IBlockTests, TypesToTest);
 
 TEST(fc32_PassThrough, _new_step)
 {
-  TestCommon::run_with_mb([](fc_Builder* mb) {
+  TestCommon::run_with_mb([](fc_BuildCtx* mb) {
     fc32_PassThrough* p1 = fc32_PassThrough_new(mb);
     using PrimitiveType = FilterPrimitiveTypeSelector<decltype(*p1)>::type;
 

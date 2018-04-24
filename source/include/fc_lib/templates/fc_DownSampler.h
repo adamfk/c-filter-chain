@@ -29,8 +29,8 @@ typedef struct DownSampler
 
 
 void DownSampler_ctor(DownSampler* block);
-DownSampler* DownSampler_new(fc_Builder* bc, uint16_t sample_offset, uint16_t sample_every_x, IBlock** block_list);
-IBlock* DownSampler_new_iblock(fc_Builder* bc, uint16_t sample_offset, uint16_t sample_every_x, IBlock** block_list);
+DownSampler* DownSampler_new(fc_BuildCtx* bc, uint16_t sample_offset, uint16_t sample_every_x, IBlock** block_list);
+IBlock* DownSampler_new_iblock(fc_BuildCtx* bc, uint16_t sample_offset, uint16_t sample_every_x, IBlock** block_list);
 BlockChain* DownSampler_cast_to_fc(DownSampler* self);
 
 /**

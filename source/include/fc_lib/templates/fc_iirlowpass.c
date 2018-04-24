@@ -15,7 +15,7 @@ void IirLowPass_ctor(IirLowPass* iir)
   iir->block.vtable = &IirLowPass_vtable;
 }
 
-IirLowPass* IirLowPass_new(fc_Builder* bc, float new_ratio)
+IirLowPass* IirLowPass_new(fc_BuildCtx* bc, float new_ratio)
 {
   IirLowPass* p = allocate_or_ret_fail_ptr(bc, sizeof(IirLowPass));
 
@@ -27,7 +27,7 @@ IirLowPass* IirLowPass_new(fc_Builder* bc, float new_ratio)
   return p;
 }
 
-IBlock* IirLowPass_new_iblock(fc_Builder* bc, float new_ratio)
+IBlock* IirLowPass_new_iblock(fc_BuildCtx* bc, float new_ratio)
 {
   IirLowPass* result = IirLowPass_new(bc, new_ratio);
   return (IBlock*)result;

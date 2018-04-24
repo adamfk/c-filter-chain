@@ -22,7 +22,7 @@ using ::testing::AtLeast;
 //
 //using std::vector;
 //
-//static fc_Builder mbc = {
+//static fc_BuildCtx mbc = {
 //  &fc_Mallocator,
 //};
 //
@@ -238,7 +238,7 @@ using ::testing::AtLeast;
 //
 //TEST(BlockChain_i32, MallocDownSamplerIir) {
 //  MockHeap heap(&mockHeapPtr);
-//  fc_Builder* bc = &mbc;
+//  fc_BuildCtx* bc = &mbc;
 //
 //
 //  fc32_BlockChain* filter_chain = fc32_BlockChain_new(bc,
@@ -270,7 +270,7 @@ using ::testing::AtLeast;
 //
 //TEST(BlockChain_i32, TestHeapMocking3) {
 //  MockHeap heap(&mockHeapPtr);
-//  fc_Builder* bc = &mbc;
+//  fc_BuildCtx* bc = &mbc;
 //
 //  //see if we can NULL the 3rd returned malloc
 //  EXPECT_CALL(heap, xMalloc(_)).Times(3)
@@ -291,7 +291,7 @@ using ::testing::AtLeast;
 //
 //TEST(BlockChain_i32, MallocSimpleTest) {
 //  MockHeap heap(&mockHeapPtr);
-//  fc_Builder* bc = &mbc;
+//  fc_BuildCtx* bc = &mbc;
 //
 //  fc32_PassThrough* p_filter;
 //  int expected_size = sizeof(*p_filter);
@@ -306,7 +306,7 @@ using ::testing::AtLeast;
 //
 //TEST(BlockChain_i32, MallocFailurePassThroughFilter) {
 //  MockHeap heap(&mockHeapPtr);
-//  fc_Builder* bc = &mbc;
+//  fc_BuildCtx* bc = &mbc;
 //
 //  fc32_PassThrough* p_filter;
 //  int expected_size = sizeof(*p_filter);
@@ -322,7 +322,7 @@ using ::testing::AtLeast;
 //
 //TEST(BlockChain_i32, MallocFailureInChain1) {
 //  MockHeap heap(&mockHeapPtr);
-//  fc_Builder* bc = &mbc;
+//  fc_BuildCtx* bc = &mbc;
 //
 //  EXPECT_CALL(heap, xMalloc(_)).Times(AtLeast(3))
 //    .WillOnce(DoDefault())  //0.42 IIR
@@ -356,10 +356,10 @@ using ::testing::AtLeast;
 //  MockHeap heap(&mockHeapPtr);
 //  fc_CountAllocator count_allocator;
 //  fc_CountAllocator_ctor(&count_allocator, &fc_Mallocator);
-//  fc_Builder counting_bc;
+//  fc_BuildCtx counting_bc;
 //  counting_bc.allocator = &count_allocator.base_instance;
 //
-//  fc_Builder* bc = &counting_bc;
+//  fc_BuildCtx* bc = &counting_bc;
 //
 //  EXPECT_CALL(heap, xMalloc(_)).WillRepeatedly(ReturnNull());
 //
@@ -391,10 +391,10 @@ using ::testing::AtLeast;
 //  MockHeap heap(&mockHeapPtr);
 //  fc_CountAllocator count_allocator;
 //  fc_CountAllocator_ctor(&count_allocator, &fc_Mallocator);
-//  fc_Builder counting_bc;
+//  fc_BuildCtx counting_bc;
 //  counting_bc.allocator = &count_allocator.base_instance;
 //
-//  fc_Builder* bc = &counting_bc;
+//  fc_BuildCtx* bc = &counting_bc;
 //
 //  EXPECT_CALL(heap, xMalloc(_)).Times(AtLeast(4));
 //

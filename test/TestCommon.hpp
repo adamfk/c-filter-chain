@@ -57,10 +57,10 @@ using ::testing::InSequence;
 
 //TODO test allocation of working buffer
 
-extern fc_Builder test_malloc_builder;
+extern fc_BuildCtx test_malloc_builder;
 
-typedef std::function<void*(fc_Builder*)> new_iblock_func_t;
-typedef std::function<void(fc_Builder*)> run_with_mb_t;
+typedef std::function<void*(fc_BuildCtx*)> new_iblock_func_t;
+typedef std::function<void(fc_BuildCtx*)> run_with_mb_t;
 
 template <typename PrimitiveType> class InputOutput {
 public:
@@ -73,12 +73,12 @@ public:
  * Wraps up a few common things used all over for setting up tests
  */
 class MockHeapBuilder : public MockHeap {
-  fc_Builder builder = { 0 };
+  fc_BuildCtx builder = { 0 };
   
 
 public:
   fc_WorkingBuffer wb = { 0 };
-  fc_Builder* bc;
+  fc_BuildCtx* bc;
 
   MockHeapBuilder(MockHeap** c_reference) : MockHeap(c_reference) {
     builder.allocator = &fc_Mallocator;
@@ -98,7 +98,7 @@ public:
     }
   }
 
-  operator fc_Builder* () { return bc; };
+  operator fc_BuildCtx* () { return bc; };
   operator fc_IAllocator const * () { return bc->allocator; };
 
   virtual ~MockHeapBuilder() {
@@ -493,7 +493,7 @@ public:
 
 
   /**
-   * Use this to limit unnecessary MockHeap, fc_Builder... setup boiler plate
+   * Use this to limit unnecessary MockHeap, fc_BuildCtx... setup boiler plate
    */
   static void run_with_mb(run_with_mb_t run_func) {
     SCOPED_TRACE(__func__);

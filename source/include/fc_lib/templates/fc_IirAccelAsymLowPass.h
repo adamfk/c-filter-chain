@@ -25,8 +25,8 @@ typedef struct IirAccelAsymLowPass
 
 
 void IirAccelAsymLowPass_ctor(IirAccelAsymLowPass* block);
-IirAccelAsymLowPass* IirAccelAsymLowPass_new(fc_Builder* bc, float higher_ratio, float lower_ratio);
-IBlock* IirAccelAsymLowPass_new_iblock(fc_Builder* bc, float higher_ratio, float lower_ratio);
+IirAccelAsymLowPass* IirAccelAsymLowPass_new(fc_BuildCtx* bc, float higher_ratio, float lower_ratio);
+IBlock* IirAccelAsymLowPass_new_iblock(fc_BuildCtx* bc, float higher_ratio, float lower_ratio);
 
 /**
  * Class method.

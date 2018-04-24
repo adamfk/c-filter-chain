@@ -17,8 +17,8 @@ public:
   typedef BlockType const * DummyT; //TODO look at removing * from DummyT. sizeof(dummy) is a common mistake as you want sizeof(*dummy)
   DummyT dummy = nullptr;    //see README.md "Dummy Variables" section 
   
-  typedef std::function<BlockType*(fc_Builder*)> x_new_func_t;
-  typedef std::function<void*(fc_Builder*)> x_new_iblock_func_t;
+  typedef std::function<BlockType*(fc_BuildCtx*)> x_new_func_t;
+  typedef std::function<void*(fc_BuildCtx*)> x_new_iblock_func_t;
   typedef std::function<bool(void* iblock)> x_test_type_t;
  
 

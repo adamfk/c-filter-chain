@@ -20,7 +20,7 @@ void PassThrough_ctor(PassThrough* passThrough)
 /**
 * Returns #fc_ALLOCATE_FAIL_PTR on allocate failure.
 */
-PassThrough* PassThrough_new(fc_Builder* bc)
+PassThrough* PassThrough_new(fc_BuildCtx* bc)
 {
   PassThrough* p = allocate_or_ret_fail_ptr(bc, sizeof(PassThrough));
   if (is_ok_ptr(p)) {
@@ -30,7 +30,7 @@ PassThrough* PassThrough_new(fc_Builder* bc)
 }
 
 
-IBlock* PassThrough_new_iblock(fc_Builder* bc) {
+IBlock* PassThrough_new_iblock(fc_BuildCtx* bc) {
   return (IBlock*)PassThrough_new(bc);
 }
 

@@ -20,7 +20,7 @@ typedef struct Delay
 
 
 void Delay_ctor(Delay* block);
-Delay* Delay_new(fc_Builder* bc, uint16_t history_depth);
+Delay* Delay_new(fc_BuildCtx* bc, uint16_t history_depth);
 
 /**
  * Class method.
