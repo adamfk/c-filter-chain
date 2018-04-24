@@ -39,9 +39,10 @@ IBlock* IirLowPass_new_iblock(fc_BuildCtx* bc, float new_ratio)
  * Class method.
  * Use to check if an IBlock is a IirLowPass.
  */
-bool IirLowPass_Test_type(IBlock* some_block)
+bool IirLowPass_Test_type(void* some_block)
 {
-  bool result = some_block->vtable->step == IirLowPass_vtable.step;
+  IBlock* iblock = (IBlock*)some_block;
+  bool result = iblock->vtable->step == IirLowPass_vtable.step;
   return result;
 }
 

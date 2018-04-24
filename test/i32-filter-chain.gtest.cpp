@@ -112,31 +112,6 @@ using ::testing::AtLeast;
 //}
 //
 //
-//TEST(BlockChain_i32, OneIirPrecalc) {
-//
-//  fc32_IirLowPass iir1;
-//  fc32_IirLowPass_ctor(&iir1);
-//  iir1.new_ratio = 0.2f;
-//
-//
-//  fc32_BlockChain filter_chain = { 0 };
-//  fc32_IBlock* blocks[] = {
-//    &iir1.block,
-//  };
-//  filter_chain.blocks = &blocks[0];
-//  filter_chain.block_count = fc_COUNTOF(blocks);
-//  fc32_BlockChain_preload(&filter_chain, 0);
-//
-//
-//  const int32_t error_tolerance = 1;
-//  const int32_t inputs[] =           { 100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100, };
-//  const int32_t expected_outputs[] = { 20,  36, 49, 59, 67, 74, 79, 83, 87, 89, 91, 93, 95, 96, 96, 97, 98, 98, 99, };
-//  const size_t length = fc_COUNTOF(expected_outputs);
-//  test_chain_against_array(&filter_chain, inputs, expected_outputs, length, error_tolerance);
-//}
-//
-//
-//
 //TEST(BlockChain_i32, OneIirDynamicCalc) {
 //
 //  fc32_IirLowPass iir1;

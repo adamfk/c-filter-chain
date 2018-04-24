@@ -90,6 +90,9 @@
     <ClCompile Include="..\..\test\i32-filter-chain.gtest.cpp">
       <Filter>Source Files\test</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_IirLowPass.gtest.cpp">
+      <Filter>Source Files\fc_lib\templates\blocks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\test\test_config.h">

@@ -29,7 +29,7 @@ IBlock* IirLowPass_new_iblock(fc_BuildCtx* bc, float new_ratio);
  * Class method.
  * Use to check if an IBlock is a IirLowPass.
  */
-bool IirLowPass_Test_type(IBlock* some_block);
+bool IirLowPass_Test_type(void* some_block);
 
 
 
@@ -39,3 +39,42 @@ bool IirLowPass_Test_type(IBlock* some_block);
 
 void IirLowPass_preload(void* self, fc_Type input);
 fc_Type IirLowPass_step(void* self, fc_Type input);
+
+
+
+//#########################################################################################################
+// Unit testing stuff
+//#########################################################################################################
+
+//The following methods are useful for unit testing using generic C++ code.
+//THESE functions must be static because they are defined in a header
+#if defined(__cplusplus) && defined(fc_UNIT_TESTING)
+extern "C++" {
+
+#ifndef _fc_CPP_TEST_IIR_LOW_PASS_INCLUDE_GUARD
+#define _fc_CPP_TEST_IIR_LOW_PASS_INCLUDE_GUARD
+  template <typename BlockType>
+  static BlockType* CppIirLowPass_new(fc_BuildCtx* bc, float new_ratio);
+
+  template <typename BlockType>
+  static BlockType* CppIirLowPass_new_iblock(fc_BuildCtx* bc, float new_ratio);
+#endif
+
+
+  template <>
+  static IirLowPass* CppIirLowPass_new<IirLowPass>(fc_BuildCtx* bc, float new_ratio) {
+    return IirLowPass_new(bc, new_ratio);
+  }
+
+  template <>
+  static IirLowPass* CppIirLowPass_new_iblock<IirLowPass>(fc_BuildCtx* bc, float new_ratio) {
+    return (IirLowPass*)IirLowPass_new_iblock(bc, new_ratio);
+  }
+
+
+  //TODO rename CppHelperFilterType to CppHelperBlockType
+  #define CppHelperFilterType     IirLowPass
+  #include "fc_lib/templates/fc_cpp_helper.ipp"
+}
+
+#endif
