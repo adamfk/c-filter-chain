@@ -52,6 +52,8 @@ Delay* Delay_new(fc_BuildCtx* bc, uint16_t history_depth)
     }
   }
 
+  fc_BuildCtx_update_success_from_ptr(bc, self);
+
   return self;
 }
 

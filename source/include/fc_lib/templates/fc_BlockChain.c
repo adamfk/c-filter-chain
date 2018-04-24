@@ -113,6 +113,8 @@ BlockChain* BlockChain_new(fc_BuildCtx* bc, IBlock** block_list)
     self = fc_ALLOCATE_FAIL_PTR;
   }
 
+  fc_BuildCtx_update_success_from_ptr(bc, self);
+
   return self;
 }
 

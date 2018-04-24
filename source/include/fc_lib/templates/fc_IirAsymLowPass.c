@@ -18,15 +18,17 @@ void IirAsymLowPass_ctor(IirAsymLowPass* iir)
 
 IirAsymLowPass* IirAsymLowPass_new(fc_BuildCtx* bc, float higher_ratio, float lower_ratio)
 {
-  IirAsymLowPass* p = allocate_or_ret_fail_ptr(bc, sizeof(IirAsymLowPass));
+  IirAsymLowPass* self = allocate_or_ret_fail_ptr(bc, sizeof(IirAsymLowPass));
 
-  if (is_ok_ptr(p)) {
-    IirAsymLowPass_ctor(p);
-    p->higher_ratio = higher_ratio;
-    p->lower_ratio = lower_ratio;
+  if (is_ok_ptr(self)) {
+    IirAsymLowPass_ctor(self);
+    self->higher_ratio = higher_ratio;
+    self->lower_ratio = lower_ratio;
   }
 
-  return p;
+  fc_BuildCtx_update_success_from_ptr(bc, self);
+
+  return self;
 }
 
 IBlock* IirAsymLowPass_new_iblock(fc_BuildCtx* bc, float higher_ratio, float lower_ratio)

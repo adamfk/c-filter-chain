@@ -18,17 +18,19 @@ void IirAccelAsymLowPass_ctor(IirAccelAsymLowPass* iir)
 
 IirAccelAsymLowPass* IirAccelAsymLowPass_new(fc_BuildCtx* bc, float higher_ratio, float lower_ratio)
 {
-  IirAccelAsymLowPass* p = allocate_or_ret_fail_ptr(bc, sizeof(IirAccelAsymLowPass));
+  IirAccelAsymLowPass* self = allocate_or_ret_fail_ptr(bc, sizeof(IirAccelAsymLowPass));
 
-  if (is_ok_ptr(p)) {
-    IirAccelAsymLowPass_ctor(p);
-    p->higher_ratio = higher_ratio;
-    p->lower_ratio = lower_ratio;
-    p->cur_higher_ratio = p->higher_ratio;
-    p->cur_lower_ratio = p->lower_ratio;
+  if (is_ok_ptr(self)) {
+    IirAccelAsymLowPass_ctor(self);
+    self->higher_ratio = higher_ratio;
+    self->lower_ratio = lower_ratio;
+    self->cur_higher_ratio = self->higher_ratio;
+    self->cur_lower_ratio = self->lower_ratio;
   }
 
-  return p;
+  fc_BuildCtx_update_success_from_ptr(bc, self);
+
+  return self;
 }
 
 

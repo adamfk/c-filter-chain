@@ -17,14 +17,16 @@ void IirLowPass_ctor(IirLowPass* iir)
 
 IirLowPass* IirLowPass_new(fc_BuildCtx* bc, float new_ratio)
 {
-  IirLowPass* p = allocate_or_ret_fail_ptr(bc, sizeof(IirLowPass));
+  IirLowPass* self = allocate_or_ret_fail_ptr(bc, sizeof(IirLowPass));
 
-  if (is_ok_ptr(p)) {
-    IirLowPass_ctor(p);
-    p->new_ratio = new_ratio;
+  if (is_ok_ptr(self)) {
+    IirLowPass_ctor(self);
+    self->new_ratio = new_ratio;
   }
 
-  return p;
+  fc_BuildCtx_update_success_from_ptr(bc, self);
+
+  return self;
 }
 
 IBlock* IirLowPass_new_iblock(fc_BuildCtx* bc, float new_ratio)

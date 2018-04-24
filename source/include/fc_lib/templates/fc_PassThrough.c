@@ -22,11 +22,14 @@ void PassThrough_ctor(PassThrough* passThrough)
 */
 PassThrough* PassThrough_new(fc_BuildCtx* bc)
 {
-  PassThrough* p = allocate_or_ret_fail_ptr(bc, sizeof(PassThrough));
-  if (is_ok_ptr(p)) {
-    PassThrough_ctor(p);
+  PassThrough* self = allocate_or_ret_fail_ptr(bc, sizeof(PassThrough));
+  if (is_ok_ptr(self)) {
+    PassThrough_ctor(self);
   }
-  return p;
+
+  fc_BuildCtx_update_success_from_ptr(bc, self);
+
+  return self;
 }
 
 

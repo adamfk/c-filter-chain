@@ -68,6 +68,8 @@ Median* Median_new(fc_BuildCtx* bc, uint16_t length)
     }
   }
 
+  fc_BuildCtx_update_success_from_ptr(bc, self);
+
   return self;
 }
 

@@ -51,6 +51,8 @@ DownSampler* DownSampler_new(fc_BuildCtx* bc, uint16_t sample_offset, uint16_t s
     self = fc_ALLOCATE_FAIL_PTR;
   }
 
+  fc_BuildCtx_update_success_from_ptr(bc, self);
+
   return self;
 }
 

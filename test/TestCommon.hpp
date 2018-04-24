@@ -368,6 +368,7 @@ public:
     if (should_fail) {
       ASSERT_TRUE(is_bad_ptr(block));
       EXPECT_EQ(hb.sumAllocationBytes(), 0); //it should have freed all memory
+      EXPECT_TRUE(hb.bc->one_or_more_failures);
     }
     else {
       EXPECT_EQ(hb.sumAllocationBytes(), args->expected_alloc_sum);
@@ -385,6 +386,8 @@ public:
 
       EXPECT_CALL(hb, xFree(_)).Times(args->expected_allocations);
       fc_destruct_and_free(block, hb);
+
+      EXPECT_FALSE(hb.bc->one_or_more_failures);
     }
 
     EXPECT_EQ(hb.getAllocationCount(), 0);
