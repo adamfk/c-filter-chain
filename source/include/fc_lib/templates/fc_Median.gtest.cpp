@@ -16,8 +16,8 @@ typedef Types<fc32_Median, fc8_Median, fcflt_Median> TypesToTest;
 
 
 //forward declare
-template <typename BlockType>
-static std::function<void(BlockType* block)> get_step_test_filter_length_3_func(void);
+template <typename BlockType, typename PrimitiveType>
+static StepFunc<BlockType> get_step_test_filter_length_3_func(ICtorGroup<BlockType>* ctorGroup);
 
 
 
