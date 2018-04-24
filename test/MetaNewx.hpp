@@ -69,7 +69,7 @@ public:
    * Provides optional descriptive text (perhaps __FILE__, __LINE__, or relevant 
    * field configurations) about the constructor groups.
    */
-  virtual std::string getDescription(void) = 0;
+  virtual std::string getDescription(void) { return "not-described"; };
 
   virtual char const * getLocationFilePath(void) = 0;
   virtual int getLocationLineNumber(void) = 0;
@@ -157,9 +157,16 @@ public:
    */
   virtual std::function<void(BlockType*)> buildBlockFieldsTestFunc(void) = 0;
 
-
+  virtual void addNoCrashStepTestFunc() {
+    auto thisCtorGroup = this;
+    stepTestFuncs.push_back([=](BlockType* block) {
+      sfcg_SET_LOCATION_INFO(*thisCtorGroup);
+      TestCommon::preload_step_random_no_expect<BlockType>(block, 100);
+    });
+  }
 
 };
+
 
 
 

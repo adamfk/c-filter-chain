@@ -128,12 +128,9 @@ public:
     };
 
     //add random step tester that only ensures that the filter doesn't crash
-    ctorGroup->stepTestFuncs.push_back([=](BlockType* block) {
-      sfcg_SET_LOCATION_INFO(*ctorGroup);
-      TestCommon::preload_step_random_no_expect<BlockType>(block, 100);
-    });
-
+    ctorGroup->addNoCrashStepTestFunc();
     ctorGroup->filter_length = filter_length;
+
     return ctorGroup;
   }
 
