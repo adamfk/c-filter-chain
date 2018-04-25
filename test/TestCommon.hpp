@@ -146,10 +146,14 @@ public:
 
     PrimitiveType actual_output;
 
-    for (size_t i = 0; i < steps.size(); i++) {
+    auto testCount = steps.size();
+
+    for (size_t i = 0; i < testCount; i++) {
       InputOutput<PrimitiveType> step = steps[i];
       actual_output = CppX_step(block, step.input);
+      SCOPED_TRACE(std::string("step ") + std::to_string(i+1) + "/" + std::to_string(testCount));
       EXPECT_NEAR(step.expected_output, actual_output, error_tolerance);
+      RETURN_IF_FATAL_FAILURE();
     }
   }
 
@@ -252,7 +256,12 @@ public:
       RETURN_IF_FATAL_FAILURE();
     }
 
-    (*stepTestFunc)(block);
+    {
+      SCOPED_TRACE("step test");
+      (*stepTestFunc)(block);
+      RETURN_IF_FATAL_FAILURE();
+    }
+
 
     EXPECT_CALL(hb, xFree(_)).Times(expected_inner_allocations).RetiresOnSaturation();
     EXPECT_CALL(hb, xFree(block)).Times(1).RetiresOnSaturation();
@@ -363,10 +372,17 @@ public:
       SCOPED_TRACE_CTOR_GROUP(args->ctorGroup); //comes after call because call sets the info
       RETURN_IF_FATAL_FAILURE();
 
-      args->blockFieldsTestFunc(block);
-      RETURN_IF_FATAL_FAILURE();
+      {
+        SCOPED_TRACE("test block fields");
+        args->blockFieldsTestFunc(block);
+        RETURN_IF_FATAL_FAILURE();
+      }
 
-      (*args->stepTestFunc)(block);
+      {
+        SCOPED_TRACE("step test");
+        (*args->stepTestFunc)(block);
+        RETURN_IF_FATAL_FAILURE();
+      }
 
       EXPECT_CALL(hb, xFree(_)).Times(args->expected_allocations);
       fc_destruct_and_free(block, hb);
