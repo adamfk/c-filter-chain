@@ -19,6 +19,8 @@ typedef Types<fc32_IirAsymLowPass, fc8_IirAsymLowPass, fcflt_IirAsymLowPass> Typ
 template <typename BlockType, typename PrimitiveType>
 static StepFunc<BlockType> getStepTestRiseOnly(ICtorGroup<BlockType>* ctorGroup);
 
+template <typename BlockType, typename PrimitiveType>
+static StepFunc<BlockType> getStepTestFallOnly(ICtorGroup<BlockType>* ctorGroup);
 
 
 /**
@@ -65,13 +67,27 @@ public:
   using PrimitiveType = PrimitiveType; //we inherit PrimitiveType, but this line helps intellisense
 
 
-  virtual ICtorGroup<BlockType>* buildSimpleCtors(void) override
+  virtual vector<ICtorGroup<BlockType>*> buildSimpleCtorGroups(void) override
   {
-    const float higher_ratio = 0.5f;
-    const float lower_ratio = 0.0000000000001f; //something non-zero so we can test for known field values
-    auto ctorGroup = buildSimpleCtorsWithHigherLowerRatio(higher_ratio, lower_ratio);
-    ctorGroup->stepTestFuncs.push_back(getStepTestRiseOnly<BlockType, PrimitiveType>(ctorGroup));
-    return ctorGroup;
+    vector<ICtorGroup<BlockType>*> groups;
+
+    {
+      const float higher_ratio = 0.5f;
+      const float lower_ratio = 0.0000000000001f;  //something non-zero so we can test for known field values
+      auto ctorGroup = buildSimpleCtorsWithHigherLowerRatio(higher_ratio, lower_ratio);
+      ctorGroup->stepTestFuncs.push_back(getStepTestRiseOnly<BlockType, PrimitiveType>(ctorGroup));
+      groups.push_back(ctorGroup);
+    }
+
+    {
+      const float higher_ratio = 0.0000000000001f;  //something non-zero so we can test for known field values
+      const float lower_ratio = 0.5f; 
+      auto ctorGroup = buildSimpleCtorsWithHigherLowerRatio(higher_ratio, lower_ratio);
+      ctorGroup->stepTestFuncs.push_back(getStepTestFallOnly<BlockType, PrimitiveType>(ctorGroup));
+      groups.push_back(ctorGroup);
+    }
+    
+    return groups;
   }
 
 
@@ -80,10 +96,12 @@ public:
   * Why? Because we test every possible combination of allocation failure to ensure that every allocating
   * constructor function behaves as expected.
   */
-  virtual IirAsymLowPassCtorGroup<BlockType>* buildMemGrindCtors(void) override
+  virtual vector<ICtorGroup<BlockType>*> buildMemGrindCtorGroups(void) override
   {
     const float higher_ratio = Randomization::get_for_type<float>();
     const float lower_ratio = Randomization::get_for_type<float>();
+
+    vector<ICtorGroup<BlockType>*> groups;
 
     auto ctorGroup = new IirAsymLowPassCtorGroup<BlockType>();
 
@@ -102,7 +120,9 @@ public:
     ctorGroup->expected_higher_ratio = higher_ratio;
     ctorGroup->expected_lower_ratio  = lower_ratio;
 
-    return ctorGroup;
+    groups.push_back(ctorGroup);
+
+    return groups;
   }
 
 
@@ -171,25 +191,31 @@ static StepFunc<BlockType> getStepTestRiseOnly(ICtorGroup<BlockType>* ctorGroup)
 }
 
 
+template <typename BlockType, typename PrimitiveType>
+static StepFunc<BlockType> getStepTestFallOnly(ICtorGroup<BlockType>* ctorGroup) {
+  auto func_name = __func__;
+  auto func = [=](BlockType* block) {
+    SCOPED_TRACE(func_name);
+    ASSERT_NEAR(block->higher_ratio, 0.0f, 0.00001f);
+    ASSERT_EQ(block->lower_ratio, 0.5f);
+    const PrimitiveType init_value = 50;
 
+    CppX_preload(block, init_value);
 
-TEST(fc32_IirAsymLowPass, _new_step_fall_only) {
-  TestCommon::runWithBuildCtx([](fc_BuildCtx* bc) {
-    const int32_t init_value = 50;
-    fc32_IirAsymLowPass* p1 = fc32_IirAsymLowPass_new(bc, 0, 0.5f);
-    fc32_IirAsymLowPass_preload(p1, init_value);
-
-    vector<InputOutput<int32_t>> steps = {
-      InputOutput<int32_t>{ 88, 50 }, //input above last output, so will stay
-      InputOutput<int32_t>{ 55, 50 }, //input above last output, so will stay
-      InputOutput<int32_t>{ 40, 45 }, //input < than last output, so it will drop 50% the difference
-      InputOutput<int32_t>{ 35, 40 }, //input < than last output, so it will drop 50% the difference
-      InputOutput<int32_t>{ 30, 35 }, //input < than last output, so it will drop 50% the difference
-      InputOutput<int32_t>{ 77, 35 }, //input above last output, so will stay
+    vector<InputOutput<PrimitiveType>> steps = {
+      InputOutput<PrimitiveType>{ 88, 50 }, //input above last output, so will stay
+      InputOutput<PrimitiveType>{ 55, 50 }, //input above last output, so will stay
+      InputOutput<PrimitiveType>{ 40, 45 }, //input < than last output, so it will drop 50% the difference
+      InputOutput<PrimitiveType>{ 35, 40 }, //input < than last output, so it will drop 50% the difference
+      InputOutput<PrimitiveType>{ 30, 35 }, //input < than last output, so it will drop 50% the difference
+      InputOutput<PrimitiveType>{ 77, 35 }, //input above last output, so will stay
     };
 
-    TestCommon::test_steps(p1, steps);
-  });
+    TestCommon::test_steps(block, steps, 1);
+
+  };//end of test function
+
+  return func;
 }
 
 

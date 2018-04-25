@@ -30,8 +30,10 @@ class PassThroughTester : public StoredStandardBlockTester<BlockType>
 {
   using PrimitiveType = PrimitiveType; //we inherit PrimitiveType, but this line helps intellisense
 public:
-  virtual ICtorGroup<BlockType>* buildSimpleCtors(void) override
+  virtual vector<ICtorGroup<BlockType>*> buildSimpleCtorGroups(void) override
   {
+    vector<ICtorGroup<BlockType>*> groups;
+
     auto ctorGroup = new PassThroughCtorGrp<BlockType>();
     
     ctorGroup->ctors = {
@@ -64,13 +66,16 @@ public:
       TestCommon::xtest_block(passThrough, inputs, outputs);
     });
 
+    groups.push_back(ctorGroup);
 
-    return ctorGroup;
+    return groups;
   }
 
 
-  virtual ICtorGroup<BlockType>* buildMemGrindCtors(void) override
+  virtual vector<ICtorGroup<BlockType>*> buildMemGrindCtorGroups(void) override
   {
+    vector<ICtorGroup<BlockType>*> groups;
+
     auto ctorGroup = new PassThroughCtorGrp<BlockType>();
 
     ctorGroup->ctors = {
@@ -88,7 +93,9 @@ public:
       TestCommon::preload_step_random_no_expect<BlockType>(block, 100);
     });
 
-    return ctorGroup;
+    groups.push_back(ctorGroup);
+
+    return groups;
   }
 };
 

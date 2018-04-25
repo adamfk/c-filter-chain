@@ -94,11 +94,13 @@ public:
    * when compared to each other. The constructed blocks must all function the same,
    * and have the same allocation pattern.
    */
-  virtual ICtorGroup<BlockType>* buildSimpleCtors(void) override
+  virtual vector<ICtorGroup<BlockType>*> buildSimpleCtorGroups(void) override
   {
+    vector<ICtorGroup<BlockType>*> groups;
     auto ctorGroup = buildSimpleCtorsFromLength(3);
     ctorGroup->stepTestFuncs.push_back(get_step_test_filter_length_3_func<BlockType, PrimitiveType>(ctorGroup));
-    return ctorGroup;
+    groups.push_back(ctorGroup);
+    return groups;
   }
 
 
@@ -107,8 +109,10 @@ public:
    * Why? Because we test every possible combination of allocation failure to ensure that every allocating
    * constructor function behaves as expected.
    */
-  virtual MedianCtorGroup<BlockType>* buildMemGrindCtors(void) override
+  virtual vector<ICtorGroup<BlockType>*> buildMemGrindCtorGroups(void) override
   {
+    vector<ICtorGroup<BlockType>*> groups;
+
     const int filter_length = Randomization::get_int(1, 2000);
 
     auto ctorGroup = new MedianCtorGroup<BlockType>();
@@ -130,7 +134,9 @@ public:
     ctorGroup->addNoCrashStepTestFunc();
     ctorGroup->filter_length = filter_length;
 
-    return ctorGroup;
+    groups.push_back(ctorGroup);
+
+    return groups;
   }
 
 

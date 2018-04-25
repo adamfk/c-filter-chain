@@ -209,16 +209,23 @@ public:
   
 
   template <typename BlockType>
-  static void test_simple_visitor(ICtorGroup<BlockType>* ctorGroup)
+  static void test_simple_visitor(vector<ICtorGroup<BlockType>*> ctorGroups)
   {
     SCOPED_TRACE(__func__);
-    for each (auto ctor in ctorGroup->getCtors())
+
+    for (size_t ctorGroupIndex = 0; ctorGroupIndex < ctorGroups.size(); ctorGroupIndex++)
     {
-      build_run<BlockType>(ctorGroup, ctor, [=](BlockType* block) {
-        MockVisitor visitor;
-        EXPECT_CALL(visitor, visit(block)).Times(1);
-        fc_IVisitor_visit(visitor, block);
-      });
+      SCOPED_TRACE(std::string("ctor group index: ") + std::to_string(ctorGroupIndex));
+      auto ctorGroup = ctorGroups[ctorGroupIndex];
+
+      for each (auto ctor in ctorGroup->getCtors())
+      {
+        build_run<BlockType>(ctorGroup, ctor, [=](BlockType* block) {
+          MockVisitor visitor;
+          EXPECT_CALL(visitor, visit(block)).Times(1);
+          fc_IVisitor_visit(visitor, block);
+        });
+      }
     }
   }
 
@@ -274,25 +281,30 @@ public:
 
 
   template <typename BlockType>
-  static void build_test_destruct2(ICtorGroup<BlockType>* metaCtor) {
+  static void build_test_destruct2(vector<ICtorGroup<BlockType>*> ctorGroups) {
     SCOPED_TRACE(__func__);
 
-    auto stepTestFuncs = metaCtor->getStepTestFuncs();
-
-    ASSERT_GE(stepTestFuncs.size(), 1);
-
-    int ctor_index = 1;
-    for each (auto ctor in metaCtor->getCtors()) 
+    for (size_t ctorGroupIndex = 0; ctorGroupIndex < ctorGroups.size(); ctorGroupIndex++)
     {
-      for each (auto stepTestFunc in stepTestFuncs)
+      SCOPED_TRACE(std::string("ctor group index: ") + std::to_string(ctorGroupIndex));
+      auto ctorGroup = ctorGroups[ctorGroupIndex];
+
+      auto stepTestFuncs = ctorGroup->getStepTestFuncs();
+
+      ASSERT_GE(stepTestFuncs.size(), 1);
+
+      int ctor_index = 1;
+      for each (auto ctor in ctorGroup->getCtors())
       {
-        SCOPED_TRACE("ctor index: " + std::to_string(ctor_index));
-        build_test_destruct2_part(metaCtor, ctor, &stepTestFunc);
-        RETURN_IF_ANY_FAILURE();
-        ctor_index++;
+        for each (auto stepTestFunc in stepTestFuncs)
+        {
+          SCOPED_TRACE("ctor index: " + std::to_string(ctor_index));
+          build_test_destruct2_part(ctorGroup, ctor, &stepTestFunc);
+          RETURN_IF_ANY_FAILURE();
+          ctor_index++;
+        }
       }
     }
-
   }
 
 
@@ -399,8 +411,7 @@ public:
   template <typename BlockType>
   static void build_verify_alloc_free_part(ICtorGroup<BlockType>* ctorGroup,
                                         Ctor<BlockType> ctor,
-                                        StepFunc<BlockType>* stepTestFunc,
-                                        int ctor_index)
+                                        StepFunc<BlockType>* stepTestFunc)
   {
     SCOPED_TRACE(__func__);
 
@@ -434,21 +445,33 @@ public:
 
 
   template <typename BlockType>
-  static void build_verify_alloc_free(ICtorGroup<BlockType>* ctorGroup) {
+  static void build_verify_alloc_free(vector<ICtorGroup<BlockType>*> ctorGroups) {
     SCOPED_TRACE(__func__);
 
-    auto stepTestFuncs = ctorGroup->getStepTestFuncs();
-    ASSERT_GE(stepTestFuncs.size(), 1);
-
-    int ctor_index = 1;
-    for each (auto ctor in ctorGroup->getCtors())
+    for (size_t ctorGroupIndex = 0; ctorGroupIndex < ctorGroups.size(); ctorGroupIndex++)
     {
-      for each (auto stepTestFunc in stepTestFuncs)
+      SCOPED_TRACE(std::string("ctor group index: ") + std::to_string(ctorGroupIndex));
+      auto ctorGroup = ctorGroups[ctorGroupIndex];
+
+      auto stepTestFuncs = ctorGroup->getStepTestFuncs();
+      ASSERT_GE(stepTestFuncs.size(), 1);
+
+      int ctorIndex = 0;
+      for each (auto ctor in ctorGroup->getCtors())
       {
-        build_verify_alloc_free_part(ctorGroup, ctor, &stepTestFunc, ctor_index++);
-        RETURN_IF_ANY_FAILURE();
+        SCOPED_TRACE(std::string("ctor index: ") + std::to_string(ctorIndex));
+
+        for each (auto stepTestFunc in stepTestFuncs)
+        {
+          build_verify_alloc_free_part(ctorGroup, ctor, &stepTestFunc);
+          RETURN_IF_ANY_FAILURE();
+        }
+
+        ctorIndex++;
       }
     }
+
+
 
   }
 
@@ -474,21 +497,27 @@ public:
 
 
   template <typename BlockType>
-  static void test_type_testing(ICtorGroup<BlockType>* ctorGroup, std::function<bool(void* iblock)> comparison_func) 
+  static void test_type_testing(vector<ICtorGroup<BlockType>*> ctorGroups, std::function<bool(void* iblock)> comparison_func) 
   {
     SCOPED_TRACE(__func__);
 
-    for each (auto ctor in ctorGroup->getCtors())
+    for (size_t ctorGroupIndex = 0; ctorGroupIndex < ctorGroups.size(); ctorGroupIndex++)
     {
-      build_run<BlockType>(ctorGroup, ctor, [=](BlockType* block) {
-        NotABlock not_a_block;
-        NotABlock_ctor(&not_a_block);
-        test_iblock_constructed(&not_a_block);
-        RETURN_IF_FATAL_FAILURE();
+      SCOPED_TRACE(std::string("ctor group index: ") + std::to_string(ctorGroupIndex));
+      auto ctorGroup = ctorGroups[ctorGroupIndex];
 
-        EXPECT_FALSE(comparison_func(&not_a_block));
-        EXPECT_TRUE(comparison_func(block));
-      });
+      for each (auto ctor in ctorGroup->getCtors())
+      {
+        build_run<BlockType>(ctorGroup, ctor, [=](BlockType* block) {
+          NotABlock not_a_block;
+          NotABlock_ctor(&not_a_block);
+          test_iblock_constructed(&not_a_block);
+          RETURN_IF_FATAL_FAILURE();
+
+          EXPECT_FALSE(comparison_func(&not_a_block));
+          EXPECT_TRUE(comparison_func(block));
+        });
+      }
     }
   }
 

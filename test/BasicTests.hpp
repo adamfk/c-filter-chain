@@ -13,7 +13,6 @@ public:
 
   using PrimitiveType = typename FilterPrimitiveTypeSelector<BlockType>::type;
 
-
   typedef BlockType const * DummyT; //TODO look at removing * from DummyT. sizeof(dummy) is a common mistake as you want sizeof(*dummy)
   DummyT dummy = nullptr;    //see README.md "Dummy Variables" section 
   
@@ -22,8 +21,8 @@ public:
   typedef std::function<bool(void* iblock)> x_test_type_t;
  
 
-  virtual ICtorGroup<BlockType>* getSimpleCtors(void) = 0;
-  virtual ICtorGroup<BlockType>* getMemGrindCtors(void) = 0;
+  virtual vector<ICtorGroup<BlockType>*> getSimpleCtorGroups(void) = 0;
+  virtual vector<ICtorGroup<BlockType>*> getMemGrindCtorGroups(void) = 0;
   virtual void setup(void) { };
 
   virtual x_test_type_t get_test_type_func(DummyT dummy) {
@@ -43,30 +42,30 @@ public:
 
   virtual void rtest_newx(DummyT dummy) {
     SCOPED_TRACE(__func__);
-    TestCommon::build_test_destruct2(getSimpleCtors());
+    TestCommon::build_test_destruct2(getSimpleCtorGroups());
   }
   virtual void rtest_newx() { rtest_newx(dummy); }
 
 
   virtual void rtest_Test_type(DummyT dummy) {
     SCOPED_TRACE(__func__);
-    TestCommon::test_type_testing(getSimpleCtors(), get_test_type_func());
+    TestCommon::test_type_testing(getSimpleCtorGroups(), get_test_type_func());
   }
   virtual void rtest_Test_type() { rtest_Test_type(dummy); };
 
 
   virtual void rtest_run_visitor(DummyT dummy) {
     SCOPED_TRACE(__func__);
-    TestCommon::test_simple_visitor(getSimpleCtors());
+    TestCommon::test_simple_visitor(getSimpleCtorGroups());
   }
   virtual void rtest_run_visitor() { rtest_run_visitor(dummy); }
 
 
   virtual void rtest_verify_alloc_free(DummyT dummy) {
     SCOPED_TRACE(__func__);
-    auto ctors = getMemGrindCtors();
+    auto ctorGroups = getMemGrindCtorGroups();
     for (size_t i = 0; i < 100; i++) {
-      TestCommon::build_verify_alloc_free(ctors);
+      TestCommon::build_verify_alloc_free(ctorGroups);
       RETURN_IF_ANY_FAILURE();
     }
   }
@@ -80,49 +79,61 @@ public:
 template <typename BlockType>
 class StoredStandardBlockTester : public StandardBlockTester<BlockType>
 {
+
 private:
   bool is_setup;
-  ICtorGroup<BlockType>* simpleCtors;
-  ICtorGroup<BlockType>* memGrindCtors;
+  vector<ICtorGroup<BlockType>*> simpleCtorGroups;
+  vector<ICtorGroup<BlockType>*> memGrindCtorGroups;
 
 public:
 
   virtual ~StoredStandardBlockTester() {
-    delete simpleCtors;
-    delete memGrindCtors;
+    for each (auto ctorGroup in simpleCtorGroups) {
+      delete ctorGroup;
+    }
+    for each (auto ctorGroup in memGrindCtorGroups) {
+      delete ctorGroup;
+    }
   }
 
   virtual void setup(void) override {
-    if (!is_setup) {
-      simpleCtors = buildSimpleCtors();
-      simpleCtors->setup();
-      memGrindCtors = buildMemGrindCtors();
-      memGrindCtors->setup();
+    if (!is_setup) 
+    {
+      simpleCtorGroups = buildSimpleCtorGroups();
+      for each (auto ctorGroup in simpleCtorGroups) {
+        ctorGroup->setup();
+      }
+      
+      memGrindCtorGroups = buildMemGrindCtorGroups();
+      for each (auto ctorGroup in memGrindCtorGroups) {
+        ctorGroup->setup();
+      }
+
       is_setup = true;
     }
   }
 
-  virtual ICtorGroup<BlockType>* getSimpleCtors(void) override {
+  virtual vector<ICtorGroup<BlockType>*> getSimpleCtorGroups(void) override {
     setup();
-    return simpleCtors;
+    return simpleCtorGroups;
   }
 
-  virtual ICtorGroup<BlockType>* getMemGrindCtors(void) override {
+  virtual vector<ICtorGroup<BlockType>*> getMemGrindCtorGroups(void) override {
     setup();
-    return memGrindCtors;
+    return memGrindCtorGroups;
   }
 
   /**
    * Expected to allocate so that they can be deleted.
    * See `ICtorGroup<BlockType>` for more details.
    */
-  virtual ICtorGroup<BlockType>* buildSimpleCtors(void) = 0;
+  virtual vector<ICtorGroup<BlockType>*> buildSimpleCtorGroups(void) = 0;
 
   /**
    * Expected to allocate so that they can be deleted.
    * See `ICtorGroup<BlockType>` for more details.
    */
-  virtual ICtorGroup<BlockType>* buildMemGrindCtors(void) = 0;
+  virtual vector<ICtorGroup<BlockType>*> buildMemGrindCtorGroups(void) = 0;
 
 };
 

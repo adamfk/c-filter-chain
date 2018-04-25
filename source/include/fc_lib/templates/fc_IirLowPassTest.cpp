@@ -63,12 +63,15 @@ public:
   using PrimitiveType = PrimitiveType; //we inherit PrimitiveType, but this line helps intellisense
 
 
-  virtual ICtorGroup<BlockType>* buildSimpleCtors(void) override
+  virtual vector<ICtorGroup<BlockType>*> buildSimpleCtorGroups(void) override
   {
+    vector<ICtorGroup<BlockType>*> groups;
+
     const float new_ratio = 0.2f;
-    auto ctorGroup = buildSimpleCtorsWithNewRatio(new_ratio);
-    ctorGroup->stepTestFuncs.push_back(get_step_test_20_percent<BlockType, PrimitiveType>(ctorGroup));
-    return ctorGroup;
+    auto group = buildSimpleCtorsWithNewRatio(new_ratio);
+    group->stepTestFuncs.push_back(get_step_test_20_percent<BlockType, PrimitiveType>(group));
+    groups.push_back(group);
+    return groups;
   }
 
 
@@ -77,8 +80,10 @@ public:
   * Why? Because we test every possible combination of allocation failure to ensure that every allocating
   * constructor function behaves as expected.
   */
-  virtual IirLowPassCtorGroup<BlockType>* buildMemGrindCtors(void) override
+  virtual vector<ICtorGroup<BlockType>*> buildMemGrindCtorGroups(void) override
   {
+    vector<ICtorGroup<BlockType>*> groups;
+
     const float new_ratio = Randomization::get_for_type<float>();
 
     auto ctorGroup = new IirLowPassCtorGroup<BlockType>();
@@ -97,7 +102,9 @@ public:
     ctorGroup->addNoCrashStepTestFunc();
     ctorGroup->expected_new_ratio = new_ratio;
 
-    return ctorGroup;
+    groups.push_back(ctorGroup);
+
+    return groups;
   }
 
 
