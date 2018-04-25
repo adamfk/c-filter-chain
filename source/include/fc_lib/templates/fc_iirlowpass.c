@@ -47,21 +47,7 @@ bool IirLowPass_Test_type(void* some_block)
 }
 
 
-static fc_PTYPE round_result(double output) 
-{
-  fc_PTYPE result = (fc_PTYPE)output;
 
-  if (fc_PTYPE_IS_INGEGRAL) {
-    if (output >= 0) {
-      result = (fc_PTYPE)(output + 0.5);
-    }
-    else {
-      result = (fc_PTYPE)(output - 0.5);
-    }
-  }
-
-  return result;
-}
 
 
 //#########################################################################################################

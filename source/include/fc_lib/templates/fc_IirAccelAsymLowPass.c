@@ -131,7 +131,7 @@ fc_PTYPE IirAccelAsymLowPass_step(void* vself, fc_PTYPE input)
   }
 
   double output = new_ratio * input + (1 - new_ratio) * self->last_output;  //TODO rewrite in efficient form. TODO use generic type numerator and denominator instead of floating point
-  result = (fc_PTYPE)(output + 0.5); //TODO make rounding type generic. and respects negative numbers.
+  result = round_result(output);
   self->last_output = result;
   return result;
 }
