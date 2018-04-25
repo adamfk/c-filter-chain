@@ -42,3 +42,39 @@ fc_PTYPE IirAsymLowPass_step(void* self, fc_PTYPE input);
 
 
 
+
+//#########################################################################################################
+// Unit testing stuff
+//#########################################################################################################
+
+//The following methods are useful for unit testing using generic C++ code.
+//THESE functions must be static because they are defined in a header
+#if defined(__cplusplus) && defined(fc_UNIT_TESTING)
+extern "C++" {
+
+#ifndef _fc_CPP_TEST_IIR_ASYM_LOW_PASS_INCLUDE_GUARD
+#define _fc_CPP_TEST_IIR_ASYM_LOW_PASS_INCLUDE_GUARD
+  template <typename BlockType>
+  static BlockType* CppIirAsymLowPass_new(fc_BuildCtx* bc, float higher_ratio, float lower_ratio);
+
+  template <typename BlockType>
+  static BlockType* CppIirAsymLowPass_new_iblock(fc_BuildCtx* bc, float higher_ratio, float lower_ratio);
+#endif
+
+
+  template <>
+  static IirAsymLowPass* CppIirAsymLowPass_new<IirAsymLowPass>(fc_BuildCtx* bc, float higher_ratio, float lower_ratio) {
+    return IirAsymLowPass_new(bc, higher_ratio, lower_ratio);
+  }
+
+  template <>
+  static IirAsymLowPass* CppIirAsymLowPass_new_iblock<IirAsymLowPass>(fc_BuildCtx* bc, float higher_ratio, float lower_ratio) {
+    return (IirAsymLowPass*)IirAsymLowPass_new_iblock(bc, higher_ratio, lower_ratio);
+  }
+
+
+  #define CppHelperFilterType     IirAsymLowPass
+  #include "fc_lib/templates/fc_cpp_helper.ipp"
+}
+
+#endif
