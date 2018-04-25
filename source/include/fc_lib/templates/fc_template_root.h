@@ -28,7 +28,6 @@
 #  define LIST_END  NULL, }
 #endif
 
-#define fc_Type FILTER_CHAIN_TYPE
 
 
 //expand macro and concatenate
@@ -43,7 +42,35 @@
 #define ECAT( arg_1, arg_2, arg_3, arg_4)    ECAT8(arg_1, arg_2, arg_3, arg_4)
 
 
-#define FC_MAKE_NAME(name) ECAT(fc, FILTER_CHAIN_NAME_PREFIX, _, name)
+#define FC_MAKE_NAME(name) ECAT(fc, fc_LIB_PREFIX, _, name)
+
+
+
+#define _fc_int8_t_IS_SIGNED   true
+#define _fc_int16_t_IS_SIGNED  true
+#define _fc_int32_t_IS_SIGNED  true
+#define _fc_int64_t_IS_SIGNED  true
+#define _fc_uint8_t_IS_SIGNED  false
+#define _fc_uint16_t_IS_SIGNED false
+#define _fc_uint32_t_IS_SIGNED false
+#define _fc_uint64_t_IS_SIGNED false
+#define _fc_float_IS_SIGNED  true
+#define _fc_double_IS_SIGNED true
+
+#define _fc_int8_t_IS_FLOATING_PT   false
+#define _fc_int16_t_IS_FLOATING_PT  false
+#define _fc_int32_t_IS_FLOATING_PT  false
+#define _fc_int64_t_IS_FLOATING_PT  false
+#define _fc_uint8_t_IS_FLOATING_PT  false
+#define _fc_uint16_t_IS_FLOATING_PT false
+#define _fc_uint32_t_IS_FLOATING_PT false
+#define _fc_uint64_t_IS_FLOATING_PT false
+#define _fc_float_IS_FLOATING_PT  true
+#define _fc_double_IS_FLOATING_PT true
+
+#define fc_PTYPE_IS_SIGNED        ECAT(_fc_, fc_PTYPE, _IS_SIGNED,)
+#define fc_PTYPE_IS_FLOATING_PT   ECAT(_fc_, fc_PTYPE, _IS_FLOATING_PT,)
+#define fc_PTYPE_IS_INGEGRAL      !fc_PTYPE_IS_FLOATING_PT
 
 
 //###############################################################

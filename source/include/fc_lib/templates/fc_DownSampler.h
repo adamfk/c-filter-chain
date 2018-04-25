@@ -23,7 +23,7 @@ typedef struct DownSampler
   BlockChain base_fc_instance;   //!< MUST BE FIRST FIELD IN STRUCT TO ALLOW CASTING FROM PARENT TYPE
   uint16_t sample_every_x; //!< How often to sample input. If 1, it will sample every input. One based!
   uint16_t sample_count;   //!< When this counts up to #sample_every_x, it will sample and reset count
-  fc_Type latched_output;  //!< keeps outputting the same value between downsamples
+  fc_PTYPE latched_output;  //!< keeps outputting the same value between downsamples
 } DownSampler;
 
 
@@ -44,7 +44,7 @@ bool DownSampler_Test_type(IBlock* some_block);
 // IBlock interface methods
 //#########################################################################################################
 
-void DownSampler_preload(void* block, fc_Type input);
-fc_Type DownSampler_step(void* block, fc_Type input);
+void DownSampler_preload(void* block, fc_PTYPE input);
+fc_PTYPE DownSampler_step(void* block, fc_PTYPE input);
 
 

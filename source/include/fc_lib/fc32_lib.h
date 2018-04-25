@@ -2,11 +2,11 @@
 
 #include "fc_default_config.h"
 
-#undef FILTER_CHAIN_TYPE
-#undef FILTER_CHAIN_NAME_PREFIX
+#undef fc_PTYPE
+#undef fc_LIB_PREFIX
 
-#define FILTER_CHAIN_NAME_PREFIX 32
-#define FILTER_CHAIN_TYPE int32_t
+#define fc_LIB_PREFIX 32
+#define fc_PTYPE int32_t
 
 #include "fc_lib/templates/fc_template_root.h"
 

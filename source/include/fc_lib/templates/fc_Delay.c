@@ -23,7 +23,7 @@ void Delay_ctor(Delay* self)
 Delay* Delay_new(fc_BuildCtx* bc, uint16_t history_depth)
 {
   bool success = true;
-  fc_Type* array;
+  fc_PTYPE* array;
 
   Delay* self = allocate_or_ret_fail_ptr(bc, sizeof(Delay));
   if (is_bad_ptr(self)) {
@@ -31,7 +31,7 @@ Delay* Delay_new(fc_BuildCtx* bc, uint16_t history_depth)
   }
 
   //try to allocate always to allow determining required size for full chain
-  array = allocate_or_ret_fail_ptr(bc, sizeof(fc_Type)*history_depth);
+  array = allocate_or_ret_fail_ptr(bc, sizeof(fc_PTYPE)*history_depth);
 
   if (is_bad_ptr(self)) {
     success = false;
@@ -73,7 +73,7 @@ bool Delay_Test_type(IBlock* some_block)
 // IBlock interface methods
 //#########################################################################################################
 
-void Delay_preload(void* vself, fc_Type input)
+void Delay_preload(void* vself, fc_PTYPE input)
 {
   Delay* self = (Delay*)vself;
 
@@ -83,10 +83,10 @@ void Delay_preload(void* vself, fc_Type input)
 }
 
 
-fc_Type Delay_step(void* vself, fc_Type input)
+fc_PTYPE Delay_step(void* vself, fc_PTYPE input)
 {
   Delay* self = (Delay*)vself;
-  fc_Type output = self->previous_samples[self->saved_sample_length - 1];
+  fc_PTYPE output = self->previous_samples[self->saved_sample_length - 1];
 
   shift_queue(self->previous_samples, self->saved_sample_length, input);
   return output;

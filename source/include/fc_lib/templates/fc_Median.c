@@ -19,7 +19,7 @@ void Median_ctor(Median* self)
 
 static size_t Median_calc_buffer_size(uint16_t filter_length)
 {
-  size_t size = sizeof(fc_Type)*(filter_length);
+  size_t size = sizeof(fc_PTYPE)*(filter_length);
   return size;
 }
 
@@ -37,7 +37,7 @@ Median* Median_new(fc_BuildCtx* bc, uint16_t length)
 {
   uint16_t saved_sample_length = length - 1;  //-1 because we save one less than length of median filter as it has access to the input
   bool success = true;
-  fc_Type* array;
+  fc_PTYPE* array;
 
   Median* self = allocate_or_ret_fail_ptr(bc, sizeof(Median));
   if (is_bad_ptr(self)) {
@@ -45,7 +45,7 @@ Median* Median_new(fc_BuildCtx* bc, uint16_t length)
   }
 
   //try to allocate always to allow determining required size for full chain
-  array = allocate_or_ret_fail_ptr(bc, sizeof(fc_Type)*saved_sample_length);
+  array = allocate_or_ret_fail_ptr(bc, sizeof(fc_PTYPE)*saved_sample_length);
 
   if (is_bad_ptr(array)) {
     success = false;
@@ -98,7 +98,7 @@ void Median_destruct_fields(void* vself, fc_IAllocator const * allocator)
 }
 
 
-void Median_preload(void* vself, fc_Type input)
+void Median_preload(void* vself, fc_PTYPE input)
 {
   Median* self = (Median*)vself;
 
@@ -108,12 +108,12 @@ void Median_preload(void* vself, fc_Type input)
 }
 
 
-fc_Type Median_step(void* vself, fc_Type input)
+fc_PTYPE Median_step(void* vself, fc_PTYPE input)
 {
   Median* self = (Median*)vself;
 
-  fc_Type output;
-  fc_Type* sorted_samples = self->working_buffer->buffer;
+  fc_PTYPE output;
+  fc_PTYPE* sorted_samples = self->working_buffer->buffer;
   uint16_t filter_length = self->saved_sample_length + 1;
   size_t buffer_size = Median_calc_buffer_size(filter_length);
 

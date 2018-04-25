@@ -67,9 +67,9 @@ bool BlockChain_Test_type(IBlock* some_block);
 // IBlock interface methods
 //##################################################################
 
-void BlockChain_preload(void* self, fc_Type input);
+void BlockChain_preload(void* self, fc_PTYPE input);
 
-fc_Type BlockChain_step(void* self, fc_Type input);
+fc_PTYPE BlockChain_step(void* self, fc_PTYPE input);
 
 /**
  * user code should prefer to call `BlockChain_destruct_entire( )` instead.

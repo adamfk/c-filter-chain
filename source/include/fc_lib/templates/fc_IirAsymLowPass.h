@@ -16,7 +16,7 @@ typedef struct IirAsymLowPass
   IBlock block;  //!< MUST BE FIRST FIELD IN STRUCT TO ALLOW CASTING FROM PARENT TYPE
   float higher_ratio;   //!< ratio applied when input higher than our last_output
   float lower_ratio;    //!< ratio applied when input lower than our last_output
-  fc_Type last_output;
+  fc_PTYPE last_output;
 } IirAsymLowPass;
 
 
@@ -37,8 +37,8 @@ bool IirAsymLowPass_Test_type(void* some_block);
 // IBlock interface methods
 //#########################################################################################################
 
-void IirAsymLowPass_preload(void* self, fc_Type input);
-fc_Type IirAsymLowPass_step(void* self, fc_Type input);
+void IirAsymLowPass_preload(void* self, fc_PTYPE input);
+fc_PTYPE IirAsymLowPass_step(void* self, fc_PTYPE input);
 
 
 

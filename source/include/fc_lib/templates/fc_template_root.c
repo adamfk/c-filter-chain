@@ -141,7 +141,7 @@ static bool test_and_copy_blocks(IBlock** store_in, IBlock** list, uint16_t coun
 
 
 
-static void shift_queue(fc_Type* array, uint16_t array_length, fc_Type input) {
+static void shift_queue(fc_PTYPE* array, uint16_t array_length, fc_PTYPE input) {
   //consider using a head/tail instead of shifting data
   for (size_t i = array_length - 1; i > 0; i--) {
     array[i] = array[i - 1];  //consider using memove
@@ -151,9 +151,9 @@ static void shift_queue(fc_Type* array, uint16_t array_length, fc_Type input) {
 }
 
 
-static void swap(fc_Type *xp, fc_Type *yp)
+static void swap(fc_PTYPE *xp, fc_PTYPE *yp)
 {
-  fc_Type temp = *xp;
+  fc_PTYPE temp = *xp;
   *xp = *yp;
   *yp = temp;
 }

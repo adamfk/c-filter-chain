@@ -3,11 +3,11 @@
   IBlock is an interface and should only wrap `vtable` access.
 */
 
-fc_Type IBlock_step(IBlock* self, fc_Type input) {
+fc_PTYPE IBlock_step(IBlock* self, fc_PTYPE input) {
   return self->vtable->step(self, input);
 }
 
-void IBlock_preload(IBlock* self, fc_Type input) {
+void IBlock_preload(IBlock* self, fc_PTYPE input) {
   self->vtable->preload(self, input);
 }
 

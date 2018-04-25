@@ -15,7 +15,7 @@ typedef struct Delay
 {
   IBlock block; //!< MUST BE FIRST FIELD IN STRUCT TO ALLOW CASTING FROM PARENT TYPE
   uint16_t saved_sample_length;
-  fc_Type* previous_samples; //!< index zero is most recent
+  fc_PTYPE* previous_samples; //!< index zero is most recent
 } Delay;
 
 
@@ -35,7 +35,7 @@ bool Delay_Test_type(IBlock* some_block);
 //#########################################################################################################
 
 void Delay_destruct_fields(void* self, fc_IAllocator const * allocator);
-void Delay_preload(void* self, fc_Type input);
-fc_Type Delay_step(void* self, fc_Type input);
+void Delay_preload(void* self, fc_PTYPE input);
+fc_PTYPE Delay_step(void* self, fc_PTYPE input);
 
 

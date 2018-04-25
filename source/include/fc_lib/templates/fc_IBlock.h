@@ -24,13 +24,13 @@ typedef struct IBlockVirtualTable
    * This function takes an input and produces an output. It should be called at a regular interval.
    * It may affect the internal state of the filter.
    */
-  fc_Type (*step)(void* self, fc_Type input);
+  fc_PTYPE (*step)(void* self, fc_PTYPE input);
 
   /**
    * This function is supposed to preload a filter so that it is at a particular state.
    * This is often useful to do before the first sample is fed to a filter.
    */
-  void (*preload)(void* self, fc_Type input);
+  void (*preload)(void* self, fc_PTYPE input);
 
   /**
    * User code should not call directly. Use `IBlock_destruct_fields( )` instead.
@@ -63,8 +63,8 @@ struct IBlock
 };
 
 
-fc_Type IBlock_step(IBlock* self, fc_Type input);
+fc_PTYPE IBlock_step(IBlock* self, fc_PTYPE input);
 void IBlock_destruct_fields(IBlock* self, fc_IAllocator const * allocator);
 void IBlock_run_visitor(IBlock* self, fc_IVisitor* visitor);
-void IBlock_preload(IBlock* self, fc_Type input);
+void IBlock_preload(IBlock* self, fc_PTYPE input);
 

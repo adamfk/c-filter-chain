@@ -2,8 +2,8 @@
 #include "fc_lib/fc_allocate.h"
 
 //get a structure for any IBlock type to allow casting
-#define FILTER_CHAIN_NAME_PREFIX 8
-#define FILTER_CHAIN_TYPE int8_t
+#define fc_LIB_PREFIX 8
+#define fc_PTYPE int8_t
 #include "fc_lib/templates/fc_template_root.h"
 
 

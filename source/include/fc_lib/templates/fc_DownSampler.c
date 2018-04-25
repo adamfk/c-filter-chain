@@ -79,7 +79,7 @@ bool DownSampler_Test_type(IBlock* some_block)
 // IBlock interface methods
 //#########################################################################################################
 
-void DownSampler_preload(void* vself, fc_Type input)
+void DownSampler_preload(void* vself, fc_PTYPE input)
 {
   DownSampler* self = (DownSampler*)vself;
   self->latched_output = input;
@@ -87,7 +87,7 @@ void DownSampler_preload(void* vself, fc_Type input)
 }
 
 
-fc_Type DownSampler_step(void* vself, fc_Type input)
+fc_PTYPE DownSampler_step(void* vself, fc_PTYPE input)
 {
   DownSampler* self = (DownSampler*)vself;
   self->sample_count++;

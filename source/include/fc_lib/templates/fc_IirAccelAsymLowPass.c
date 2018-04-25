@@ -77,7 +77,7 @@ bool IirAccelAsymLowPass_Test_type(IBlock* some_block)
 // IBlock interface methods
 //#########################################################################################################
 
-void IirAccelAsymLowPass_preload(void* vself, fc_Type input)
+void IirAccelAsymLowPass_preload(void* vself, fc_PTYPE input)
 {
   IirAccelAsymLowPass* self = (IirAccelAsymLowPass*)vself;
   self->last_output = input;
@@ -90,10 +90,10 @@ void IirAccelAsymLowPass_preload(void* vself, fc_Type input)
  * Note that if this is an integer based IIR, the rounding errors can be substantial if the input
  * is small. Test with a step function and see if it reaches 100%.
  */
-fc_Type IirAccelAsymLowPass_step(void* vself, fc_Type input)
+fc_PTYPE IirAccelAsymLowPass_step(void* vself, fc_PTYPE input)
 {
   IirAccelAsymLowPass* self = (IirAccelAsymLowPass*)vself;
-  fc_Type result;
+  fc_PTYPE result;
   float new_ratio;
 
   if (self->lower_ratio > self->higher_ratio) {
@@ -131,7 +131,7 @@ fc_Type IirAccelAsymLowPass_step(void* vself, fc_Type input)
   }
 
   double output = new_ratio * input + (1 - new_ratio) * self->last_output;  //TODO rewrite in efficient form. TODO use generic type numerator and denominator instead of floating point
-  result = (fc_Type)(output + 0.5); //TODO make rounding type generic. and respects negative numbers.
+  result = (fc_PTYPE)(output + 0.5); //TODO make rounding type generic. and respects negative numbers.
   self->last_output = result;
   return result;
 }

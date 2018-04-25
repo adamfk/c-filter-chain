@@ -47,6 +47,23 @@ bool IirLowPass_Test_type(void* some_block)
 }
 
 
+static fc_PTYPE round_result(double output) 
+{
+  fc_PTYPE result = (fc_PTYPE)output;
+
+  if (fc_PTYPE_IS_INGEGRAL) {
+    if (output >= 0) {
+      result = (fc_PTYPE)(output + 0.5);
+    }
+    else {
+      result = (fc_PTYPE)(output - 0.5);
+    }
+  }
+
+  return result;
+}
+
+
 //#########################################################################################################
 // IBlock interface methods
 //#########################################################################################################
@@ -55,18 +72,20 @@ bool IirLowPass_Test_type(void* some_block)
  * Note that if this is an integer based IIR, the rounding errors can be substantial if the input
  * is small. Test with a step function and see if it reaches 100%.
  */
-fc_Type IirLowPass_step(void* vself, fc_Type input)
+fc_PTYPE IirLowPass_step(void* vself, fc_PTYPE input)
 {
   IirLowPass* self = (IirLowPass*)vself;
-  fc_Type result;
+  fc_PTYPE result;
+
   double output = self->new_ratio * input + (1 - self->new_ratio) * self->last_output;  //TODO rewrite in efficient form. TODO use generic type numerator and denominator instead of floating point
-  result = (fc_Type)(output + 0.5); //TODO make rounding type generic. and respects negative numbers.
+  result = round_result(output);
   self->last_output = result;
+
   return result;
 }
 
 
-void IirLowPass_preload(void* vself, fc_Type input)
+void IirLowPass_preload(void* vself, fc_PTYPE input)
 {
   IirLowPass* self = (IirLowPass*)vself;
   self->last_output = input;

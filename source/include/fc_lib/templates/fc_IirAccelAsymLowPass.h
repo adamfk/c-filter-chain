@@ -20,7 +20,7 @@ typedef struct IirAccelAsymLowPass
   float lower_ratio;    //!< ratio applied when input lower than our last_output
   float cur_higher_ratio;   //!< ratio applied when input higher than our last_output
   float cur_lower_ratio;    //!< ratio applied when input lower than our last_output
-  fc_Type last_output;
+  fc_PTYPE last_output;
 } IirAccelAsymLowPass;
 
 
@@ -40,7 +40,7 @@ bool IirAccelAsymLowPass_Test_type(IBlock* some_block);
 // IBlock interface methods
 //#########################################################################################################
 
-void IirAccelAsymLowPass_preload(void* self, fc_Type input);
-fc_Type IirAccelAsymLowPass_step(void* self, fc_Type input);
+void IirAccelAsymLowPass_preload(void* self, fc_PTYPE input);
+fc_PTYPE IirAccelAsymLowPass_step(void* self, fc_PTYPE input);
 
 

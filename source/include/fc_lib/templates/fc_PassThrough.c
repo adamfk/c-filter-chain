@@ -55,13 +55,13 @@ bool PassThrough_Test_type(void* some_block)
 // IBlock interface methods
 //#########################################################################################################
 
-void PassThrough_preload(void* self, fc_Type input)
+void PassThrough_preload(void* self, fc_PTYPE input)
 {
   (void)self; (void)input;
 }
 
 
-fc_Type PassThrough_step(void* self, fc_Type input)
+fc_PTYPE PassThrough_step(void* self, fc_PTYPE input)
 {
   (void)self; (void)input;
   return input;

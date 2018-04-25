@@ -144,7 +144,7 @@ void BlockChain_destruct_fields(void* vself, fc_IAllocator const * allocator)
 }
 
 
-void BlockChain_preload(void* vself, fc_Type input)
+void BlockChain_preload(void* vself, fc_PTYPE input)
 {
   BlockChain* self = (BlockChain*)vself;
 
@@ -156,9 +156,9 @@ void BlockChain_preload(void* vself, fc_Type input)
 }
 
 
-fc_Type BlockChain_step(void* vself, fc_Type input)
+fc_PTYPE BlockChain_step(void* vself, fc_PTYPE input)
 {
-  fc_Type output = 0;
+  fc_PTYPE output = 0;
   BlockChain* self = (BlockChain*)vself;
 
   for (size_t i = 0; i < self->block_count; i++)

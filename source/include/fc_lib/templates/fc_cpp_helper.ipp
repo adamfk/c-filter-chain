@@ -11,11 +11,11 @@
     CppHelperType_ctor(block);
   }
 
-  static void CppX_preload(CppHelperFilterType* block, fc_Type input) {
+  static void CppX_preload(CppHelperFilterType* block, fc_PTYPE input) {
     CppHelperType_preload(block, input);
   }
 
-  static fc_Type CppX_step(CppHelperFilterType* block, fc_Type input) {
+  static fc_PTYPE CppX_step(CppHelperFilterType* block, fc_PTYPE input) {
     return CppHelperType_step(block, input);
   }
 
@@ -28,12 +28,12 @@
 
   //see `fc_template_root.h` for details.
   //from https:stackoverflow.com/questions/36526400/is-there-a-way-to-make-a-function-return-a-typename
-  template <> struct FilterPrimitiveTypeSelector<CppHelperFilterType> { using type = fc_Type; };
+  template <> struct FilterPrimitiveTypeSelector<CppHelperFilterType> { using type = fc_PTYPE; };
 
   //below "&" reference syntax needed to allow:
   //    fc32_PassThrough* p1 = fc32_PassThrough_new(mb);
   //    using PrimitiveType = FilterPrimitiveTypeSelector<decltype(*p1)>::type;
-  template <> struct FilterPrimitiveTypeSelector<CppHelperFilterType&> { using type = fc_Type; };
+  template <> struct FilterPrimitiveTypeSelector<CppHelperFilterType&> { using type = fc_PTYPE; };
 
 
   #undef CppHelperFilterType

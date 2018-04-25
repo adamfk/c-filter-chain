@@ -15,7 +15,7 @@ typedef struct Median
 {
   IBlock block; //!< MUST BE FIRST FIELD IN STRUCT TO ALLOW CASTING FROM PARENT TYPE
   uint16_t saved_sample_length; //!< this is one less than the length of the filter
-  fc_Type* previous_samples; //!< index zero is most recent
+  fc_PTYPE* previous_samples; //!< index zero is most recent
   fc_WorkingBuffer* working_buffer;
 } Median;
 
@@ -38,8 +38,8 @@ bool Median_Test_type(void* some_block);
 //#########################################################################################################
 
 void Median_destruct_fields(void* self, fc_IAllocator const * allocator);
-void Median_preload(void* self, fc_Type input);
-fc_Type Median_step(void* self, fc_Type input);
+void Median_preload(void* self, fc_PTYPE input);
+fc_PTYPE Median_step(void* self, fc_PTYPE input);
 
 
 
