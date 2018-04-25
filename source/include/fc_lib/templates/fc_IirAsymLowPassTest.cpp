@@ -118,7 +118,7 @@ private:
       },
       [=](fc_BuildCtx* bc) {
         sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
-        return CppIirAsymLowPass_new_iblock<BlockType>(bc, 0, 0);
+        return CppIirAsymLowPass_new_iblock<BlockType>(bc, higher_ratio, lower_ratio);
       },
       [=](fc_BuildCtx* bc) {
         sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
@@ -126,8 +126,8 @@ private:
         //vanilla method of setting it up
         BlockType* block = (BlockType*)fc_IAllocator_allocate(bc->allocator, sizeof(BlockType));
         CppX_ctor(block);
-        //block->new_ratio = new_ratio; 
-        //FIXME
+        block->higher_ratio = higher_ratio;
+        block->lower_ratio = lower_ratio;
         return block;
       },
     };
@@ -145,7 +145,9 @@ private:
 
 template <typename BlockType, typename PrimitiveType>
 static StepFunc<BlockType> getStepTestRiseOnly(ICtorGroup<BlockType>* ctorGroup) {
+  auto func_name = __func__;
   auto func = [=](BlockType* block) {
+    SCOPED_TRACE(func_name);
     ASSERT_EQ(block->higher_ratio, 0.5f);
     ASSERT_EQ(block->lower_ratio, 0.0f);
     const PrimitiveType init_value = 10;
