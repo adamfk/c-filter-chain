@@ -22,6 +22,8 @@ public:
  
 
   virtual vector<ICtorGroup<BlockType>*> getSimpleCtorGroups(void) = 0;
+
+  //fresh ctor groups should be built every time this is called so that we can get new random ones.
   virtual vector<ICtorGroup<BlockType>*> getMemGrindCtorGroups(void) = 0;
   virtual void setup(void) { };
 
@@ -63,8 +65,8 @@ public:
 
   virtual void rtest_verify_alloc_free(DummyT dummy) {
     SCOPED_TRACE(__func__);
-    auto ctorGroups = getMemGrindCtorGroups();
     for (size_t i = 0; i < 100; i++) {
+      auto ctorGroups = getMemGrindCtorGroups();
       TestCommon::build_verify_alloc_free(ctorGroups);
       RETURN_IF_ANY_FAILURE();
     }
@@ -103,11 +105,6 @@ public:
       for each (auto ctorGroup in simpleCtorGroups) {
         ctorGroup->setup();
       }
-      
-      memGrindCtorGroups = buildMemGrindCtorGroups();
-      for each (auto ctorGroup in memGrindCtorGroups) {
-        ctorGroup->setup();
-      }
 
       is_setup = true;
     }
@@ -119,7 +116,18 @@ public:
   }
 
   virtual vector<ICtorGroup<BlockType>*> getMemGrindCtorGroups(void) override {
-    setup();
+    //Because the memory grinding functions are intended to have random elements to them,
+    // we need to re-build them every time they are asked for.
+
+    for each (auto ctorGroup in memGrindCtorGroups) {
+      delete ctorGroup;
+    }
+
+    memGrindCtorGroups = buildMemGrindCtorGroups();
+    for each (auto ctorGroup in memGrindCtorGroups) {
+      ctorGroup->setup();
+    }
+
     return memGrindCtorGroups;
   }
 

@@ -102,6 +102,8 @@ public:
   /**
    * CANNOT call this in the current class constructor as the the proper 
    * virtual `buildBlockFieldsTestFunc( )` will not be called as the vtable isn't fully constructed yet.
+   * Why do we do this? So that we can have as little code in each Block's test file and also 
+   * make it easier to refactor.
    */
   virtual void setup() override {
     if (!is_setup) {
