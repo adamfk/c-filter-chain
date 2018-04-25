@@ -68,7 +68,7 @@ public:
   virtual ICtorGroup<BlockType>* buildSimpleCtors(void) override
   {
     const float higher_ratio = 0.5f;
-    const float lower_ratio = 0.0f;
+    const float lower_ratio = 0.0000000000001f; //something non-zero so we can test for known field values
     auto ctorGroup = buildSimpleCtorsWithHigherLowerRatio(higher_ratio, lower_ratio);
     ctorGroup->stepTestFuncs.push_back(getStepTestRiseOnly<BlockType, PrimitiveType>(ctorGroup));
     return ctorGroup;
@@ -149,7 +149,7 @@ static StepFunc<BlockType> getStepTestRiseOnly(ICtorGroup<BlockType>* ctorGroup)
   auto func = [=](BlockType* block) {
     SCOPED_TRACE(func_name);
     ASSERT_EQ(block->higher_ratio, 0.5f);
-    ASSERT_EQ(block->lower_ratio, 0.0f);
+    ASSERT_NEAR(block->lower_ratio, 0.0f, 0.00001f);
     const PrimitiveType init_value = 10;
 
     CppX_preload(block, init_value);
