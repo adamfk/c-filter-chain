@@ -60,7 +60,6 @@ using ::testing::InSequence;
 extern fc_BuildCtx test_malloc_builder;
 
 typedef std::function<void*(fc_BuildCtx*)> new_iblock_func_t;
-typedef std::function<void(fc_BuildCtx*)> run_with_mb_t;
 
 template <typename PrimitiveType> class InputOutput {
 public:
@@ -132,41 +131,24 @@ private:
 
 public:
 
-  static int8_t step_block(void* iblock, int8_t input);
-
-  static int32_t step_block(void* iblock, int32_t input);
-
   static void test_iblock_constructed(void* iblock);
 
 
-  template <typename PrimitiveType> static void test_steps(void* iblock, vector<InputOutput<PrimitiveType>> steps, PrimitiveType error_tolerance = 0)
+  template <typename BlockType, typename PrimitiveType> static void test_steps(BlockType* block, vector<InputOutput<PrimitiveType>> steps, double error_tolerance = 0)
   {
     SCOPED_TRACE(__func__);
+    using BlockPrimitiveType = FilterPrimitiveTypeSelector<BlockType>::type;
+    static_assert(std::is_same<BlockPrimitiveType, PrimitiveType>(), "Input/Block primitive types mismatch!");
 
     PrimitiveType actual_output;
 
     for (size_t i = 0; i < steps.size(); i++) {
       InputOutput<PrimitiveType> step = steps[i];
-      actual_output = step_block(iblock, step.input);
+      actual_output = CppX_step(block, step.input);
       EXPECT_NEAR(step.expected_output, actual_output, error_tolerance);
     }
   }
 
-
-
-
-
-  //TODO test the type checking
-  template <typename BlockType, typename PrimitiveType> static PrimitiveType xstep_block(BlockType* block, PrimitiveType input)
-  {
-    SCOPED_TRACE(__func__);
-
-    using BlockPrimitiveType = FilterPrimitiveTypeSelector<BlockType>::type;
-    static_assert(std::is_same<BlockPrimitiveType, PrimitiveType>(), "Input/Block primitive types mismatch!");
-    
-    PrimitiveType output = output = CppX_step(block, input);
-    return output;
-  }
   
 
 
@@ -207,7 +189,7 @@ public:
       SCOPED_TRACE(msg);
       input = inputs[i];
       expected = get_expected(expected_outputs, i);
-      actual_output = xstep_block(block, input);
+      actual_output = CppX_step(block, input);
 
       if (::testing::Test::HasFailure()) {
         return;
@@ -238,10 +220,8 @@ public:
   template <typename BlockType>
   static void build_test_destruct2_part(ICtorGroup<BlockType>* ctorGroup, 
                                         Ctor<BlockType> ctor,
-                                        StepFunc<BlockType>* stepTestFunc,
-                                        int ctor_index) 
+                                        StepFunc<BlockType>* stepTestFunc) 
   {
-    SCOPED_TRACE("ctor index: " + std::to_string(ctor_index));
     MockHeapBuilder hb(&mockHeapPtr);
 
     auto blockFieldsTestFunc = ctorGroup->getBlockFieldsTestFunc();
@@ -293,8 +273,10 @@ public:
     {
       for each (auto stepTestFunc in stepTestFuncs)
       {
-        build_test_destruct2_part(metaCtor, ctor, &stepTestFunc, ctor_index++);
+        SCOPED_TRACE("ctor index: " + std::to_string(ctor_index));
+        build_test_destruct2_part(metaCtor, ctor, &stepTestFunc);
         RETURN_IF_ANY_FAILURE();
+        ctor_index++;
       }
     }
 
@@ -498,11 +480,11 @@ public:
   /**
    * Use this to limit unnecessary MockHeap, fc_BuildCtx... setup boiler plate
    */
-  static void run_with_mb(run_with_mb_t run_func) {
+  static void runWithBuildCtx(std::function<void(fc_BuildCtx*)> runFunc) {
     SCOPED_TRACE(__func__);
 
     MockHeapBuilder hb(&mockHeapPtr);
-    run_func(hb);
+    runFunc(hb);
   }
 
 

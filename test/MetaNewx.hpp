@@ -83,6 +83,7 @@ public:
 
 
 
+//rename to sfcg_SET_CTOR_LOCATION_INFO and only use in CTORs. step and test functions will capture trace info properly already.
 #define sfcg_SET_LOCATION_INFO(storedFuncsCtorGroup) \
   (storedFuncsCtorGroup).setLocationInfo(__FILE__, __LINE__)
 

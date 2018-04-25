@@ -8,18 +8,6 @@ fc_BuildCtx test_malloc_builder = {
 };
 
 
-int8_t TestCommon::step_block(void* iblock, int8_t input) {
-  SCOPED_TRACE(__func__);
-
-  return fc8_IBlock_step((fc8_IBlock*)iblock, input);
-}
-
-int32_t TestCommon::step_block(void* iblock, int32_t input) {
-  SCOPED_TRACE(__func__);
-
-  return fc32_IBlock_step((fc32_IBlock*)iblock, input);
-}
-
 void TestCommon::test_iblock_constructed(void* iblock)
 {
   SCOPED_TRACE(__func__);
