@@ -1,9 +1,16 @@
 #include "visitors.hpp"
 
-void TestVisitorBridge_visit(fc_IVisitor* c_visitor, void* iblock)
+void TestVisitorBridge_block_entered(fc_IVisitor* c_visitor, void* iblock)
 {
   TestVisitorBridge* self = (TestVisitorBridge*)c_visitor;
-  self->cpp_visitor->visit(iblock);
+  self->cpp_visitor->block_entered(iblock);
+}
+
+
+void TestVisitorBridge_block_exited(fc_IVisitor* c_visitor, void* iblock)
+{
+  TestVisitorBridge* self = (TestVisitorBridge*)c_visitor;
+  self->cpp_visitor->block_exited(iblock);
 }
 
 

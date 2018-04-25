@@ -2,12 +2,12 @@
 #define BlockChain                  FC_MAKE_NAME(BlockChain)
 #define BlockChain_ctor             FC_MAKE_NAME(BlockChain_ctor)
 #define BlockChain_preload          FC_MAKE_NAME(BlockChain_preload)
-#define BlockChain_step           FC_MAKE_NAME(BlockChain_step)
+#define BlockChain_step             FC_MAKE_NAME(BlockChain_step)
 #define BlockChain_new              FC_MAKE_NAME(BlockChain_new)
 #define BlockChain_allocate_fields  FC_MAKE_NAME(BlockChain_allocate_fields)
 #define BlockChain_destruct_fields  FC_MAKE_NAME(BlockChain_destruct_fields)
 #define BlockChain_destruct_entire  FC_MAKE_NAME(BlockChain_destruct_entire)
-#define BlockChain_visit            FC_MAKE_NAME(BlockChain_visit)
+#define BlockChain_run_visitor      FC_MAKE_NAME(BlockChain_run_visitor)
 
 #define BlockChain_Test_type        FC_MAKE_NAME(BlockChain_Test_type)
 
@@ -76,6 +76,6 @@ fc_PTYPE BlockChain_step(void* self, fc_PTYPE input);
  */
 void BlockChain_destruct_fields(void* self, fc_IAllocator const * allocator);
 
-void BlockChain_visit(void* self, fc_IVisitor* visitor);
+void BlockChain_run_visitor(void* self, fc_IVisitor* visitor);
 
 

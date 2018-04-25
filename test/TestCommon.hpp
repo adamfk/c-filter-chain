@@ -222,8 +222,10 @@ public:
       {
         build_run<BlockType>(ctorGroup, ctor, [=](BlockType* block) {
           MockVisitor visitor;
-          EXPECT_CALL(visitor, visit(block)).Times(1);
-          fc_IVisitor_visit(visitor, block);
+          InSequence dummy;
+          EXPECT_CALL(visitor, block_entered(block)).Times(1);
+          EXPECT_CALL(visitor, block_exited(block)).Times(1);
+          fc_run_visitor(visitor, block);
         });
       }
     }

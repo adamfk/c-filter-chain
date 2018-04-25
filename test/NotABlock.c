@@ -18,7 +18,8 @@ static void NotABlock_destruct_fields(NotABlock* self, fc_IAllocator const * all
 
 static void NotABlock_run_visitor(NotABlock* block, fc_IVisitor* visitor)
 {
-  fc_IVisitor_visit(visitor, block);
+  fc_IVisitor_block_entered(visitor, block);
+  fc_IVisitor_block_exited(visitor, block);
 }
 
 

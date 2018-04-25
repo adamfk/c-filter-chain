@@ -6,7 +6,7 @@ const IBlockVirtualTable DownSampler_vtable = {
   .step = DownSampler_step,
   .preload = DownSampler_preload,
   .destruct_fields = BlockChain_destruct_fields,  //inherit from parent
-  .run_visitor = BlockChain_visit, //inherit from parent
+  .run_visitor = BlockChain_run_visitor, //inherit from parent
 };
 
 

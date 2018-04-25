@@ -164,7 +164,8 @@ static void swap(fc_PTYPE *xp, fc_PTYPE *yp)
  */
 static void simple_run_visitor(void* self, fc_IVisitor* visitor)
 {
-  fc_IVisitor_visit(visitor, self);
+  fc_IVisitor_block_entered(visitor, self);
+  fc_IVisitor_block_exited(visitor, self);
 }
 
 

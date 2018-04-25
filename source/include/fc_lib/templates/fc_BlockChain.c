@@ -5,7 +5,7 @@ const IBlockVirtualTable BlockChain_vtable = {
   .step = BlockChain_step,
   .preload = BlockChain_preload,
   .destruct_fields = BlockChain_destruct_fields,
-  .run_visitor = BlockChain_visit,
+  .run_visitor = BlockChain_run_visitor,
 };
 
 
@@ -173,16 +173,18 @@ fc_PTYPE BlockChain_step(void* vself, fc_PTYPE input)
 
 
 
-void BlockChain_visit(void* vself, fc_IVisitor* visitor)
+void BlockChain_run_visitor(void* vself, fc_IVisitor* visitor)
 {
   BlockChain* self = (BlockChain*)vself;
 
-  fc_IVisitor_visit(visitor, &self->block);
+  fc_IVisitor_block_entered(visitor, &self->block);
 
   for (size_t i = 0; i < self->block_count; i++)
   {
     IBlock* block = self->blocks[i];
     IBlock_run_visitor(block, visitor);
   }
+
+  fc_IVisitor_block_exited(visitor, &self->block);
 }
 

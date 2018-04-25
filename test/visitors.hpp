@@ -15,7 +15,8 @@ class ITestVisitor;
 /**
  * C style visitor function that bridges to c++ visitor
  */
-void TestVisitorBridge_visit(fc_IVisitor* c_visitor, void* iblock);
+void TestVisitorBridge_block_entered(fc_IVisitor* c_visitor, void* iblock);
+void TestVisitorBridge_block_exited(fc_IVisitor* c_visitor, void* iblock);
 
 
 /**
@@ -46,7 +47,8 @@ public:
   TestVisitorBridge()
   {
     c_base.vtable = &c_vtable;
-    c_vtable.visit = TestVisitorBridge_visit;
+    c_vtable.block_entered = TestVisitorBridge_block_entered;
+    c_vtable.block_exited = TestVisitorBridge_block_exited;
   }
 };
 
@@ -63,7 +65,8 @@ public:
   }
 
   virtual ~ITestVisitor() {}
-  virtual void visit(void* iblock) {}
+  virtual void block_entered(void* iblock) {}
+  virtual void block_exited(void* iblock) {}
 
   //allow passing c++ object to c code with below implicit conversion
   operator fc_IVisitor* () { return &c_bridge.c_base; }
@@ -75,7 +78,8 @@ public:
 class MockVisitor : public ITestVisitor {
 
 public:
-  MOCK_METHOD1(visit, void(void* iblock));
+  MOCK_METHOD1(block_entered, void(void* iblock));
+  MOCK_METHOD1(block_exited, void(void* iblock));
 };
 
 
