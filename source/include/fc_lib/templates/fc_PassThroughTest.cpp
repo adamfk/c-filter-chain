@@ -113,8 +113,8 @@ INSTANTIATE_TYPED_TEST_CASE_P(PassThrough, IBlockTests, TypesToTest);
 
 TEST(fc32_PassThrough, _new_step)
 {
-  TestCommon::runWithBuildCtx([](fc_BuildCtx* mb) {
-    fc32_PassThrough* p1 = fc32_PassThrough_new(mb);
+  TestCommon::runWithBuildCtx([](fc_BuildCtx* bc) {
+    fc32_PassThrough* p1 = fc32_PassThrough_new(bc);
     using PrimitiveType = FilterPrimitiveTypeSelector<decltype(*p1)>::type;
 
 

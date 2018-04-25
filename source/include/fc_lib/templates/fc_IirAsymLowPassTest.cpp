@@ -174,9 +174,9 @@ static StepFunc<BlockType> getStepTestRiseOnly(ICtorGroup<BlockType>* ctorGroup)
 
 
 TEST(fc32_IirAsymLowPass, _new_step_fall_only) {
-  TestCommon::runWithBuildCtx([](fc_BuildCtx* mb) {
+  TestCommon::runWithBuildCtx([](fc_BuildCtx* bc) {
     const int32_t init_value = 50;
-    fc32_IirAsymLowPass* p1 = fc32_IirAsymLowPass_new(mb, 0, 0.5f);
+    fc32_IirAsymLowPass* p1 = fc32_IirAsymLowPass_new(bc, 0, 0.5f);
     fc32_IirAsymLowPass_preload(p1, init_value);
 
     vector<InputOutput<int32_t>> steps = {
@@ -216,9 +216,9 @@ INSTANTIATE_TYPED_TEST_CASE_P(IirAsymLowPass, IBlockTests, TypesToTest);
 
 TEST(fc32_IirAsymLowPass, _step_0_coefficients)
 {
-  TestCommon::runWithBuildCtx( [](fc_BuildCtx* mb) {
+  TestCommon::runWithBuildCtx( [](fc_BuildCtx* bc) {
     const int32_t init_value = 6468;
-    fc32_IirAsymLowPass* p1 = fc32_IirAsymLowPass_new(mb, 0, 0);
+    fc32_IirAsymLowPass* p1 = fc32_IirAsymLowPass_new(bc, 0, 0);
     fc32_IirAsymLowPass_preload(p1, init_value);
     vector<int32_t> inputs = { 235, 5325, 57575, 455 };
     vector<int32_t> outputs = { init_value };

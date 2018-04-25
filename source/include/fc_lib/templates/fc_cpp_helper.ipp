@@ -31,7 +31,7 @@
   template <> struct FilterPrimitiveTypeSelector<CppHelperFilterType> { using type = fc_PTYPE; };
 
   //below "&" reference syntax needed to allow:
-  //    fc32_PassThrough* p1 = fc32_PassThrough_new(mb);
+  //    fc32_PassThrough* p1 = fc32_PassThrough_new(bc);
   //    using PrimitiveType = FilterPrimitiveTypeSelector<decltype(*p1)>::type;
   template <> struct FilterPrimitiveTypeSelector<CppHelperFilterType&> { using type = fc_PTYPE; };
 
