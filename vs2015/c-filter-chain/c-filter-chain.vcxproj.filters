@@ -78,19 +78,19 @@
     <ClCompile Include="..\..\source\include\fc_lib\fcflt_lib.c">
       <Filter>Source Files\fc_lib</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_Median.gtest.cpp">
-      <Filter>Source Files\fc_lib\templates\blocks</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_PassThrough.gtest.cpp">
-      <Filter>Source Files\fc_lib\templates\blocks</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\test\i32-filter-chain.gtest.cpp">
       <Filter>Source Files\test</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_IirLowPass.gtest.cpp">
+    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_IirAsymLowPassTest.cpp">
       <Filter>Source Files\fc_lib\templates\blocks</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_IirAsymLowPass.gtest.cpp">
+    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_PassThroughTest.cpp">
+      <Filter>Source Files\fc_lib\templates\blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_MedianTest.cpp">
+      <Filter>Source Files\fc_lib\templates\blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_IirLowPassTest.cpp">
       <Filter>Source Files\fc_lib\templates\blocks</Filter>
     </ClCompile>
   </ItemGroup>

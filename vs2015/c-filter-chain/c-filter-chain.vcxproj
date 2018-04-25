@@ -128,10 +128,10 @@
     <ClCompile Include="..\..\source\include\fc_lib\fc_IAllocator.c" />
     <ClCompile Include="..\..\source\include\fc_lib\fc_IVisitor.c" />
     <ClCompile Include="..\..\source\include\fc_lib\fc_Mallocator.c" />
-    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_IirAsymLowPass.gtest.cpp" />
-    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_IirLowPass.gtest.cpp" />
-    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_Median.gtest.cpp" />
-    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_PassThrough.gtest.cpp" />
+    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_IirAsymLowPassTest.cpp" />
+    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_IirLowPassTest.cpp" />
+    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_MedianTest.cpp" />
+    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_PassThroughTest.cpp" />
     <ClCompile Include="..\..\test\BasicTests.cpp" />
     <ClCompile Include="..\..\test\c-test.c" />
     <ClCompile Include="..\..\test\i32-filter-chain.gtest.cpp" />
