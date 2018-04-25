@@ -42,7 +42,6 @@ public:
   virtual std::function<void(BlockType*)> buildBlockFieldsTestFunc(void) {
     auto thisCtorGroup = this;
     return [=](BlockType* block) {
-      sfcg_SET_LOCATION_INFO(*thisCtorGroup);
       EXPECT_NE(block->previous_samples, nullptr);
       EXPECT_EQ(block->saved_sample_length, this->filter_length - 1);
       EXPECT_NE(block->working_buffer, nullptr);
@@ -116,11 +115,11 @@ public:
     
     ctorGroup->ctors = {
       [=](fc_BuildCtx* bc) {
-        sfcg_SET_LOCATION_INFO(*ctorGroup);
+        sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
         return CppMedian_new<BlockType>(bc, filter_length);
       },
       [=](fc_BuildCtx* bc) {
-        sfcg_SET_LOCATION_INFO(*ctorGroup);
+        sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
         return CppMedian_new_iblock<BlockType>(bc, filter_length);
       },
       //Doesn't make sense to provide function constructing via `Median_ctor` as then you have to manually code 
@@ -142,15 +141,15 @@ private:
 
     ctorGroup->ctors = {
       [=](fc_BuildCtx* bc) {
-        sfcg_SET_LOCATION_INFO(*ctorGroup);
+        sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
         return CppMedian_new<BlockType>(bc, filter_length);
       },
       [=](fc_BuildCtx* bc) {
-        sfcg_SET_LOCATION_INFO(*ctorGroup);
+        sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
         return CppMedian_new_iblock<BlockType>(bc, filter_length);
       },
       [=](fc_BuildCtx* bc) {
-        sfcg_SET_LOCATION_INFO(*ctorGroup);
+        sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
 
         //vanilla method of setting it up
         BlockType* block = (BlockType*)fc_IAllocator_allocate(bc->allocator, sizeof(BlockType));
@@ -175,7 +174,6 @@ private:
 template <typename BlockType, typename PrimitiveType>
 static StepFunc<BlockType> get_step_test_filter_length_3_func(ICtorGroup<BlockType>* ctorGroup) {
   auto func = [=](BlockType* block) {
-    sfcg_SET_LOCATION_INFO(*ctorGroup);
     //fc32_Median* median = (fc32_Median*)block; //uncomment line for when you want intellisense. Do not leave in though.
     BlockType* median = block;
 

@@ -36,15 +36,15 @@ public:
     
     ctorGroup->ctors = {
       [=](fc_BuildCtx* bc) {
-        sfcg_SET_LOCATION_INFO(*ctorGroup);
+        sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
         return CppPassThrough_new<BlockType>(bc);
       },
       [=](fc_BuildCtx* bc) {
-        sfcg_SET_LOCATION_INFO(*ctorGroup);
+        sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
         return CppPassThrough_new_iblock<BlockType>(bc);
       },
       [=](fc_BuildCtx* bc) {
-        sfcg_SET_LOCATION_INFO(*ctorGroup);
+        sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
         //vanilla method of setting it up
         BlockType* block = (BlockType*)fc_IAllocator_allocate(bc->allocator, sizeof(BlockType));
         CppX_ctor(block);
@@ -53,8 +53,6 @@ public:
     };
 
     ctorGroup->stepTestFuncs.push_back( [=](BlockType* block) {
-      sfcg_SET_LOCATION_INFO(*ctorGroup);
-
       BlockType* passThrough = block;
       //fc32_PassThrough* passThrough = (fc32_PassThrough*)block;
 
@@ -77,17 +75,16 @@ public:
 
     ctorGroup->ctors = {
       [=](fc_BuildCtx* bc) {
-        sfcg_SET_LOCATION_INFO(*ctorGroup);
+        sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
         return CppPassThrough_new<BlockType>(bc);
       },
       [=](fc_BuildCtx* bc) {
-        sfcg_SET_LOCATION_INFO(*ctorGroup);
+        sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
         return CppPassThrough_new_iblock<BlockType>(bc);
       },
     };
 
     ctorGroup->stepTestFuncs.push_back([=](BlockType* block) {
-      sfcg_SET_LOCATION_INFO(*ctorGroup);
       TestCommon::preload_step_random_no_expect<BlockType>(block, 100);
     });
 

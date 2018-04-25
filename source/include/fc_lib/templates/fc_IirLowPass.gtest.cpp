@@ -39,7 +39,6 @@ public:
   virtual std::function<void(BlockType*)> buildBlockFieldsTestFunc(void) {
     auto thisCtorGroup = this;
     return [=](BlockType* block) {
-      sfcg_SET_LOCATION_INFO(*thisCtorGroup);
       //fc8_IirLowPass* b;
       EXPECT_EQ(block->last_output, 0);
       EXPECT_EQ(block->new_ratio, expected_new_ratio);
@@ -86,11 +85,11 @@ public:
 
     ctorGroup->ctors = {
       [=](fc_BuildCtx* bc) {
-        sfcg_SET_LOCATION_INFO(*ctorGroup);
+        sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
         return CppIirLowPass_new<BlockType>(bc, new_ratio);
       },
       [=](fc_BuildCtx* bc) {
-        sfcg_SET_LOCATION_INFO(*ctorGroup);
+        sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
         return CppIirLowPass_new_iblock<BlockType>(bc, new_ratio);
       },
     };
@@ -109,15 +108,15 @@ private:
 
     ctorGroup->ctors = {
       [=](fc_BuildCtx* bc) {
-        sfcg_SET_LOCATION_INFO(*ctorGroup);
+        sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
         return CppIirLowPass_new<BlockType>(bc, new_ratio);
       },
       [=](fc_BuildCtx* bc) {
-        sfcg_SET_LOCATION_INFO(*ctorGroup);
+        sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
         return CppIirLowPass_new_iblock<BlockType>(bc, new_ratio);
       },
       [=](fc_BuildCtx* bc) {
-        sfcg_SET_LOCATION_INFO(*ctorGroup);
+        sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
 
         //vanilla method of setting it up
         BlockType* block = (BlockType*)fc_IAllocator_allocate(bc->allocator, sizeof(BlockType));
@@ -141,8 +140,6 @@ private:
 template <typename BlockType, typename PrimitiveType>
 static StepFunc<BlockType> get_step_test_20_percent(ICtorGroup<BlockType>* ctorGroup) {
   auto func = [=](BlockType* block) {
-    sfcg_SET_LOCATION_INFO(*ctorGroup);
-
     ASSERT_EQ(block->new_ratio, 0.2f);
 
     CppX_preload(block, 0);

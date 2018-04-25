@@ -78,9 +78,6 @@
     <ClCompile Include="..\..\source\include\fc_lib\fcflt_lib.c">
       <Filter>Source Files\fc_lib</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_IirAsymLowPass.gtest.cpp">
-      <Filter>Source Files\fc_lib\templates\blocks</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\include\fc_lib\templates\fc_Median.gtest.cpp">
       <Filter>Source Files\fc_lib\templates\blocks</Filter>
     </ClCompile>
@@ -91,6 +88,9 @@
       <Filter>Source Files\test</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\include\fc_lib\templates\fc_IirLowPass.gtest.cpp">
+      <Filter>Source Files\fc_lib\templates\blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_IirAsymLowPass.gtest.cpp">
       <Filter>Source Files\fc_lib\templates\blocks</Filter>
     </ClCompile>
   </ItemGroup>

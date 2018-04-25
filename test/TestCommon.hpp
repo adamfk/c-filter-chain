@@ -47,12 +47,16 @@ using ::testing::InSequence;
 
 
 
+//should ONLY be used directly after constructing a block from a ICtorGroup
+//to improve tracing to the lambda constructor source.
+//No need to call in step/field test functions as their asserts/expects will capture stack
+//trace information properly.
 //modified from `SCOPED_TRACE()`
 #define SCOPED_TRACE_CTOR_GROUP(ctorGroupPtr) \
   ::testing::internal::ScopedTrace GTEST_CONCAT_TOKEN_(gtest_trace_, __LINE__)(\
   (ctorGroupPtr)->getLocationFilePath(), \
   (ctorGroupPtr)->getLocationLineNumber(), \
-  ::testing::Message() << "lambda source")
+  ::testing::Message() << "ctor source")
 
 
 //TODO test allocation of working buffer
@@ -242,13 +246,13 @@ public:
     hb.allocateWorkingBuffer();
     EXPECT_EQ(hb.sumAllocationBytes(), expected_alloc_sum);
 
-    blockFieldsTestFunc(block);
-    SCOPED_TRACE_CTOR_GROUP(ctorGroup); //comes after call because call sets the info
-    RETURN_IF_FATAL_FAILURE();
+    {
+      SCOPED_TRACE("test block fields");
+      blockFieldsTestFunc(block);
+      RETURN_IF_FATAL_FAILURE();
+    }
 
     (*stepTestFunc)(block);
-    SCOPED_TRACE_CTOR_GROUP(ctorGroup); //comes after call because call sets the info
-
 
     EXPECT_CALL(hb, xFree(_)).Times(expected_inner_allocations).RetiresOnSaturation();
     EXPECT_CALL(hb, xFree(block)).Times(1).RetiresOnSaturation();
@@ -360,11 +364,9 @@ public:
       RETURN_IF_FATAL_FAILURE();
 
       args->blockFieldsTestFunc(block);
-      SCOPED_TRACE_CTOR_GROUP(args->ctorGroup); //comes after call because call sets the info
       RETURN_IF_FATAL_FAILURE();
 
       (*args->stepTestFunc)(block);
-      SCOPED_TRACE_CTOR_GROUP(args->ctorGroup); //comes after call because call sets the info
 
       EXPECT_CALL(hb, xFree(_)).Times(args->expected_allocations);
       fc_destruct_and_free(block, hb);

@@ -83,8 +83,7 @@ public:
 
 
 
-//rename to sfcg_SET_CTOR_LOCATION_INFO and only use in CTORs. step and test functions will capture trace info properly already.
-#define sfcg_SET_LOCATION_INFO(storedFuncsCtorGroup) \
+#define sfcg_SET_CTOR_LOCATION_INFO(storedFuncsCtorGroup) \
   (storedFuncsCtorGroup).setLocationInfo(__FILE__, __LINE__)
 
 
@@ -161,7 +160,6 @@ public:
   virtual void addNoCrashStepTestFunc() {
     auto thisCtorGroup = this;
     stepTestFuncs.push_back([=](BlockType* block) {
-      sfcg_SET_LOCATION_INFO(*thisCtorGroup);
       TestCommon::preload_step_random_no_expect<BlockType>(block, 100);
     });
   }
