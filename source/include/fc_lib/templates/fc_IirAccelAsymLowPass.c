@@ -16,16 +16,15 @@ void IirAccelAsymLowPass_ctor(IirAccelAsymLowPass* iir)
 }
 
 
-IirAccelAsymLowPass* IirAccelAsymLowPass_new(fc_BuildCtx* bc, float raising_ratio, float lowering_ratio)
+IirAccelAsymLowPass* IirAccelAsymLowPass_new(fc_BuildCtx* bc, bool rise_faster, float fast_ratio, float slow_ratio)
 {
   IirAccelAsymLowPass* self = allocate_or_ret_fail_ptr(bc, sizeof(IirAccelAsymLowPass));
 
   if (is_ok_ptr(self)) {
     IirAccelAsymLowPass_ctor(self);
-    self->raising_ratio = raising_ratio;
-    self->lowering_ratio = lowering_ratio;
-    self->cur_raising_ratio = self->raising_ratio;
-    self->cur_lowering_ratio = self->lowering_ratio;
+    self->rise_faster = rise_faster;
+    self->fast_ratio = fast_ratio;
+    self->slow_ratio = slow_ratio;
   }
 
   fc_BuildCtx_update_success_from_ptr(bc, self);
@@ -34,32 +33,11 @@ IirAccelAsymLowPass* IirAccelAsymLowPass_new(fc_BuildCtx* bc, float raising_rati
 }
 
 
-IBlock* IirAccelAsymLowPass_new_iblock(fc_BuildCtx* bc, float raising_ratio, float lowering_ratio)
+IBlock* IirAccelAsymLowPass_new_iblock(fc_BuildCtx* bc, bool rise_faster, float fast_ratio, float slow_ratio)
 {
-  IirAccelAsymLowPass* result = IirAccelAsymLowPass_new(bc, raising_ratio, lowering_ratio);
+  IirAccelAsymLowPass* result = IirAccelAsymLowPass_new(bc, rise_faster, fast_ratio, slow_ratio);
   return (IBlock*)result;
 }
-
-
-
-
-static void adjust_coefficients(bool reset, float* cur_ratio, float normal_ratio, float ratio_limit)
-{
-  //TODO consider having the reset be affected by magnitude instead of just binary. To help with tracking 
-  // a negative slope signal with tiny positive blips causes undesirable behaviour.
-  // See https://github.com/adamfk/c-filter-chain/issues/20 
-
-  if (reset) {
-    *cur_ratio *= 0.3f;
-    ENSURE_NOT_LOWER_THAN(*cur_ratio, normal_ratio);
-  } else {
-    *cur_ratio *= 1.1f; //1.05 good for slowish
-    ENSURE_NOT_HIGHER_THAN(*cur_ratio, ratio_limit);
-  }
-  
-}
-
-
 
 
 /**
@@ -84,8 +62,7 @@ void IirAccelAsymLowPass_preload(void* vself, fc_PTYPE input)
 {
   IirAccelAsymLowPass* self = (IirAccelAsymLowPass*)vself;
   self->last_output = input;
-  self->cur_raising_ratio = self->raising_ratio;
-  self->cur_lowering_ratio = self->lowering_ratio;
+  self->accelerated_slow_ratio = self->slow_ratio;
 }
 
 
@@ -99,39 +76,47 @@ fc_PTYPE IirAccelAsymLowPass_step(void* vself, fc_PTYPE input)
   fc_PTYPE result;
   float new_ratio;
 
-  if (self->lowering_ratio > self->raising_ratio) {
-    //this is a decaying min hold.
-    //it already drops fast, but rises slow.
-    //we accelerate the raising.
+  bool should_reset_accel_slow_ratio = false;
 
-    bool should_reset_ratio = input < self->last_output;
-    float normal_ratio = self->raising_ratio;
-    float* accelerated_ratio = &self->cur_raising_ratio;
-    float ratio_limit = self->lowering_ratio;
+  if (self->rise_faster) 
+  {
+    //this is a decaying MAX hold.
+    //it rises fast, but lowers slow.
+    //we accelerate the lowering.
 
-    adjust_coefficients(should_reset_ratio, accelerated_ratio, normal_ratio, ratio_limit);
+    if (input > self->last_output) {
+      should_reset_accel_slow_ratio = true;
+      new_ratio = self->fast_ratio;
+    }
+    else {
+      new_ratio = self->accelerated_slow_ratio;
+    }
   }
   else
   {
-    //this is a decaying MAX hold.
-    //it already rises fast, but drops slow.
-    //we accelerate the lowering.
+    //this is a decaying min hold.
+    //it lowers fast, but rises slow.
+    //we accelerate the raising.
 
-    bool should_reset_ratio = input > self->last_output;
-    float normal_ratio = self->lowering_ratio;
-    float* accelerated_ratio = &self->cur_lowering_ratio;
-    float ratio_limit = self->raising_ratio;
-
-    adjust_coefficients(should_reset_ratio, accelerated_ratio, normal_ratio, ratio_limit);
+    if (input < self->last_output) {
+      should_reset_accel_slow_ratio = true;
+      new_ratio = self->fast_ratio;
+    }
+    else {
+      new_ratio = self->accelerated_slow_ratio;
+    }
   }
 
+  //TODO consider having the reset be affected by magnitude instead of just binary. To help with tracking 
+  // a negative slope signal with tiny positive blips causes undesirable behaviour.
+  // See https://github.com/adamfk/c-filter-chain/issues/20 
 
-  if (input > self->last_output) {
-    new_ratio = self->cur_raising_ratio;
+  if (should_reset_accel_slow_ratio) {
+    self->accelerated_slow_ratio *= 0.3f;
+  } else {
+    self->accelerated_slow_ratio *= 1.1f; //1.05 good for slowish
   }
-  else {
-    new_ratio = self->cur_lowering_ratio;
-  }
+  ENSURE_BETWEEN(self->slow_ratio, self->accelerated_slow_ratio, self->fast_ratio);
 
   double output = new_ratio * input + (1 - new_ratio) * self->last_output;  //TODO rewrite in efficient form. TODO use generic type numerator and denominator instead of floating point
   result = round_result(output);

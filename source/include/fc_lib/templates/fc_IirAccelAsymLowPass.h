@@ -11,23 +11,23 @@
 
 
 /**
- * Structure for an asymmetric single order low pass IIR filter
+ * Structure for an accelerated asymmetric single order low pass IIR filter
+ * 
  */
 typedef struct IirAccelAsymLowPass
 {
   IBlock block;  //!< MUST BE FIRST FIELD IN STRUCT TO ALLOW CASTING FROM PARENT TYPE
-  float raising_ratio;   //!< IIR ratio applied when input higher than `last_output`
-  float lowering_ratio;    //!< IIR ratio applied when input lower than `last_output`
-  float cur_raising_ratio;   //!< current IIR ratio applied when input higher than `last_output`
-  float cur_lowering_ratio;    //!< current IIR ratio applied when input lower than `last_output`
-  //TODO consolidate `cur_raising_ratio` and `cur_lowering_ratio` into one field as we only need a single `cur_accelerated_ratio`
+  bool rise_faster;
+  float fast_ratio;
+  float slow_ratio;
+  float accelerated_slow_ratio;
   fc_PTYPE last_output;
 } IirAccelAsymLowPass;
 
 
 void IirAccelAsymLowPass_ctor(IirAccelAsymLowPass* block);
-IirAccelAsymLowPass* IirAccelAsymLowPass_new(fc_BuildCtx* bc, float raising_ratio, float lowering_ratio);
-IBlock* IirAccelAsymLowPass_new_iblock(fc_BuildCtx* bc, float raising_ratio, float lowering_ratio);
+IirAccelAsymLowPass* IirAccelAsymLowPass_new(fc_BuildCtx* bc, bool rise_faster, float fast_ratio, float slow_ratio);
+IBlock* IirAccelAsymLowPass_new_iblock(fc_BuildCtx* bc, bool rise_faster, float fast_ratio, float slow_ratio);
 
 /**
  * Class method.
