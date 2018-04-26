@@ -10,7 +10,7 @@ fc32_BlockChain* buildChain1(void)
 
   fc32_BlockChain* filter_chain = fc32_BlockChain_new(bc,
     LIST_START(32)
-    fc32_DownSampler_new_iblock(bc, 0, 2,
+    fc32_DownSampler_new_iblock(bc, 2,
       LIST_START(32)
       fc32_IirLowPass_new_iblock(bc, 0.5),
       LIST_END

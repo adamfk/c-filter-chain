@@ -30,7 +30,7 @@ BlockChain* DownSampler_cast_to_fc(DownSampler* self)
  * block_list MUST BE NULL TERMINATED!
  * SEE #BlockChain_new for usage.
  */
-DownSampler* DownSampler_new(fc_BuildCtx* bc, uint16_t sample_offset, uint16_t sample_every_x, IBlock** block_list)
+DownSampler* DownSampler_new(fc_BuildCtx* bc, uint16_t sample_every_x, IBlock** block_list)
 {
   DownSampler* self;
   self = allocate_or_ret_fail_ptr(bc, sizeof(DownSampler));
@@ -38,7 +38,7 @@ DownSampler* DownSampler_new(fc_BuildCtx* bc, uint16_t sample_offset, uint16_t s
   if (is_ok_ptr(self)) {
     DownSampler_ctor(self);
     self->sample_every_x = sample_every_x;
-    self->sample_count = sample_offset;
+    //self->sample_count = 0; //not needed as zerod in ctor
   }
 
   //Intentially try allocating fields even if above failed.
@@ -57,9 +57,9 @@ DownSampler* DownSampler_new(fc_BuildCtx* bc, uint16_t sample_offset, uint16_t s
 }
 
 
-IBlock* DownSampler_new_iblock(fc_BuildCtx* bc, uint16_t sample_offset, uint16_t sample_every_x, IBlock** block_list)
+IBlock* DownSampler_new_iblock(fc_BuildCtx* bc, uint16_t sample_every_x, IBlock** block_list)
 {
-  return (IBlock*)DownSampler_new(bc, sample_offset, sample_every_x, block_list);
+  return (IBlock*)DownSampler_new(bc, sample_every_x, block_list);
 }
 
 
