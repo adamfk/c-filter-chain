@@ -16,10 +16,11 @@
 typedef struct IirAccelAsymLowPass
 {
   IBlock block;  //!< MUST BE FIRST FIELD IN STRUCT TO ALLOW CASTING FROM PARENT TYPE
-  float raising_ratio;   //!< ratio applied when input higher than our last_output
-  float lowering_ratio;    //!< ratio applied when input lower than our last_output
-  float cur_raising_ratio;   //!< ratio applied when input higher than our last_output
-  float cur_lowering_ratio;    //!< ratio applied when input lower than our last_output
+  float raising_ratio;   //!< IIR ratio applied when input higher than `last_output`
+  float lowering_ratio;    //!< IIR ratio applied when input lower than `last_output`
+  float cur_raising_ratio;   //!< current IIR ratio applied when input higher than `last_output`
+  float cur_lowering_ratio;    //!< current IIR ratio applied when input lower than `last_output`
+  //TODO consolidate `cur_raising_ratio` and `cur_lowering_ratio` into one field as we only need a single `cur_accelerated_ratio`
   fc_PTYPE last_output;
 } IirAccelAsymLowPass;
 

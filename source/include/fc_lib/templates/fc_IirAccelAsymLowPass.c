@@ -45,6 +45,9 @@ IBlock* IirAccelAsymLowPass_new_iblock(fc_BuildCtx* bc, float raising_ratio, flo
 
 static void adjust_coefficients(bool reset, float* cur_ratio, float normal_ratio, float ratio_limit)
 {
+  //TODO consider having the reset be affected by magnitude instead of just binary. To help with tracking 
+  // a negative slope signal with tiny positive blips causes undesirable behaviour.
+  // See https://github.com/adamfk/c-filter-chain/issues/20 
 
   if (reset) {
     *cur_ratio *= 0.3f;
@@ -99,7 +102,7 @@ fc_PTYPE IirAccelAsymLowPass_step(void* vself, fc_PTYPE input)
   if (self->lowering_ratio > self->raising_ratio) {
     //this is a decaying min hold.
     //it already drops fast, but rises slow.
-    //we accelerate the rising.
+    //we accelerate the raising.
 
     bool should_reset_ratio = input < self->last_output;
     float normal_ratio = self->raising_ratio;
@@ -112,7 +115,7 @@ fc_PTYPE IirAccelAsymLowPass_step(void* vself, fc_PTYPE input)
   {
     //this is a decaying MAX hold.
     //it already rises fast, but drops slow.
-    //we accelerate the drop.
+    //we accelerate the lowering.
 
     bool should_reset_ratio = input > self->last_output;
     float normal_ratio = self->lowering_ratio;
