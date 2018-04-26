@@ -16,14 +16,14 @@ void IirAsymLowPass_ctor(IirAsymLowPass* iir)
   iir->block.vtable = &IirAsymLowPass_vtable;
 }
 
-IirAsymLowPass* IirAsymLowPass_new(fc_BuildCtx* bc, float higher_ratio, float lower_ratio)
+IirAsymLowPass* IirAsymLowPass_new(fc_BuildCtx* bc, float raising_ratio, float lowering_ratio)
 {
   IirAsymLowPass* self = allocate_or_ret_fail_ptr(bc, sizeof(IirAsymLowPass));
 
   if (is_ok_ptr(self)) {
     IirAsymLowPass_ctor(self);
-    self->higher_ratio = higher_ratio;
-    self->lower_ratio = lower_ratio;
+    self->raising_ratio = raising_ratio;
+    self->lowering_ratio = lowering_ratio;
   }
 
   fc_BuildCtx_update_success_from_ptr(bc, self);
@@ -31,9 +31,9 @@ IirAsymLowPass* IirAsymLowPass_new(fc_BuildCtx* bc, float higher_ratio, float lo
   return self;
 }
 
-IBlock* IirAsymLowPass_new_iblock(fc_BuildCtx* bc, float higher_ratio, float lower_ratio)
+IBlock* IirAsymLowPass_new_iblock(fc_BuildCtx* bc, float raising_ratio, float lowering_ratio)
 {
-  IirAsymLowPass* result = IirAsymLowPass_new(bc, higher_ratio, lower_ratio);
+  IirAsymLowPass* result = IirAsymLowPass_new(bc, raising_ratio, lowering_ratio);
   return (IBlock*)result;
 }
 
@@ -72,10 +72,10 @@ fc_PTYPE IirAsymLowPass_step(void* vself, fc_PTYPE input)
   float new_ratio;
 
   if (input > self->last_output) {
-    new_ratio = self->higher_ratio;
+    new_ratio = self->raising_ratio;
   }
   else {
-    new_ratio = self->lower_ratio;
+    new_ratio = self->lowering_ratio;
   }
 
   double output = new_ratio * input + (1 - new_ratio) * self->last_output;  //TODO rewrite in efficient form. TODO use generic type numerator and denominator instead of floating point

@@ -33,8 +33,8 @@ public:
   using StoredFuncsCtorGroup::StoredFuncsCtorGroup; //to inherit parent constructors
 
   //expected value for objects constructed in this group
-  float expected_higher_ratio;
-  float expected_lower_ratio;
+  float expected_raising_ratio;
+  float expected_lowering_ratio;
 
   /**
    * Builds the function that will test ALL the fields in a constructed IirAsymLowPass block.
@@ -44,8 +44,8 @@ public:
     return [=](BlockType* block) {
       //fc8_IirAsymLowPass* b;
       EXPECT_EQ(block->last_output, 0);
-      EXPECT_EQ(block->lower_ratio, expected_lower_ratio);
-      EXPECT_EQ(block->higher_ratio, expected_higher_ratio);
+      EXPECT_EQ(block->lowering_ratio, expected_lowering_ratio);
+      EXPECT_EQ(block->raising_ratio, expected_raising_ratio);
     };
   }
 
@@ -72,17 +72,17 @@ public:
     vector<ICtorGroup<BlockType>*> groups;
 
     {
-      const float higher_ratio = 0.5f;
-      const float lower_ratio = 0.0000000000001f;  //something non-zero so we can test for known field values
-      auto ctorGroup = buildSimpleCtorsWithHigherLowerRatio(higher_ratio, lower_ratio);
+      const float raising_ratio = 0.5f;
+      const float lowering_ratio = 0.0000000000001f;  //something non-zero so we can test for known field values
+      auto ctorGroup = buildSimpleCtorsWithHigherLowerRatio(raising_ratio, lowering_ratio);
       ctorGroup->stepTestFuncs.push_back(getStepTestRiseOnly<BlockType, PrimitiveType>(ctorGroup));
       groups.push_back(ctorGroup);
     }
 
     {
-      const float higher_ratio = 0.0000000000001f;  //something non-zero so we can test for known field values
-      const float lower_ratio = 0.5f; 
-      auto ctorGroup = buildSimpleCtorsWithHigherLowerRatio(higher_ratio, lower_ratio);
+      const float raising_ratio = 0.0000000000001f;  //something non-zero so we can test for known field values
+      const float lowering_ratio = 0.5f; 
+      auto ctorGroup = buildSimpleCtorsWithHigherLowerRatio(raising_ratio, lowering_ratio);
       ctorGroup->stepTestFuncs.push_back(getStepTestFallOnly<BlockType, PrimitiveType>(ctorGroup));
       groups.push_back(ctorGroup);
     }
@@ -98,8 +98,8 @@ public:
   */
   virtual vector<ICtorGroup<BlockType>*> buildMemGrindCtorGroups(void) override
   {
-    const float higher_ratio = Randomization::get_for_type<float>();
-    const float lower_ratio = Randomization::get_for_type<float>();
+    const float raising_ratio = Randomization::get_for_type<float>();
+    const float lowering_ratio = Randomization::get_for_type<float>();
 
     vector<ICtorGroup<BlockType>*> groups;
 
@@ -108,17 +108,17 @@ public:
     ctorGroup->ctors = {
       [=](fc_BuildCtx* bc) {
         sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
-        return CppIirAsymLowPass_new<BlockType>(bc, higher_ratio, lower_ratio);
+        return CppIirAsymLowPass_new<BlockType>(bc, raising_ratio, lowering_ratio);
       },
       [=](fc_BuildCtx* bc) {
         sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
-        return CppIirAsymLowPass_new_iblock<BlockType>(bc, higher_ratio, lower_ratio);
+        return CppIirAsymLowPass_new_iblock<BlockType>(bc, raising_ratio, lowering_ratio);
       },
     };
 
     ctorGroup->addNoCrashStepTestFunc();
-    ctorGroup->expected_higher_ratio = higher_ratio;
-    ctorGroup->expected_lower_ratio  = lower_ratio;
+    ctorGroup->expected_raising_ratio = raising_ratio;
+    ctorGroup->expected_lowering_ratio  = lowering_ratio;
 
     groups.push_back(ctorGroup);
 
@@ -127,18 +127,18 @@ public:
 
 
 private:
-  IirAsymLowPassCtorGroup<BlockType>* buildSimpleCtorsWithHigherLowerRatio(float higher_ratio, float lower_ratio)
+  IirAsymLowPassCtorGroup<BlockType>* buildSimpleCtorsWithHigherLowerRatio(float raising_ratio, float lowering_ratio)
   {
     auto ctorGroup = new IirAsymLowPassCtorGroup<BlockType>();
 
     ctorGroup->ctors = {
       [=](fc_BuildCtx* bc) {
         sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
-        return CppIirAsymLowPass_new<BlockType>(bc, higher_ratio, lower_ratio);
+        return CppIirAsymLowPass_new<BlockType>(bc, raising_ratio, lowering_ratio);
       },
       [=](fc_BuildCtx* bc) {
         sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
-        return CppIirAsymLowPass_new_iblock<BlockType>(bc, higher_ratio, lower_ratio);
+        return CppIirAsymLowPass_new_iblock<BlockType>(bc, raising_ratio, lowering_ratio);
       },
       [=](fc_BuildCtx* bc) {
         sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
@@ -146,14 +146,14 @@ private:
         //vanilla method of setting it up
         BlockType* block = (BlockType*)fc_IAllocator_allocate(bc->allocator, sizeof(BlockType));
         CppX_ctor(block);
-        block->higher_ratio = higher_ratio;
-        block->lower_ratio = lower_ratio;
+        block->raising_ratio = raising_ratio;
+        block->lowering_ratio = lowering_ratio;
         return block;
       },
     };
 
-    ctorGroup->expected_lower_ratio = lower_ratio;
-    ctorGroup->expected_higher_ratio = higher_ratio;
+    ctorGroup->expected_lowering_ratio = lowering_ratio;
+    ctorGroup->expected_raising_ratio = raising_ratio;
     return ctorGroup;
   }
 
@@ -168,8 +168,8 @@ static StepFunc<BlockType> getStepTestRiseOnly(ICtorGroup<BlockType>* ctorGroup)
   auto func_name = __func__;
   auto func = [=](BlockType* block) {
     SCOPED_TRACE(func_name);
-    ASSERT_EQ(block->higher_ratio, 0.5f);
-    ASSERT_NEAR(block->lower_ratio, 0.0f, 0.00001f);
+    ASSERT_EQ(block->raising_ratio, 0.5f);
+    ASSERT_NEAR(block->lowering_ratio, 0.0f, 0.00001f);
     const PrimitiveType init_value = 10;
 
     CppX_preload(block, init_value);
@@ -196,8 +196,8 @@ static StepFunc<BlockType> getStepTestFallOnly(ICtorGroup<BlockType>* ctorGroup)
   auto func_name = __func__;
   auto func = [=](BlockType* block) {
     SCOPED_TRACE(func_name);
-    ASSERT_NEAR(block->higher_ratio, 0.0f, 0.00001f);
-    ASSERT_EQ(block->lower_ratio, 0.5f);
+    ASSERT_NEAR(block->raising_ratio, 0.0f, 0.00001f);
+    ASSERT_EQ(block->lowering_ratio, 0.5f);
     const PrimitiveType init_value = 50;
 
     CppX_preload(block, init_value);

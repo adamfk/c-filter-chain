@@ -16,16 +16,16 @@ void IirAccelAsymLowPass_ctor(IirAccelAsymLowPass* iir)
 }
 
 
-IirAccelAsymLowPass* IirAccelAsymLowPass_new(fc_BuildCtx* bc, float higher_ratio, float lower_ratio)
+IirAccelAsymLowPass* IirAccelAsymLowPass_new(fc_BuildCtx* bc, float raising_ratio, float lowering_ratio)
 {
   IirAccelAsymLowPass* self = allocate_or_ret_fail_ptr(bc, sizeof(IirAccelAsymLowPass));
 
   if (is_ok_ptr(self)) {
     IirAccelAsymLowPass_ctor(self);
-    self->higher_ratio = higher_ratio;
-    self->lower_ratio = lower_ratio;
-    self->cur_higher_ratio = self->higher_ratio;
-    self->cur_lower_ratio = self->lower_ratio;
+    self->raising_ratio = raising_ratio;
+    self->lowering_ratio = lowering_ratio;
+    self->cur_raising_ratio = self->raising_ratio;
+    self->cur_lowering_ratio = self->lowering_ratio;
   }
 
   fc_BuildCtx_update_success_from_ptr(bc, self);
@@ -34,9 +34,9 @@ IirAccelAsymLowPass* IirAccelAsymLowPass_new(fc_BuildCtx* bc, float higher_ratio
 }
 
 
-IBlock* IirAccelAsymLowPass_new_iblock(fc_BuildCtx* bc, float higher_ratio, float lower_ratio)
+IBlock* IirAccelAsymLowPass_new_iblock(fc_BuildCtx* bc, float raising_ratio, float lowering_ratio)
 {
-  IirAccelAsymLowPass* result = IirAccelAsymLowPass_new(bc, higher_ratio, lower_ratio);
+  IirAccelAsymLowPass* result = IirAccelAsymLowPass_new(bc, raising_ratio, lowering_ratio);
   return (IBlock*)result;
 }
 
@@ -81,8 +81,8 @@ void IirAccelAsymLowPass_preload(void* vself, fc_PTYPE input)
 {
   IirAccelAsymLowPass* self = (IirAccelAsymLowPass*)vself;
   self->last_output = input;
-  self->cur_higher_ratio = self->higher_ratio;
-  self->cur_lower_ratio = self->lower_ratio;
+  self->cur_raising_ratio = self->raising_ratio;
+  self->cur_lowering_ratio = self->lowering_ratio;
 }
 
 
@@ -96,38 +96,38 @@ fc_PTYPE IirAccelAsymLowPass_step(void* vself, fc_PTYPE input)
   fc_PTYPE result;
   float new_ratio;
 
-  if (self->lower_ratio > self->higher_ratio) {
+  if (self->lowering_ratio > self->raising_ratio) {
     //this is a decaying min hold.
     //it already drops fast, but rises slow.
     //we accelerate the rising.
 
-    bool reset_ratio = input < self->last_output;
-    float normal_ratio = self->higher_ratio;
-    float* accelerated_ratio = &self->cur_higher_ratio;
-    float ratio_limit = self->lower_ratio;
+    bool should_reset_ratio = input < self->last_output;
+    float normal_ratio = self->raising_ratio;
+    float* accelerated_ratio = &self->cur_raising_ratio;
+    float ratio_limit = self->lowering_ratio;
 
-    adjust_coefficients(reset_ratio, accelerated_ratio, normal_ratio, ratio_limit);
+    adjust_coefficients(should_reset_ratio, accelerated_ratio, normal_ratio, ratio_limit);
   }
-  else 
+  else
   {
     //this is a decaying MAX hold.
     //it already rises fast, but drops slow.
     //we accelerate the drop.
 
-    bool reset_ratio = input > self->last_output;
-    float normal_ratio = self->lower_ratio;
-    float* accelerated_ratio = &self->cur_lower_ratio;
-    float ratio_limit = self->higher_ratio;
+    bool should_reset_ratio = input > self->last_output;
+    float normal_ratio = self->lowering_ratio;
+    float* accelerated_ratio = &self->cur_lowering_ratio;
+    float ratio_limit = self->raising_ratio;
 
-    adjust_coefficients(reset_ratio, accelerated_ratio, normal_ratio, ratio_limit);
+    adjust_coefficients(should_reset_ratio, accelerated_ratio, normal_ratio, ratio_limit);
   }
 
 
   if (input > self->last_output) {
-    new_ratio = self->cur_higher_ratio;
+    new_ratio = self->cur_raising_ratio;
   }
   else {
-    new_ratio = self->cur_lower_ratio;
+    new_ratio = self->cur_lowering_ratio;
   }
 
   double output = new_ratio * input + (1 - new_ratio) * self->last_output;  //TODO rewrite in efficient form. TODO use generic type numerator and denominator instead of floating point

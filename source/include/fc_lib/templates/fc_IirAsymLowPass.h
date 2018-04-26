@@ -14,15 +14,15 @@
 typedef struct IirAsymLowPass
 {
   IBlock block;  //!< MUST BE FIRST FIELD IN STRUCT TO ALLOW CASTING FROM PARENT TYPE
-  float higher_ratio;   //!< ratio applied when input higher than our last_output
-  float lower_ratio;    //!< ratio applied when input lower than our last_output
+  float raising_ratio;   //!< ratio applied when input higher than our last_output
+  float lowering_ratio;    //!< ratio applied when input lower than our last_output
   fc_PTYPE last_output;
 } IirAsymLowPass;
 
 
 void IirAsymLowPass_ctor(IirAsymLowPass* block);
-IirAsymLowPass* IirAsymLowPass_new(fc_BuildCtx* bc, float higher_ratio, float lower_ratio);
-IBlock* IirAsymLowPass_new_iblock(fc_BuildCtx* bc, float higher_ratio, float lower_ratio);
+IirAsymLowPass* IirAsymLowPass_new(fc_BuildCtx* bc, float raising_ratio, float lowering_ratio);
+IBlock* IirAsymLowPass_new_iblock(fc_BuildCtx* bc, float raising_ratio, float lowering_ratio);
 
 
 /**
@@ -55,21 +55,21 @@ extern "C++" {
 #ifndef _fc_CPP_TEST_IIR_ASYM_LOW_PASS_INCLUDE_GUARD
 #define _fc_CPP_TEST_IIR_ASYM_LOW_PASS_INCLUDE_GUARD
   template <typename BlockType>
-  static BlockType* CppIirAsymLowPass_new(fc_BuildCtx* bc, float higher_ratio, float lower_ratio);
+  static BlockType* CppIirAsymLowPass_new(fc_BuildCtx* bc, float raising_ratio, float lowering_ratio);
 
   template <typename BlockType>
-  static BlockType* CppIirAsymLowPass_new_iblock(fc_BuildCtx* bc, float higher_ratio, float lower_ratio);
+  static BlockType* CppIirAsymLowPass_new_iblock(fc_BuildCtx* bc, float raising_ratio, float lowering_ratio);
 #endif
 
 
   template <>
-  static IirAsymLowPass* CppIirAsymLowPass_new<IirAsymLowPass>(fc_BuildCtx* bc, float higher_ratio, float lower_ratio) {
-    return IirAsymLowPass_new(bc, higher_ratio, lower_ratio);
+  static IirAsymLowPass* CppIirAsymLowPass_new<IirAsymLowPass>(fc_BuildCtx* bc, float raising_ratio, float lowering_ratio) {
+    return IirAsymLowPass_new(bc, raising_ratio, lowering_ratio);
   }
 
   template <>
-  static IirAsymLowPass* CppIirAsymLowPass_new_iblock<IirAsymLowPass>(fc_BuildCtx* bc, float higher_ratio, float lower_ratio) {
-    return (IirAsymLowPass*)IirAsymLowPass_new_iblock(bc, higher_ratio, lower_ratio);
+  static IirAsymLowPass* CppIirAsymLowPass_new_iblock<IirAsymLowPass>(fc_BuildCtx* bc, float raising_ratio, float lowering_ratio) {
+    return (IirAsymLowPass*)IirAsymLowPass_new_iblock(bc, raising_ratio, lowering_ratio);
   }
 
 
