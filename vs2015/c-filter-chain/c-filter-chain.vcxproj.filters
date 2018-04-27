@@ -93,6 +93,9 @@
     <ClCompile Include="..\..\source\include\fc_lib\templates\fc_IirLowPassTest.cpp">
       <Filter>Source Files\fc_lib\templates\blocks</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_IirAccelAsymLowPassTest.cpp">
+      <Filter>Source Files\fc_lib\templates\blocks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\test\test_config.h">
