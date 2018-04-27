@@ -44,9 +44,10 @@ IBlock* IirAccelAsymLowPass_new_iblock(fc_BuildCtx* bc, bool rise_faster, float 
  * Class method.
  * Use to check if an IBlock is a IirAccelAsymLowPass block.
  */
-bool IirAccelAsymLowPass_Test_type(IBlock* some_block)
+bool IirAccelAsymLowPass_Test_type(void* void_block)
 {
-  bool result = some_block->vtable->step == IirAccelAsymLowPass_vtable.step;
+  IBlock* iblock = (IBlock*)void_block;
+  bool result = iblock->vtable->step == IirAccelAsymLowPass_vtable.step;
   return result;
 }
 
@@ -84,7 +85,7 @@ fc_PTYPE IirAccelAsymLowPass_step(void* vself, fc_PTYPE input)
     //it rises fast, but lowers slow.
     //we accelerate the lowering.
 
-    if (input > self->last_output) {
+    if (input >= self->last_output) {
       should_reset_accel_slow_ratio = true;
       new_ratio = self->fast_ratio;
     }
@@ -98,7 +99,7 @@ fc_PTYPE IirAccelAsymLowPass_step(void* vself, fc_PTYPE input)
     //it lowers fast, but rises slow.
     //we accelerate the raising.
 
-    if (input < self->last_output) {
+    if (input <= self->last_output) {
       should_reset_accel_slow_ratio = true;
       new_ratio = self->fast_ratio;
     }
@@ -107,6 +108,11 @@ fc_PTYPE IirAccelAsymLowPass_step(void* vself, fc_PTYPE input)
     }
   }
 
+  double output = new_ratio * input + (1 - new_ratio) * self->last_output;  //TODO rewrite in efficient form. TODO use generic type numerator and denominator instead of floating point
+  result = round_result(output);
+  self->last_output = result;
+
+  //accelerate slow ratio for next iteration
   //TODO consider having the reset be affected by magnitude instead of just binary. To help with tracking 
   // a negative slope signal with tiny positive blips causes undesirable behaviour.
   // See https://github.com/adamfk/c-filter-chain/issues/20 
@@ -118,8 +124,5 @@ fc_PTYPE IirAccelAsymLowPass_step(void* vself, fc_PTYPE input)
   }
   ENSURE_BETWEEN(self->slow_ratio, self->accelerated_slow_ratio, self->fast_ratio);
 
-  double output = new_ratio * input + (1 - new_ratio) * self->last_output;  //TODO rewrite in efficient form. TODO use generic type numerator and denominator instead of floating point
-  result = round_result(output);
-  self->last_output = result;
   return result;
 }
