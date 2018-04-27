@@ -159,6 +159,15 @@ public:
 
   
 
+  template <typename BlockType, typename PrimitiveType> static void test_steps_repeatedly(BlockType* block, vector<InputOutput<PrimitiveType>> steps, int loopCount, double error_tolerance = 0)
+  {
+    for (size_t i = 0; i < loopCount; i++) {
+      SCOPED_TRACE(std::string("loop step ") + std::to_string(i + 1) + "/" + std::to_string(loopCount));
+      test_steps(block, steps, error_tolerance);
+      RETURN_IF_FATAL_FAILURE();
+    }
+  }
+
 
   /**
    * Do this when you want to ensure that it doesn't explode, but can't describe what output should look like
@@ -302,7 +311,7 @@ public:
         {
           SCOPED_TRACE("ctor index: " + std::to_string(ctor_index));
           build_test_destruct2_part(ctorGroup, ctor, &stepTestFunc);
-          RETURN_IF_ANY_FAILURE();
+          RETURN_IF_FATAL_FAILURE();
           ctor_index++;
         }
       }

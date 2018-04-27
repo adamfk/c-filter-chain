@@ -185,53 +185,46 @@ static StepFunc<BlockType> getStepTestRiseFaster(ICtorGroup<BlockType>* ctorGrou
     BlockType* b = block;
     //fc8_IirAccelAsymLowPass* b; //uncomment when you want code completion
 
+    const int errorTolerance = 1;
+    const int loopCount = 2;
+
     SCOPED_TRACE(func_name);
     ASSERT_EQ(b->rise_faster, true);
     ASSERT_NEAR(b->fast_ratio, 1.0, 0.00001);
     ASSERT_NEAR(b->slow_ratio, 0.1, 0.00001);
 
-    const PrimitiveType init_value = 0;
-    CppX_preload(block, init_value);
+    CppX_preload(block, 0);
 
     vector<InputOutput<PrimitiveType>> steps = {
-      InputOutput<PrimitiveType>{  0, 0 },
-      InputOutput<PrimitiveType>{  0, 0 },
-      InputOutput<PrimitiveType>{  3, 3 },
-      InputOutput<PrimitiveType>{  5, 5 },
-      InputOutput<PrimitiveType>{  100, 100},  //step #5
-      InputOutput<PrimitiveType>{  0, 90},  //step #6
-      InputOutput<PrimitiveType>{  0, 80},  //step #7
-      InputOutput<PrimitiveType>{  0, 70},  //step #8
-      InputOutput<PrimitiveType>{  0, 61},  //step #9
-      InputOutput<PrimitiveType>{  0, 52},  //step #10
-      InputOutput<PrimitiveType>{  0, 44},  //step #11
-      InputOutput<PrimitiveType>{  0, 36},  //step #12
-      InputOutput<PrimitiveType>{  0, 29},  //step #13
-      InputOutput<PrimitiveType>{  0, 23},  //step #14
-      InputOutput<PrimitiveType>{  0, 18},  //step #15
-      InputOutput<PrimitiveType>{  0, 13},  //step #16
-      InputOutput<PrimitiveType>{  0, 9},  //step #17
-      InputOutput<PrimitiveType>{  0, 6},  //step #18
-      InputOutput<PrimitiveType>{  0, 4},  //step #19
-      InputOutput<PrimitiveType>{  0, 2},  //step #20
-      InputOutput<PrimitiveType>{  0, 1},  //step #21
-      InputOutput<PrimitiveType>{  0, 1},  //step #22
-      InputOutput<PrimitiveType>{  0, 0},  //step #23
-      InputOutput<PrimitiveType>{  0, 0},  //step #24
-      InputOutput<PrimitiveType>{  0, 0},  //step #25
-      InputOutput<PrimitiveType>{  0, 0},  //step #26
+      InputOutput<PrimitiveType>{   0,   0 },
+      InputOutput<PrimitiveType>{   0,   0 },
+      InputOutput<PrimitiveType>{   3,   3 },
+      InputOutput<PrimitiveType>{   5,   5 },
+      InputOutput<PrimitiveType>{ 100, 100 },  //step #5
+      InputOutput<PrimitiveType>{   0,  90 },  //step #6
+      InputOutput<PrimitiveType>{   0,  80 },  //step #7
+      InputOutput<PrimitiveType>{   0,  70 },  //step #8
+      InputOutput<PrimitiveType>{   0,  61 },  //step #9
+      InputOutput<PrimitiveType>{   0,  52 },  //step #10
+      InputOutput<PrimitiveType>{   0,  44 },  //step #11
+      InputOutput<PrimitiveType>{   0,  36 },  //step #12
+      InputOutput<PrimitiveType>{   0,  29 },  //step #13
+      InputOutput<PrimitiveType>{   0,  23 },  //step #14
+      InputOutput<PrimitiveType>{   0,  18 },  //step #15
+      InputOutput<PrimitiveType>{   0,  13 },  //step #16
+      InputOutput<PrimitiveType>{   0,   9 },  //step #17
+      InputOutput<PrimitiveType>{   0,   6 },  //step #18
+      InputOutput<PrimitiveType>{   0,   4 },  //step #19
+      InputOutput<PrimitiveType>{   0,   2 },  //step #20
+      InputOutput<PrimitiveType>{   0,   1 },  //step #21
+      InputOutput<PrimitiveType>{   0,   1 },  //step #22
+      InputOutput<PrimitiveType>{   0,   0 },  //step #23
+      InputOutput<PrimitiveType>{   0,   0 },  //step #24
+      InputOutput<PrimitiveType>{   0,   0 },  //step #25
+      InputOutput<PrimitiveType>{   0,   0 },  //step #26
     };
 
-
-    {
-      SCOPED_TRACE("1st run");
-      TestCommon::test_steps(block, steps, 1);
-    }
-
-    {
-      SCOPED_TRACE("Repeated run");
-      TestCommon::test_steps(block, steps, 1);
-    }
+    TestCommon::test_steps_repeatedly(block, steps, loopCount, errorTolerance);
 
   };//end of test function
 
@@ -249,6 +242,9 @@ static StepFunc<BlockType> getStepTestLowerFaster(ICtorGroup<BlockType>* ctorGro
     BlockType* b = block;
     //fc8_IirAccelAsymLowPass* b; //uncomment when you want code completion
 
+    const int errorTolerance = 1;
+    const int loopCount = 2;
+
     SCOPED_TRACE(func_name);
     ASSERT_EQ(b->rise_faster, false);
     ASSERT_NEAR(b->fast_ratio, 1.0, 0.00001);
@@ -257,46 +253,37 @@ static StepFunc<BlockType> getStepTestLowerFaster(ICtorGroup<BlockType>* ctorGro
     CppX_preload(block, 100);
 
     vector<InputOutput<PrimitiveType>> steps = {
-      InputOutput<PrimitiveType>{  100, 100 },
-      InputOutput<PrimitiveType>{  100, 100 },
-      InputOutput<PrimitiveType>{  57, 57 },
-      InputOutput<PrimitiveType>{  13, 13 },
-      InputOutput<PrimitiveType>{ 10, 10},  //step #5
-      InputOutput<PrimitiveType>{ 100, 19},  //step #6
-      InputOutput<PrimitiveType>{ 100, 28},  //step #7
-      InputOutput<PrimitiveType>{ 100, 37},  //step #8
-      InputOutput<PrimitiveType>{ 100, 45},  //step #9
-      InputOutput<PrimitiveType>{ 100, 53},  //step #10
-      InputOutput<PrimitiveType>{ 100, 61},  //step #11
-      InputOutput<PrimitiveType>{ 100, 68},  //step #12
-      InputOutput<PrimitiveType>{ 100, 74},  //step #13
-      InputOutput<PrimitiveType>{ 100, 80},  //step #14
-      InputOutput<PrimitiveType>{ 100, 85},  //step #15
-      InputOutput<PrimitiveType>{ 100, 89},  //step #16
-      InputOutput<PrimitiveType>{ 100, 92},  //step #17
-      InputOutput<PrimitiveType>{ 100, 95},  //step #18
-      InputOutput<PrimitiveType>{ 100, 97},  //step #19
-      InputOutput<PrimitiveType>{ 100, 98},  //step #20
-      InputOutput<PrimitiveType>{ 100, 99},  //step #21
-      InputOutput<PrimitiveType>{ 100, 99},  //step #22
-      InputOutput<PrimitiveType>{ 100, 100},  //step #23
-      InputOutput<PrimitiveType>{ 100, 100},  //step #24
-      InputOutput<PrimitiveType>{ 100, 100},  //step #25
-      InputOutput<PrimitiveType>{ 100, 100},  //step #26
-      InputOutput<PrimitiveType>{ 100, 100},  //step #27
+      InputOutput<PrimitiveType>{ 100, 100 },
+      InputOutput<PrimitiveType>{ 100, 100 },
+      InputOutput<PrimitiveType>{  57,  57 },
+      InputOutput<PrimitiveType>{  13,  13 },
+      InputOutput<PrimitiveType>{  10,  10 },  //step #5
+      InputOutput<PrimitiveType>{ 100,  19 },  //step #6
+      InputOutput<PrimitiveType>{ 100,  28 },  //step #7
+      InputOutput<PrimitiveType>{ 100,  37 },  //step #8
+      InputOutput<PrimitiveType>{ 100,  45 },  //step #9
+      InputOutput<PrimitiveType>{ 100,  53 },  //step #10
+      InputOutput<PrimitiveType>{ 100,  61 },  //step #11
+      InputOutput<PrimitiveType>{ 100,  68 },  //step #12
+      InputOutput<PrimitiveType>{ 100,  74 },  //step #13
+      InputOutput<PrimitiveType>{ 100,  80 },  //step #14
+      InputOutput<PrimitiveType>{ 100,  85 },  //step #15
+      InputOutput<PrimitiveType>{ 100,  89 },  //step #16
+      InputOutput<PrimitiveType>{ 100,  92 },  //step #17
+      InputOutput<PrimitiveType>{ 100,  95 },  //step #18
+      InputOutput<PrimitiveType>{ 100,  97 },  //step #19
+      InputOutput<PrimitiveType>{ 100,  98 },  //step #20
+      InputOutput<PrimitiveType>{ 100,  99 },  //step #21
+      InputOutput<PrimitiveType>{ 100,  99 },  //step #22
+      InputOutput<PrimitiveType>{ 100, 100 },  //step #23
+      InputOutput<PrimitiveType>{ 100, 100 },  //step #24
+      InputOutput<PrimitiveType>{ 100, 100 },  //step #25
+      InputOutput<PrimitiveType>{ 100, 100 },  //step #26
+      InputOutput<PrimitiveType>{ 100, 100 },  //step #27
 
     };
 
-
-    {
-      SCOPED_TRACE("1st run");
-      TestCommon::test_steps(block, steps, 1);
-    }
-
-    {
-      SCOPED_TRACE("Repeated run");
-      TestCommon::test_steps(block, steps, 1);
-    }
+    TestCommon::test_steps_repeatedly(block, steps, loopCount, errorTolerance);
 
   };//end of test function
 
