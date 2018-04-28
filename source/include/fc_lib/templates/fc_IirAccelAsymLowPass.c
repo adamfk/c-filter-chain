@@ -77,7 +77,13 @@ fc_PTYPE IirAccelAsymLowPass_step(void* vself, fc_PTYPE input)
   fc_PTYPE result;
   float new_ratio;
 
-  bool should_reset_accel_slow_ratio = false;
+  typedef enum AccelAction
+  {
+    AccelAction_INCREASE,
+    AccelAction_DECREASE,
+  } AccelAction;
+
+  AccelAction accel_action = AccelAction_DECREASE;
 
   if (self->rise_faster) 
   {
@@ -86,10 +92,9 @@ fc_PTYPE IirAccelAsymLowPass_step(void* vself, fc_PTYPE input)
     //we accelerate the lowering.
 
     if (input >= self->last_output) {
-      should_reset_accel_slow_ratio = true;
       new_ratio = self->fast_ratio;
-    }
-    else {
+    } else {
+      accel_action = AccelAction_INCREASE;
       new_ratio = self->accelerated_slow_ratio;
     }
   }
@@ -100,10 +105,9 @@ fc_PTYPE IirAccelAsymLowPass_step(void* vself, fc_PTYPE input)
     //we accelerate the raising.
 
     if (input <= self->last_output) {
-      should_reset_accel_slow_ratio = true;
       new_ratio = self->fast_ratio;
-    }
-    else {
+    } else {
+      accel_action = AccelAction_INCREASE;
       new_ratio = self->accelerated_slow_ratio;
     }
   }
@@ -112,15 +116,24 @@ fc_PTYPE IirAccelAsymLowPass_step(void* vself, fc_PTYPE input)
   result = round_result(output);
   self->last_output = result;
 
-  //accelerate slow ratio for next iteration
+  //adjust accelerated_slow_ratio for next iteration
   //TODO consider having the reset be affected by magnitude instead of just binary. To help with tracking 
   // a negative slope signal with tiny positive blips causes undesirable behaviour.
   // See https://github.com/adamfk/c-filter-chain/issues/20 
 
-  if (should_reset_accel_slow_ratio) {
-    self->accelerated_slow_ratio *= 0.3f;
-  } else {
-    self->accelerated_slow_ratio *= 1.1f; //1.05 good for slowish
+  const float INCREASE_BY = 0.10f;  //0.05 good for slowish
+  const float DECREASE_BY = 0.70f;  //TODO consider having these be adjustable
+
+  switch (accel_action)
+  {
+    case AccelAction_INCREASE:
+      self->accelerated_slow_ratio *= 1 + INCREASE_BY;
+      break;
+
+    default:
+    case AccelAction_DECREASE:
+      self->accelerated_slow_ratio *= 1 - DECREASE_BY;
+      break;
   }
   ENSURE_BETWEEN(self->slow_ratio, self->accelerated_slow_ratio, self->fast_ratio);
 
