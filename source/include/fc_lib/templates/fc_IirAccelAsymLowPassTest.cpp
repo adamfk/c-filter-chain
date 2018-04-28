@@ -36,6 +36,8 @@ public:
   bool rise_faster;
   float fast_ratio;
   float slow_ratio;
+  float slow_ratio_inc_percent;
+  float slow_ratio_dec_percent;
 
   /**
    * Builds the function that will test ALL the fields in a constructed IirAccelAsymLowPass block.
@@ -49,6 +51,8 @@ public:
       EXPECT_EQ(b->fast_ratio, fast_ratio);
       EXPECT_EQ(b->slow_ratio, slow_ratio);
       EXPECT_EQ(b->accelerated_slow_ratio, 0);
+      EXPECT_EQ(b->slow_ratio_inc_percent, slow_ratio_inc_percent);
+      EXPECT_EQ(b->slow_ratio_dec_percent, slow_ratio_dec_percent);
       EXPECT_EQ(b->last_output, 0);
     };
   }
@@ -79,8 +83,9 @@ public:
       const bool rise_faster = true;
       const float fast_ratio = 1;
       const float slow_ratio = 0.1f;
-
-      auto ctorGroup = buildSimpleCtorGroup(rise_faster, fast_ratio, slow_ratio);
+      const float slow_ratio_inc_percent = 0.1f;
+      const float slow_ratio_dec_percent = 0.2f;
+      auto ctorGroup = buildSimpleCtorGroup(rise_faster, fast_ratio, slow_ratio, slow_ratio_inc_percent, slow_ratio_dec_percent);
       ctorGroup->stepTestFuncs.push_back(getStepTestRiseFaster<BlockType, PrimitiveType>(ctorGroup));
       groups.push_back(ctorGroup);
     }
@@ -88,8 +93,9 @@ public:
       const bool rise_faster = false;
       const float fast_ratio = 1;
       const float slow_ratio = 0.1f;
-
-      auto ctorGroup = buildSimpleCtorGroup(rise_faster, fast_ratio, slow_ratio);
+      const float slow_ratio_inc_percent = 0.1f;
+      const float slow_ratio_dec_percent = 0.2f;
+      auto ctorGroup = buildSimpleCtorGroup(rise_faster, fast_ratio, slow_ratio, slow_ratio_inc_percent, slow_ratio_dec_percent);
       ctorGroup->stepTestFuncs.push_back(getStepTestLowerFaster<BlockType, PrimitiveType>(ctorGroup));
       groups.push_back(ctorGroup);
     }
@@ -106,9 +112,11 @@ public:
    */
   virtual vector<ICtorGroup<BlockType>*> buildMemGrindCtorGroups(void) override
   {
+    const bool rise_faster = Randomization::get_for_type<bool>();
     const float fast_ratio = Randomization::get_for_type<float>();
     const float slow_ratio = Randomization::get_for_type<float>();
-    const bool rise_faster = Randomization::get_for_type<bool>();
+    const float slow_ratio_inc_percent = Randomization::get_for_type<float>();
+    const float slow_ratio_dec_percent = Randomization::get_for_type<float>();
 
     vector<ICtorGroup<BlockType>*> groups;
 
@@ -117,11 +125,11 @@ public:
     ctorGroup->ctors = {
       [=](fc_BuildCtx* bc) {
       sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
-        return CppIirAccelAsymLowPass_new<BlockType>(bc, rise_faster, fast_ratio, slow_ratio);
+        return CppIirAccelAsymLowPass_new<BlockType>(bc, rise_faster, fast_ratio, slow_ratio, slow_ratio_inc_percent, slow_ratio_dec_percent);
       },
       [=](fc_BuildCtx* bc) {
         sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
-        return CppIirAccelAsymLowPass_new_iblock<BlockType>(bc, rise_faster, fast_ratio, slow_ratio);
+        return CppIirAccelAsymLowPass_new_iblock<BlockType>(bc, rise_faster, fast_ratio, slow_ratio, slow_ratio_inc_percent, slow_ratio_dec_percent);
       },
     };
 
@@ -130,6 +138,8 @@ public:
     ctorGroup->rise_faster = rise_faster;
     ctorGroup->fast_ratio = fast_ratio;
     ctorGroup->slow_ratio = slow_ratio;
+    ctorGroup->slow_ratio_inc_percent = slow_ratio_inc_percent;
+    ctorGroup->slow_ratio_dec_percent = slow_ratio_dec_percent;
 
     groups.push_back(ctorGroup);
 
@@ -138,18 +148,18 @@ public:
 
 
 private:
-  IirAccelAsymLowPassCtorGroup<BlockType>* buildSimpleCtorGroup(bool rise_faster, float fast_ratio, float slow_ratio)
+  IirAccelAsymLowPassCtorGroup<BlockType>* buildSimpleCtorGroup(bool rise_faster, float fast_ratio, float slow_ratio, float slow_ratio_inc_percent, float slow_ratio_dec_percent)
   {
     auto ctorGroup = new IirAccelAsymLowPassCtorGroup<BlockType>();
 
     ctorGroup->ctors = {
       [=](fc_BuildCtx* bc) {
         sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
-        return CppIirAccelAsymLowPass_new<BlockType>(bc, rise_faster, fast_ratio, slow_ratio);
+        return CppIirAccelAsymLowPass_new<BlockType>(bc, rise_faster, fast_ratio, slow_ratio, slow_ratio_inc_percent, slow_ratio_dec_percent);
       },
       [=](fc_BuildCtx* bc) {
         sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
-        return CppIirAccelAsymLowPass_new_iblock<BlockType>(bc, rise_faster, fast_ratio, slow_ratio);
+        return CppIirAccelAsymLowPass_new_iblock<BlockType>(bc, rise_faster, fast_ratio, slow_ratio, slow_ratio_inc_percent, slow_ratio_dec_percent);
       },
       [=](fc_BuildCtx* bc) {
         sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
@@ -161,6 +171,8 @@ private:
         block->rise_faster = rise_faster;
         block->fast_ratio = fast_ratio;
         block->slow_ratio = slow_ratio;
+        block->slow_ratio_inc_percent = slow_ratio_inc_percent;
+        block->slow_ratio_dec_percent = slow_ratio_dec_percent;
         return block;
       },
     };
@@ -168,6 +180,8 @@ private:
     ctorGroup->rise_faster = rise_faster;
     ctorGroup->fast_ratio = fast_ratio;
     ctorGroup->slow_ratio = slow_ratio;
+    ctorGroup->slow_ratio_inc_percent = slow_ratio_inc_percent;
+    ctorGroup->slow_ratio_dec_percent = slow_ratio_dec_percent;
 
     return ctorGroup;
   }
@@ -195,6 +209,7 @@ static StepFunc<BlockType> getStepTestRiseFaster(ICtorGroup<BlockType>* ctorGrou
 
     CppX_preload(block, 0);
 
+    //TODO test de-acceleration as well
     vector<InputOutput<PrimitiveType>> steps = {
       InputOutput<PrimitiveType>{   0,   0 },
       InputOutput<PrimitiveType>{   0,   0 },
@@ -252,6 +267,7 @@ static StepFunc<BlockType> getStepTestLowerFaster(ICtorGroup<BlockType>* ctorGro
 
     CppX_preload(block, 100);
 
+    //TODO test de-acceleration as well
     vector<InputOutput<PrimitiveType>> steps = {
       InputOutput<PrimitiveType>{ 100, 100 },
       InputOutput<PrimitiveType>{ 100, 100 },

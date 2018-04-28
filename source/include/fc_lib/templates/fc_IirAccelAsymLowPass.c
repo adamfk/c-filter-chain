@@ -16,7 +16,7 @@ void IirAccelAsymLowPass_ctor(IirAccelAsymLowPass* iir)
 }
 
 
-IirAccelAsymLowPass* IirAccelAsymLowPass_new(fc_BuildCtx* bc, bool rise_faster, float fast_ratio, float slow_ratio)
+IirAccelAsymLowPass* IirAccelAsymLowPass_new(fc_BuildCtx* bc, bool rise_faster, float fast_ratio, float slow_ratio, float slow_ratio_inc_percent, float slow_ratio_dec_percent)
 {
   IirAccelAsymLowPass* self = allocate_or_ret_fail_ptr(bc, sizeof(IirAccelAsymLowPass));
 
@@ -25,6 +25,8 @@ IirAccelAsymLowPass* IirAccelAsymLowPass_new(fc_BuildCtx* bc, bool rise_faster, 
     self->rise_faster = rise_faster;
     self->fast_ratio = fast_ratio;
     self->slow_ratio = slow_ratio;
+    self->slow_ratio_inc_percent = slow_ratio_inc_percent;
+    self->slow_ratio_dec_percent = slow_ratio_dec_percent;
   }
 
   fc_BuildCtx_update_success_from_ptr(bc, self);
@@ -33,9 +35,9 @@ IirAccelAsymLowPass* IirAccelAsymLowPass_new(fc_BuildCtx* bc, bool rise_faster, 
 }
 
 
-IBlock* IirAccelAsymLowPass_new_iblock(fc_BuildCtx* bc, bool rise_faster, float fast_ratio, float slow_ratio)
+IBlock* IirAccelAsymLowPass_new_iblock(fc_BuildCtx* bc, bool rise_faster, float fast_ratio, float slow_ratio, float slow_ratio_inc_percent, float slow_ratio_dec_percent)
 {
-  IirAccelAsymLowPass* result = IirAccelAsymLowPass_new(bc, rise_faster, fast_ratio, slow_ratio);
+  IirAccelAsymLowPass* result = IirAccelAsymLowPass_new(bc, rise_faster, fast_ratio, slow_ratio, slow_ratio_inc_percent, slow_ratio_dec_percent);
   return (IBlock*)result;
 }
 
@@ -117,19 +119,15 @@ fc_PTYPE IirAccelAsymLowPass_step(void* vself, fc_PTYPE input)
   self->last_output = result;
 
   //adjust accelerated_slow_ratio for next iteration
-  //TODO consider having below acceleration parameters be adjustable
-  const float INCREASE_BY = 0.10f;  //0.05 good for slowish
-  const float DECREASE_BY = 0.20f;  //See https://github.com/adamfk/c-filter-chain/issues/20 
-
   switch (accel_action)
   {
     case AccelAction_INCREASE:
-      self->accelerated_slow_ratio *= 1 + INCREASE_BY;
+      self->accelerated_slow_ratio *= 1 + self->slow_ratio_inc_percent;
       break;
 
     default:
     case AccelAction_DECREASE:
-      self->accelerated_slow_ratio *= 1 - DECREASE_BY;
+      self->accelerated_slow_ratio *= 1 - self->slow_ratio_dec_percent;
       break;
   }
   ENSURE_BETWEEN(self->slow_ratio, self->accelerated_slow_ratio, self->fast_ratio);
