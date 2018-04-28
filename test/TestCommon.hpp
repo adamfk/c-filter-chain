@@ -159,7 +159,7 @@ public:
 
   
 
-  template <typename BlockType, typename PrimitiveType> static void test_steps_repeatedly(BlockType* block, vector<InputOutput<PrimitiveType>> steps, int loopCount, double error_tolerance = 0)
+  template <typename BlockType, typename PrimitiveType> static void test_steps_repeatedly(BlockType* block, vector<InputOutput<PrimitiveType>> steps, size_t loopCount, double error_tolerance = 0)
   {
     for (size_t i = 0; i < loopCount; i++) {
       SCOPED_TRACE(std::string("loop step ") + std::to_string(i + 1) + "/" + std::to_string(loopCount));

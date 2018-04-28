@@ -185,8 +185,8 @@ static StepFunc<BlockType> getStepTestRiseFaster(ICtorGroup<BlockType>* ctorGrou
     BlockType* b = block;
     //fc8_IirAccelAsymLowPass* b; //uncomment when you want code completion
 
-    const int errorTolerance = 1;
-    const int loopCount = 2;
+    const double errorTolerance = 1;
+    const size_t loopCount = 2;
 
     SCOPED_TRACE(func_name);
     ASSERT_EQ(b->rise_faster, true);
@@ -242,8 +242,8 @@ static StepFunc<BlockType> getStepTestLowerFaster(ICtorGroup<BlockType>* ctorGro
     BlockType* b = block;
     //fc8_IirAccelAsymLowPass* b; //uncomment when you want code completion
 
-    const int errorTolerance = 1;
-    const int loopCount = 2;
+    const double errorTolerance = 1;
+    const size_t loopCount = 2;
 
     SCOPED_TRACE(func_name);
     ASSERT_EQ(b->rise_faster, false);
