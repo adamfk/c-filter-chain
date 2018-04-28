@@ -117,12 +117,9 @@ fc_PTYPE IirAccelAsymLowPass_step(void* vself, fc_PTYPE input)
   self->last_output = result;
 
   //adjust accelerated_slow_ratio for next iteration
-  //TODO consider having the reset be affected by magnitude instead of just binary. To help with tracking 
-  // a negative slope signal with tiny positive blips causes undesirable behaviour.
-  // See https://github.com/adamfk/c-filter-chain/issues/20 
-
+  //TODO consider having below acceleration parameters be adjustable
   const float INCREASE_BY = 0.10f;  //0.05 good for slowish
-  const float DECREASE_BY = 0.70f;  //TODO consider having these be adjustable
+  const float DECREASE_BY = 0.20f;  //See https://github.com/adamfk/c-filter-chain/issues/20 
 
   switch (accel_action)
   {
