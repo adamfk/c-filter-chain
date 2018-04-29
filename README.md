@@ -13,8 +13,8 @@ c-filter-chain
 ## Emscripten
 * install instructions: http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html
 
-NOTE! the first time running the fc_lib `build_script.bat`, it will take a few minutes for emcc to get setup:
-
+### Windows
+NOTE! the first time running the fc_lib build script, it will take a few minutes for emcc to get setup:
 ```
 INFO:root:generating system asset: is_vanilla.txt... (this will be cached in "C:\some\path\.emscripten_cache\is_vanilla.txt" for subsequent builds)
 INFO:root: - ok
@@ -24,6 +24,15 @@ INFO:root: - ok
 INFO:root:generating system library: libc.bc... (this will be cached in "C:\some\path\.emscripten_cache\asmjs\libc.bc" for subsequent builds)
 INFO:root: - ok
 ```
+
+`build_script.bat`
+
+### Linux Tips
+If you are working from a fresh Ubuntu install, ensure you run `sudo apt install python-minimal` so that `python` will
+resolve to python2.7. If you do ~~`sudo apt-get python2.7`~~, `python` will not be found. Aliasing doesn't work either as emsdk uses `#!/usr/bin/env python` shebang.
+
+emsdk does not appear to work with python3 on linux.
+
 
 ## Dummy Variables - OUTDATED!
 The c++ test code often uses dummy variables to make a unique function/method signature for a type T so that
