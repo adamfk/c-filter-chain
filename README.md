@@ -10,6 +10,20 @@ c-filter-chain
   * Needs to be through allocator
 * use smart pointers. leaking memory in test code when creating IMetaNewx objects
 
+## Emscripten
+* install instructions: http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html
+
+NOTE! the first time running the fc_lib `build_script.bat`, it will take a few minutes for emcc to get setup:
+
+```
+INFO:root:generating system asset: is_vanilla.txt... (this will be cached in "C:\some\path\.emscripten_cache\is_vanilla.txt" for subsequent builds)
+INFO:root: - ok
+INFO:root:(Emscripten: Running sanity checks)
+INFO:root:generating system library: dlmalloc.bc... (this will be cached in "C:\some\path\.emscripten_cache\asmjs\dlmalloc.bc" for subsequent builds)
+INFO:root: - ok
+INFO:root:generating system library: libc.bc... (this will be cached in "C:\some\path\.emscripten_cache\asmjs\libc.bc" for subsequent builds)
+INFO:root: - ok
+```
 
 ## Dummy Variables - OUTDATED!
 The c++ test code often uses dummy variables to make a unique function/method signature for a type T so that
