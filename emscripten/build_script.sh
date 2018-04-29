@@ -23,4 +23,4 @@ debug_info=-g4
 #        generates source maps.
 
 
-emcc $optimization  $debug_info  -I$fc_lib_inc  $fc_lib_src/fc_allocate.c
+emcc $optimization  $debug_info  -I$fc_lib_inc -I.  $fc_lib_src/*.c
