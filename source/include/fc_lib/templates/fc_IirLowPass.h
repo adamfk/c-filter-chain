@@ -42,6 +42,32 @@ fc_PTYPE IirLowPass_step(void* self, fc_PTYPE input);
 
 
 
+
+//#########################################################################################################
+// Unit testing stuff
+//#########################################################################################################
+#if defined(__cplusplus) && defined(__EMSCRIPTEN__)
+extern "C++" {
+
+#include <emscripten/bind.h>
+using namespace emscripten;
+
+
+EMSCRIPTEN_BINDINGS(IirLowPass) {
+
+  class_<IirLowPass>("IirLowPass")
+    .constructor<>()
+    //.property("block", &IirLowPass::block)
+    .property("new_ratio", &IirLowPass::new_ratio)
+    .property("last_output", &IirLowPass::last_output)
+    ;
+}
+
+} //end extern c++
+#endif
+
+
+
 //#########################################################################################################
 // Unit testing stuff
 //#########################################################################################################

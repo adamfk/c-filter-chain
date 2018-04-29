@@ -23,4 +23,6 @@ debug_info=-g4
 #        generates source maps.
 
 
-emcc $optimization  $debug_info  -I$fc_lib_inc -I.  $fc_lib_src/*.c
+emcc  $optimization  $debug_info  -I$fc_lib_inc -I.  $fc_lib_src/*.c  -o temp/c_stuff.o
+
+emcc  $optimization  $debug_info  -I$fc_lib_inc -I.  temp/c_stuff.o  --bind ./fc_lib_wrapper.cpp   -o fc_lib.js
