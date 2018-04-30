@@ -21,6 +21,21 @@
         console.log(window.output);
     }
     
+    console.log(iir);
+    
+    let mbc = Module.makeMallocatorBuildContext();
+    let iirNew = Module.IirLowPass_new(mbc, 0.234);
+    
+    if (mbc.one_or_more_failures) {throw "allocation failure!"; }
+    
+    Module.EmIirLowPass_preload(iirNew, 100);
+    iirNew.new_ratio = 0.5;
+    
+    for(let i=0; i < 5; i++) {
+        window.output = Module.EmIirLowPass_step(iirNew, 0);
+        console.log(window.output);
+    }
+    
   </script>  
 
   <body>

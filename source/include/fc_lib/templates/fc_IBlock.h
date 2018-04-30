@@ -68,3 +68,25 @@ void IBlock_destruct_fields(IBlock* self, fc_IAllocator const * allocator);
 void IBlock_run_visitor(IBlock* self, fc_IVisitor* visitor);
 void IBlock_preload(IBlock* self, fc_PTYPE input);
 
+
+
+
+
+//#########################################################################################################
+// Emscripten stuff
+//#########################################################################################################
+
+#if defined(__cplusplus) && defined(__EMSCRIPTEN__)
+
+extern "C++" {
+
+#include <emscripten/bind.h>
+  using namespace emscripten;
+
+  EMSCRIPTEN_BINDINGS(IBlock) {
+    class_<IBlock>("IBlock")
+      .constructor<>();
+  }
+
+} //end extern c++
+#endif

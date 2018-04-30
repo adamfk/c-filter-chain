@@ -44,7 +44,7 @@ fc_PTYPE IirLowPass_step(void* self, fc_PTYPE input);
 
 
 //#########################################################################################################
-// Unit testing stuff
+// Emscripten stuff
 //#########################################################################################################
 
 #if defined(__cplusplus) && defined(__EMSCRIPTEN__)
@@ -56,22 +56,75 @@ static fc_PTYPE EmIirLowPass_step(IirLowPass* self, fc_PTYPE input) {
   return IirLowPass_step(self, input);
 }
 
+//casting back and forth from these functions worked :)
+static IBlock* ilpToIblock(IirLowPass* block) {
+  return (IBlock*)block;
+}
+static IirLowPass* iblockToIlp(IBlock* iblock) {
+  return (IirLowPass*)iblock;
+}
+
+
 extern "C++" {
 
 #include <emscripten/bind.h>
 using namespace emscripten;
 
 
+#include "fc_lib/fc_Mallocator.h"
+
+//static fc_IAllocator const * getMallocator(void) {
+//  return &fc_Mallocator;
+//}
+//
+#include "fc_lib/fc_allocate.h"
+static IBlock* const get_ALLOCATE_FAIL_PTR() {
+  return (IBlock*)fc_ALLOCATE_FAIL_PTR;
+}
+
+static bool is_FAIL_PTR(IBlock* b) {
+  return b == fc_ALLOCATE_FAIL_PTR;
+}
+
+static fc_BuildCtx makeMallocatorBuildContext() {
+  fc_BuildCtx bc = {};
+  bc.allocator = &fc_Mallocator;
+  return bc;
+}
+
 EMSCRIPTEN_BINDINGS(IirLowPass) {
+
+  function("get_ALLOCATE_FAIL_PTR", get_ALLOCATE_FAIL_PTR, allow_raw_pointers());
+  function("is_FAIL_PTR", is_FAIL_PTR, allow_raw_pointers());
+
+
+  //class_<fc_IAllocator>("fc_IAllocator")
+  //  .constructor<>();
+
+  function("makeMallocatorBuildContext", makeMallocatorBuildContext, allow_raw_pointers());
+  
+
+
+  class_<fc_BuildCtx>("fc_BuildCtx")
+    .constructor<>()
+    //.property("allocator", &fc_BuildCtx::allocator, allow_raw_pointers()) //emcc doesn't like this
+    .property("min_working_buffer_size", &fc_BuildCtx::min_working_buffer_size)
+    .property("one_or_more_failures", &fc_BuildCtx::one_or_more_failures)
+    ;
+  
 
   class_<IirLowPass>("IirLowPass")
     .constructor<>()
-    //.property("block", &IirLowPass::block)
+    .property("block", &IirLowPass::block)
     .property("new_ratio", &IirLowPass::new_ratio)
     .property("last_output", &IirLowPass::last_output)
     ;
 
-  function("IirLowPass_ctor",    IirLowPass_ctor, allow_raw_pointers());
+  function("ilpToIblock", ilpToIblock, allow_raw_pointers());
+  function("iblockToIlp", iblockToIlp, allow_raw_pointers());
+
+  function("IirLowPass_ctor", IirLowPass_ctor, allow_raw_pointers());
+  function("IirLowPass_new", IirLowPass_new, allow_raw_pointers());
 
   function("EmIirLowPass_preload", EmIirLowPass_preload, allow_raw_pointers());
   function("EmIirLowPass_step", EmIirLowPass_step, allow_raw_pointers());
