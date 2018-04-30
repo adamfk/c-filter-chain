@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <script src="cwrap-tests.js"></script>
+    
+  <script>
+    pow2 = Module.cwrap('pow2', 'number', ['number']);
+    
+    count_list = Module.cwrap("count_list", "number", ['number']);
+    
+    ptrArr = new Uint32Array([8,4,2,0]);
+    numBytes = ptrArr.length * ptrArr.BYTES_PER_ELEMENT;
+    arrPtr = Module._malloc(numBytes);
+    heap = new Uint8Array(Module.HEAPU8.buffer, arrPtr, numBytes);
+    heap.set(new Uint8Array(ptrArr.buffer));
+    
+    result = count_list(arrPtr);
+    console.log(result);
+    
+  </script>  
+
+  <body>
+  cwrap tests
+  </body>
+
+</html>

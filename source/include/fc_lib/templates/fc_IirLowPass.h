@@ -92,11 +92,24 @@ static fc_BuildCtx makeMallocatorBuildContext() {
   return bc;
 }
 
+
+int count_list(IBlock* list) {
+//int count_list(IBlock* (list[])) {
+  int i = 0;
+  return 1;
+  /*while (list[i] != NULL) {
+    i++;
+  }
+  return i;*/
+}
+
+
 EMSCRIPTEN_BINDINGS(IirLowPass) {
 
   function("get_ALLOCATE_FAIL_PTR", get_ALLOCATE_FAIL_PTR, allow_raw_pointers());
   function("is_FAIL_PTR", is_FAIL_PTR, allow_raw_pointers());
 
+  function("count_list", count_list, allow_raw_pointers());
 
   //class_<fc_IAllocator>("fc_IAllocator")
   //  .constructor<>();

@@ -79,3 +79,35 @@ void BlockChain_destruct_fields(void* self, fc_IAllocator const * allocator);
 void BlockChain_run_visitor(void* self, fc_IVisitor* visitor);
 
 
+
+
+
+
+//#########################################################################################################
+// Emscripten stuff
+//#########################################################################################################
+
+#if defined(__cplusplus) && defined(__EMSCRIPTEN__)
+
+extern "C++" {
+
+  #include <emscripten/bind.h>
+  using namespace emscripten;
+
+  EMSCRIPTEN_BINDINGS(BlockChain) {
+    class_<BlockChain>("BlockChain")
+      .constructor<>()
+      .property("block", &BlockChain::block)
+      .property("block_count", &BlockChain::block_count)
+      ;
+
+    function("BlockChain_new", BlockChain_new, allow_raw_pointers());
+
+  }
+
+
+
+
+} //end extern c++
+#endif
+
