@@ -46,7 +46,16 @@ fc_PTYPE IirLowPass_step(void* self, fc_PTYPE input);
 //#########################################################################################################
 // Unit testing stuff
 //#########################################################################################################
+
 #if defined(__cplusplus) && defined(__EMSCRIPTEN__)
+
+static void EmIirLowPass_preload(IirLowPass* self, fc_PTYPE input) {
+  IirLowPass_preload(self, input);
+}
+static fc_PTYPE EmIirLowPass_step(IirLowPass* self, fc_PTYPE input) {
+  return IirLowPass_step(self, input);
+}
+
 extern "C++" {
 
 #include <emscripten/bind.h>
@@ -61,6 +70,11 @@ EMSCRIPTEN_BINDINGS(IirLowPass) {
     .property("new_ratio", &IirLowPass::new_ratio)
     .property("last_output", &IirLowPass::last_output)
     ;
+
+  function("IirLowPass_ctor",    IirLowPass_ctor, allow_raw_pointers());
+
+  function("EmIirLowPass_preload", EmIirLowPass_preload, allow_raw_pointers());
+  function("EmIirLowPass_step", EmIirLowPass_step, allow_raw_pointers());
 }
 
 } //end extern c++

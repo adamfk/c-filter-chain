@@ -1444,11 +1444,11 @@ var ASM_CONSTS = [];
 
 STATIC_BASE = GLOBAL_BASE;
 
-STATICTOP = STATIC_BASE + 4160;
+STATICTOP = STATIC_BASE + 4272;
 /* global initializers */  __ATINIT__.push({ func: function() { __GLOBAL__sub_I_fc_lib_wrapper_cpp() } }, { func: function() { __GLOBAL__sub_I_bind_cpp() } });
 
 
-/* memory initializer */ allocate([200,2,0,0,55,3,0,0,0,0,0,0,24,0,0,0,92,2,0,0,74,3,0,0,200,2,0,0,100,3,0,0,1,0,0,0,24,0,0,0,92,2,0,0,149,6,0,0,92,2,0,0,180,6,0,0,92,2,0,0,211,6,0,0,92,2,0,0,242,6,0,0,92,2,0,0,17,7,0,0,92,2,0,0,48,7,0,0,92,2,0,0,79,7,0,0,92,2,0,0,110,7,0,0,92,2,0,0,141,7,0,0,92,2,0,0,172,7,0,0,92,2,0,0,203,7,0,0,92,2,0,0,234,7,0,0,92,2,0,0,9,8,0,0,228,2,0,0,28,8,0,0,0,0,0,0,1,0,0,0,176,0,0,0,0,0,0,0,92,2,0,0,91,8,0,0,228,2,0,0,129,8,0,0,0,0,0,0,1,0,0,0,176,0,0,0,0,0,0,0,228,2,0,0,192,8,0,0,0,0,0,0,1,0,0,0,176,0,0,0,0,0,0,0,132,2,0,0,82,9,0,0,248,0,0,0,0,0,0,0,132,2,0,0,255,8,0,0,8,1,0,0,0,0,0,0,92,2,0,0,32,9,0,0,132,2,0,0,45,9,0,0,232,0,0,0,0,0,0,0,132,2,0,0,152,9,0,0,248,0,0,0,0,0,0,0,132,2,0,0,116,9,0,0,32,1,0,0,0,0,0,0,132,2,0,0,186,9,0,0,248,0,0,0,0,0,0,0,172,2,0,0,226,9,0,0,172,2,0,0,228,9,0,0,172,2,0,0,231,9,0,0,172,2,0,0,233,9,0,0,172,2,0,0,235,9,0,0,172,2,0,0,237,9,0,0,172,2,0,0,239,9,0,0,172,2,0,0,241,9,0,0,172,2,0,0,243,9,0,0,172,2,0,0,245,9,0,0,172,2,0,0,247,9,0,0,172,2,0,0,249,9,0,0,172,2,0,0,251,9,0,0,172,2,0,0,253,9,0,0,132,2,0,0,255,9,0,0,232,0,0,0,0,0,0,0,8,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,3,0,0,0,54,12,0,0,0,4,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,255,255,255,255,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,212,1,0,0,0,0,0,0,232,0,0,0,4,0,0,0,5,0,0,0,6,0,0,0,7,0,0,0,8,0,0,0,9,0,0,0,10,0,0,0,11,0,0,0,0,0,0,0,16,1,0,0,4,0,0,0,12,0,0,0,6,0,0,0,7,0,0,0,8,0,0,0,13,0,0,0,14,0,0,0,15,0,0,0,0,0,0,0,64,1,0,0,4,0,0,0,16,0,0,0,6,0,0,0,7,0,0,0,17,0,0,0,0,0,0,0,48,1,0,0,4,0,0,0,18,0,0,0,6,0,0,0,7,0,0,0,19,0,0,0,0,0,0,0,192,1,0,0,4,0,0,0,20,0,0,0,6,0,0,0,7,0,0,0,8,0,0,0,21,0,0,0,22,0,0,0,23,0,0,0,73,105,114,76,111,119,80,97,115,115,0,110,101,119,95,114,97,116,105,111,0,108,97,115,116,95,111,117,116,112,117,116,0,118,105,105,105,0,105,105,105,0,118,105,105,102,0,102,105,105,0,80,49,53,102,99,51,50,95,73,105,114,76,111,119,80,97,115,115,0,49,53,102,99,51,50,95,73,105,114,76,111,119,80,97,115,115,0,118,105,0,118,0,105,105,0,80,75,49,53,102,99,51,50,95,73,105,114,76,111,119,80,97,115,115,0,118,111,105,100,0,98,111,111,108,0,99,104,97,114,0,115,105,103,110,101,100,32,99,104,97,114,0,117,110,115,105,103,110,101,100,32,99,104,97,114,0,115,104,111,114,116,0,117,110,115,105,103,110,101,100,32,115,104,111,114,116,0,105,110,116,0,117,110,115,105,103,110,101,100,32,105,110,116,0,108,111,110,103,0,117,110,115,105,103,110,101,100,32,108,111,110,103,0,102,108,111,97,116,0,100,111,117,98,108,101,0,115,116,100,58,58,115,116,114,105,110,103,0,115,116,100,58,58,98,97,115,105,99,95,115,116,114,105,110,103,60,117,110,115,105,103,110,101,100,32,99,104,97,114,62,0,115,116,100,58,58,119,115,116,114,105,110,103,0,101,109,115,99,114,105,112,116,101,110,58,58,118,97,108,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,99,104,97,114,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,115,105,103,110,101,100,32,99,104,97,114,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,117,110,115,105,103,110,101,100,32,99,104,97,114,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,115,104,111,114,116,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,117,110,115,105,103,110,101,100,32,115,104,111,114,116,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,105,110,116,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,117,110,115,105,103,110,101,100,32,105,110,116,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,108,111,110,103,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,117,110,115,105,103,110,101,100,32,108,111,110,103,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,105,110,116,56,95,116,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,117,105,110,116,56,95,116,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,105,110,116,49,54,95,116,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,117,105,110,116,49,54,95,116,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,105,110,116,51,50,95,116,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,117,105,110,116,51,50,95,116,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,102,108,111,97,116,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,100,111,117,98,108,101,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,108,111,110,103,32,100,111,117,98,108,101,62,0,78,49,48,101,109,115,99,114,105,112,116,101,110,49,49,109,101,109,111,114,121,95,118,105,101,119,73,101,69,69,0,78,49,48,101,109,115,99,114,105,112,116,101,110,49,49,109,101,109,111,114,121,95,118,105,101,119,73,100,69,69,0,78,49,48,101,109,115,99,114,105,112,116,101,110,49,49,109,101,109,111,114,121,95,118,105,101,119,73,102,69,69,0,78,49,48,101,109,115,99,114,105,112,116,101,110,49,49,109,101,109,111,114,121,95,118,105,101,119,73,109,69,69,0,78,49,48,101,109,115,99,114,105,112,116,101,110,49,49,109,101,109,111,114,121,95,118,105,101,119,73,108,69,69,0,78,49,48,101,109,115,99,114,105,112,116,101,110,49,49,109,101,109,111,114,121,95,118,105,101,119,73,106,69,69,0,78,49,48,101,109,115,99,114,105,112,116,101,110,49,49,109,101,109,111,114,121,95,118,105,101,119,73,105,69,69,0,78,49,48,101,109,115,99,114,105,112,116,101,110,49,49,109,101,109,111,114,121,95,118,105,101,119,73,116,69,69,0,78,49,48,101,109,115,99,114,105,112,116,101,110,49,49,109,101,109,111,114,121,95,118,105,101,119,73,115,69,69,0,78,49,48,101,109,115,99,114,105,112,116,101,110,49,49,109,101,109,111,114,121,95,118,105,101,119,73,104,69,69,0,78,49,48,101,109,115,99,114,105,112,116,101,110,49,49,109,101,109,111,114,121,95,118,105,101,119,73,97,69,69,0,78,49,48,101,109,115,99,114,105,112,116,101,110,49,49,109,101,109,111,114,121,95,118,105,101,119,73,99,69,69,0,78,49,48,101,109,115,99,114,105,112,116,101,110,51,118,97,108,69,0,78,83,116,51,95,95,50,49,50,98,97,115,105,99,95,115,116,114,105,110,103,73,119,78,83,95,49,49,99,104,97,114,95,116,114,97,105,116,115,73,119,69,69,78,83,95,57,97,108,108,111,99,97,116,111,114,73,119,69,69,69,69,0,78,83,116,51,95,95,50,50,49,95,95,98,97,115,105,99,95,115,116,114,105,110,103,95,99,111,109,109,111,110,73,76,98,49,69,69,69,0,78,83,116,51,95,95,50,49,50,98,97,115,105,99,95,115,116,114,105,110,103,73,104,78,83,95,49,49,99,104,97,114,95,116,114,97,105,116,115,73,104,69,69,78,83,95,57,97,108,108,111,99,97,116,111,114,73,104,69,69,69,69,0,78,83,116,51,95,95,50,49,50,98,97,115,105,99,95,115,116,114,105,110,103,73,99,78,83,95,49,49,99,104,97,114,95,116,114,97,105,116,115,73,99,69,69,78,83,95,57,97,108,108,111,99,97,116,111,114,73,99,69,69,69,69,0,78,49,48,95,95,99,120,120,97,98,105,118,49,49,54,95,95,115,104,105,109,95,116,121,112,101,95,105,110,102,111,69,0,83,116,57,116,121,112,101,95,105,110,102,111,0,78,49,48,95,95,99,120,120,97,98,105,118,49,50,48,95,95,115,105,95,99,108,97,115,115,95,116,121,112,101,95,105,110,102,111,69,0,78,49,48,95,95,99,120,120,97,98,105,118,49,49,55,95,95,99,108,97,115,115,95,116,121,112,101,95,105,110,102,111,69,0,78,49,48,95,95,99,120,120,97,98,105,118,49,49,57,95,95,112,111,105,110,116,101,114,95,116,121,112,101,95,105,110,102,111,69,0,78,49,48,95,95,99,120,120,97,98,105,118,49,49,55,95,95,112,98,97,115,101,95,116,121,112,101,95,105,110,102,111,69,0,78,49,48,95,95,99,120,120,97,98,105,118,49,50,51,95,95,102,117,110,100,97,109,101,110,116,97,108,95,116,121,112,101,95,105,110,102,111,69,0,118,0,68,110,0,98,0,99,0,104,0,97,0,115,0,116,0,105,0,106,0,108,0,109,0,102,0,100,0,78,49,48,95,95,99,120,120,97,98,105,118,49,50,49,95,95,118,109,105,95,99,108,97,115,115,95,116,121,112,101,95,105,110,102,111,69,0], "i8", ALLOC_NONE, GLOBAL_BASE);
+/* memory initializer */ allocate([248,2,0,0,145,3,0,0,0,0,0,0,24,0,0,0,140,2,0,0,164,3,0,0,248,2,0,0,212,3,0,0,1,0,0,0,24,0,0,0,140,2,0,0,5,7,0,0,140,2,0,0,36,7,0,0,140,2,0,0,67,7,0,0,140,2,0,0,98,7,0,0,140,2,0,0,129,7,0,0,140,2,0,0,160,7,0,0,140,2,0,0,191,7,0,0,140,2,0,0,222,7,0,0,140,2,0,0,253,7,0,0,140,2,0,0,28,8,0,0,140,2,0,0,59,8,0,0,140,2,0,0,90,8,0,0,140,2,0,0,121,8,0,0,20,3,0,0,140,8,0,0,0,0,0,0,1,0,0,0,176,0,0,0,0,0,0,0,140,2,0,0,203,8,0,0,20,3,0,0,241,8,0,0,0,0,0,0,1,0,0,0,176,0,0,0,0,0,0,0,20,3,0,0,48,9,0,0,0,0,0,0,1,0,0,0,176,0,0,0,0,0,0,0,180,2,0,0,194,9,0,0,248,0,0,0,0,0,0,0,180,2,0,0,111,9,0,0,8,1,0,0,0,0,0,0,140,2,0,0,144,9,0,0,180,2,0,0,157,9,0,0,232,0,0,0,0,0,0,0,180,2,0,0,8,10,0,0,248,0,0,0,0,0,0,0,180,2,0,0,228,9,0,0,32,1,0,0,0,0,0,0,180,2,0,0,42,10,0,0,248,0,0,0,0,0,0,0,220,2,0,0,82,10,0,0,220,2,0,0,84,10,0,0,220,2,0,0,87,10,0,0,220,2,0,0,89,10,0,0,220,2,0,0,91,10,0,0,220,2,0,0,93,10,0,0,220,2,0,0,95,10,0,0,220,2,0,0,97,10,0,0,220,2,0,0,99,10,0,0,220,2,0,0,101,10,0,0,220,2,0,0,103,10,0,0,220,2,0,0,105,10,0,0,220,2,0,0,107,10,0,0,220,2,0,0,109,10,0,0,180,2,0,0,111,10,0,0,232,0,0,0,0,0,0,0,1,0,0,0,2,0,0,0,3,0,0,0,4,0,0,0,144,1,0,0,8,0,0,0,144,1,0,0,80,1,0,0,8,0,0,0,144,1,0,0,80,1,0,0,8,0,0,0,8,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,7,0,0,0,166,12,0,0,0,4,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,255,255,255,255,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,0,0,0,0,0,0,232,0,0,0,8,0,0,0,9,0,0,0,10,0,0,0,11,0,0,0,12,0,0,0,13,0,0,0,14,0,0,0,15,0,0,0,0,0,0,0,16,1,0,0,8,0,0,0,16,0,0,0,10,0,0,0,11,0,0,0,12,0,0,0,17,0,0,0,18,0,0,0,19,0,0,0,0,0,0,0,64,1,0,0,8,0,0,0,20,0,0,0,10,0,0,0,11,0,0,0,21,0,0,0,0,0,0,0,48,1,0,0,8,0,0,0,22,0,0,0,10,0,0,0,11,0,0,0,23,0,0,0,0,0,0,0,192,1,0,0,8,0,0,0,24,0,0,0,10,0,0,0,11,0,0,0,12,0,0,0,25,0,0,0,26,0,0,0,27,0,0,0,73,105,114,76,111,119,80,97,115,115,0,110,101,119,95,114,97,116,105,111,0,108,97,115,116,95,111,117,116,112,117,116,0,73,105,114,76,111,119,80,97,115,115,95,99,116,111,114,0,69,109,73,105,114,76,111,119,80,97,115,115,95,112,114,101,108,111,97,100,0,69,109,73,105,114,76,111,119,80,97,115,115,95,115,116,101,112,0,105,105,105,105,0,80,49,53,102,99,51,50,95,73,105,114,76,111,119,80,97,115,115,0,49,53,102,99,51,50,95,73,105,114,76,111,119,80,97,115,115,0,118,105,105,0,118,105,105,105,0,105,105,105,0,118,105,105,102,0,102,105,105,0,118,105,0,118,0,105,105,0,80,75,49,53,102,99,51,50,95,73,105,114,76,111,119,80,97,115,115,0,118,111,105,100,0,98,111,111,108,0,99,104,97,114,0,115,105,103,110,101,100,32,99,104,97,114,0,117,110,115,105,103,110,101,100,32,99,104,97,114,0,115,104,111,114,116,0,117,110,115,105,103,110,101,100,32,115,104,111,114,116,0,105,110,116,0,117,110,115,105,103,110,101,100,32,105,110,116,0,108,111,110,103,0,117,110,115,105,103,110,101,100,32,108,111,110,103,0,102,108,111,97,116,0,100,111,117,98,108,101,0,115,116,100,58,58,115,116,114,105,110,103,0,115,116,100,58,58,98,97,115,105,99,95,115,116,114,105,110,103,60,117,110,115,105,103,110,101,100,32,99,104,97,114,62,0,115,116,100,58,58,119,115,116,114,105,110,103,0,101,109,115,99,114,105,112,116,101,110,58,58,118,97,108,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,99,104,97,114,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,115,105,103,110,101,100,32,99,104,97,114,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,117,110,115,105,103,110,101,100,32,99,104,97,114,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,115,104,111,114,116,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,117,110,115,105,103,110,101,100,32,115,104,111,114,116,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,105,110,116,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,117,110,115,105,103,110,101,100,32,105,110,116,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,108,111,110,103,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,117,110,115,105,103,110,101,100,32,108,111,110,103,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,105,110,116,56,95,116,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,117,105,110,116,56,95,116,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,105,110,116,49,54,95,116,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,117,105,110,116,49,54,95,116,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,105,110,116,51,50,95,116,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,117,105,110,116,51,50,95,116,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,102,108,111,97,116,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,100,111,117,98,108,101,62,0,101,109,115,99,114,105,112,116,101,110,58,58,109,101,109,111,114,121,95,118,105,101,119,60,108,111,110,103,32,100,111,117,98,108,101,62,0,78,49,48,101,109,115,99,114,105,112,116,101,110,49,49,109,101,109,111,114,121,95,118,105,101,119,73,101,69,69,0,78,49,48,101,109,115,99,114,105,112,116,101,110,49,49,109,101,109,111,114,121,95,118,105,101,119,73,100,69,69,0,78,49,48,101,109,115,99,114,105,112,116,101,110,49,49,109,101,109,111,114,121,95,118,105,101,119,73,102,69,69,0,78,49,48,101,109,115,99,114,105,112,116,101,110,49,49,109,101,109,111,114,121,95,118,105,101,119,73,109,69,69,0,78,49,48,101,109,115,99,114,105,112,116,101,110,49,49,109,101,109,111,114,121,95,118,105,101,119,73,108,69,69,0,78,49,48,101,109,115,99,114,105,112,116,101,110,49,49,109,101,109,111,114,121,95,118,105,101,119,73,106,69,69,0,78,49,48,101,109,115,99,114,105,112,116,101,110,49,49,109,101,109,111,114,121,95,118,105,101,119,73,105,69,69,0,78,49,48,101,109,115,99,114,105,112,116,101,110,49,49,109,101,109,111,114,121,95,118,105,101,119,73,116,69,69,0,78,49,48,101,109,115,99,114,105,112,116,101,110,49,49,109,101,109,111,114,121,95,118,105,101,119,73,115,69,69,0,78,49,48,101,109,115,99,114,105,112,116,101,110,49,49,109,101,109,111,114,121,95,118,105,101,119,73,104,69,69,0,78,49,48,101,109,115,99,114,105,112,116,101,110,49,49,109,101,109,111,114,121,95,118,105,101,119,73,97,69,69,0,78,49,48,101,109,115,99,114,105,112,116,101,110,49,49,109,101,109,111,114,121,95,118,105,101,119,73,99,69,69,0,78,49,48,101,109,115,99,114,105,112,116,101,110,51,118,97,108,69,0,78,83,116,51,95,95,50,49,50,98,97,115,105,99,95,115,116,114,105,110,103,73,119,78,83,95,49,49,99,104,97,114,95,116,114,97,105,116,115,73,119,69,69,78,83,95,57,97,108,108,111,99,97,116,111,114,73,119,69,69,69,69,0,78,83,116,51,95,95,50,50,49,95,95,98,97,115,105,99,95,115,116,114,105,110,103,95,99,111,109,109,111,110,73,76,98,49,69,69,69,0,78,83,116,51,95,95,50,49,50,98,97,115,105,99,95,115,116,114,105,110,103,73,104,78,83,95,49,49,99,104,97,114,95,116,114,97,105,116,115,73,104,69,69,78,83,95,57,97,108,108,111,99,97,116,111,114,73,104,69,69,69,69,0,78,83,116,51,95,95,50,49,50,98,97,115,105,99,95,115,116,114,105,110,103,73,99,78,83,95,49,49,99,104,97,114,95,116,114,97,105,116,115,73,99,69,69,78,83,95,57,97,108,108,111,99,97,116,111,114,73,99,69,69,69,69,0,78,49,48,95,95,99,120,120,97,98,105,118,49,49,54,95,95,115,104,105,109,95,116,121,112,101,95,105,110,102,111,69,0,83,116,57,116,121,112,101,95,105,110,102,111,0,78,49,48,95,95,99,120,120,97,98,105,118,49,50,48,95,95,115,105,95,99,108,97,115,115,95,116,121,112,101,95,105,110,102,111,69,0,78,49,48,95,95,99,120,120,97,98,105,118,49,49,55,95,95,99,108,97,115,115,95,116,121,112,101,95,105,110,102,111,69,0,78,49,48,95,95,99,120,120,97,98,105,118,49,49,57,95,95,112,111,105,110,116,101,114,95,116,121,112,101,95,105,110,102,111,69,0,78,49,48,95,95,99,120,120,97,98,105,118,49,49,55,95,95,112,98,97,115,101,95,116,121,112,101,95,105,110,102,111,69,0,78,49,48,95,95,99,120,120,97,98,105,118,49,50,51,95,95,102,117,110,100,97,109,101,110,116,97,108,95,116,121,112,101,95,105,110,102,111,69,0,118,0,68,110,0,98,0,99,0,104,0,97,0,115,0,116,0,105,0,106,0,108,0,109,0,102,0,100,0,78,49,48,95,95,99,120,120,97,98,105,118,49,50,49,95,95,118,109,105,95,99,108,97,115,115,95,116,121,112,101,95,105,110,102,111,69,0], "i8", ALLOC_NONE, GLOBAL_BASE);
 
 
 
@@ -2806,6 +2806,148 @@ function copyTempDouble(ptr) {
     }
 
   
+  
+  function new_(constructor, argumentList) {
+      if (!(constructor instanceof Function)) {
+          throw new TypeError('new_ called with constructor type ' + typeof(constructor) + " which is not a function");
+      }
+  
+      /*
+       * Previously, the following line was just:
+  
+       function dummy() {};
+  
+       * Unfortunately, Chrome was preserving 'dummy' as the object's name, even though at creation, the 'dummy' has the
+       * correct constructor name.  Thus, objects created with IMVU.new would show up in the debugger as 'dummy', which
+       * isn't very helpful.  Using IMVU.createNamedFunction addresses the issue.  Doublely-unfortunately, there's no way
+       * to write a test for this behavior.  -NRD 2013.02.22
+       */
+      var dummy = createNamedFunction(constructor.name || 'unknownFunctionName', function(){});
+      dummy.prototype = constructor.prototype;
+      var obj = new dummy;
+  
+      var r = constructor.apply(obj, argumentList);
+      return (r instanceof Object) ? r : obj;
+    }function craftInvokerFunction(humanName, argTypes, classType, cppInvokerFunc, cppTargetFunc) {
+      // humanName: a human-readable string name for the function to be generated.
+      // argTypes: An array that contains the embind type objects for all types in the function signature.
+      //    argTypes[0] is the type object for the function return value.
+      //    argTypes[1] is the type object for function this object/class type, or null if not crafting an invoker for a class method.
+      //    argTypes[2...] are the actual function parameters.
+      // classType: The embind type object for the class to be bound, or null if this is not a method of a class.
+      // cppInvokerFunc: JS Function object to the C++-side function that interops into C++ code.
+      // cppTargetFunc: Function pointer (an integer to FUNCTION_TABLE) to the target C++ function the cppInvokerFunc will end up calling.
+      var argCount = argTypes.length;
+  
+      if (argCount < 2) {
+          throwBindingError("argTypes array size mismatch! Must at least get return value and 'this' types!");
+      }
+  
+      var isClassMethodFunc = (argTypes[1] !== null && classType !== null);
+  
+      // Free functions with signature "void function()" do not need an invoker that marshalls between wire types.
+  // TODO: This omits argument count check - enable only at -O3 or similar.
+  //    if (ENABLE_UNSAFE_OPTS && argCount == 2 && argTypes[0].name == "void" && !isClassMethodFunc) {
+  //       return FUNCTION_TABLE[fn];
+  //    }
+  
+  
+      // Determine if we need to use a dynamic stack to store the destructors for the function parameters.
+      // TODO: Remove this completely once all function invokers are being dynamically generated.
+      var needsDestructorStack = false;
+  
+      for(var i = 1; i < argTypes.length; ++i) { // Skip return value at index 0 - it's not deleted here.
+          if (argTypes[i] !== null && argTypes[i].destructorFunction === undefined) { // The type does not define a destructor function - must use dynamic stack
+              needsDestructorStack = true;
+              break;
+          }
+      }
+  
+      var returns = (argTypes[0].name !== "void");
+  
+      var argsList = "";
+      var argsListWired = "";
+      for(var i = 0; i < argCount - 2; ++i) {
+          argsList += (i!==0?", ":"")+"arg"+i;
+          argsListWired += (i!==0?", ":"")+"arg"+i+"Wired";
+      }
+  
+      var invokerFnBody =
+          "return function "+makeLegalFunctionName(humanName)+"("+argsList+") {\n" +
+          "if (arguments.length !== "+(argCount - 2)+") {\n" +
+              "throwBindingError('function "+humanName+" called with ' + arguments.length + ' arguments, expected "+(argCount - 2)+" args!');\n" +
+          "}\n";
+  
+  
+      if (needsDestructorStack) {
+          invokerFnBody +=
+              "var destructors = [];\n";
+      }
+  
+      var dtorStack = needsDestructorStack ? "destructors" : "null";
+      var args1 = ["throwBindingError", "invoker", "fn", "runDestructors", "retType", "classParam"];
+      var args2 = [throwBindingError, cppInvokerFunc, cppTargetFunc, runDestructors, argTypes[0], argTypes[1]];
+  
+  
+      if (isClassMethodFunc) {
+          invokerFnBody += "var thisWired = classParam.toWireType("+dtorStack+", this);\n";
+      }
+  
+      for(var i = 0; i < argCount - 2; ++i) {
+          invokerFnBody += "var arg"+i+"Wired = argType"+i+".toWireType("+dtorStack+", arg"+i+"); // "+argTypes[i+2].name+"\n";
+          args1.push("argType"+i);
+          args2.push(argTypes[i+2]);
+      }
+  
+      if (isClassMethodFunc) {
+          argsListWired = "thisWired" + (argsListWired.length > 0 ? ", " : "") + argsListWired;
+      }
+  
+      invokerFnBody +=
+          (returns?"var rv = ":"") + "invoker(fn"+(argsListWired.length>0?", ":"")+argsListWired+");\n";
+  
+      if (needsDestructorStack) {
+          invokerFnBody += "runDestructors(destructors);\n";
+      } else {
+          for(var i = isClassMethodFunc?1:2; i < argTypes.length; ++i) { // Skip return value at index 0 - it's not deleted here. Also skip class type if not a method.
+              var paramName = (i === 1 ? "thisWired" : ("arg"+(i - 2)+"Wired"));
+              if (argTypes[i].destructorFunction !== null) {
+                  invokerFnBody += paramName+"_dtor("+paramName+"); // "+argTypes[i].name+"\n";
+                  args1.push(paramName+"_dtor");
+                  args2.push(argTypes[i].destructorFunction);
+              }
+          }
+      }
+  
+      if (returns) {
+          invokerFnBody += "var ret = retType.fromWireType(rv);\n" +
+                           "return ret;\n";
+      } else {
+      }
+      invokerFnBody += "}\n";
+  
+      args1.push(invokerFnBody);
+  
+      var invokerFunction = new_(Function, args1).apply(null, args2);
+      return invokerFunction;
+    }function __embind_register_function(name, argCount, rawArgTypesAddr, signature, rawInvoker, fn) {
+      var argTypes = heap32VectorToArray(argCount, rawArgTypesAddr);
+      name = readLatin1String(name);
+  
+      rawInvoker = embind__requireFunction(signature, rawInvoker);
+  
+      exposePublicSymbol(name, function() {
+          throwUnboundTypeError('Cannot call ' + name + ' due to unbound types', argTypes);
+      }, argCount - 1);
+  
+      whenDependentTypesAreResolved([], argTypes, function(argTypes) {
+          var invokerArgsArray = [argTypes[0] /* return value */, null /* no class 'this'*/].concat(argTypes.slice(1) /* actual params */);
+          replacePublicSymbol(name, craftInvokerFunction(name, invokerArgsArray, null /* no class 'this'*/, rawInvoker, fn), argCount - 1);
+          return [];
+      });
+    }
+
+  
   function integerReadValueFromPointer(name, shift, signed) {
       // integers are quite common, so generate very specialized functions
       switch (shift) {
@@ -3098,6 +3240,8 @@ function nullFunc_v(x) { Module["printErr"]("Invalid function pointer called wit
 
 function nullFunc_vi(x) { Module["printErr"]("Invalid function pointer called with signature 'vi'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");  Module["printErr"]("Build with ASSERTIONS=2 for more info.");abort(x) }
 
+function nullFunc_vii(x) { Module["printErr"]("Invalid function pointer called with signature 'vii'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");  Module["printErr"]("Build with ASSERTIONS=2 for more info.");abort(x) }
+
 function nullFunc_viid(x) { Module["printErr"]("Invalid function pointer called with signature 'viid'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");  Module["printErr"]("Build with ASSERTIONS=2 for more info.");abort(x) }
 
 function nullFunc_viii(x) { Module["printErr"]("Invalid function pointer called with signature 'viii'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");  Module["printErr"]("Build with ASSERTIONS=2 for more info.");abort(x) }
@@ -3171,6 +3315,15 @@ function invoke_vi(index,a1) {
   }
 }
 
+function invoke_vii(index,a1,a2) {
+  try {
+    Module["dynCall_vii"](index,a1,a2);
+  } catch(e) {
+    if (typeof e !== 'number' && e !== 'longjmp') throw e;
+    Module["setThrew"](1, 0);
+  }
+}
+
 function invoke_viid(index,a1,a2,a3) {
   try {
     Module["dynCall_viid"](index,a1,a2,a3);
@@ -3218,7 +3371,7 @@ function invoke_viiiiii(index,a1,a2,a3,a4,a5,a6) {
 
 Module.asmGlobalArg = { "Math": Math, "Int8Array": Int8Array, "Int16Array": Int16Array, "Int32Array": Int32Array, "Uint8Array": Uint8Array, "Uint16Array": Uint16Array, "Uint32Array": Uint32Array, "Float32Array": Float32Array, "Float64Array": Float64Array, "NaN": NaN, "Infinity": Infinity };
 
-Module.asmLibraryArg = { "abort": abort, "assert": assert, "enlargeMemory": enlargeMemory, "getTotalMemory": getTotalMemory, "abortOnCannotGrowMemory": abortOnCannotGrowMemory, "abortStackOverflow": abortStackOverflow, "nullFunc_dii": nullFunc_dii, "nullFunc_i": nullFunc_i, "nullFunc_ii": nullFunc_ii, "nullFunc_iii": nullFunc_iii, "nullFunc_iiii": nullFunc_iiii, "nullFunc_v": nullFunc_v, "nullFunc_vi": nullFunc_vi, "nullFunc_viid": nullFunc_viid, "nullFunc_viii": nullFunc_viii, "nullFunc_viiii": nullFunc_viiii, "nullFunc_viiiii": nullFunc_viiiii, "nullFunc_viiiiii": nullFunc_viiiiii, "invoke_dii": invoke_dii, "invoke_i": invoke_i, "invoke_ii": invoke_ii, "invoke_iii": invoke_iii, "invoke_iiii": invoke_iiii, "invoke_v": invoke_v, "invoke_vi": invoke_vi, "invoke_viid": invoke_viid, "invoke_viii": invoke_viii, "invoke_viiii": invoke_viiii, "invoke_viiiii": invoke_viiiii, "invoke_viiiiii": invoke_viiiiii, "ClassHandle": ClassHandle, "ClassHandle_clone": ClassHandle_clone, "ClassHandle_delete": ClassHandle_delete, "ClassHandle_deleteLater": ClassHandle_deleteLater, "ClassHandle_isAliasOf": ClassHandle_isAliasOf, "ClassHandle_isDeleted": ClassHandle_isDeleted, "RegisteredClass": RegisteredClass, "RegisteredPointer": RegisteredPointer, "RegisteredPointer_deleteObject": RegisteredPointer_deleteObject, "RegisteredPointer_destructor": RegisteredPointer_destructor, "RegisteredPointer_fromWireType": RegisteredPointer_fromWireType, "RegisteredPointer_getPointee": RegisteredPointer_getPointee, "___lock": ___lock, "___setErrNo": ___setErrNo, "___syscall140": ___syscall140, "___syscall146": ___syscall146, "___syscall54": ___syscall54, "___syscall6": ___syscall6, "___unlock": ___unlock, "__embind_register_bool": __embind_register_bool, "__embind_register_class": __embind_register_class, "__embind_register_class_constructor": __embind_register_class_constructor, "__embind_register_class_property": __embind_register_class_property, "__embind_register_emval": __embind_register_emval, "__embind_register_float": __embind_register_float, "__embind_register_integer": __embind_register_integer, "__embind_register_memory_view": __embind_register_memory_view, "__embind_register_std_string": __embind_register_std_string, "__embind_register_std_wstring": __embind_register_std_wstring, "__embind_register_void": __embind_register_void, "__emval_decref": __emval_decref, "__emval_register": __emval_register, "_abort": _abort, "_embind_repr": _embind_repr, "_emscripten_memcpy_big": _emscripten_memcpy_big, "constNoSmartPtrRawPointerToWireType": constNoSmartPtrRawPointerToWireType, "count_emval_handles": count_emval_handles, "createNamedFunction": createNamedFunction, "downcastPointer": downcastPointer, "embind__requireFunction": embind__requireFunction, "embind_init_charCodes": embind_init_charCodes, "ensureOverloadTable": ensureOverloadTable, "exposePublicSymbol": exposePublicSymbol, "extendError": extendError, "floatReadValueFromPointer": floatReadValueFromPointer, "flushPendingDeletes": flushPendingDeletes, "flush_NO_FILESYSTEM": flush_NO_FILESYSTEM, "genericPointerToWireType": genericPointerToWireType, "getBasestPointer": getBasestPointer, "getInheritedInstance": getInheritedInstance, "getInheritedInstanceCount": getInheritedInstanceCount, "getLiveInheritedInstances": getLiveInheritedInstances, "getShiftFromSize": getShiftFromSize, "getTypeName": getTypeName, "get_first_emval": get_first_emval, "heap32VectorToArray": heap32VectorToArray, "init_ClassHandle": init_ClassHandle, "init_RegisteredPointer": init_RegisteredPointer, "init_embind": init_embind, "init_emval": init_emval, "integerReadValueFromPointer": integerReadValueFromPointer, "makeClassHandle": makeClassHandle, "makeLegalFunctionName": makeLegalFunctionName, "nonConstNoSmartPtrRawPointerToWireType": nonConstNoSmartPtrRawPointerToWireType, "readLatin1String": readLatin1String, "registerType": registerType, "replacePublicSymbol": replacePublicSymbol, "runDestructor": runDestructor, "runDestructors": runDestructors, "setDelayFunction": setDelayFunction, "shallowCopyInternalPointer": shallowCopyInternalPointer, "simpleReadValueFromPointer": simpleReadValueFromPointer, "throwBindingError": throwBindingError, "throwInstanceAlreadyDeleted": throwInstanceAlreadyDeleted, "throwInternalError": throwInternalError, "throwUnboundTypeError": throwUnboundTypeError, "upcastPointer": upcastPointer, "validateThis": validateThis, "whenDependentTypesAreResolved": whenDependentTypesAreResolved, "DYNAMICTOP_PTR": DYNAMICTOP_PTR, "tempDoublePtr": tempDoublePtr, "ABORT": ABORT, "STACKTOP": STACKTOP, "STACK_MAX": STACK_MAX };
+Module.asmLibraryArg = { "abort": abort, "assert": assert, "enlargeMemory": enlargeMemory, "getTotalMemory": getTotalMemory, "abortOnCannotGrowMemory": abortOnCannotGrowMemory, "abortStackOverflow": abortStackOverflow, "nullFunc_dii": nullFunc_dii, "nullFunc_i": nullFunc_i, "nullFunc_ii": nullFunc_ii, "nullFunc_iii": nullFunc_iii, "nullFunc_iiii": nullFunc_iiii, "nullFunc_v": nullFunc_v, "nullFunc_vi": nullFunc_vi, "nullFunc_vii": nullFunc_vii, "nullFunc_viid": nullFunc_viid, "nullFunc_viii": nullFunc_viii, "nullFunc_viiii": nullFunc_viiii, "nullFunc_viiiii": nullFunc_viiiii, "nullFunc_viiiiii": nullFunc_viiiiii, "invoke_dii": invoke_dii, "invoke_i": invoke_i, "invoke_ii": invoke_ii, "invoke_iii": invoke_iii, "invoke_iiii": invoke_iiii, "invoke_v": invoke_v, "invoke_vi": invoke_vi, "invoke_vii": invoke_vii, "invoke_viid": invoke_viid, "invoke_viii": invoke_viii, "invoke_viiii": invoke_viiii, "invoke_viiiii": invoke_viiiii, "invoke_viiiiii": invoke_viiiiii, "ClassHandle": ClassHandle, "ClassHandle_clone": ClassHandle_clone, "ClassHandle_delete": ClassHandle_delete, "ClassHandle_deleteLater": ClassHandle_deleteLater, "ClassHandle_isAliasOf": ClassHandle_isAliasOf, "ClassHandle_isDeleted": ClassHandle_isDeleted, "RegisteredClass": RegisteredClass, "RegisteredPointer": RegisteredPointer, "RegisteredPointer_deleteObject": RegisteredPointer_deleteObject, "RegisteredPointer_destructor": RegisteredPointer_destructor, "RegisteredPointer_fromWireType": RegisteredPointer_fromWireType, "RegisteredPointer_getPointee": RegisteredPointer_getPointee, "___lock": ___lock, "___setErrNo": ___setErrNo, "___syscall140": ___syscall140, "___syscall146": ___syscall146, "___syscall54": ___syscall54, "___syscall6": ___syscall6, "___unlock": ___unlock, "__embind_register_bool": __embind_register_bool, "__embind_register_class": __embind_register_class, "__embind_register_class_constructor": __embind_register_class_constructor, "__embind_register_class_property": __embind_register_class_property, "__embind_register_emval": __embind_register_emval, "__embind_register_float": __embind_register_float, "__embind_register_function": __embind_register_function, "__embind_register_integer": __embind_register_integer, "__embind_register_memory_view": __embind_register_memory_view, "__embind_register_std_string": __embind_register_std_string, "__embind_register_std_wstring": __embind_register_std_wstring, "__embind_register_void": __embind_register_void, "__emval_decref": __emval_decref, "__emval_register": __emval_register, "_abort": _abort, "_embind_repr": _embind_repr, "_emscripten_memcpy_big": _emscripten_memcpy_big, "constNoSmartPtrRawPointerToWireType": constNoSmartPtrRawPointerToWireType, "count_emval_handles": count_emval_handles, "craftInvokerFunction": craftInvokerFunction, "createNamedFunction": createNamedFunction, "downcastPointer": downcastPointer, "embind__requireFunction": embind__requireFunction, "embind_init_charCodes": embind_init_charCodes, "ensureOverloadTable": ensureOverloadTable, "exposePublicSymbol": exposePublicSymbol, "extendError": extendError, "floatReadValueFromPointer": floatReadValueFromPointer, "flushPendingDeletes": flushPendingDeletes, "flush_NO_FILESYSTEM": flush_NO_FILESYSTEM, "genericPointerToWireType": genericPointerToWireType, "getBasestPointer": getBasestPointer, "getInheritedInstance": getInheritedInstance, "getInheritedInstanceCount": getInheritedInstanceCount, "getLiveInheritedInstances": getLiveInheritedInstances, "getShiftFromSize": getShiftFromSize, "getTypeName": getTypeName, "get_first_emval": get_first_emval, "heap32VectorToArray": heap32VectorToArray, "init_ClassHandle": init_ClassHandle, "init_RegisteredPointer": init_RegisteredPointer, "init_embind": init_embind, "init_emval": init_emval, "integerReadValueFromPointer": integerReadValueFromPointer, "makeClassHandle": makeClassHandle, "makeLegalFunctionName": makeLegalFunctionName, "new_": new_, "nonConstNoSmartPtrRawPointerToWireType": nonConstNoSmartPtrRawPointerToWireType, "readLatin1String": readLatin1String, "registerType": registerType, "replacePublicSymbol": replacePublicSymbol, "runDestructor": runDestructor, "runDestructors": runDestructors, "setDelayFunction": setDelayFunction, "shallowCopyInternalPointer": shallowCopyInternalPointer, "simpleReadValueFromPointer": simpleReadValueFromPointer, "throwBindingError": throwBindingError, "throwInstanceAlreadyDeleted": throwInstanceAlreadyDeleted, "throwInternalError": throwInternalError, "throwUnboundTypeError": throwUnboundTypeError, "upcastPointer": upcastPointer, "validateThis": validateThis, "whenDependentTypesAreResolved": whenDependentTypesAreResolved, "DYNAMICTOP_PTR": DYNAMICTOP_PTR, "tempDoublePtr": tempDoublePtr, "ABORT": ABORT, "STACKTOP": STACKTOP, "STACK_MAX": STACK_MAX };
 // EMSCRIPTEN_START_ASM
 var asm = (/** @suppress {uselessCode} */ function(global, env, buffer) {
 'almost asm';
@@ -3278,6 +3431,7 @@ var asm = (/** @suppress {uselessCode} */ function(global, env, buffer) {
   var nullFunc_iiii=env.nullFunc_iiii;
   var nullFunc_v=env.nullFunc_v;
   var nullFunc_vi=env.nullFunc_vi;
+  var nullFunc_vii=env.nullFunc_vii;
   var nullFunc_viid=env.nullFunc_viid;
   var nullFunc_viii=env.nullFunc_viii;
   var nullFunc_viiii=env.nullFunc_viiii;
@@ -3290,6 +3444,7 @@ var asm = (/** @suppress {uselessCode} */ function(global, env, buffer) {
   var invoke_iiii=env.invoke_iiii;
   var invoke_v=env.invoke_v;
   var invoke_vi=env.invoke_vi;
+  var invoke_vii=env.invoke_vii;
   var invoke_viid=env.invoke_viid;
   var invoke_viii=env.invoke_viii;
   var invoke_viiii=env.invoke_viiii;
@@ -3320,6 +3475,7 @@ var asm = (/** @suppress {uselessCode} */ function(global, env, buffer) {
   var __embind_register_class_property=env.__embind_register_class_property;
   var __embind_register_emval=env.__embind_register_emval;
   var __embind_register_float=env.__embind_register_float;
+  var __embind_register_function=env.__embind_register_function;
   var __embind_register_integer=env.__embind_register_integer;
   var __embind_register_memory_view=env.__embind_register_memory_view;
   var __embind_register_std_string=env.__embind_register_std_string;
@@ -3332,6 +3488,7 @@ var asm = (/** @suppress {uselessCode} */ function(global, env, buffer) {
   var _emscripten_memcpy_big=env._emscripten_memcpy_big;
   var constNoSmartPtrRawPointerToWireType=env.constNoSmartPtrRawPointerToWireType;
   var count_emval_handles=env.count_emval_handles;
+  var craftInvokerFunction=env.craftInvokerFunction;
   var createNamedFunction=env.createNamedFunction;
   var downcastPointer=env.downcastPointer;
   var embind__requireFunction=env.embind__requireFunction;
@@ -3358,6 +3515,7 @@ var asm = (/** @suppress {uselessCode} */ function(global, env, buffer) {
   var integerReadValueFromPointer=env.integerReadValueFromPointer;
   var makeClassHandle=env.makeClassHandle;
   var makeLegalFunctionName=env.makeLegalFunctionName;
+  var new_=env.new_;
   var nonConstNoSmartPtrRawPointerToWireType=env.nonConstNoSmartPtrRawPointerToWireType;
   var readLatin1String=env.readLatin1String;
   var registerType=env.registerType;
@@ -3419,6 +3577,159 @@ function getTempRet0() {
   return tempRet0|0;
 }
 
+function _destruct_no_fields($0,$1) {
+ $0 = $0|0;
+ $1 = $1|0;
+ var $2 = 0, $3 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 16|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(16|0);
+ $2 = $0;
+ $3 = $1;
+ STACKTOP = sp;return; //@line 177 "../source/include/fc_lib/templates/fc_template_root.c"
+}
+function _simple_run_visitor($0,$1) {
+ $0 = $0|0;
+ $1 = $1|0;
+ var $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 16|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(16|0);
+ $2 = $0;
+ $3 = $1;
+ $4 = $3; //@line 167 "../source/include/fc_lib/templates/fc_template_root.c"
+ $5 = $2; //@line 167 "../source/include/fc_lib/templates/fc_template_root.c"
+ _fc_IVisitor_block_entered($4,$5); //@line 167 "../source/include/fc_lib/templates/fc_template_root.c"
+ $6 = $3; //@line 168 "../source/include/fc_lib/templates/fc_template_root.c"
+ $7 = $2; //@line 168 "../source/include/fc_lib/templates/fc_template_root.c"
+ _fc_IVisitor_block_exited($6,$7); //@line 168 "../source/include/fc_lib/templates/fc_template_root.c"
+ STACKTOP = sp;return; //@line 169 "../source/include/fc_lib/templates/fc_template_root.c"
+}
+function _fc32_IirLowPass_step($0,$1) {
+ $0 = $0|0;
+ $1 = $1|0;
+ var $10 = 0.0, $11 = 0, $12 = 0.0, $13 = 0.0, $14 = 0, $15 = 0, $16 = 0.0, $17 = 0.0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0.0, $22 = 0.0, $23 = 0.0, $24 = 0.0, $25 = 0.0, $26 = 0, $27 = 0, $28 = 0;
+ var $29 = 0, $3 = 0, $30 = 0, $4 = 0, $5 = 0, $6 = 0.0, $7 = 0, $8 = 0, $9 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 32|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(32|0);
+ $2 = $0;
+ $3 = $1;
+ $7 = $2; //@line 63 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $4 = $7; //@line 63 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $8 = $4; //@line 66 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $9 = ((($8)) + 4|0); //@line 66 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $10 = +HEAPF32[$9>>2]; //@line 66 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $11 = $3; //@line 66 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $12 = (+($11|0)); //@line 66 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $13 = $10 * $12; //@line 66 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $14 = $4; //@line 66 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $15 = ((($14)) + 4|0); //@line 66 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $16 = +HEAPF32[$15>>2]; //@line 66 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $17 = 1.0 - $16; //@line 66 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $18 = $4; //@line 66 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $19 = ((($18)) + 8|0); //@line 66 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $20 = HEAP32[$19>>2]|0; //@line 66 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $21 = (+($20|0)); //@line 66 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $22 = $17 * $21; //@line 66 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $23 = $13 + $22; //@line 66 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $24 = $23; //@line 66 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $6 = $24; //@line 66 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $25 = $6; //@line 67 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $26 = (_round_result($25)|0); //@line 67 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $5 = $26; //@line 67 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $27 = $5; //@line 68 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $28 = $4; //@line 68 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $29 = ((($28)) + 8|0); //@line 68 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ HEAP32[$29>>2] = $27; //@line 68 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $30 = $5; //@line 70 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ STACKTOP = sp;return ($30|0); //@line 70 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+}
+function _fc32_IirLowPass_preload($0,$1) {
+ $0 = $0|0;
+ $1 = $1|0;
+ var $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 16|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(16|0);
+ $2 = $0;
+ $3 = $1;
+ $5 = $2; //@line 76 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $4 = $5; //@line 76 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $6 = $3; //@line 77 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $7 = $4; //@line 77 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $8 = ((($7)) + 8|0); //@line 77 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ HEAP32[$8>>2] = $6; //@line 77 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ STACKTOP = sp;return; //@line 78 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+}
+function _round_result($0) {
+ $0 = +$0;
+ var $1 = 0.0, $10 = 0.0, $11 = 0, $12 = 0, $2 = 0, $3 = 0.0, $4 = 0, $5 = 0.0, $6 = 0, $7 = 0.0, $8 = 0.0, $9 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 16|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(16|0);
+ $1 = $0;
+ $3 = $1; //@line 182 "../source/include/fc_lib/templates/fc_template_root.c"
+ $4 = (~~(($3))); //@line 182 "../source/include/fc_lib/templates/fc_template_root.c"
+ $2 = $4; //@line 182 "../source/include/fc_lib/templates/fc_template_root.c"
+ $5 = $1; //@line 185 "../source/include/fc_lib/templates/fc_template_root.c"
+ $6 = $5 >= 0.0; //@line 185 "../source/include/fc_lib/templates/fc_template_root.c"
+ $7 = $1;
+ if ($6) {
+  $8 = $7 + 0.5; //@line 186 "../source/include/fc_lib/templates/fc_template_root.c"
+  $9 = (~~(($8))); //@line 186 "../source/include/fc_lib/templates/fc_template_root.c"
+  $2 = $9; //@line 186 "../source/include/fc_lib/templates/fc_template_root.c"
+  $12 = $2; //@line 193 "../source/include/fc_lib/templates/fc_template_root.c"
+  STACKTOP = sp;return ($12|0); //@line 193 "../source/include/fc_lib/templates/fc_template_root.c"
+ } else {
+  $10 = $7 - 0.5; //@line 189 "../source/include/fc_lib/templates/fc_template_root.c"
+  $11 = (~~(($10))); //@line 189 "../source/include/fc_lib/templates/fc_template_root.c"
+  $2 = $11; //@line 189 "../source/include/fc_lib/templates/fc_template_root.c"
+  $12 = $2; //@line 193 "../source/include/fc_lib/templates/fc_template_root.c"
+  STACKTOP = sp;return ($12|0); //@line 193 "../source/include/fc_lib/templates/fc_template_root.c"
+ }
+ return (0)|0;
+}
+function _fc32_IirLowPass_ctor($0) {
+ $0 = $0|0;
+ var $1 = 0, $2 = 0, $3 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 16|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(16|0);
+ $1 = $0;
+ $2 = $1; //@line 14 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ ;HEAP32[$2>>2]=0|0;HEAP32[$2+4>>2]=0|0;HEAP32[$2+8>>2]=0|0; //@line 14 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ $3 = $1; //@line 15 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ HEAP32[$3>>2] = 464; //@line 15 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+ STACKTOP = sp;return; //@line 16 "../source/include/fc_lib/templates/fc_IirLowPass.c"
+}
+function _fc_IVisitor_block_entered($0,$1) {
+ $0 = $0|0;
+ $1 = $1|0;
+ var $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 16|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(16|0);
+ $2 = $0;
+ $3 = $1;
+ $4 = $2; //@line 6 "../source/include/fc_lib/fc_IVisitor.c"
+ $5 = HEAP32[$4>>2]|0; //@line 6 "../source/include/fc_lib/fc_IVisitor.c"
+ $6 = HEAP32[$5>>2]|0; //@line 6 "../source/include/fc_lib/fc_IVisitor.c"
+ $7 = $2; //@line 6 "../source/include/fc_lib/fc_IVisitor.c"
+ $8 = $3; //@line 6 "../source/include/fc_lib/fc_IVisitor.c"
+ FUNCTION_TABLE_vii[$6 & 63]($7,$8); //@line 6 "../source/include/fc_lib/fc_IVisitor.c"
+ STACKTOP = sp;return; //@line 7 "../source/include/fc_lib/fc_IVisitor.c"
+}
+function _fc_IVisitor_block_exited($0,$1) {
+ $0 = $0|0;
+ $1 = $1|0;
+ var $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 16|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(16|0);
+ $2 = $0;
+ $3 = $1;
+ $4 = $2; //@line 12 "../source/include/fc_lib/fc_IVisitor.c"
+ $5 = HEAP32[$4>>2]|0; //@line 12 "../source/include/fc_lib/fc_IVisitor.c"
+ $6 = ((($5)) + 4|0); //@line 12 "../source/include/fc_lib/fc_IVisitor.c"
+ $7 = HEAP32[$6>>2]|0; //@line 12 "../source/include/fc_lib/fc_IVisitor.c"
+ $8 = $2; //@line 12 "../source/include/fc_lib/fc_IVisitor.c"
+ $9 = $3; //@line 12 "../source/include/fc_lib/fc_IVisitor.c"
+ FUNCTION_TABLE_vii[$7 & 63]($8,$9); //@line 12 "../source/include/fc_lib/fc_IVisitor.c"
+ STACKTOP = sp;return; //@line 13 "../source/include/fc_lib/fc_IVisitor.c"
+}
 function __GLOBAL__sub_I_fc_lib_wrapper_cpp() {
  var label = 0, sp = 0;
  sp = STACKTOP;
@@ -3428,111 +3739,123 @@ function __GLOBAL__sub_I_fc_lib_wrapper_cpp() {
 function ___cxx_global_var_init() {
  var label = 0, sp = 0;
  sp = STACKTOP;
- __ZN39EmscriptenBindingInitializer_IirLowPassC2Ev(3116); //@line 56 "../source/include/fc_lib/templates/fc_IirLowPass.h"
- return; //@line 56 "../source/include/fc_lib/templates/fc_IirLowPass.h"
+ __ZN39EmscriptenBindingInitializer_IirLowPassC2Ev(3228); //@line 65 "../source/include/fc_lib/templates/fc_IirLowPass.h"
+ return; //@line 65 "../source/include/fc_lib/templates/fc_IirLowPass.h"
 }
 function __ZN39EmscriptenBindingInitializer_IirLowPassC2Ev($0) {
  $0 = $0|0;
- var $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0, $24 = 0, $25 = 0, $26 = 0, $27 = 0;
- var $28 = 0, $29 = 0, $3 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $37 = 0, $38 = 0, $39 = 0, $4 = 0, $40 = 0, $41 = 0, $42 = 0, $43 = 0, $44 = 0, $45 = 0;
- var $46 = 0, $47 = 0, $48 = 0, $49 = 0, $5 = 0, $50 = 0, $51 = 0, $52 = 0, $53 = 0, $54 = 0, $55 = 0, $56 = 0, $57 = 0, $58 = 0, $59 = 0, $6 = 0, $60 = 0, $61 = 0, $62 = 0, $63 = 0;
- var $64 = 0, $65 = 0, $66 = 0, $67 = 0, $68 = 0, $69 = 0, $7 = 0, $70 = 0, $71 = 0, $72 = 0, $73 = 0, $74 = 0, $75 = 0, $76 = 0, $77 = 0, $78 = 0, $79 = 0, $8 = 0, $80 = 0, $81 = 0;
- var $82 = 0, $83 = 0, $84 = 0, $85 = 0, $9 = 0, label = 0, sp = 0;
+ var $$byval_copy = 0, $$byval_copy1 = 0, $$byval_copy2 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0, $24 = 0;
+ var $25 = 0, $26 = 0, $27 = 0, $28 = 0, $29 = 0, $3 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $37 = 0, $38 = 0, $39 = 0, $4 = 0, $40 = 0, $41 = 0, $42 = 0;
+ var $43 = 0, $44 = 0, $45 = 0, $46 = 0, $47 = 0, $48 = 0, $49 = 0, $5 = 0, $50 = 0, $51 = 0, $52 = 0, $53 = 0, $54 = 0, $55 = 0, $56 = 0, $57 = 0, $58 = 0, $59 = 0, $6 = 0, $60 = 0;
+ var $61 = 0, $62 = 0, $63 = 0, $64 = 0, $65 = 0, $66 = 0, $67 = 0, $68 = 0, $69 = 0, $7 = 0, $70 = 0, $71 = 0, $72 = 0, $73 = 0, $74 = 0, $75 = 0, $76 = 0, $77 = 0, $78 = 0, $79 = 0;
+ var $8 = 0, $80 = 0, $81 = 0, $82 = 0, $83 = 0, $84 = 0, $85 = 0, $86 = 0, $87 = 0, $88 = 0, $9 = 0, label = 0, sp = 0;
  sp = STACKTOP;
  STACKTOP = STACKTOP + 128|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(128|0);
+ $$byval_copy2 = sp + 127|0;
+ $$byval_copy1 = sp + 126|0;
+ $$byval_copy = sp + 125|0;
  $5 = sp + 100|0;
  $12 = sp + 72|0;
- $18 = sp + 121|0;
- $32 = sp + 120|0;
+ $18 = sp + 124|0;
+ $32 = sp + 123|0;
+ $33 = sp + 122|0;
+ $34 = sp + 121|0;
+ $35 = sp + 120|0;
  $31 = $0;
  $25 = $32;
- $26 = 772;
+ $26 = 820;
  __ZN10emscripten8internal11NoBaseClass6verifyI15fc32_IirLowPassEEvv(); //@line 1121 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $27 = 24; //@line 1123 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $33 = (__ZN10emscripten8internal11NoBaseClass11getUpcasterI15fc32_IirLowPassEEPFvvEv()|0); //@line 1124 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $28 = $33; //@line 1124 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $34 = (__ZN10emscripten8internal11NoBaseClass13getDowncasterI15fc32_IirLowPassEEPFvvEv()|0); //@line 1125 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $29 = $34; //@line 1125 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $30 = 25; //@line 1126 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $35 = (__ZN10emscripten8internal6TypeIDI15fc32_IirLowPassE3getEv()|0); //@line 1129 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $36 = (__ZN10emscripten8internal6TypeIDINS0_17AllowedRawPointerI15fc32_IirLowPassEEE3getEv()|0); //@line 1130 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $37 = (__ZN10emscripten8internal6TypeIDINS0_17AllowedRawPointerIK15fc32_IirLowPassEEE3getEv()|0); //@line 1131 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $38 = (__ZN10emscripten8internal11NoBaseClass3getEv()|0); //@line 1132 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $39 = $27; //@line 1133 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $24 = $39;
- $40 = (__ZN10emscripten8internal19getGenericSignatureIJiiEEEPKcv()|0); //@line 399 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $41 = $27; //@line 1134 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $42 = $28; //@line 1135 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $23 = $42;
- $43 = (__ZN10emscripten8internal19getGenericSignatureIJvEEEPKcv()|0); //@line 399 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $44 = $28; //@line 1136 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $45 = $29; //@line 1137 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $22 = $45;
+ $27 = 28; //@line 1123 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $36 = (__ZN10emscripten8internal11NoBaseClass11getUpcasterI15fc32_IirLowPassEEPFvvEv()|0); //@line 1124 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $28 = $36; //@line 1124 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $37 = (__ZN10emscripten8internal11NoBaseClass13getDowncasterI15fc32_IirLowPassEEPFvvEv()|0); //@line 1125 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $29 = $37; //@line 1125 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $30 = 29; //@line 1126 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $38 = (__ZN10emscripten8internal6TypeIDI15fc32_IirLowPassE3getEv()|0); //@line 1129 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $39 = (__ZN10emscripten8internal6TypeIDINS0_17AllowedRawPointerI15fc32_IirLowPassEEE3getEv()|0); //@line 1130 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $40 = (__ZN10emscripten8internal6TypeIDINS0_17AllowedRawPointerIK15fc32_IirLowPassEEE3getEv()|0); //@line 1131 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $41 = (__ZN10emscripten8internal11NoBaseClass3getEv()|0); //@line 1132 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $42 = $27; //@line 1133 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $24 = $42;
+ $43 = (__ZN10emscripten8internal19getGenericSignatureIJiiEEEPKcv()|0); //@line 399 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $44 = $27; //@line 1134 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $45 = $28; //@line 1135 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $23 = $45;
  $46 = (__ZN10emscripten8internal19getGenericSignatureIJvEEEPKcv()|0); //@line 399 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $47 = $29; //@line 1138 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $48 = $26; //@line 1139 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $49 = $30; //@line 1140 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $21 = $49;
- $50 = (__ZN10emscripten8internal19getGenericSignatureIJviEEEPKcv()|0); //@line 399 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $51 = $30; //@line 1141 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- __embind_register_class(($35|0),($36|0),($37|0),($38|0),($40|0),($41|0),($43|0),($44|0),($46|0),($47|0),($48|0),($50|0),($51|0)); //@line 1128 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $47 = $28; //@line 1136 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $48 = $29; //@line 1137 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $22 = $48;
+ $49 = (__ZN10emscripten8internal19getGenericSignatureIJvEEEPKcv()|0); //@line 399 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $50 = $29; //@line 1138 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $51 = $26; //@line 1139 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $52 = $30; //@line 1140 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $21 = $52;
+ $53 = (__ZN10emscripten8internal19getGenericSignatureIJviEEEPKcv()|0); //@line 399 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $54 = $30; //@line 1141 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ __embind_register_class(($38|0),($39|0),($40|0),($41|0),($43|0),($44|0),($46|0),($47|0),($49|0),($50|0),($51|0),($53|0),($54|0)); //@line 1128 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
  $20 = $32;
- $52 = $20;
- $16 = $52;
- $17 = 26;
- $53 = $16;
- $19 = 27; //@line 1187 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $54 = (__ZN10emscripten8internal6TypeIDI15fc32_IirLowPassE3getEv()|0); //@line 1189 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $55 = (__ZNK10emscripten8internal12WithPoliciesIJNS_18allow_raw_pointersEEE11ArgTypeListIJP15fc32_IirLowPassEE8getCountEv($18)|0); //@line 1190 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $56 = (__ZNK10emscripten8internal12WithPoliciesIJNS_18allow_raw_pointersEEE11ArgTypeListIJP15fc32_IirLowPassEE8getTypesEv($18)|0); //@line 1191 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $57 = $19; //@line 1192 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $15 = $57;
- $58 = (__ZN10emscripten8internal19getGenericSignatureIJiiEEEPKcv()|0); //@line 399 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $59 = $19; //@line 1193 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $60 = $17; //@line 1194 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- __embind_register_class_constructor(($54|0),($55|0),($56|0),($58|0),($59|0),($60|0)); //@line 1188 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $10 = $53;
- $11 = 783;
+ $55 = $20;
+ $16 = $55;
+ $17 = 30;
+ $56 = $16;
+ $19 = 31; //@line 1187 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $57 = (__ZN10emscripten8internal6TypeIDI15fc32_IirLowPassE3getEv()|0); //@line 1189 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $58 = (__ZNK10emscripten8internal12WithPoliciesIJNS_18allow_raw_pointersEEE11ArgTypeListIJP15fc32_IirLowPassEE8getCountEv($18)|0); //@line 1190 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $59 = (__ZNK10emscripten8internal12WithPoliciesIJNS_18allow_raw_pointersEEE11ArgTypeListIJP15fc32_IirLowPassEE8getTypesEv($18)|0); //@line 1191 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $60 = $19; //@line 1192 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $15 = $60;
+ $61 = (__ZN10emscripten8internal19getGenericSignatureIJiiEEEPKcv()|0); //@line 399 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $62 = $19; //@line 1193 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $63 = $17; //@line 1194 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ __embind_register_class_constructor(($57|0),($58|0),($59|0),($61|0),($62|0),($63|0)); //@line 1188 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $10 = $56;
+ $11 = 831;
  HEAP32[$12>>2] = 4;
- $61 = $10;
- $13 = 28; //@line 1345 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $14 = 29; //@line 1346 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $62 = (__ZN10emscripten8internal6TypeIDI15fc32_IirLowPassE3getEv()|0); //@line 1348 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $63 = $11; //@line 1349 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $64 = (__ZN10emscripten8internal6TypeIDIfE3getEv()|0); //@line 1350 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $65 = $13; //@line 1351 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $9 = $65;
- $66 = (__ZN10emscripten8internal19getGenericSignatureIJfiiEEEPKcv()|0); //@line 399 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $67 = $13; //@line 1352 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $68 = (__ZN10emscripten8internal10getContextIM15fc32_IirLowPassfEEPT_RKS4_($12)|0); //@line 1353 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $69 = (__ZN10emscripten8internal6TypeIDIfE3getEv()|0); //@line 1354 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $70 = $14; //@line 1355 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $8 = $70;
- $71 = (__ZN10emscripten8internal19getGenericSignatureIJviifEEEPKcv()|0); //@line 399 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $72 = $14; //@line 1356 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $73 = (__ZN10emscripten8internal10getContextIM15fc32_IirLowPassfEEPT_RKS4_($12)|0); //@line 1357 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- __embind_register_class_property(($62|0),($63|0),($64|0),($66|0),($67|0),($68|0),($69|0),($71|0),($72|0),($73|0)); //@line 1347 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $3 = $61;
- $4 = 793;
+ $64 = $10;
+ $13 = 32; //@line 1345 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $14 = 33; //@line 1346 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $65 = (__ZN10emscripten8internal6TypeIDI15fc32_IirLowPassE3getEv()|0); //@line 1348 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $66 = $11; //@line 1349 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $67 = (__ZN10emscripten8internal6TypeIDIfE3getEv()|0); //@line 1350 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $68 = $13; //@line 1351 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $9 = $68;
+ $69 = (__ZN10emscripten8internal19getGenericSignatureIJfiiEEEPKcv()|0); //@line 399 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $70 = $13; //@line 1352 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $71 = (__ZN10emscripten8internal10getContextIM15fc32_IirLowPassfEEPT_RKS4_($12)|0); //@line 1353 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $72 = (__ZN10emscripten8internal6TypeIDIfE3getEv()|0); //@line 1354 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $73 = $14; //@line 1355 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $8 = $73;
+ $74 = (__ZN10emscripten8internal19getGenericSignatureIJviifEEEPKcv()|0); //@line 399 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $75 = $14; //@line 1356 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $76 = (__ZN10emscripten8internal10getContextIM15fc32_IirLowPassfEEPT_RKS4_($12)|0); //@line 1357 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ __embind_register_class_property(($65|0),($66|0),($67|0),($69|0),($70|0),($71|0),($72|0),($74|0),($75|0),($76|0)); //@line 1347 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $3 = $64;
+ $4 = 841;
  HEAP32[$5>>2] = 8;
- $6 = 30; //@line 1345 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $7 = 31; //@line 1346 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $74 = (__ZN10emscripten8internal6TypeIDI15fc32_IirLowPassE3getEv()|0); //@line 1348 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $75 = $4; //@line 1349 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $76 = (__ZN10emscripten8internal6TypeIDIiE3getEv()|0); //@line 1350 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $77 = $6; //@line 1351 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $2 = $77;
- $78 = (__ZN10emscripten8internal19getGenericSignatureIJiiiEEEPKcv()|0); //@line 399 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $79 = $6; //@line 1352 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $80 = (__ZN10emscripten8internal10getContextIM15fc32_IirLowPassiEEPT_RKS4_($5)|0); //@line 1353 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $81 = (__ZN10emscripten8internal6TypeIDIiE3getEv()|0); //@line 1354 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $82 = $7; //@line 1355 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $1 = $82;
- $83 = (__ZN10emscripten8internal19getGenericSignatureIJviiiEEEPKcv()|0); //@line 399 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $84 = $7; //@line 1356 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- $85 = (__ZN10emscripten8internal10getContextIM15fc32_IirLowPassiEEPT_RKS4_($5)|0); //@line 1357 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- __embind_register_class_property(($74|0),($75|0),($76|0),($78|0),($79|0),($80|0),($81|0),($83|0),($84|0),($85|0)); //@line 1347 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
- STACKTOP = sp;return; //@line 64 "../source/include/fc_lib/templates/fc_IirLowPass.h"
+ $6 = 34; //@line 1345 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $7 = 35; //@line 1346 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $77 = (__ZN10emscripten8internal6TypeIDI15fc32_IirLowPassE3getEv()|0); //@line 1348 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $78 = $4; //@line 1349 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $79 = (__ZN10emscripten8internal6TypeIDIiE3getEv()|0); //@line 1350 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $80 = $6; //@line 1351 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $2 = $80;
+ $81 = (__ZN10emscripten8internal19getGenericSignatureIJiiiEEEPKcv()|0); //@line 399 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $82 = $6; //@line 1352 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $83 = (__ZN10emscripten8internal10getContextIM15fc32_IirLowPassiEEPT_RKS4_($5)|0); //@line 1353 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $84 = (__ZN10emscripten8internal6TypeIDIiE3getEv()|0); //@line 1354 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $85 = $7; //@line 1355 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $1 = $85;
+ $86 = (__ZN10emscripten8internal19getGenericSignatureIJviiiEEEPKcv()|0); //@line 399 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $87 = $7; //@line 1356 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $88 = (__ZN10emscripten8internal10getContextIM15fc32_IirLowPassiEEPT_RKS4_($5)|0); //@line 1357 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ __embind_register_class_property(($77|0),($78|0),($79|0),($81|0),($82|0),($83|0),($84|0),($86|0),($87|0),($88|0)); //@line 1347 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ ;HEAP8[$$byval_copy>>0]=HEAP8[$33>>0]|0; //@line 74 "../source/include/fc_lib/templates/fc_IirLowPass.h"
+ __ZN10emscripten8functionIvJP15fc32_IirLowPassEJNS_18allow_raw_pointersEEEEvPKcPFT_DpT0_EDpT1_(853,36,$$byval_copy); //@line 74 "../source/include/fc_lib/templates/fc_IirLowPass.h"
+ ;HEAP8[$$byval_copy1>>0]=HEAP8[$34>>0]|0; //@line 76 "../source/include/fc_lib/templates/fc_IirLowPass.h"
+ __ZN10emscripten8functionIvJP15fc32_IirLowPassiEJNS_18allow_raw_pointersEEEEvPKcPFT_DpT0_EDpT1_(869,37,$$byval_copy1); //@line 76 "../source/include/fc_lib/templates/fc_IirLowPass.h"
+ ;HEAP8[$$byval_copy2>>0]=HEAP8[$35>>0]|0; //@line 77 "../source/include/fc_lib/templates/fc_IirLowPass.h"
+ __ZN10emscripten8functionIiJP15fc32_IirLowPassiEJNS_18allow_raw_pointersEEEEvPKcPFT_DpT0_EDpT1_(890,38,$$byval_copy2); //@line 77 "../source/include/fc_lib/templates/fc_IirLowPass.h"
+ STACKTOP = sp;return; //@line 78 "../source/include/fc_lib/templates/fc_IirLowPass.h"
 }
 function __ZN10emscripten8internal11NoBaseClass6verifyI15fc32_IirLowPassEEvv() {
  var label = 0, sp = 0;
@@ -3598,17 +3921,17 @@ function __ZN10emscripten8internal11NoBaseClass3getEv() {
 function __ZN10emscripten8internal19getGenericSignatureIJiiEEEPKcv() {
  var label = 0, sp = 0;
  sp = STACKTOP;
- return (865|0); //@line 389 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ return (977|0); //@line 389 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
 }
 function __ZN10emscripten8internal19getGenericSignatureIJvEEEPKcv() {
  var label = 0, sp = 0;
  sp = STACKTOP;
- return (863|0); //@line 389 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ return (975|0); //@line 389 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
 }
 function __ZN10emscripten8internal19getGenericSignatureIJviEEEPKcv() {
  var label = 0, sp = 0;
  sp = STACKTOP;
- return (860|0); //@line 389 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ return (972|0); //@line 389 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
 }
 function __ZN10emscripten8internal12operator_newI15fc32_IirLowPassJEEEPT_DpOT0_() {
  var $0 = 0, label = 0, sp = 0;
@@ -3688,7 +4011,7 @@ function __ZN10emscripten8internal6TypeIDIfE3getEv() {
 function __ZN10emscripten8internal19getGenericSignatureIJfiiEEEPKcv() {
  var label = 0, sp = 0;
  sp = STACKTOP;
- return (819|0); //@line 389 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ return (968|0); //@line 389 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
 }
 function __ZN10emscripten8internal10getContextIM15fc32_IirLowPassfEEPT_RKS4_($0) {
  $0 = $0|0;
@@ -3705,7 +4028,7 @@ function __ZN10emscripten8internal10getContextIM15fc32_IirLowPassfEEPT_RKS4_($0)
 function __ZN10emscripten8internal19getGenericSignatureIJviifEEEPKcv() {
  var label = 0, sp = 0;
  sp = STACKTOP;
- return (814|0); //@line 389 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ return (963|0); //@line 389 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
 }
 function __ZN10emscripten8internal12MemberAccessI15fc32_IirLowPassiE7getWireIS2_EEiRKMS2_iRKT_($0,$1) {
  $0 = $0|0;
@@ -3750,7 +4073,7 @@ function __ZN10emscripten8internal6TypeIDIiE3getEv() {
 function __ZN10emscripten8internal19getGenericSignatureIJiiiEEEPKcv() {
  var label = 0, sp = 0;
  sp = STACKTOP;
- return (810|0); //@line 389 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ return (959|0); //@line 389 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
 }
 function __ZN10emscripten8internal10getContextIM15fc32_IirLowPassiEEPT_RKS4_($0) {
  $0 = $0|0;
@@ -3767,12 +4090,156 @@ function __ZN10emscripten8internal10getContextIM15fc32_IirLowPassiEEPT_RKS4_($0)
 function __ZN10emscripten8internal19getGenericSignatureIJviiiEEEPKcv() {
  var label = 0, sp = 0;
  sp = STACKTOP;
- return (805|0); //@line 389 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ return (954|0); //@line 389 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
 }
-function __ZN10emscripten8internal11LightTypeIDIiE3getEv() {
+function __ZN10emscripten8functionIvJP15fc32_IirLowPassEJNS_18allow_raw_pointersEEEEvPKcPFT_DpT0_EDpT1_($0,$1,$2) {
+ $0 = $0|0;
+ $1 = $1|0;
+ $2 = $2|0;
+ var $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 32|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(32|0);
+ $6 = sp + 16|0;
+ $4 = $0;
+ $5 = $1;
+ $7 = 39; //@line 420 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $8 = $4; //@line 422 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $9 = (__ZNK10emscripten8internal12WithPoliciesIJNS_18allow_raw_pointersEEE11ArgTypeListIJvP15fc32_IirLowPassEE8getCountEv($6)|0); //@line 423 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $10 = (__ZNK10emscripten8internal12WithPoliciesIJNS_18allow_raw_pointersEEE11ArgTypeListIJvP15fc32_IirLowPassEE8getTypesEv($6)|0); //@line 424 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $11 = $7; //@line 425 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $3 = $11;
+ $12 = (__ZN10emscripten8internal19getGenericSignatureIJviiEEEPKcv()|0); //@line 399 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $13 = $7; //@line 426 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $14 = $5; //@line 427 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ __embind_register_function(($8|0),($9|0),($10|0),($12|0),($13|0),($14|0)); //@line 421 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ STACKTOP = sp;return; //@line 428 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+}
+function __ZL20EmIirLowPass_preloadP15fc32_IirLowPassi($0,$1) {
+ $0 = $0|0;
+ $1 = $1|0;
+ var $2 = 0, $3 = 0, $4 = 0, $5 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 16|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(16|0);
+ $2 = $0;
+ $3 = $1;
+ $4 = $2; //@line 53 "../source/include/fc_lib/templates/fc_IirLowPass.h"
+ $5 = $3; //@line 53 "../source/include/fc_lib/templates/fc_IirLowPass.h"
+ _fc32_IirLowPass_preload($4,$5); //@line 53 "../source/include/fc_lib/templates/fc_IirLowPass.h"
+ STACKTOP = sp;return; //@line 54 "../source/include/fc_lib/templates/fc_IirLowPass.h"
+}
+function __ZN10emscripten8functionIvJP15fc32_IirLowPassiEJNS_18allow_raw_pointersEEEEvPKcPFT_DpT0_EDpT1_($0,$1,$2) {
+ $0 = $0|0;
+ $1 = $1|0;
+ $2 = $2|0;
+ var $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 32|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(32|0);
+ $6 = sp + 16|0;
+ $4 = $0;
+ $5 = $1;
+ $7 = 40; //@line 420 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $8 = $4; //@line 422 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $9 = (__ZNK10emscripten8internal12WithPoliciesIJNS_18allow_raw_pointersEEE11ArgTypeListIJvP15fc32_IirLowPassiEE8getCountEv($6)|0); //@line 423 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $10 = (__ZNK10emscripten8internal12WithPoliciesIJNS_18allow_raw_pointersEEE11ArgTypeListIJvP15fc32_IirLowPassiEE8getTypesEv($6)|0); //@line 424 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $11 = $7; //@line 425 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $3 = $11;
+ $12 = (__ZN10emscripten8internal19getGenericSignatureIJviiiEEEPKcv()|0); //@line 399 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $13 = $7; //@line 426 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $14 = $5; //@line 427 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ __embind_register_function(($8|0),($9|0),($10|0),($12|0),($13|0),($14|0)); //@line 421 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ STACKTOP = sp;return; //@line 428 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+}
+function __ZL17EmIirLowPass_stepP15fc32_IirLowPassi($0,$1) {
+ $0 = $0|0;
+ $1 = $1|0;
+ var $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 16|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(16|0);
+ $2 = $0;
+ $3 = $1;
+ $4 = $2; //@line 56 "../source/include/fc_lib/templates/fc_IirLowPass.h"
+ $5 = $3; //@line 56 "../source/include/fc_lib/templates/fc_IirLowPass.h"
+ $6 = (_fc32_IirLowPass_step($4,$5)|0); //@line 56 "../source/include/fc_lib/templates/fc_IirLowPass.h"
+ STACKTOP = sp;return ($6|0); //@line 56 "../source/include/fc_lib/templates/fc_IirLowPass.h"
+}
+function __ZN10emscripten8functionIiJP15fc32_IirLowPassiEJNS_18allow_raw_pointersEEEEvPKcPFT_DpT0_EDpT1_($0,$1,$2) {
+ $0 = $0|0;
+ $1 = $1|0;
+ $2 = $2|0;
+ var $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 32|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(32|0);
+ $6 = sp + 16|0;
+ $4 = $0;
+ $5 = $1;
+ $7 = 41; //@line 420 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $8 = $4; //@line 422 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $9 = (__ZNK10emscripten8internal12WithPoliciesIJNS_18allow_raw_pointersEEE11ArgTypeListIJiP15fc32_IirLowPassiEE8getCountEv($6)|0); //@line 423 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $10 = (__ZNK10emscripten8internal12WithPoliciesIJNS_18allow_raw_pointersEEE11ArgTypeListIJiP15fc32_IirLowPassiEE8getTypesEv($6)|0); //@line 424 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $11 = $7; //@line 425 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $3 = $11;
+ $12 = (__ZN10emscripten8internal19getGenericSignatureIJiiiiEEEPKcv()|0); //@line 399 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $13 = $7; //@line 426 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $14 = $5; //@line 427 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ __embind_register_function(($8|0),($9|0),($10|0),($12|0),($13|0),($14|0)); //@line 421 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ STACKTOP = sp;return; //@line 428 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+}
+function __ZN10emscripten8internal7InvokerIiJP15fc32_IirLowPassiEE6invokeEPFiS3_iES3_i($0,$1,$2) {
+ $0 = $0|0;
+ $1 = $1|0;
+ $2 = $2|0;
+ var $10 = 0, $11 = 0, $12 = 0, $13 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 16|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(16|0);
+ $6 = sp;
+ $3 = $0;
+ $4 = $1;
+ $5 = $2;
+ $7 = $3; //@line 330 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $8 = $4; //@line 331 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $9 = (__ZN10emscripten8internal11BindingTypeIP15fc32_IirLowPassE12fromWireTypeES3_($8)|0); //@line 331 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $10 = $5; //@line 331 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $11 = (__ZN10emscripten8internal11BindingTypeIiE12fromWireTypeEi($10)|0); //@line 331 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $12 = (FUNCTION_TABLE_iii[$7 & 63]($9,$11)|0); //@line 330 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ HEAP32[$6>>2] = $12; //@line 330 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $13 = (__ZN10emscripten8internal11BindingTypeIiE10toWireTypeERKi($6)|0); //@line 329 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ STACKTOP = sp;return ($13|0); //@line 329 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+}
+function __ZNK10emscripten8internal12WithPoliciesIJNS_18allow_raw_pointersEEE11ArgTypeListIJiP15fc32_IirLowPassiEE8getCountEv($0) {
+ $0 = $0|0;
+ var $1 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 16|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(16|0);
+ $1 = $0;
+ STACKTOP = sp;return 3; //@line 224 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/wire.h"
+}
+function __ZNK10emscripten8internal12WithPoliciesIJNS_18allow_raw_pointersEEE11ArgTypeListIJiP15fc32_IirLowPassiEE8getTypesEv($0) {
+ $0 = $0|0;
+ var $1 = 0, $2 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 16|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(16|0);
+ $1 = $0;
+ $2 = (__ZN10emscripten8internal14ArgArrayGetterINS0_8TypeListIJiNS0_17AllowedRawPointerI15fc32_IirLowPassEEiEEEE3getEv()|0); //@line 228 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/wire.h"
+ STACKTOP = sp;return ($2|0); //@line 228 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/wire.h"
+}
+function __ZN10emscripten8internal19getGenericSignatureIJiiiiEEEPKcv() {
  var label = 0, sp = 0;
  sp = STACKTOP;
- return (400|0); //@line 62 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/wire.h"
+ return (908|0); //@line 389 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+}
+function __ZN10emscripten8internal14ArgArrayGetterINS0_8TypeListIJiNS0_17AllowedRawPointerI15fc32_IirLowPassEEiEEEE3getEv() {
+ var label = 0, sp = 0;
+ sp = STACKTOP;
+ return (480|0); //@line 208 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/wire.h"
+}
+function __ZN10emscripten8internal11BindingTypeIP15fc32_IirLowPassE12fromWireTypeES3_($0) {
+ $0 = $0|0;
+ var $1 = 0, $2 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 16|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(16|0);
+ $1 = $0;
+ $2 = $1; //@line 344 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/wire.h"
+ STACKTOP = sp;return ($2|0); //@line 344 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/wire.h"
 }
 function __ZN10emscripten8internal11BindingTypeIiE12fromWireTypeEi($0) {
  $0 = $0|0;
@@ -3792,6 +4259,92 @@ function __ZN10emscripten8internal11BindingTypeIiE10toWireTypeERKi($0) {
  $2 = $1; //@line 257 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/wire.h"
  $3 = HEAP32[$2>>2]|0; //@line 257 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/wire.h"
  STACKTOP = sp;return ($3|0); //@line 257 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/wire.h"
+}
+function __ZN10emscripten8internal7InvokerIvJP15fc32_IirLowPassiEE6invokeEPFvS3_iES3_i($0,$1,$2) {
+ $0 = $0|0;
+ $1 = $1|0;
+ $2 = $2|0;
+ var $10 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 16|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(16|0);
+ $3 = $0;
+ $4 = $1;
+ $5 = $2;
+ $6 = $3; //@line 343 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $7 = $4; //@line 344 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $8 = (__ZN10emscripten8internal11BindingTypeIP15fc32_IirLowPassE12fromWireTypeES3_($7)|0); //@line 344 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $9 = $5; //@line 344 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $10 = (__ZN10emscripten8internal11BindingTypeIiE12fromWireTypeEi($9)|0); //@line 344 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ FUNCTION_TABLE_vii[$6 & 63]($8,$10); //@line 343 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ STACKTOP = sp;return; //@line 343 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+}
+function __ZNK10emscripten8internal12WithPoliciesIJNS_18allow_raw_pointersEEE11ArgTypeListIJvP15fc32_IirLowPassiEE8getCountEv($0) {
+ $0 = $0|0;
+ var $1 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 16|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(16|0);
+ $1 = $0;
+ STACKTOP = sp;return 3; //@line 224 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/wire.h"
+}
+function __ZNK10emscripten8internal12WithPoliciesIJNS_18allow_raw_pointersEEE11ArgTypeListIJvP15fc32_IirLowPassiEE8getTypesEv($0) {
+ $0 = $0|0;
+ var $1 = 0, $2 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 16|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(16|0);
+ $1 = $0;
+ $2 = (__ZN10emscripten8internal14ArgArrayGetterINS0_8TypeListIJvNS0_17AllowedRawPointerI15fc32_IirLowPassEEiEEEE3getEv()|0); //@line 228 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/wire.h"
+ STACKTOP = sp;return ($2|0); //@line 228 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/wire.h"
+}
+function __ZN10emscripten8internal14ArgArrayGetterINS0_8TypeListIJvNS0_17AllowedRawPointerI15fc32_IirLowPassEEiEEEE3getEv() {
+ var label = 0, sp = 0;
+ sp = STACKTOP;
+ return (492|0); //@line 208 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/wire.h"
+}
+function __ZN10emscripten8internal7InvokerIvJP15fc32_IirLowPassEE6invokeEPFvS3_ES3_($0,$1) {
+ $0 = $0|0;
+ $1 = $1|0;
+ var $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 16|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(16|0);
+ $2 = $0;
+ $3 = $1;
+ $4 = $2; //@line 343 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $5 = $3; //@line 344 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ $6 = (__ZN10emscripten8internal11BindingTypeIP15fc32_IirLowPassE12fromWireTypeES3_($5)|0); //@line 344 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ FUNCTION_TABLE_vi[$4 & 63]($6); //@line 343 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+ STACKTOP = sp;return; //@line 343 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+}
+function __ZNK10emscripten8internal12WithPoliciesIJNS_18allow_raw_pointersEEE11ArgTypeListIJvP15fc32_IirLowPassEE8getCountEv($0) {
+ $0 = $0|0;
+ var $1 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 16|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(16|0);
+ $1 = $0;
+ STACKTOP = sp;return 2; //@line 224 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/wire.h"
+}
+function __ZNK10emscripten8internal12WithPoliciesIJNS_18allow_raw_pointersEEE11ArgTypeListIJvP15fc32_IirLowPassEE8getTypesEv($0) {
+ $0 = $0|0;
+ var $1 = 0, $2 = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 16|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(16|0);
+ $1 = $0;
+ $2 = (__ZN10emscripten8internal14ArgArrayGetterINS0_8TypeListIJvNS0_17AllowedRawPointerI15fc32_IirLowPassEEEEEE3getEv()|0); //@line 228 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/wire.h"
+ STACKTOP = sp;return ($2|0); //@line 228 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/wire.h"
+}
+function __ZN10emscripten8internal19getGenericSignatureIJviiEEEPKcv() {
+ var label = 0, sp = 0;
+ sp = STACKTOP;
+ return (950|0); //@line 389 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/bind.h"
+}
+function __ZN10emscripten8internal14ArgArrayGetterINS0_8TypeListIJvNS0_17AllowedRawPointerI15fc32_IirLowPassEEEEEE3getEv() {
+ var label = 0, sp = 0;
+ sp = STACKTOP;
+ return (504|0); //@line 208 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/wire.h"
+}
+function __ZN10emscripten8internal11LightTypeIDIiE3getEv() {
+ var label = 0, sp = 0;
+ sp = STACKTOP;
+ return (400|0); //@line 62 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/wire.h"
 }
 function __ZN10emscripten8internal11LightTypeIDIfE3getEv() {
  var label = 0, sp = 0;
@@ -3820,7 +4373,7 @@ function __ZN10emscripten8internal11BindingTypeIfE10toWireTypeERKf($0) {
 function __ZN10emscripten8internal14ArgArrayGetterINS0_8TypeListIJNS0_17AllowedRawPointerI15fc32_IirLowPassEEEEEE3getEv() {
  var label = 0, sp = 0;
  sp = STACKTOP;
- return (464|0); //@line 208 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/wire.h"
+ return (512|0); //@line 208 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/include/emscripten/wire.h"
 }
 function __ZN10emscripten8internal11BindingTypeIP15fc32_IirLowPassE10toWireTypeES3_($0) {
  $0 = $0|0;
@@ -3863,7 +4416,7 @@ function __GLOBAL__sub_I_bind_cpp() {
 function ___cxx_global_var_init_2() {
  var label = 0, sp = 0;
  sp = STACKTOP;
- __ZN53EmscriptenBindingInitializer_native_and_builtin_typesC2Ev(3117); //@line 95 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN53EmscriptenBindingInitializer_native_and_builtin_typesC2Ev(3229); //@line 95 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
  return; //@line 95 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
 }
 function __ZN53EmscriptenBindingInitializer_native_and_builtin_typesC2Ev($0) {
@@ -3873,46 +4426,46 @@ function __ZN53EmscriptenBindingInitializer_native_and_builtin_typesC2Ev($0) {
  STACKTOP = STACKTOP + 16|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abortStackOverflow(16|0);
  $1 = $0;
  $2 = (__ZN10emscripten8internal6TypeIDIvE3getEv()|0); //@line 98 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __embind_register_void(($2|0),(888|0)); //@line 98 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __embind_register_void(($2|0),(1000|0)); //@line 98 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
  $3 = (__ZN10emscripten8internal6TypeIDIbE3getEv()|0); //@line 100 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __embind_register_bool(($3|0),(893|0),1,1,0); //@line 100 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L16register_integerIcEEvPKc(898); //@line 102 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L16register_integerIaEEvPKc(903); //@line 103 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L16register_integerIhEEvPKc(915); //@line 104 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L16register_integerIsEEvPKc(929); //@line 105 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L16register_integerItEEvPKc(935); //@line 106 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L16register_integerIiEEvPKc(950); //@line 107 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L16register_integerIjEEvPKc(954); //@line 108 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L16register_integerIlEEvPKc(967); //@line 109 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L16register_integerImEEvPKc(972); //@line 110 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L14register_floatIfEEvPKc(986); //@line 112 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L14register_floatIdEEvPKc(992); //@line 113 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __embind_register_bool(($3|0),(1005|0),1,1,0); //@line 100 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L16register_integerIcEEvPKc(1010); //@line 102 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L16register_integerIaEEvPKc(1015); //@line 103 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L16register_integerIhEEvPKc(1027); //@line 104 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L16register_integerIsEEvPKc(1041); //@line 105 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L16register_integerItEEvPKc(1047); //@line 106 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L16register_integerIiEEvPKc(1062); //@line 107 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L16register_integerIjEEvPKc(1066); //@line 108 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L16register_integerIlEEvPKc(1079); //@line 109 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L16register_integerImEEvPKc(1084); //@line 110 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L14register_floatIfEEvPKc(1098); //@line 112 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L14register_floatIdEEvPKc(1104); //@line 113 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
  $4 = (__ZN10emscripten8internal6TypeIDINSt3__212basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEE3getEv()|0); //@line 115 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __embind_register_std_string(($4|0),(999|0)); //@line 115 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __embind_register_std_string(($4|0),(1111|0)); //@line 115 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
  $5 = (__ZN10emscripten8internal6TypeIDINSt3__212basic_stringIhNS2_11char_traitsIhEENS2_9allocatorIhEEEEE3getEv()|0); //@line 116 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __embind_register_std_string(($5|0),(1011|0)); //@line 116 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __embind_register_std_string(($5|0),(1123|0)); //@line 116 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
  $6 = (__ZN10emscripten8internal6TypeIDINSt3__212basic_stringIwNS2_11char_traitsIwEENS2_9allocatorIwEEEEE3getEv()|0); //@line 117 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __embind_register_std_wstring(($6|0),4,(1044|0)); //@line 117 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __embind_register_std_wstring(($6|0),4,(1156|0)); //@line 117 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
  $7 = (__ZN10emscripten8internal6TypeIDINS_3valEE3getEv()|0); //@line 118 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __embind_register_emval(($7|0),(1057|0)); //@line 118 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L20register_memory_viewIcEEvPKc(1073); //@line 126 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L20register_memory_viewIaEEvPKc(1103); //@line 127 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L20register_memory_viewIhEEvPKc(1140); //@line 128 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L20register_memory_viewIsEEvPKc(1179); //@line 130 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L20register_memory_viewItEEvPKc(1210); //@line 131 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L20register_memory_viewIiEEvPKc(1250); //@line 132 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L20register_memory_viewIjEEvPKc(1279); //@line 133 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L20register_memory_viewIlEEvPKc(1317); //@line 134 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L20register_memory_viewImEEvPKc(1347); //@line 135 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L20register_memory_viewIaEEvPKc(1386); //@line 137 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L20register_memory_viewIhEEvPKc(1418); //@line 138 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L20register_memory_viewIsEEvPKc(1451); //@line 139 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L20register_memory_viewItEEvPKc(1484); //@line 140 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L20register_memory_viewIiEEvPKc(1518); //@line 141 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L20register_memory_viewIjEEvPKc(1551); //@line 142 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L20register_memory_viewIfEEvPKc(1585); //@line 144 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L20register_memory_viewIdEEvPKc(1616); //@line 145 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
- __ZN12_GLOBAL__N_1L20register_memory_viewIeEEvPKc(1648); //@line 147 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __embind_register_emval(($7|0),(1169|0)); //@line 118 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L20register_memory_viewIcEEvPKc(1185); //@line 126 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L20register_memory_viewIaEEvPKc(1215); //@line 127 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L20register_memory_viewIhEEvPKc(1252); //@line 128 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L20register_memory_viewIsEEvPKc(1291); //@line 130 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L20register_memory_viewItEEvPKc(1322); //@line 131 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L20register_memory_viewIiEEvPKc(1362); //@line 132 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L20register_memory_viewIjEEvPKc(1391); //@line 133 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L20register_memory_viewIlEEvPKc(1429); //@line 134 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L20register_memory_viewImEEvPKc(1459); //@line 135 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L20register_memory_viewIaEEvPKc(1498); //@line 137 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L20register_memory_viewIhEEvPKc(1530); //@line 138 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L20register_memory_viewIsEEvPKc(1563); //@line 139 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L20register_memory_viewItEEvPKc(1596); //@line 140 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L20register_memory_viewIiEEvPKc(1630); //@line 141 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L20register_memory_viewIjEEvPKc(1663); //@line 142 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L20register_memory_viewIfEEvPKc(1697); //@line 144 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L20register_memory_viewIdEEvPKc(1728); //@line 145 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
+ __ZN12_GLOBAL__N_1L20register_memory_viewIeEEvPKc(1760); //@line 147 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
  STACKTOP = sp;return; //@line 149 "/mnt/c/Users/akruck/Documents/code/linuxtools/emsdk/emscripten/1.37.38/system/lib/embind/bind.cpp"
 }
 function __ZN10emscripten8internal6TypeIDIvE3getEv() {
@@ -4633,7 +5186,7 @@ function _malloc($0) {
    $5 = $4 & -8;
    $6 = $3 ? 16 : $5;
    $7 = $6 >>> 3;
-   $8 = HEAP32[650]|0;
+   $8 = HEAP32[678]|0;
    $9 = $8 >>> $7;
    $10 = $9 & 3;
    $11 = ($10|0)==(0);
@@ -4642,7 +5195,7 @@ function _malloc($0) {
     $13 = $12 ^ 1;
     $14 = (($13) + ($7))|0;
     $15 = $14 << 1;
-    $16 = (2640 + ($15<<2)|0);
+    $16 = (2752 + ($15<<2)|0);
     $17 = ((($16)) + 8|0);
     $18 = HEAP32[$17>>2]|0;
     $19 = ((($18)) + 8|0);
@@ -4653,9 +5206,9 @@ function _malloc($0) {
       $22 = 1 << $14;
       $23 = $22 ^ -1;
       $24 = $8 & $23;
-      HEAP32[650] = $24;
+      HEAP32[678] = $24;
      } else {
-      $25 = HEAP32[(2616)>>2]|0;
+      $25 = HEAP32[(2728)>>2]|0;
       $26 = ($25>>>0)>($20>>>0);
       if ($26) {
        _abort();
@@ -4686,7 +5239,7 @@ function _malloc($0) {
     $$0 = $19;
     STACKTOP = sp;return ($$0|0);
    }
-   $37 = HEAP32[(2608)>>2]|0;
+   $37 = HEAP32[(2720)>>2]|0;
    $38 = ($6>>>0)>($37>>>0);
    if ($38) {
     $39 = ($9|0)==(0);
@@ -4720,7 +5273,7 @@ function _malloc($0) {
      $66 = $62 >>> $64;
      $67 = (($65) + ($66))|0;
      $68 = $67 << 1;
-     $69 = (2640 + ($68<<2)|0);
+     $69 = (2752 + ($68<<2)|0);
      $70 = ((($69)) + 8|0);
      $71 = HEAP32[$70>>2]|0;
      $72 = ((($71)) + 8|0);
@@ -4731,10 +5284,10 @@ function _malloc($0) {
        $75 = 1 << $67;
        $76 = $75 ^ -1;
        $77 = $8 & $76;
-       HEAP32[650] = $77;
+       HEAP32[678] = $77;
        $98 = $77;
       } else {
-       $78 = HEAP32[(2616)>>2]|0;
+       $78 = HEAP32[(2728)>>2]|0;
        $79 = ($78>>>0)>($73>>>0);
        if ($79) {
         _abort();
@@ -4767,22 +5320,22 @@ function _malloc($0) {
      HEAP32[$90>>2] = $84;
      $91 = ($37|0)==(0);
      if (!($91)) {
-      $92 = HEAP32[(2620)>>2]|0;
+      $92 = HEAP32[(2732)>>2]|0;
       $93 = $37 >>> 3;
       $94 = $93 << 1;
-      $95 = (2640 + ($94<<2)|0);
+      $95 = (2752 + ($94<<2)|0);
       $96 = 1 << $93;
       $97 = $98 & $96;
       $99 = ($97|0)==(0);
       if ($99) {
        $100 = $98 | $96;
-       HEAP32[650] = $100;
+       HEAP32[678] = $100;
        $$pre = ((($95)) + 8|0);
        $$0199 = $95;$$pre$phiZ2D = $$pre;
       } else {
        $101 = ((($95)) + 8|0);
        $102 = HEAP32[$101>>2]|0;
-       $103 = HEAP32[(2616)>>2]|0;
+       $103 = HEAP32[(2728)>>2]|0;
        $104 = ($103>>>0)>($102>>>0);
        if ($104) {
         _abort();
@@ -4799,12 +5352,12 @@ function _malloc($0) {
       $107 = ((($92)) + 12|0);
       HEAP32[$107>>2] = $95;
      }
-     HEAP32[(2608)>>2] = $84;
-     HEAP32[(2620)>>2] = $87;
+     HEAP32[(2720)>>2] = $84;
+     HEAP32[(2732)>>2] = $87;
      $$0 = $72;
      STACKTOP = sp;return ($$0|0);
     }
-    $108 = HEAP32[(2604)>>2]|0;
+    $108 = HEAP32[(2716)>>2]|0;
     $109 = ($108|0)==(0);
     if ($109) {
      $$0197 = $6;
@@ -4832,7 +5385,7 @@ function _malloc($0) {
      $130 = $126 | $129;
      $131 = $127 >>> $129;
      $132 = (($130) + ($131))|0;
-     $133 = (2904 + ($132<<2)|0);
+     $133 = (3016 + ($132<<2)|0);
      $134 = HEAP32[$133>>2]|0;
      $135 = ((($134)) + 4|0);
      $136 = HEAP32[$135>>2]|0;
@@ -4872,7 +5425,7 @@ function _malloc($0) {
        }
       }
      }
-     $157 = HEAP32[(2616)>>2]|0;
+     $157 = HEAP32[(2728)>>2]|0;
      $158 = ($157>>>0)>($$0192$lcssa$i>>>0);
      if ($158) {
       _abort();
@@ -4967,7 +5520,7 @@ function _malloc($0) {
       if (!($188)) {
        $189 = ((($$0192$lcssa$i)) + 28|0);
        $190 = HEAP32[$189>>2]|0;
-       $191 = (2904 + ($190<<2)|0);
+       $191 = (3016 + ($190<<2)|0);
        $192 = HEAP32[$191>>2]|0;
        $193 = ($$0192$lcssa$i|0)==($192|0);
        do {
@@ -4978,11 +5531,11 @@ function _malloc($0) {
           $194 = 1 << $190;
           $195 = $194 ^ -1;
           $196 = $108 & $195;
-          HEAP32[(2604)>>2] = $196;
+          HEAP32[(2716)>>2] = $196;
           break L73;
          }
         } else {
-         $197 = HEAP32[(2616)>>2]|0;
+         $197 = HEAP32[(2728)>>2]|0;
          $198 = ($197>>>0)>($162>>>0);
          if ($198) {
           _abort();
@@ -5003,7 +5556,7 @@ function _malloc($0) {
          }
         }
        } while(0);
-       $204 = HEAP32[(2616)>>2]|0;
+       $204 = HEAP32[(2728)>>2]|0;
        $205 = ($204>>>0)>($$3$i>>>0);
        if ($205) {
         _abort();
@@ -5033,7 +5586,7 @@ function _malloc($0) {
        $214 = HEAP32[$213>>2]|0;
        $215 = ($214|0)==(0|0);
        if (!($215)) {
-        $216 = HEAP32[(2616)>>2]|0;
+        $216 = HEAP32[(2728)>>2]|0;
         $217 = ($216>>>0)>($214>>>0);
         if ($217) {
          _abort();
@@ -5070,22 +5623,22 @@ function _malloc($0) {
       HEAP32[$232>>2] = $$0193$lcssa$i;
       $233 = ($37|0)==(0);
       if (!($233)) {
-       $234 = HEAP32[(2620)>>2]|0;
+       $234 = HEAP32[(2732)>>2]|0;
        $235 = $37 >>> 3;
        $236 = $235 << 1;
-       $237 = (2640 + ($236<<2)|0);
+       $237 = (2752 + ($236<<2)|0);
        $238 = 1 << $235;
        $239 = $8 & $238;
        $240 = ($239|0)==(0);
        if ($240) {
         $241 = $8 | $238;
-        HEAP32[650] = $241;
+        HEAP32[678] = $241;
         $$pre$i = ((($237)) + 8|0);
         $$0189$i = $237;$$pre$phi$iZ2D = $$pre$i;
        } else {
         $242 = ((($237)) + 8|0);
         $243 = HEAP32[$242>>2]|0;
-        $244 = HEAP32[(2616)>>2]|0;
+        $244 = HEAP32[(2728)>>2]|0;
         $245 = ($244>>>0)>($243>>>0);
         if ($245) {
          _abort();
@@ -5102,8 +5655,8 @@ function _malloc($0) {
        $248 = ((($234)) + 12|0);
        HEAP32[$248>>2] = $237;
       }
-      HEAP32[(2608)>>2] = $$0193$lcssa$i;
-      HEAP32[(2620)>>2] = $159;
+      HEAP32[(2720)>>2] = $$0193$lcssa$i;
+      HEAP32[(2732)>>2] = $159;
      }
      $249 = ((($$0192$lcssa$i)) + 8|0);
      $$0 = $249;
@@ -5119,7 +5672,7 @@ function _malloc($0) {
    } else {
     $251 = (($0) + 11)|0;
     $252 = $251 & -8;
-    $253 = HEAP32[(2604)>>2]|0;
+    $253 = HEAP32[(2716)>>2]|0;
     $254 = ($253|0)==(0);
     if ($254) {
      $$0197 = $252;
@@ -5159,7 +5712,7 @@ function _malloc($0) {
        $$0358$i = $280;
       }
      }
-     $281 = (2904 + ($$0358$i<<2)|0);
+     $281 = (3016 + ($$0358$i<<2)|0);
      $282 = HEAP32[$281>>2]|0;
      $283 = ($282|0)==(0|0);
      L117: do {
@@ -5251,7 +5804,7 @@ function _malloc($0) {
        $331 = $327 | $330;
        $332 = $328 >>> $330;
        $333 = (($331) + ($332))|0;
-       $334 = (2904 + ($333<<2)|0);
+       $334 = (3016 + ($333<<2)|0);
        $335 = HEAP32[$334>>2]|0;
        $$4$ph$i = 0;$$4357$ph$i = $335;
       } else {
@@ -5295,11 +5848,11 @@ function _malloc($0) {
      if ($348) {
       $$0197 = $252;
      } else {
-      $349 = HEAP32[(2608)>>2]|0;
+      $349 = HEAP32[(2720)>>2]|0;
       $350 = (($349) - ($252))|0;
       $351 = ($$4351$lcssa$i>>>0)<($350>>>0);
       if ($351) {
-       $352 = HEAP32[(2616)>>2]|0;
+       $352 = HEAP32[(2728)>>2]|0;
        $353 = ($352>>>0)>($$4$lcssa$i>>>0);
        if ($353) {
         _abort();
@@ -5396,7 +5949,7 @@ function _malloc($0) {
         } else {
          $384 = ((($$4$lcssa$i)) + 28|0);
          $385 = HEAP32[$384>>2]|0;
-         $386 = (2904 + ($385<<2)|0);
+         $386 = (3016 + ($385<<2)|0);
          $387 = HEAP32[$386>>2]|0;
          $388 = ($$4$lcssa$i|0)==($387|0);
          do {
@@ -5407,12 +5960,12 @@ function _malloc($0) {
             $389 = 1 << $385;
             $390 = $389 ^ -1;
             $391 = $253 & $390;
-            HEAP32[(2604)>>2] = $391;
+            HEAP32[(2716)>>2] = $391;
             $475 = $391;
             break L164;
            }
           } else {
-           $392 = HEAP32[(2616)>>2]|0;
+           $392 = HEAP32[(2728)>>2]|0;
            $393 = ($392>>>0)>($357>>>0);
            if ($393) {
             _abort();
@@ -5434,7 +5987,7 @@ function _malloc($0) {
            }
           }
          } while(0);
-         $399 = HEAP32[(2616)>>2]|0;
+         $399 = HEAP32[(2728)>>2]|0;
          $400 = ($399>>>0)>($$3372$i>>>0);
          if ($400) {
           _abort();
@@ -5466,7 +6019,7 @@ function _malloc($0) {
          if ($410) {
           $475 = $253;
          } else {
-          $411 = HEAP32[(2616)>>2]|0;
+          $411 = HEAP32[(2728)>>2]|0;
           $412 = ($411>>>0)>($409>>>0);
           if ($412) {
            _abort();
@@ -5507,20 +6060,20 @@ function _malloc($0) {
          $429 = ($$4351$lcssa$i>>>0)<(256);
          if ($429) {
           $430 = $428 << 1;
-          $431 = (2640 + ($430<<2)|0);
-          $432 = HEAP32[650]|0;
+          $431 = (2752 + ($430<<2)|0);
+          $432 = HEAP32[678]|0;
           $433 = 1 << $428;
           $434 = $432 & $433;
           $435 = ($434|0)==(0);
           if ($435) {
            $436 = $432 | $433;
-           HEAP32[650] = $436;
+           HEAP32[678] = $436;
            $$pre$i210 = ((($431)) + 8|0);
            $$0368$i = $431;$$pre$phi$i211Z2D = $$pre$i210;
           } else {
            $437 = ((($431)) + 8|0);
            $438 = HEAP32[$437>>2]|0;
-           $439 = HEAP32[(2616)>>2]|0;
+           $439 = HEAP32[(2728)>>2]|0;
            $440 = ($439>>>0)>($438>>>0);
            if ($440) {
             _abort();
@@ -5572,7 +6125,7 @@ function _malloc($0) {
            $$0361$i = $468;
           }
          }
-         $469 = (2904 + ($$0361$i<<2)|0);
+         $469 = (3016 + ($$0361$i<<2)|0);
          $470 = ((($354)) + 28|0);
          HEAP32[$470>>2] = $$0361$i;
          $471 = ((($354)) + 16|0);
@@ -5584,7 +6137,7 @@ function _malloc($0) {
          $476 = ($474|0)==(0);
          if ($476) {
           $477 = $475 | $473;
-          HEAP32[(2604)>>2] = $477;
+          HEAP32[(2716)>>2] = $477;
           HEAP32[$469>>2] = $354;
           $478 = ((($354)) + 24|0);
           HEAP32[$478>>2] = $469;
@@ -5623,7 +6176,7 @@ function _malloc($0) {
           }
          }
          if ((label|0) == 136) {
-          $496 = HEAP32[(2616)>>2]|0;
+          $496 = HEAP32[(2728)>>2]|0;
           $497 = ($496>>>0)>($492>>>0);
           if ($497) {
            _abort();
@@ -5642,7 +6195,7 @@ function _malloc($0) {
          else if ((label|0) == 139) {
           $501 = ((($$0345$i)) + 8|0);
           $502 = HEAP32[$501>>2]|0;
-          $503 = HEAP32[(2616)>>2]|0;
+          $503 = HEAP32[(2728)>>2]|0;
           $504 = ($503>>>0)<=($$0345$i>>>0);
           $505 = ($503>>>0)<=($502>>>0);
           $506 = $505 & $504;
@@ -5675,16 +6228,16 @@ function _malloc($0) {
    }
   }
  } while(0);
- $512 = HEAP32[(2608)>>2]|0;
+ $512 = HEAP32[(2720)>>2]|0;
  $513 = ($512>>>0)<($$0197>>>0);
  if (!($513)) {
   $514 = (($512) - ($$0197))|0;
-  $515 = HEAP32[(2620)>>2]|0;
+  $515 = HEAP32[(2732)>>2]|0;
   $516 = ($514>>>0)>(15);
   if ($516) {
    $517 = (($515) + ($$0197)|0);
-   HEAP32[(2620)>>2] = $517;
-   HEAP32[(2608)>>2] = $514;
+   HEAP32[(2732)>>2] = $517;
+   HEAP32[(2720)>>2] = $514;
    $518 = $514 | 1;
    $519 = ((($517)) + 4|0);
    HEAP32[$519>>2] = $518;
@@ -5694,8 +6247,8 @@ function _malloc($0) {
    $522 = ((($515)) + 4|0);
    HEAP32[$522>>2] = $521;
   } else {
-   HEAP32[(2608)>>2] = 0;
-   HEAP32[(2620)>>2] = 0;
+   HEAP32[(2720)>>2] = 0;
+   HEAP32[(2732)>>2] = 0;
    $523 = $512 | 3;
    $524 = ((($515)) + 4|0);
    HEAP32[$524>>2] = $523;
@@ -5709,14 +6262,14 @@ function _malloc($0) {
   $$0 = $529;
   STACKTOP = sp;return ($$0|0);
  }
- $530 = HEAP32[(2612)>>2]|0;
+ $530 = HEAP32[(2724)>>2]|0;
  $531 = ($530>>>0)>($$0197>>>0);
  if ($531) {
   $532 = (($530) - ($$0197))|0;
-  HEAP32[(2612)>>2] = $532;
-  $533 = HEAP32[(2624)>>2]|0;
+  HEAP32[(2724)>>2] = $532;
+  $533 = HEAP32[(2736)>>2]|0;
   $534 = (($533) + ($$0197)|0);
-  HEAP32[(2624)>>2] = $534;
+  HEAP32[(2736)>>2] = $534;
   $535 = $532 | 1;
   $536 = ((($534)) + 4|0);
   HEAP32[$536>>2] = $535;
@@ -5727,22 +6280,22 @@ function _malloc($0) {
   $$0 = $539;
   STACKTOP = sp;return ($$0|0);
  }
- $540 = HEAP32[768]|0;
+ $540 = HEAP32[796]|0;
  $541 = ($540|0)==(0);
  if ($541) {
-  HEAP32[(3080)>>2] = 4096;
-  HEAP32[(3076)>>2] = 4096;
-  HEAP32[(3084)>>2] = -1;
-  HEAP32[(3088)>>2] = -1;
-  HEAP32[(3092)>>2] = 0;
-  HEAP32[(3044)>>2] = 0;
+  HEAP32[(3192)>>2] = 4096;
+  HEAP32[(3188)>>2] = 4096;
+  HEAP32[(3196)>>2] = -1;
+  HEAP32[(3200)>>2] = -1;
+  HEAP32[(3204)>>2] = 0;
+  HEAP32[(3156)>>2] = 0;
   $542 = $1;
   $543 = $542 & -16;
   $544 = $543 ^ 1431655768;
-  HEAP32[768] = $544;
+  HEAP32[796] = $544;
   $548 = 4096;
  } else {
-  $$pre$i212 = HEAP32[(3080)>>2]|0;
+  $$pre$i212 = HEAP32[(3192)>>2]|0;
   $548 = $$pre$i212;
  }
  $545 = (($$0197) + 48)|0;
@@ -5755,10 +6308,10 @@ function _malloc($0) {
   $$0 = 0;
   STACKTOP = sp;return ($$0|0);
  }
- $552 = HEAP32[(3040)>>2]|0;
+ $552 = HEAP32[(3152)>>2]|0;
  $553 = ($552|0)==(0);
  if (!($553)) {
-  $554 = HEAP32[(3032)>>2]|0;
+  $554 = HEAP32[(3144)>>2]|0;
   $555 = (($554) + ($550))|0;
   $556 = ($555>>>0)<=($554>>>0);
   $557 = ($555>>>0)>($552>>>0);
@@ -5768,18 +6321,18 @@ function _malloc($0) {
    STACKTOP = sp;return ($$0|0);
   }
  }
- $558 = HEAP32[(3044)>>2]|0;
+ $558 = HEAP32[(3156)>>2]|0;
  $559 = $558 & 4;
  $560 = ($559|0)==(0);
  L244: do {
   if ($560) {
-   $561 = HEAP32[(2624)>>2]|0;
+   $561 = HEAP32[(2736)>>2]|0;
    $562 = ($561|0)==(0|0);
    L246: do {
     if ($562) {
      label = 163;
     } else {
-     $$0$i$i = (3048);
+     $$0$i$i = (3160);
      while(1) {
       $563 = HEAP32[$$0$i$i>>2]|0;
       $564 = ($563>>>0)>($561>>>0);
@@ -5837,7 +6390,7 @@ function _malloc($0) {
       $$2234243136$i = 0;
      } else {
       $574 = $572;
-      $575 = HEAP32[(3076)>>2]|0;
+      $575 = HEAP32[(3188)>>2]|0;
       $576 = (($575) + -1)|0;
       $577 = $576 & $574;
       $578 = ($577|0)==(0);
@@ -5847,13 +6400,13 @@ function _malloc($0) {
       $582 = (($581) - ($574))|0;
       $583 = $578 ? 0 : $582;
       $$$i = (($583) + ($550))|0;
-      $584 = HEAP32[(3032)>>2]|0;
+      $584 = HEAP32[(3144)>>2]|0;
       $585 = (($$$i) + ($584))|0;
       $586 = ($$$i>>>0)>($$0197>>>0);
       $587 = ($$$i>>>0)<(2147483647);
       $or$cond$i214 = $586 & $587;
       if ($or$cond$i214) {
-       $588 = HEAP32[(3040)>>2]|0;
+       $588 = HEAP32[(3152)>>2]|0;
        $589 = ($588|0)==(0);
        if (!($589)) {
         $590 = ($585>>>0)<=($584>>>0);
@@ -5899,7 +6452,7 @@ function _malloc($0) {
        break L244;
       }
      }
-     $607 = HEAP32[(3080)>>2]|0;
+     $607 = HEAP32[(3192)>>2]|0;
      $608 = (($546) - ($$2253$ph$i))|0;
      $609 = (($608) + ($607))|0;
      $610 = (0 - ($607))|0;
@@ -5924,9 +6477,9 @@ function _malloc($0) {
      }
     }
    } while(0);
-   $617 = HEAP32[(3044)>>2]|0;
+   $617 = HEAP32[(3156)>>2]|0;
    $618 = $617 | 4;
-   HEAP32[(3044)>>2] = $618;
+   HEAP32[(3156)>>2] = $618;
    $$4236$i = $$2234243136$i;
    label = 178;
   } else {
@@ -5962,59 +6515,31 @@ function _malloc($0) {
   }
  }
  if ((label|0) == 180) {
-  $632 = HEAP32[(3032)>>2]|0;
+  $632 = HEAP32[(3144)>>2]|0;
   $633 = (($632) + ($$723947$i))|0;
-  HEAP32[(3032)>>2] = $633;
-  $634 = HEAP32[(3036)>>2]|0;
+  HEAP32[(3144)>>2] = $633;
+  $634 = HEAP32[(3148)>>2]|0;
   $635 = ($633>>>0)>($634>>>0);
   if ($635) {
-   HEAP32[(3036)>>2] = $633;
+   HEAP32[(3148)>>2] = $633;
   }
-  $636 = HEAP32[(2624)>>2]|0;
+  $636 = HEAP32[(2736)>>2]|0;
   $637 = ($636|0)==(0|0);
   do {
    if ($637) {
-    $638 = HEAP32[(2616)>>2]|0;
+    $638 = HEAP32[(2728)>>2]|0;
     $639 = ($638|0)==(0|0);
     $640 = ($$748$i>>>0)<($638>>>0);
     $or$cond12$i = $639 | $640;
     if ($or$cond12$i) {
-     HEAP32[(2616)>>2] = $$748$i;
+     HEAP32[(2728)>>2] = $$748$i;
     }
-    HEAP32[(3048)>>2] = $$748$i;
-    HEAP32[(3052)>>2] = $$723947$i;
-    HEAP32[(3060)>>2] = 0;
-    $641 = HEAP32[768]|0;
-    HEAP32[(2636)>>2] = $641;
-    HEAP32[(2632)>>2] = -1;
-    HEAP32[(2652)>>2] = (2640);
-    HEAP32[(2648)>>2] = (2640);
-    HEAP32[(2660)>>2] = (2648);
-    HEAP32[(2656)>>2] = (2648);
-    HEAP32[(2668)>>2] = (2656);
-    HEAP32[(2664)>>2] = (2656);
-    HEAP32[(2676)>>2] = (2664);
-    HEAP32[(2672)>>2] = (2664);
-    HEAP32[(2684)>>2] = (2672);
-    HEAP32[(2680)>>2] = (2672);
-    HEAP32[(2692)>>2] = (2680);
-    HEAP32[(2688)>>2] = (2680);
-    HEAP32[(2700)>>2] = (2688);
-    HEAP32[(2696)>>2] = (2688);
-    HEAP32[(2708)>>2] = (2696);
-    HEAP32[(2704)>>2] = (2696);
-    HEAP32[(2716)>>2] = (2704);
-    HEAP32[(2712)>>2] = (2704);
-    HEAP32[(2724)>>2] = (2712);
-    HEAP32[(2720)>>2] = (2712);
-    HEAP32[(2732)>>2] = (2720);
-    HEAP32[(2728)>>2] = (2720);
-    HEAP32[(2740)>>2] = (2728);
-    HEAP32[(2736)>>2] = (2728);
-    HEAP32[(2748)>>2] = (2736);
-    HEAP32[(2744)>>2] = (2736);
-    HEAP32[(2756)>>2] = (2744);
-    HEAP32[(2752)>>2] = (2744);
+    HEAP32[(3160)>>2] = $$748$i;
+    HEAP32[(3164)>>2] = $$723947$i;
+    HEAP32[(3172)>>2] = 0;
+    $641 = HEAP32[796]|0;
+    HEAP32[(2748)>>2] = $641;
+    HEAP32[(2744)>>2] = -1;
     HEAP32[(2764)>>2] = (2752);
     HEAP32[(2760)>>2] = (2752);
     HEAP32[(2772)>>2] = (2760);
@@ -6051,6 +6576,34 @@ function _malloc($0) {
     HEAP32[(2888)>>2] = (2880);
     HEAP32[(2900)>>2] = (2888);
     HEAP32[(2896)>>2] = (2888);
+    HEAP32[(2908)>>2] = (2896);
+    HEAP32[(2904)>>2] = (2896);
+    HEAP32[(2916)>>2] = (2904);
+    HEAP32[(2912)>>2] = (2904);
+    HEAP32[(2924)>>2] = (2912);
+    HEAP32[(2920)>>2] = (2912);
+    HEAP32[(2932)>>2] = (2920);
+    HEAP32[(2928)>>2] = (2920);
+    HEAP32[(2940)>>2] = (2928);
+    HEAP32[(2936)>>2] = (2928);
+    HEAP32[(2948)>>2] = (2936);
+    HEAP32[(2944)>>2] = (2936);
+    HEAP32[(2956)>>2] = (2944);
+    HEAP32[(2952)>>2] = (2944);
+    HEAP32[(2964)>>2] = (2952);
+    HEAP32[(2960)>>2] = (2952);
+    HEAP32[(2972)>>2] = (2960);
+    HEAP32[(2968)>>2] = (2960);
+    HEAP32[(2980)>>2] = (2968);
+    HEAP32[(2976)>>2] = (2968);
+    HEAP32[(2988)>>2] = (2976);
+    HEAP32[(2984)>>2] = (2976);
+    HEAP32[(2996)>>2] = (2984);
+    HEAP32[(2992)>>2] = (2984);
+    HEAP32[(3004)>>2] = (2992);
+    HEAP32[(3000)>>2] = (2992);
+    HEAP32[(3012)>>2] = (3000);
+    HEAP32[(3008)>>2] = (3000);
     $642 = (($$723947$i) + -40)|0;
     $643 = ((($$748$i)) + 8|0);
     $644 = $643;
@@ -6061,18 +6614,18 @@ function _malloc($0) {
     $649 = $646 ? 0 : $648;
     $650 = (($$748$i) + ($649)|0);
     $651 = (($642) - ($649))|0;
-    HEAP32[(2624)>>2] = $650;
-    HEAP32[(2612)>>2] = $651;
+    HEAP32[(2736)>>2] = $650;
+    HEAP32[(2724)>>2] = $651;
     $652 = $651 | 1;
     $653 = ((($650)) + 4|0);
     HEAP32[$653>>2] = $652;
     $654 = (($$748$i) + ($642)|0);
     $655 = ((($654)) + 4|0);
     HEAP32[$655>>2] = 40;
-    $656 = HEAP32[(3088)>>2]|0;
-    HEAP32[(2628)>>2] = $656;
+    $656 = HEAP32[(3200)>>2]|0;
+    HEAP32[(2740)>>2] = $656;
    } else {
-    $$024367$i = (3048);
+    $$024367$i = (3160);
     while(1) {
      $657 = HEAP32[$$024367$i>>2]|0;
      $658 = ((($$024367$i)) + 4|0);
@@ -6104,7 +6657,7 @@ function _malloc($0) {
       if ($or$cond50$i) {
        $671 = (($659) + ($$723947$i))|0;
        HEAP32[$658>>2] = $671;
-       $672 = HEAP32[(2612)>>2]|0;
+       $672 = HEAP32[(2724)>>2]|0;
        $673 = (($672) + ($$723947$i))|0;
        $674 = ((($636)) + 8|0);
        $675 = $674;
@@ -6115,30 +6668,30 @@ function _malloc($0) {
        $680 = $677 ? 0 : $679;
        $681 = (($636) + ($680)|0);
        $682 = (($673) - ($680))|0;
-       HEAP32[(2624)>>2] = $681;
-       HEAP32[(2612)>>2] = $682;
+       HEAP32[(2736)>>2] = $681;
+       HEAP32[(2724)>>2] = $682;
        $683 = $682 | 1;
        $684 = ((($681)) + 4|0);
        HEAP32[$684>>2] = $683;
        $685 = (($636) + ($673)|0);
        $686 = ((($685)) + 4|0);
        HEAP32[$686>>2] = 40;
-       $687 = HEAP32[(3088)>>2]|0;
-       HEAP32[(2628)>>2] = $687;
+       $687 = HEAP32[(3200)>>2]|0;
+       HEAP32[(2740)>>2] = $687;
        break;
       }
      }
     }
-    $688 = HEAP32[(2616)>>2]|0;
+    $688 = HEAP32[(2728)>>2]|0;
     $689 = ($$748$i>>>0)<($688>>>0);
     if ($689) {
-     HEAP32[(2616)>>2] = $$748$i;
+     HEAP32[(2728)>>2] = $$748$i;
      $752 = $$748$i;
     } else {
      $752 = $688;
     }
     $690 = (($$748$i) + ($$723947$i)|0);
-    $$124466$i = (3048);
+    $$124466$i = (3160);
     while(1) {
      $691 = HEAP32[$$124466$i>>2]|0;
      $692 = ($691|0)==($690|0);
@@ -6150,7 +6703,7 @@ function _malloc($0) {
      $694 = HEAP32[$693>>2]|0;
      $695 = ($694|0)==(0|0);
      if ($695) {
-      $$0$i$i$i = (3048);
+      $$0$i$i$i = (3160);
       break;
      } else {
       $$124466$i = $694;
@@ -6194,21 +6747,21 @@ function _malloc($0) {
       $726 = ($636|0)==($718|0);
       do {
        if ($726) {
-        $727 = HEAP32[(2612)>>2]|0;
+        $727 = HEAP32[(2724)>>2]|0;
         $728 = (($727) + ($723))|0;
-        HEAP32[(2612)>>2] = $728;
-        HEAP32[(2624)>>2] = $722;
+        HEAP32[(2724)>>2] = $728;
+        HEAP32[(2736)>>2] = $722;
         $729 = $728 | 1;
         $730 = ((($722)) + 4|0);
         HEAP32[$730>>2] = $729;
        } else {
-        $731 = HEAP32[(2620)>>2]|0;
+        $731 = HEAP32[(2732)>>2]|0;
         $732 = ($731|0)==($718|0);
         if ($732) {
-         $733 = HEAP32[(2608)>>2]|0;
+         $733 = HEAP32[(2720)>>2]|0;
          $734 = (($733) + ($723))|0;
-         HEAP32[(2608)>>2] = $734;
-         HEAP32[(2620)>>2] = $722;
+         HEAP32[(2720)>>2] = $734;
+         HEAP32[(2732)>>2] = $722;
          $735 = $734 | 1;
          $736 = ((($722)) + 4|0);
          HEAP32[$736>>2] = $735;
@@ -6231,7 +6784,7 @@ function _malloc($0) {
            $747 = ((($718)) + 12|0);
            $748 = HEAP32[$747>>2]|0;
            $749 = $743 << 1;
-           $750 = (2640 + ($749<<2)|0);
+           $750 = (2752 + ($749<<2)|0);
            $751 = ($746|0)==($750|0);
            do {
             if (!($751)) {
@@ -6254,9 +6807,9 @@ function _malloc($0) {
            if ($757) {
             $758 = 1 << $743;
             $759 = $758 ^ -1;
-            $760 = HEAP32[650]|0;
+            $760 = HEAP32[678]|0;
             $761 = $760 & $759;
-            HEAP32[650] = $761;
+            HEAP32[678] = $761;
             break;
            }
            $762 = ($748|0)==($750|0);
@@ -6369,7 +6922,7 @@ function _malloc($0) {
            }
            $796 = ((($718)) + 28|0);
            $797 = HEAP32[$796>>2]|0;
-           $798 = (2904 + ($797<<2)|0);
+           $798 = (3016 + ($797<<2)|0);
            $799 = HEAP32[$798>>2]|0;
            $800 = ($799|0)==($718|0);
            do {
@@ -6381,12 +6934,12 @@ function _malloc($0) {
              }
              $801 = 1 << $797;
              $802 = $801 ^ -1;
-             $803 = HEAP32[(2604)>>2]|0;
+             $803 = HEAP32[(2716)>>2]|0;
              $804 = $803 & $802;
-             HEAP32[(2604)>>2] = $804;
+             HEAP32[(2716)>>2] = $804;
              break L311;
             } else {
-             $805 = HEAP32[(2616)>>2]|0;
+             $805 = HEAP32[(2728)>>2]|0;
              $806 = ($805>>>0)>($769>>>0);
              if ($806) {
               _abort();
@@ -6407,7 +6960,7 @@ function _malloc($0) {
              }
             }
            } while(0);
-           $812 = HEAP32[(2616)>>2]|0;
+           $812 = HEAP32[(2728)>>2]|0;
            $813 = ($812>>>0)>($$3$i$i>>>0);
            if ($813) {
             _abort();
@@ -6439,7 +6992,7 @@ function _malloc($0) {
            if ($823) {
             break;
            }
-           $824 = HEAP32[(2616)>>2]|0;
+           $824 = HEAP32[(2728)>>2]|0;
            $825 = ($824>>>0)>($822>>>0);
            if ($825) {
             _abort();
@@ -6472,21 +7025,21 @@ function _malloc($0) {
         $837 = ($$0287$i$i>>>0)<(256);
         if ($837) {
          $838 = $836 << 1;
-         $839 = (2640 + ($838<<2)|0);
-         $840 = HEAP32[650]|0;
+         $839 = (2752 + ($838<<2)|0);
+         $840 = HEAP32[678]|0;
          $841 = 1 << $836;
          $842 = $840 & $841;
          $843 = ($842|0)==(0);
          do {
           if ($843) {
            $844 = $840 | $841;
-           HEAP32[650] = $844;
+           HEAP32[678] = $844;
            $$pre$i18$i = ((($839)) + 8|0);
            $$0295$i$i = $839;$$pre$phi$i19$iZ2D = $$pre$i18$i;
           } else {
            $845 = ((($839)) + 8|0);
            $846 = HEAP32[$845>>2]|0;
-           $847 = HEAP32[(2616)>>2]|0;
+           $847 = HEAP32[(2728)>>2]|0;
            $848 = ($847>>>0)>($846>>>0);
            if (!($848)) {
             $$0295$i$i = $846;$$pre$phi$i19$iZ2D = $845;
@@ -6541,20 +7094,20 @@ function _malloc($0) {
           $$0296$i$i = $876;
          }
         } while(0);
-        $877 = (2904 + ($$0296$i$i<<2)|0);
+        $877 = (3016 + ($$0296$i$i<<2)|0);
         $878 = ((($722)) + 28|0);
         HEAP32[$878>>2] = $$0296$i$i;
         $879 = ((($722)) + 16|0);
         $880 = ((($879)) + 4|0);
         HEAP32[$880>>2] = 0;
         HEAP32[$879>>2] = 0;
-        $881 = HEAP32[(2604)>>2]|0;
+        $881 = HEAP32[(2716)>>2]|0;
         $882 = 1 << $$0296$i$i;
         $883 = $881 & $882;
         $884 = ($883|0)==(0);
         if ($884) {
          $885 = $881 | $882;
-         HEAP32[(2604)>>2] = $885;
+         HEAP32[(2716)>>2] = $885;
          HEAP32[$877>>2] = $722;
          $886 = ((($722)) + 24|0);
          HEAP32[$886>>2] = $877;
@@ -6593,7 +7146,7 @@ function _malloc($0) {
          }
         }
         if ((label|0) == 260) {
-         $904 = HEAP32[(2616)>>2]|0;
+         $904 = HEAP32[(2728)>>2]|0;
          $905 = ($904>>>0)>($900>>>0);
          if ($905) {
           _abort();
@@ -6612,7 +7165,7 @@ function _malloc($0) {
         else if ((label|0) == 263) {
          $909 = ((($$0289$i$i)) + 8|0);
          $910 = HEAP32[$909>>2]|0;
-         $911 = HEAP32[(2616)>>2]|0;
+         $911 = HEAP32[(2728)>>2]|0;
          $912 = ($911>>>0)<=($$0289$i$i>>>0);
          $913 = ($911>>>0)<=($910>>>0);
          $914 = $913 & $912;
@@ -6638,7 +7191,7 @@ function _malloc($0) {
       $$0 = $1051;
       STACKTOP = sp;return ($$0|0);
      } else {
-      $$0$i$i$i = (3048);
+      $$0$i$i$i = (3160);
      }
     }
     while(1) {
@@ -6681,23 +7234,23 @@ function _malloc($0) {
     $948 = $945 ? 0 : $947;
     $949 = (($$748$i) + ($948)|0);
     $950 = (($941) - ($948))|0;
-    HEAP32[(2624)>>2] = $949;
-    HEAP32[(2612)>>2] = $950;
+    HEAP32[(2736)>>2] = $949;
+    HEAP32[(2724)>>2] = $950;
     $951 = $950 | 1;
     $952 = ((($949)) + 4|0);
     HEAP32[$952>>2] = $951;
     $953 = (($$748$i) + ($941)|0);
     $954 = ((($953)) + 4|0);
     HEAP32[$954>>2] = 40;
-    $955 = HEAP32[(3088)>>2]|0;
-    HEAP32[(2628)>>2] = $955;
+    $955 = HEAP32[(3200)>>2]|0;
+    HEAP32[(2740)>>2] = $955;
     $956 = ((($938)) + 4|0);
     HEAP32[$956>>2] = 27;
-    ;HEAP32[$939>>2]=HEAP32[(3048)>>2]|0;HEAP32[$939+4>>2]=HEAP32[(3048)+4>>2]|0;HEAP32[$939+8>>2]=HEAP32[(3048)+8>>2]|0;HEAP32[$939+12>>2]=HEAP32[(3048)+12>>2]|0;
-    HEAP32[(3048)>>2] = $$748$i;
-    HEAP32[(3052)>>2] = $$723947$i;
-    HEAP32[(3060)>>2] = 0;
-    HEAP32[(3056)>>2] = $939;
+    ;HEAP32[$939>>2]=HEAP32[(3160)>>2]|0;HEAP32[$939+4>>2]=HEAP32[(3160)+4>>2]|0;HEAP32[$939+8>>2]=HEAP32[(3160)+8>>2]|0;HEAP32[$939+12>>2]=HEAP32[(3160)+12>>2]|0;
+    HEAP32[(3160)>>2] = $$748$i;
+    HEAP32[(3164)>>2] = $$723947$i;
+    HEAP32[(3172)>>2] = 0;
+    HEAP32[(3168)>>2] = $939;
     $958 = $940;
     while(1) {
      $957 = ((($958)) + 4|0);
@@ -6726,20 +7279,20 @@ function _malloc($0) {
      $970 = ($964>>>0)<(256);
      if ($970) {
       $971 = $969 << 1;
-      $972 = (2640 + ($971<<2)|0);
-      $973 = HEAP32[650]|0;
+      $972 = (2752 + ($971<<2)|0);
+      $973 = HEAP32[678]|0;
       $974 = 1 << $969;
       $975 = $973 & $974;
       $976 = ($975|0)==(0);
       if ($976) {
        $977 = $973 | $974;
-       HEAP32[650] = $977;
+       HEAP32[678] = $977;
        $$pre$i$i = ((($972)) + 8|0);
        $$0211$i$i = $972;$$pre$phi$i$iZ2D = $$pre$i$i;
       } else {
        $978 = ((($972)) + 8|0);
        $979 = HEAP32[$978>>2]|0;
-       $980 = HEAP32[(2616)>>2]|0;
+       $980 = HEAP32[(2728)>>2]|0;
        $981 = ($980>>>0)>($979>>>0);
        if ($981) {
         _abort();
@@ -6791,19 +7344,19 @@ function _malloc($0) {
        $$0212$i$i = $1009;
       }
      }
-     $1010 = (2904 + ($$0212$i$i<<2)|0);
+     $1010 = (3016 + ($$0212$i$i<<2)|0);
      $1011 = ((($636)) + 28|0);
      HEAP32[$1011>>2] = $$0212$i$i;
      $1012 = ((($636)) + 20|0);
      HEAP32[$1012>>2] = 0;
      HEAP32[$936>>2] = 0;
-     $1013 = HEAP32[(2604)>>2]|0;
+     $1013 = HEAP32[(2716)>>2]|0;
      $1014 = 1 << $$0212$i$i;
      $1015 = $1013 & $1014;
      $1016 = ($1015|0)==(0);
      if ($1016) {
       $1017 = $1013 | $1014;
-      HEAP32[(2604)>>2] = $1017;
+      HEAP32[(2716)>>2] = $1017;
       HEAP32[$1010>>2] = $636;
       $1018 = ((($636)) + 24|0);
       HEAP32[$1018>>2] = $1010;
@@ -6842,7 +7395,7 @@ function _malloc($0) {
       }
      }
      if ((label|0) == 286) {
-      $1036 = HEAP32[(2616)>>2]|0;
+      $1036 = HEAP32[(2728)>>2]|0;
       $1037 = ($1036>>>0)>($1032>>>0);
       if ($1037) {
        _abort();
@@ -6861,7 +7414,7 @@ function _malloc($0) {
      else if ((label|0) == 289) {
       $1041 = ((($$0207$i$i)) + 8|0);
       $1042 = HEAP32[$1041>>2]|0;
-      $1043 = HEAP32[(2616)>>2]|0;
+      $1043 = HEAP32[(2728)>>2]|0;
       $1044 = ($1043>>>0)<=($$0207$i$i>>>0);
       $1045 = ($1043>>>0)<=($1042>>>0);
       $1046 = $1045 & $1044;
@@ -6884,14 +7437,14 @@ function _malloc($0) {
     }
    }
   } while(0);
-  $1052 = HEAP32[(2612)>>2]|0;
+  $1052 = HEAP32[(2724)>>2]|0;
   $1053 = ($1052>>>0)>($$0197>>>0);
   if ($1053) {
    $1054 = (($1052) - ($$0197))|0;
-   HEAP32[(2612)>>2] = $1054;
-   $1055 = HEAP32[(2624)>>2]|0;
+   HEAP32[(2724)>>2] = $1054;
+   $1055 = HEAP32[(2736)>>2]|0;
    $1056 = (($1055) + ($$0197)|0);
-   HEAP32[(2624)>>2] = $1056;
+   HEAP32[(2736)>>2] = $1056;
    $1057 = $1054 | 1;
    $1058 = ((($1056)) + 4|0);
    HEAP32[$1058>>2] = $1057;
@@ -6934,7 +7487,7 @@ function _free($0) {
   return;
  }
  $2 = ((($0)) + -8|0);
- $3 = HEAP32[(2616)>>2]|0;
+ $3 = HEAP32[(2728)>>2]|0;
  $4 = ($2>>>0)<($3>>>0);
  if ($4) {
   _abort();
@@ -6967,7 +7520,7 @@ function _free($0) {
     _abort();
     // unreachable;
    }
-   $19 = HEAP32[(2620)>>2]|0;
+   $19 = HEAP32[(2732)>>2]|0;
    $20 = ($19|0)==($16|0);
    if ($20) {
     $105 = ((($10)) + 4|0);
@@ -6978,7 +7531,7 @@ function _free($0) {
      $$1 = $16;$$1382 = $17;$113 = $16;
      break;
     }
-    HEAP32[(2608)>>2] = $17;
+    HEAP32[(2720)>>2] = $17;
     $109 = $106 & -2;
     HEAP32[$105>>2] = $109;
     $110 = $17 | 1;
@@ -6996,7 +7549,7 @@ function _free($0) {
     $25 = ((($16)) + 12|0);
     $26 = HEAP32[$25>>2]|0;
     $27 = $21 << 1;
-    $28 = (2640 + ($27<<2)|0);
+    $28 = (2752 + ($27<<2)|0);
     $29 = ($24|0)==($28|0);
     if (!($29)) {
      $30 = ($3>>>0)>($24>>>0);
@@ -7016,9 +7569,9 @@ function _free($0) {
     if ($34) {
      $35 = 1 << $21;
      $36 = $35 ^ -1;
-     $37 = HEAP32[650]|0;
+     $37 = HEAP32[678]|0;
      $38 = $37 & $36;
-     HEAP32[650] = $38;
+     HEAP32[678] = $38;
      $$1 = $16;$$1382 = $17;$113 = $16;
      break;
     }
@@ -7132,7 +7685,7 @@ function _free($0) {
    } else {
     $73 = ((($16)) + 28|0);
     $74 = HEAP32[$73>>2]|0;
-    $75 = (2904 + ($74<<2)|0);
+    $75 = (3016 + ($74<<2)|0);
     $76 = HEAP32[$75>>2]|0;
     $77 = ($76|0)==($16|0);
     do {
@@ -7142,14 +7695,14 @@ function _free($0) {
       if ($cond421) {
        $78 = 1 << $74;
        $79 = $78 ^ -1;
-       $80 = HEAP32[(2604)>>2]|0;
+       $80 = HEAP32[(2716)>>2]|0;
        $81 = $80 & $79;
-       HEAP32[(2604)>>2] = $81;
+       HEAP32[(2716)>>2] = $81;
        $$1 = $16;$$1382 = $17;$113 = $16;
        break L10;
       }
      } else {
-      $82 = HEAP32[(2616)>>2]|0;
+      $82 = HEAP32[(2728)>>2]|0;
       $83 = ($82>>>0)>($46>>>0);
       if ($83) {
        _abort();
@@ -7171,7 +7724,7 @@ function _free($0) {
       }
      }
     } while(0);
-    $89 = HEAP32[(2616)>>2]|0;
+    $89 = HEAP32[(2728)>>2]|0;
     $90 = ($89>>>0)>($$3>>>0);
     if ($90) {
      _abort();
@@ -7203,7 +7756,7 @@ function _free($0) {
     if ($100) {
      $$1 = $16;$$1382 = $17;$113 = $16;
     } else {
-     $101 = HEAP32[(2616)>>2]|0;
+     $101 = HEAP32[(2728)>>2]|0;
      $102 = ($101>>>0)>($99>>>0);
      if ($102) {
       _abort();
@@ -7238,32 +7791,32 @@ function _free($0) {
  $119 = $116 & 2;
  $120 = ($119|0)==(0);
  if ($120) {
-  $121 = HEAP32[(2624)>>2]|0;
+  $121 = HEAP32[(2736)>>2]|0;
   $122 = ($121|0)==($10|0);
   if ($122) {
-   $123 = HEAP32[(2612)>>2]|0;
+   $123 = HEAP32[(2724)>>2]|0;
    $124 = (($123) + ($$1382))|0;
-   HEAP32[(2612)>>2] = $124;
-   HEAP32[(2624)>>2] = $$1;
+   HEAP32[(2724)>>2] = $124;
+   HEAP32[(2736)>>2] = $$1;
    $125 = $124 | 1;
    $126 = ((($$1)) + 4|0);
    HEAP32[$126>>2] = $125;
-   $127 = HEAP32[(2620)>>2]|0;
+   $127 = HEAP32[(2732)>>2]|0;
    $128 = ($$1|0)==($127|0);
    if (!($128)) {
     return;
    }
-   HEAP32[(2620)>>2] = 0;
-   HEAP32[(2608)>>2] = 0;
+   HEAP32[(2732)>>2] = 0;
+   HEAP32[(2720)>>2] = 0;
    return;
   }
-  $129 = HEAP32[(2620)>>2]|0;
+  $129 = HEAP32[(2732)>>2]|0;
   $130 = ($129|0)==($10|0);
   if ($130) {
-   $131 = HEAP32[(2608)>>2]|0;
+   $131 = HEAP32[(2720)>>2]|0;
    $132 = (($131) + ($$1382))|0;
-   HEAP32[(2608)>>2] = $132;
-   HEAP32[(2620)>>2] = $113;
+   HEAP32[(2720)>>2] = $132;
+   HEAP32[(2732)>>2] = $113;
    $133 = $132 | 1;
    $134 = ((($$1)) + 4|0);
    HEAP32[$134>>2] = $133;
@@ -7282,10 +7835,10 @@ function _free($0) {
     $142 = ((($10)) + 12|0);
     $143 = HEAP32[$142>>2]|0;
     $144 = $138 << 1;
-    $145 = (2640 + ($144<<2)|0);
+    $145 = (2752 + ($144<<2)|0);
     $146 = ($141|0)==($145|0);
     if (!($146)) {
-     $147 = HEAP32[(2616)>>2]|0;
+     $147 = HEAP32[(2728)>>2]|0;
      $148 = ($147>>>0)>($141>>>0);
      if ($148) {
       _abort();
@@ -7303,9 +7856,9 @@ function _free($0) {
     if ($152) {
      $153 = 1 << $138;
      $154 = $153 ^ -1;
-     $155 = HEAP32[650]|0;
+     $155 = HEAP32[678]|0;
      $156 = $155 & $154;
-     HEAP32[650] = $156;
+     HEAP32[678] = $156;
      break;
     }
     $157 = ($143|0)==($145|0);
@@ -7313,7 +7866,7 @@ function _free($0) {
      $$pre441 = ((($143)) + 8|0);
      $$pre$phi442Z2D = $$pre441;
     } else {
-     $158 = HEAP32[(2616)>>2]|0;
+     $158 = HEAP32[(2728)>>2]|0;
      $159 = ($158>>>0)>($143>>>0);
      if ($159) {
       _abort();
@@ -7373,7 +7926,7 @@ function _free($0) {
         $$1398 = $189;$$1402 = $188;
        }
       }
-      $191 = HEAP32[(2616)>>2]|0;
+      $191 = HEAP32[(2728)>>2]|0;
       $192 = ($191>>>0)>($$1402>>>0);
       if ($192) {
        _abort();
@@ -7386,7 +7939,7 @@ function _free($0) {
      } else {
       $169 = ((($10)) + 8|0);
       $170 = HEAP32[$169>>2]|0;
-      $171 = HEAP32[(2616)>>2]|0;
+      $171 = HEAP32[(2728)>>2]|0;
       $172 = ($171>>>0)>($170>>>0);
       if ($172) {
        _abort();
@@ -7417,7 +7970,7 @@ function _free($0) {
     if (!($193)) {
      $194 = ((($10)) + 28|0);
      $195 = HEAP32[$194>>2]|0;
-     $196 = (2904 + ($195<<2)|0);
+     $196 = (3016 + ($195<<2)|0);
      $197 = HEAP32[$196>>2]|0;
      $198 = ($197|0)==($10|0);
      do {
@@ -7427,13 +7980,13 @@ function _free($0) {
        if ($cond422) {
         $199 = 1 << $195;
         $200 = $199 ^ -1;
-        $201 = HEAP32[(2604)>>2]|0;
+        $201 = HEAP32[(2716)>>2]|0;
         $202 = $201 & $200;
-        HEAP32[(2604)>>2] = $202;
+        HEAP32[(2716)>>2] = $202;
         break L108;
        }
       } else {
-       $203 = HEAP32[(2616)>>2]|0;
+       $203 = HEAP32[(2728)>>2]|0;
        $204 = ($203>>>0)>($165>>>0);
        if ($204) {
         _abort();
@@ -7454,7 +8007,7 @@ function _free($0) {
        }
       }
      } while(0);
-     $210 = HEAP32[(2616)>>2]|0;
+     $210 = HEAP32[(2728)>>2]|0;
      $211 = ($210>>>0)>($$3400>>>0);
      if ($211) {
       _abort();
@@ -7484,7 +8037,7 @@ function _free($0) {
      $220 = HEAP32[$219>>2]|0;
      $221 = ($220|0)==(0|0);
      if (!($221)) {
-      $222 = HEAP32[(2616)>>2]|0;
+      $222 = HEAP32[(2728)>>2]|0;
       $223 = ($222>>>0)>($220>>>0);
       if ($223) {
        _abort();
@@ -7505,10 +8058,10 @@ function _free($0) {
   HEAP32[$227>>2] = $226;
   $228 = (($113) + ($137)|0);
   HEAP32[$228>>2] = $137;
-  $229 = HEAP32[(2620)>>2]|0;
+  $229 = HEAP32[(2732)>>2]|0;
   $230 = ($$1|0)==($229|0);
   if ($230) {
-   HEAP32[(2608)>>2] = $137;
+   HEAP32[(2720)>>2] = $137;
    return;
   } else {
    $$2 = $137;
@@ -7527,20 +8080,20 @@ function _free($0) {
  $236 = ($$2>>>0)<(256);
  if ($236) {
   $237 = $235 << 1;
-  $238 = (2640 + ($237<<2)|0);
-  $239 = HEAP32[650]|0;
+  $238 = (2752 + ($237<<2)|0);
+  $239 = HEAP32[678]|0;
   $240 = 1 << $235;
   $241 = $239 & $240;
   $242 = ($241|0)==(0);
   if ($242) {
    $243 = $239 | $240;
-   HEAP32[650] = $243;
+   HEAP32[678] = $243;
    $$pre = ((($238)) + 8|0);
    $$0403 = $238;$$pre$phiZ2D = $$pre;
   } else {
    $244 = ((($238)) + 8|0);
    $245 = HEAP32[$244>>2]|0;
-   $246 = HEAP32[(2616)>>2]|0;
+   $246 = HEAP32[(2728)>>2]|0;
    $247 = ($246>>>0)>($245>>>0);
    if ($247) {
     _abort();
@@ -7592,21 +8145,21 @@ function _free($0) {
    $$0396 = $275;
   }
  }
- $276 = (2904 + ($$0396<<2)|0);
+ $276 = (3016 + ($$0396<<2)|0);
  $277 = ((($$1)) + 28|0);
  HEAP32[$277>>2] = $$0396;
  $278 = ((($$1)) + 16|0);
  $279 = ((($$1)) + 20|0);
  HEAP32[$279>>2] = 0;
  HEAP32[$278>>2] = 0;
- $280 = HEAP32[(2604)>>2]|0;
+ $280 = HEAP32[(2716)>>2]|0;
  $281 = 1 << $$0396;
  $282 = $280 & $281;
  $283 = ($282|0)==(0);
  do {
   if ($283) {
    $284 = $280 | $281;
-   HEAP32[(2604)>>2] = $284;
+   HEAP32[(2716)>>2] = $284;
    HEAP32[$276>>2] = $$1;
    $285 = ((($$1)) + 24|0);
    HEAP32[$285>>2] = $276;
@@ -7644,7 +8197,7 @@ function _free($0) {
     }
    }
    if ((label|0) == 121) {
-    $303 = HEAP32[(2616)>>2]|0;
+    $303 = HEAP32[(2728)>>2]|0;
     $304 = ($303>>>0)>($299>>>0);
     if ($304) {
      _abort();
@@ -7663,7 +8216,7 @@ function _free($0) {
    else if ((label|0) == 124) {
     $308 = ((($$0384)) + 8|0);
     $309 = HEAP32[$308>>2]|0;
-    $310 = HEAP32[(2616)>>2]|0;
+    $310 = HEAP32[(2728)>>2]|0;
     $311 = ($310>>>0)<=($$0384>>>0);
     $312 = ($310>>>0)<=($309>>>0);
     $313 = $312 & $311;
@@ -7685,12 +8238,12 @@ function _free($0) {
    }
   }
  } while(0);
- $318 = HEAP32[(2632)>>2]|0;
+ $318 = HEAP32[(2744)>>2]|0;
  $319 = (($318) + -1)|0;
- HEAP32[(2632)>>2] = $319;
+ HEAP32[(2744)>>2] = $319;
  $320 = ($319|0)==(0);
  if ($320) {
-  $$0212$in$i = (3056);
+  $$0212$in$i = (3168);
  } else {
   return;
  }
@@ -7704,7 +8257,7 @@ function _free($0) {
    $$0212$in$i = $322;
   }
  }
- HEAP32[(2632)>>2] = -1;
+ HEAP32[(2744)>>2] = -1;
  return;
 }
 function ___stdio_close($0) {
@@ -7886,7 +8439,7 @@ function ___syscall_ret($0) {
 function ___errno_location() {
  var label = 0, sp = 0;
  sp = STACKTOP;
- return (3096|0);
+ return (3208|0);
 }
 function _dummy_737($0) {
  $0 = $0|0;
@@ -7904,7 +8457,7 @@ function ___stdout_write($0,$1,$2) {
  $vararg_buffer = sp;
  $3 = sp + 16|0;
  $4 = ((($0)) + 36|0);
- HEAP32[$4>>2] = 32;
+ HEAP32[$4>>2] = 42;
  $5 = HEAP32[$0>>2]|0;
  $6 = $5 & 64;
  $7 = ($6|0)==(0);
@@ -8033,13 +8586,13 @@ function ___strdup($0) {
 function ___ofl_lock() {
  var label = 0, sp = 0;
  sp = STACKTOP;
- ___lock((3100|0));
- return (3108|0);
+ ___lock((3212|0));
+ return (3220|0);
 }
 function ___ofl_unlock() {
  var label = 0, sp = 0;
  sp = STACKTOP;
- ___unlock((3100|0));
+ ___unlock((3212|0));
  return;
 }
 function _fflush($0) {
@@ -8050,12 +8603,12 @@ function _fflush($0) {
  $1 = ($0|0)==(0|0);
  do {
   if ($1) {
-   $8 = HEAP32[148]|0;
+   $8 = HEAP32[160]|0;
    $9 = ($8|0)==(0|0);
    if ($9) {
     $29 = 0;
    } else {
-    $10 = HEAP32[148]|0;
+    $10 = HEAP32[160]|0;
     $11 = (_fflush($10)|0);
     $29 = $11;
    }
@@ -9410,9 +9963,9 @@ function __ZNK10__cxxabiv122__base_class_type_info16search_below_dstEPNS_19__dyn
 function __ZSt15get_new_handlerv() {
  var $0 = 0, $1 = 0, $2 = 0, label = 0, sp = 0;
  sp = STACKTOP;
- $0 = HEAP32[778]|0;
+ $0 = HEAP32[806]|0;
  $1 = (($0) + 0)|0;
- HEAP32[778] = $1;
+ HEAP32[806] = $1;
  $2 = $0;
  return ($2|0);
 }
@@ -9569,7 +10122,7 @@ function _sbrk(increment) {
 function dynCall_dii(index,a1,a2) {
   index = index|0;
   a1=a1|0; a2=a2|0;
-  return +FUNCTION_TABLE_dii[index&31](a1|0,a2|0);
+  return +FUNCTION_TABLE_dii[index&63](a1|0,a2|0);
 }
 
 
@@ -9590,7 +10143,7 @@ function dynCall_ii(index,a1) {
 function dynCall_iii(index,a1,a2) {
   index = index|0;
   a1=a1|0; a2=a2|0;
-  return FUNCTION_TABLE_iii[index&31](a1|0,a2|0)|0;
+  return FUNCTION_TABLE_iii[index&63](a1|0,a2|0)|0;
 }
 
 
@@ -9611,21 +10164,28 @@ function dynCall_v(index) {
 function dynCall_vi(index,a1) {
   index = index|0;
   a1=a1|0;
-  FUNCTION_TABLE_vi[index&31](a1|0);
+  FUNCTION_TABLE_vi[index&63](a1|0);
+}
+
+
+function dynCall_vii(index,a1,a2) {
+  index = index|0;
+  a1=a1|0; a2=a2|0;
+  FUNCTION_TABLE_vii[index&63](a1|0,a2|0);
 }
 
 
 function dynCall_viid(index,a1,a2,a3) {
   index = index|0;
   a1=a1|0; a2=a2|0; a3=+a3;
-  FUNCTION_TABLE_viid[index&31](a1|0,a2|0,+a3);
+  FUNCTION_TABLE_viid[index&63](a1|0,a2|0,+a3);
 }
 
 
 function dynCall_viii(index,a1,a2,a3) {
   index = index|0;
   a1=a1|0; a2=a2|0; a3=a3|0;
-  FUNCTION_TABLE_viii[index&31](a1|0,a2|0,a3|0);
+  FUNCTION_TABLE_viii[index&63](a1|0,a2|0,a3|0);
 }
 
 
@@ -9670,49 +10230,60 @@ function b5() {
 function b6(p0) {
  p0 = p0|0; nullFunc_vi(6);
 }
-function b7(p0,p1,p2) {
- p0 = p0|0;p1 = p1|0;p2 = +p2; nullFunc_viid(7);
+function b7(p0,p1) {
+ p0 = p0|0;p1 = p1|0; nullFunc_vii(7);
 }
 function b8(p0,p1,p2) {
- p0 = p0|0;p1 = p1|0;p2 = p2|0; nullFunc_viii(8);
+ p0 = p0|0;p1 = p1|0;p2 = +p2; nullFunc_viid(8);
 }
-function b9(p0,p1,p2,p3) {
- p0 = p0|0;p1 = p1|0;p2 = p2|0;p3 = p3|0; nullFunc_viiii(9);
+function b9(p0,p1,p2) {
+ p0 = p0|0;p1 = p1|0;p2 = p2|0; nullFunc_viii(9);
 }
-function b10(p0,p1,p2,p3,p4) {
- p0 = p0|0;p1 = p1|0;p2 = p2|0;p3 = p3|0;p4 = p4|0; nullFunc_viiiii(10);
+function b10(p0,p1,p2,p3) {
+ p0 = p0|0;p1 = p1|0;p2 = p2|0;p3 = p3|0; nullFunc_viiii(10);
 }
-function b11(p0,p1,p2,p3,p4,p5) {
- p0 = p0|0;p1 = p1|0;p2 = p2|0;p3 = p3|0;p4 = p4|0;p5 = p5|0; nullFunc_viiiiii(11);
+function b11(p0,p1,p2,p3,p4) {
+ p0 = p0|0;p1 = p1|0;p2 = p2|0;p3 = p3|0;p4 = p4|0; nullFunc_viiiii(11);
+}
+function b12(p0,p1,p2,p3,p4,p5) {
+ p0 = p0|0;p1 = p1|0;p2 = p2|0;p3 = p3|0;p4 = p4|0;p5 = p5|0; nullFunc_viiiiii(12);
 }
 
 // EMSCRIPTEN_END_FUNCS
-var FUNCTION_TABLE_dii = [b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,__ZN10emscripten8internal12MemberAccessI15fc32_IirLowPassfE7getWireIS2_EEfRKMS2_fRKT_
-,b0,b0,b0];
-var FUNCTION_TABLE_i = [b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,__ZN10emscripten8internal12operator_newI15fc32_IirLowPassJEEEPT_DpOT0_,b1,b1
-,b1,b1,b1];
-var FUNCTION_TABLE_ii = [b2,___stdio_close,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,__ZN10emscripten8internal13getActualTypeI15fc32_IirLowPassEEPKvPT_,b2,b2,__ZN10emscripten8internal7InvokerIP15fc32_IirLowPassJEE6invokeEPFS3_vE,b2
-,b2,b2,b2];
-var FUNCTION_TABLE_iii = [b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3
-,b3,__ZN10emscripten8internal12MemberAccessI15fc32_IirLowPassiE7getWireIS2_EEiRKMS2_iRKT_,b3];
-var FUNCTION_TABLE_iiii = [b4,b4,___stdout_write,___stdio_seek,b4,b4,b4,b4,__ZNK10__cxxabiv117__class_type_info9can_catchEPKNS_16__shim_type_infoERPv,b4,b4,b4,b4,b4,b4,b4,b4,__ZNK10__cxxabiv123__fundamental_type_info9can_catchEPKNS_16__shim_type_infoERPv,b4,__ZNK10__cxxabiv119__pointer_type_info9can_catchEPKNS_16__shim_type_infoERPv,b4,b4,b4,b4,b4,b4,b4,b4,b4
-,b4,b4,b4,___stdio_write,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4
+var FUNCTION_TABLE_dii = [b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0
+,b0,b0,b0,__ZN10emscripten8internal12MemberAccessI15fc32_IirLowPassfE7getWireIS2_EEfRKMS2_fRKT_,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0,b0
+,b0,b0,b0,b0,b0];
+var FUNCTION_TABLE_i = [b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1
+,b1,__ZN10emscripten8internal12operator_newI15fc32_IirLowPassJEEEPT_DpOT0_,b1];
+var FUNCTION_TABLE_ii = [b2,b2,b2,b2,b2,___stdio_close,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,b2,__ZN10emscripten8internal13getActualTypeI15fc32_IirLowPassEEPKvPT_
+,b2,b2,__ZN10emscripten8internal7InvokerIP15fc32_IirLowPassJEE6invokeEPFS3_vE];
+var FUNCTION_TABLE_iii = [b3,_fc32_IirLowPass_step,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3
+,b3,b3,b3,b3,b3,__ZN10emscripten8internal12MemberAccessI15fc32_IirLowPassiE7getWireIS2_EEiRKMS2_iRKT_,b3,b3,b3,__ZL17EmIirLowPass_stepP15fc32_IirLowPassi,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3,b3
+,b3,b3,b3,b3,b3];
+var FUNCTION_TABLE_iiii = [b4,b4,b4,b4,b4,b4,___stdout_write,___stdio_seek,b4,b4,b4,b4,__ZNK10__cxxabiv117__class_type_info9can_catchEPKNS_16__shim_type_infoERPv,b4,b4,b4,b4,b4,b4,b4,b4,__ZNK10__cxxabiv123__fundamental_type_info9can_catchEPKNS_16__shim_type_infoERPv,b4,__ZNK10__cxxabiv119__pointer_type_info9can_catchEPKNS_16__shim_type_infoERPv,b4,b4,b4,b4,b4
+,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,__ZN10emscripten8internal7InvokerIiJP15fc32_IirLowPassiEE6invokeEPFiS3_iES3_i,___stdio_write,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4,b4
 ,b4,b4,b4,b4,b4];
 var FUNCTION_TABLE_v = [b5];
-var FUNCTION_TABLE_vi = [b6,b6,b6,b6,__ZN10__cxxabiv116__shim_type_infoD2Ev,__ZN10__cxxabiv117__class_type_infoD0Ev,__ZNK10__cxxabiv116__shim_type_info5noop1Ev,__ZNK10__cxxabiv116__shim_type_info5noop2Ev,b6,b6,b6,b6,__ZN10__cxxabiv120__si_class_type_infoD0Ev,b6,b6,b6,__ZN10__cxxabiv123__fundamental_type_infoD0Ev,b6,__ZN10__cxxabiv119__pointer_type_infoD0Ev,b6,__ZN10__cxxabiv121__vmi_class_type_infoD0Ev,b6,b6,b6,b6,__ZN10emscripten8internal14raw_destructorI15fc32_IirLowPassEEvPT_,b6,b6,b6
-,b6,b6,b6];
-var FUNCTION_TABLE_viid = [b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7
-,__ZN10emscripten8internal12MemberAccessI15fc32_IirLowPassfE7setWireIS2_EEvRKMS2_fRT_f,b7,b7];
-var FUNCTION_TABLE_viii = [b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8
-,b8,b8,__ZN10emscripten8internal12MemberAccessI15fc32_IirLowPassiE7setWireIS2_EEvRKMS2_iRT_i];
-var FUNCTION_TABLE_viiii = [b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,__ZNK10__cxxabiv117__class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi,b9,b9,b9,__ZNK10__cxxabiv120__si_class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi,b9,b9,b9,b9,b9,b9,b9,__ZNK10__cxxabiv121__vmi_class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi,b9,b9,b9,b9,b9
-,b9,b9,b9];
-var FUNCTION_TABLE_viiiii = [b10,b10,b10,b10,b10,b10,b10,b10,b10,b10,__ZNK10__cxxabiv117__class_type_info16search_below_dstEPNS_19__dynamic_cast_infoEPKvib,b10,b10,b10,__ZNK10__cxxabiv120__si_class_type_info16search_below_dstEPNS_19__dynamic_cast_infoEPKvib,b10,b10,b10,b10,b10,b10,b10,__ZNK10__cxxabiv121__vmi_class_type_info16search_below_dstEPNS_19__dynamic_cast_infoEPKvib,b10,b10,b10,b10,b10,b10
+var FUNCTION_TABLE_vi = [b6,b6,b6,b6,b6,b6,b6,b6,__ZN10__cxxabiv116__shim_type_infoD2Ev,__ZN10__cxxabiv117__class_type_infoD0Ev,__ZNK10__cxxabiv116__shim_type_info5noop1Ev,__ZNK10__cxxabiv116__shim_type_info5noop2Ev,b6,b6,b6,b6,__ZN10__cxxabiv120__si_class_type_infoD0Ev,b6,b6,b6,__ZN10__cxxabiv123__fundamental_type_infoD0Ev,b6,__ZN10__cxxabiv119__pointer_type_infoD0Ev,b6,__ZN10__cxxabiv121__vmi_class_type_infoD0Ev,b6,b6,b6,b6
+,__ZN10emscripten8internal14raw_destructorI15fc32_IirLowPassEEvPT_,b6,b6,b6,b6,b6,b6,_fc32_IirLowPass_ctor,b6,b6,b6,b6,b6,b6,b6,b6,b6,b6,b6,b6,b6,b6,b6,b6,b6,b6,b6,b6,b6,b6
+,b6,b6,b6,b6,b6];
+var FUNCTION_TABLE_vii = [b7,b7,_fc32_IirLowPass_preload,_destruct_no_fields,_simple_run_visitor,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7
+,b7,b7,b7,b7,b7,b7,b7,b7,__ZL20EmIirLowPass_preloadP15fc32_IirLowPassi,b7,__ZN10emscripten8internal7InvokerIvJP15fc32_IirLowPassEE6invokeEPFvS3_ES3_,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7,b7
+,b7,b7,b7,b7,b7];
+var FUNCTION_TABLE_viid = [b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8
+,b8,b8,b8,b8,__ZN10emscripten8internal12MemberAccessI15fc32_IirLowPassfE7setWireIS2_EEvRKMS2_fRT_f,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8
+,b8,b8,b8,b8,b8];
+var FUNCTION_TABLE_viii = [b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9
+,b9,b9,b9,b9,b9,b9,__ZN10emscripten8internal12MemberAccessI15fc32_IirLowPassiE7setWireIS2_EEvRKMS2_iRT_i,b9,b9,b9,b9,__ZN10emscripten8internal7InvokerIvJP15fc32_IirLowPassiEE6invokeEPFvS3_iES3_i,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9,b9
+,b9,b9,b9,b9,b9];
+var FUNCTION_TABLE_viiii = [b10,b10,b10,b10,b10,b10,b10,b10,b10,b10,b10,b10,b10,b10,b10,__ZNK10__cxxabiv117__class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi,b10,b10,b10,__ZNK10__cxxabiv120__si_class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi,b10,b10,b10,b10,b10,b10,b10,__ZNK10__cxxabiv121__vmi_class_type_info27has_unambiguous_public_baseEPNS_19__dynamic_cast_infoEPvi,b10
 ,b10,b10,b10];
-var FUNCTION_TABLE_viiiiii = [b11,b11,b11,b11,b11,b11,b11,b11,b11,__ZNK10__cxxabiv117__class_type_info16search_above_dstEPNS_19__dynamic_cast_infoEPKvS4_ib,b11,b11,b11,__ZNK10__cxxabiv120__si_class_type_info16search_above_dstEPNS_19__dynamic_cast_infoEPKvS4_ib,b11,b11,b11,b11,b11,b11,b11,__ZNK10__cxxabiv121__vmi_class_type_info16search_above_dstEPNS_19__dynamic_cast_infoEPKvS4_ib,b11,b11,b11,b11,b11,b11,b11
+var FUNCTION_TABLE_viiiii = [b11,b11,b11,b11,b11,b11,b11,b11,b11,b11,b11,b11,b11,b11,__ZNK10__cxxabiv117__class_type_info16search_below_dstEPNS_19__dynamic_cast_infoEPKvib,b11,b11,b11,__ZNK10__cxxabiv120__si_class_type_info16search_below_dstEPNS_19__dynamic_cast_infoEPKvib,b11,b11,b11,b11,b11,b11,b11,__ZNK10__cxxabiv121__vmi_class_type_info16search_below_dstEPNS_19__dynamic_cast_infoEPKvib,b11,b11
 ,b11,b11,b11];
+var FUNCTION_TABLE_viiiiii = [b12,b12,b12,b12,b12,b12,b12,b12,b12,b12,b12,b12,b12,__ZNK10__cxxabiv117__class_type_info16search_above_dstEPNS_19__dynamic_cast_infoEPKvS4_ib,b12,b12,b12,__ZNK10__cxxabiv120__si_class_type_info16search_above_dstEPNS_19__dynamic_cast_infoEPKvS4_ib,b12,b12,b12,b12,b12,b12,b12,__ZNK10__cxxabiv121__vmi_class_type_info16search_above_dstEPNS_19__dynamic_cast_infoEPKvS4_ib,b12,b12,b12
+,b12,b12,b12];
 
-  return { __GLOBAL__sub_I_bind_cpp: __GLOBAL__sub_I_bind_cpp, __GLOBAL__sub_I_fc_lib_wrapper_cpp: __GLOBAL__sub_I_fc_lib_wrapper_cpp, ___errno_location: ___errno_location, ___getTypeName: ___getTypeName, _fflush: _fflush, _free: _free, _malloc: _malloc, _memcpy: _memcpy, _memset: _memset, _sbrk: _sbrk, dynCall_dii: dynCall_dii, dynCall_i: dynCall_i, dynCall_ii: dynCall_ii, dynCall_iii: dynCall_iii, dynCall_iiii: dynCall_iiii, dynCall_v: dynCall_v, dynCall_vi: dynCall_vi, dynCall_viid: dynCall_viid, dynCall_viii: dynCall_viii, dynCall_viiii: dynCall_viiii, dynCall_viiiii: dynCall_viiiii, dynCall_viiiiii: dynCall_viiiiii, establishStackSpace: establishStackSpace, getTempRet0: getTempRet0, runPostSets: runPostSets, setTempRet0: setTempRet0, setThrew: setThrew, stackAlloc: stackAlloc, stackRestore: stackRestore, stackSave: stackSave };
+  return { __GLOBAL__sub_I_bind_cpp: __GLOBAL__sub_I_bind_cpp, __GLOBAL__sub_I_fc_lib_wrapper_cpp: __GLOBAL__sub_I_fc_lib_wrapper_cpp, ___errno_location: ___errno_location, ___getTypeName: ___getTypeName, _fflush: _fflush, _free: _free, _malloc: _malloc, _memcpy: _memcpy, _memset: _memset, _sbrk: _sbrk, dynCall_dii: dynCall_dii, dynCall_i: dynCall_i, dynCall_ii: dynCall_ii, dynCall_iii: dynCall_iii, dynCall_iiii: dynCall_iiii, dynCall_v: dynCall_v, dynCall_vi: dynCall_vi, dynCall_vii: dynCall_vii, dynCall_viid: dynCall_viid, dynCall_viii: dynCall_viii, dynCall_viiii: dynCall_viiii, dynCall_viiiii: dynCall_viiiii, dynCall_viiiiii: dynCall_viiiiii, establishStackSpace: establishStackSpace, getTempRet0: getTempRet0, runPostSets: runPostSets, setTempRet0: setTempRet0, setThrew: setThrew, stackAlloc: stackAlloc, stackRestore: stackRestore, stackSave: stackSave };
 })
 // EMSCRIPTEN_END_ASM
 (Module.asmGlobalArg, Module.asmLibraryArg, buffer);
@@ -9831,6 +10402,7 @@ var dynCall_iii = Module["dynCall_iii"] = asm["dynCall_iii"];
 var dynCall_iiii = Module["dynCall_iiii"] = asm["dynCall_iiii"];
 var dynCall_v = Module["dynCall_v"] = asm["dynCall_v"];
 var dynCall_vi = Module["dynCall_vi"] = asm["dynCall_vi"];
+var dynCall_vii = Module["dynCall_vii"] = asm["dynCall_vii"];
 var dynCall_viid = Module["dynCall_viid"] = asm["dynCall_viid"];
 var dynCall_viii = Module["dynCall_viii"] = asm["dynCall_viii"];
 var dynCall_viiii = Module["dynCall_viiii"] = asm["dynCall_viiii"];
