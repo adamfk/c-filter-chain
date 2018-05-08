@@ -37,9 +37,13 @@ bool fc_BuildCtx_allocate_working_buffer(fc_BuildCtx* bc)
 {
   bool success = false;
 
+  //TODO should we just allocate the working_buffer pointer as well? Would make it easier for users. See issue #27.
+
   if (bc->working_buffer == NULL) {
     return success;
   }
+
+  //TODO consider case where `bc->min_working_buffer_size` == 0
 
   bc->working_buffer->buffer = fc_IAllocator_allocate(bc->allocator, bc->min_working_buffer_size);
 
