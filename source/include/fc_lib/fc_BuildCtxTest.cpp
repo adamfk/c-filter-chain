@@ -1,5 +1,4 @@
-#include "gmock/gmock.h"
-#include "gtest/gtest.h"
+#include "TestCommon.hpp"
 
 #include "fc_lib/fc_BuildCtx.h"
 #include "fc_allocate.h"
@@ -111,7 +110,44 @@ TEST(BuildCtx, one_or_more_failures__flag) {
 }
 
 
+TEST(BuildCtx, allocate_working_buffer__null_wb) {
+  fc_BuildCtx build_ctx = { 0 };
+  fc_BuildCtx* bc = &build_ctx;
 
+  ASSERT_EQ(bc->working_buffer, nullptr);
+
+  bool result = fc_BuildCtx_allocate_working_buffer_if_needed(bc);
+  bool expected = false;
+  EXPECT_EQ(expected, result);
+}
+
+
+TEST(BuildCtx, allocate_working_buffer__normal) {
+
+  vector<uint16_t> sizes = { 0, 1, 2, 3, 4, 100, 1013 };
+
+  for (auto size : sizes) 
+  {
+    MockHeapBuilder hb(&mockHeapPtr);
+
+    SCOPED_TRACE(std::string("size: ") + std::to_string(size));
+
+    fc_BuildCtx_update_minimum_working_buffer(hb, size);
+
+    if (size == 0) {
+      EXPECT_CALL(hb, xMalloc(_)).Times(0);
+    } else {
+      EXPECT_CALL(hb, xMalloc(size)).Times(1);
+    }
+
+    bool result = fc_BuildCtx_allocate_working_buffer_if_needed(hb);
+    bool expected = true;
+    EXPECT_EQ(expected, result);
+    EXPECT_FALSE(fc_BuildCtx_has_failure(hb));
+  }
+
+  
+}
 
 
 
