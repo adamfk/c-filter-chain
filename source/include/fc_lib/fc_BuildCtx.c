@@ -8,7 +8,7 @@ void fc_BuildCtx_update_minimum_working_buffer(fc_BuildCtx* bc, uint32_t require
 }
 
 
-void fc_BuildCtx_update_success_from_ptr(fc_BuildCtx* bc, void* ptr) {
+void fc_BuildCtx_update_success_from_ptr(fc_BuildCtx* bc, void const * ptr) {
   if (is_bad_ptr(ptr)) {
     fc_BuildCtx_update_success(bc, false);
   }

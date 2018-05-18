@@ -36,7 +36,7 @@ void fc_BuildCtx_update_minimum_working_buffer(fc_BuildCtx* bc, uint32_t require
 bool fc_BuildCtx_allocate_working_buffer(fc_BuildCtx* self);
 void fc_BuildCtx_update_success(fc_BuildCtx* bc, bool success);
 void fc_BuildCtx_update_failure(fc_BuildCtx* bc, bool failure);
-void fc_BuildCtx_update_success_from_ptr(fc_BuildCtx* bc, void* ptr);
+void fc_BuildCtx_update_success_from_ptr(fc_BuildCtx* bc, void const * ptr);
 bool fc_BuildCtx_has_failure(fc_BuildCtx* bc);
 
 fc_END_C_DECLS
