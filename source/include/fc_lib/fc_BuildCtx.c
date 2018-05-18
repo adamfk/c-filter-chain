@@ -8,7 +8,7 @@ void fc_BuildCtx_update_minimum_working_buffer(fc_BuildCtx* bc, uint32_t require
 }
 
 
-void fc_BuildCtx_update_success_from_ptr(fc_BuildCtx* bc, void* ptr) {
+void fc_BuildCtx_update_success_from_ptr(fc_BuildCtx* bc, void const * ptr) {
   if (is_bad_ptr(ptr)) {
     fc_BuildCtx_update_success(bc, false);
   }
@@ -33,17 +33,23 @@ bool fc_BuildCtx_has_failure(fc_BuildCtx* bc) {
 
 
 //TODO decide on should all Builder's have a working buffer instead of a pointer to one?
-bool fc_BuildCtx_allocate_working_buffer(fc_BuildCtx* bc) 
+bool fc_BuildCtx_allocate_working_buffer_if_needed(fc_BuildCtx* bc) 
 {
   bool success = false;
 
   //TODO should we just allocate the working_buffer pointer as well? Would make it easier for users. See issue #27.
 
   if (bc->working_buffer == NULL) {
+    success = false;
     return success;
   }
 
-  //TODO consider case where `bc->min_working_buffer_size` == 0
+  //fix for issue #28
+  if (bc->min_working_buffer_size == 0) {
+    success = true;
+    return success;
+  }
+
 
   bc->working_buffer->buffer = fc_IAllocator_allocate(bc->allocator, bc->min_working_buffer_size);
 

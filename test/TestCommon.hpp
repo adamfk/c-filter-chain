@@ -82,6 +82,7 @@ class MockHeapBuilder : public MockHeap {
 public:
   fc_WorkingBuffer wb = { 0 };
   fc_BuildCtx* bc;
+  bool self_allocated_wb_buffer = false;
 
   MockHeapBuilder(MockHeap** c_reference) : MockHeap(c_reference) {
     builder.allocator = &fc_Mallocator;
@@ -94,6 +95,7 @@ public:
   }
 
   void allocateWorkingBuffer(void) {
+    self_allocated_wb_buffer = true;
     wb.buffer = malloc(builder.min_working_buffer_size);
 
     if (wb.buffer != nullptr) {
@@ -105,7 +107,7 @@ public:
   operator fc_IAllocator const * () { return bc->allocator; };
 
   virtual ~MockHeapBuilder() {
-    if (wb.buffer != nullptr) {
+    if (self_allocated_wb_buffer) {
       free(wb.buffer);
     }
   }
