@@ -40,7 +40,6 @@ public:
    * Builds the function that will test ALL the fields in a constructed Median block.
    */
   virtual std::function<void(BlockType*)> buildBlockFieldsTestFunc(void) {
-    auto thisCtorGroup = this;
     return [=](BlockType* block) {
       EXPECT_NE(block->previous_samples, nullptr);
       EXPECT_EQ(block->saved_sample_length, this->filter_length - 1);
@@ -54,7 +53,7 @@ public:
    */
   virtual size_t getExpectedAllocSum(void) {
     int saved_sample_length = filter_length - 1;
-    size_t size = sizeof(*dummy) + saved_sample_length * sizeof(dummy->previous_samples[0]);
+    size_t size = sizeof(BlockType) + saved_sample_length * sizeof(dummy->previous_samples[0]);
     return size;
   }
 
