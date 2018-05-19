@@ -99,6 +99,9 @@
     <ClCompile Include="..\..\source\include\fc_lib\fc_BuildCtxTest.cpp">
       <Filter>Source Files\fc_lib</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\include\fc_lib\templates\fc_DelayTest.cpp">
+      <Filter>Source Files\fc_lib\templates\blocks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\test\test_config.h">

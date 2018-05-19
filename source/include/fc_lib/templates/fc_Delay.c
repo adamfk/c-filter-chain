@@ -58,12 +58,20 @@ Delay* Delay_new(fc_BuildCtx* bc, uint16_t history_depth)
 }
 
 
+
+IBlock* Delay_new_iblock(fc_BuildCtx* bc, uint16_t history_depth)
+{
+  return (IBlock*)Delay_new(bc, history_depth);
+}
+
+
 /**
  * Class method.
  * Use to check if an IBlock is a Delay block.
  */
-bool Delay_Test_type(IBlock* some_block)
+bool Delay_Test_type(void* void_block)
 {
+  IBlock* some_block = (IBlock*)void_block;
   bool result = some_block->vtable->step == Delay_vtable.step;
   return result;
 }
