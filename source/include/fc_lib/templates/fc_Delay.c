@@ -33,7 +33,7 @@ Delay* Delay_new(fc_BuildCtx* bc, uint16_t history_depth)
   //try to allocate always to allow determining required size for full chain
   array = allocate_or_ret_fail_ptr(bc, sizeof(fc_PTYPE)*history_depth);
 
-  if (is_bad_ptr(self)) {
+  if (is_bad_ptr(array)) {
     success = false;
   }
 
@@ -50,6 +50,7 @@ Delay* Delay_new(fc_BuildCtx* bc, uint16_t history_depth)
     if (is_ok_ptr(array)) {
       fc_free(bc->allocator, array);
     }
+    self = fc_ALLOCATE_FAIL_PTR;
   }
 
   fc_BuildCtx_update_success_from_ptr(bc, self);
