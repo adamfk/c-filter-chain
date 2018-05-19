@@ -362,7 +362,7 @@ public:
 
       for (size_t alloc_index = 0; alloc_index < args->expected_allocations; alloc_index++)
       {
-        bool should_fail_alloc_x = args->alloc_permutation_i && (1 << alloc_index);
+        bool should_fail_alloc_x = (args->alloc_permutation_i & (1 << alloc_index) ) > 0;
 
         if (should_fail_alloc_x) {
           should_fail = true;
