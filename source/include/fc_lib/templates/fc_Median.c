@@ -40,32 +40,23 @@ Median* Median_new(fc_BuildCtx* bc, uint16_t length)
   fc_PTYPE* array;
 
   Median* self = allocate_or_ret_fail_ptr(bc, sizeof(Median));
-  if (is_bad_ptr(self)) {
-    success = false;
-  }
 
   //try to allocate always to allow determining required size for full chain
   array = allocate_or_ret_fail_ptr(bc, sizeof(fc_PTYPE)*saved_sample_length);
 
-  if (is_bad_ptr(array)) {
-    success = false;
-  }
 
-  if (success) {
+  if (is_bad_ptr(self) || is_bad_ptr(array)) {
+    //some part failed
+    fc_free(bc->allocator, self);
+    fc_free(bc->allocator, array);
+    self = fc_ALLOCATE_FAIL_PTR;
+  }
+  else {
     Median_ctor(self);
     self->working_buffer = bc->working_buffer;
     self->saved_sample_length = saved_sample_length;
     self->previous_samples = array;
     fc_BuildCtx_update_minimum_working_buffer(bc, Median_calc_buffer_size(length));
-  }
-  else {
-    //some part failed
-    if (is_ok_ptr(self)) {
-      fc_free(bc->allocator, self);
-    }
-    if (is_ok_ptr(array)) {
-      fc_free(bc->allocator, array);
-    }
   }
 
   fc_BuildCtx_update_success_from_ptr(bc, self);

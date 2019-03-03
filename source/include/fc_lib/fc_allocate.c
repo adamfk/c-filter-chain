@@ -24,7 +24,10 @@ void fc_free(fc_IAllocator const * const allocator, void* address) {
   if (!allocator) {
     return;
   }
-  fc_IAllocator_free(allocator, address);
+
+  if (is_ok_ptr(address)) {
+    fc_IAllocator_free(allocator, address);
+  }
 }
 
 

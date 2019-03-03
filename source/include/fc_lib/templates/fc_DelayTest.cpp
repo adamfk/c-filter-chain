@@ -8,9 +8,9 @@ using testing::Types;
 
 
 /**
- * Define which primitive types will be used to test the Median filter implementation.
+ * Define which primitive types will be used to test the Delay filter implementation.
  */
-typedef Types<fc32_Median, fc8_Median, fcflt_Median> TypesToTest;
+typedef Types<fc32_Delay, fc8_Delay, fcflt_Delay> TypesToTest;
 
 
 
@@ -23,27 +23,22 @@ static StepFunc<BlockType> get_step_test_filter_length_3_func(ICtorGroup<BlockTy
 
 
 /**
- * Define how the Median constructors will be tested. See `ICtorGroup` for more detail.
+ * Define how the Delay constructors will be tested. See `ICtorGroup` for more detail.
  */
 template <typename BlockType>
-class MedianCtorGroup : public StoredFuncsCtorGroup<BlockType> {
+class DelayCtorGroup : public StoredFuncsCtorGroup<BlockType> {
 
 public:
-  using StoredFuncsCtorGroup::StoredFuncsCtorGroup; //to inherit parent constructors
+
+  int saved_sample_length;
 
   /**
-   * Determines the filter length for all Median filter constructors in this group.
-   */
-  int filter_length;
-
-  /**
-   * Builds the function that will test ALL the fields in a constructed Median block.
+   * Builds the function that will test ALL the fields in a constructed Delay block.
    */
   virtual std::function<void(BlockType*)> buildBlockFieldsTestFunc(void) {
     return [=](BlockType* block) {
       EXPECT_NE(block->previous_samples, nullptr);
-      EXPECT_EQ(block->saved_sample_length, this->filter_length - 1);
-      EXPECT_NE(block->working_buffer, nullptr);
+      EXPECT_EQ(block->saved_sample_length, this->saved_sample_length);
     };
   }
 
@@ -52,7 +47,6 @@ public:
    * of the constructors in this group.
    */
   virtual size_t getExpectedAllocSum(void) {
-    int saved_sample_length = filter_length - 1;
     size_t size = sizeof(BlockType) + saved_sample_length * sizeof(dummy->previous_samples[0]);
     return size;
   }
@@ -67,7 +61,7 @@ public:
    * Descriptive text about this constructor group.
    */
   virtual std::string getDescription(void) {
-    std::string result = "filter length: " + std::to_string(filter_length);
+    std::string result = "filter length: " + std::to_string(saved_sample_length);
     return result;
   }
 };
@@ -79,17 +73,17 @@ public:
 
 /**
  * Provides methods that will allow the base `StandardBlockTester` class to 
- * test and validate the Median filter block implementation.
+ * test and validate the Delay filter block implementation.
  */
 template <typename BlockType> 
-class MedianTester : public StoredStandardBlockTester<BlockType>
+class DelayTester : public StoredStandardBlockTester<BlockType>
 {
 public:
   using PrimitiveType = PrimitiveType; //we inherit PrimitiveType, but this line helps intellisense
 
   /**
    * Defines "C++" wrapper functions that will exercise each and every "c" constructor function.
-   * All of the "C++" constructor functions MUST produce an equivalent Median filter block
+   * All of the "C++" constructor functions MUST produce an equivalent Delay filter block
    * when compared to each other. The constructed blocks must all function the same,
    * and have the same allocation pattern.
    */
@@ -114,24 +108,24 @@ public:
 
     const int filter_length = Randomization::get_int(1, 2000);
 
-    auto ctorGroup = new MedianCtorGroup<BlockType>();
+    auto ctorGroup = new DelayCtorGroup<BlockType>();
     
     ctorGroup->ctors = {
       [=](fc_BuildCtx* bc) {
         sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
-        return CppMedian_new<BlockType>(bc, filter_length);
+        return CppDelay_new<BlockType>(bc, filter_length);
       },
       [=](fc_BuildCtx* bc) {
         sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
-        return CppMedian_new_iblock<BlockType>(bc, filter_length);
+        return CppDelay_new_iblock<BlockType>(bc, filter_length);
       },
-      //Doesn't make sense to provide function constructing via `Median_ctor` as then you have to manually code 
-      // all the allocation failures which are already handled in `CppMedian_new` and `CppMedian_new_iblock`
+      //Doesn't make sense to provide function constructing via `Delay_ctor` as then you have to manually code 
+      // all the allocation failures which are already handled in `CppDelay_new` and `CppDelay_new_iblock`
     };
 
     //add random step tester that only ensures that the filter doesn't crash
     ctorGroup->addNoCrashStepTestFunc();
-    ctorGroup->filter_length = filter_length;
+    ctorGroup->saved_sample_length = filter_length;
 
     groups.push_back(ctorGroup);
 
@@ -140,18 +134,18 @@ public:
 
 
 private:
-  MedianCtorGroup<BlockType>* buildSimpleCtorsFromLength(uint16_t filter_length)
+  DelayCtorGroup<BlockType>* buildSimpleCtorsFromLength(uint16_t filter_length)
   {
-    auto ctorGroup = new MedianCtorGroup<BlockType>();
+    auto ctorGroup = new DelayCtorGroup<BlockType>();
 
     ctorGroup->ctors = {
       [=](fc_BuildCtx* bc) {
         sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
-        return CppMedian_new<BlockType>(bc, filter_length);
+        return CppDelay_new<BlockType>(bc, filter_length);
       },
       [=](fc_BuildCtx* bc) {
         sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
-        return CppMedian_new_iblock<BlockType>(bc, filter_length);
+        return CppDelay_new_iblock<BlockType>(bc, filter_length);
       },
       [=](fc_BuildCtx* bc) {
         sfcg_SET_CTOR_LOCATION_INFO(*ctorGroup);
@@ -159,16 +153,13 @@ private:
         //vanilla method of setting it up
         BlockType* block = (BlockType*)fc_IAllocator_allocate(bc->allocator, sizeof(BlockType));
         CppX_ctor(block);
-        block->working_buffer = bc->working_buffer;
-        block->saved_sample_length = filter_length - 1;
-        block->previous_samples = (PrimitiveType*)fc_IAllocator_allocate(bc->allocator, sizeof(PrimitiveType)*block->saved_sample_length);
-        size_t wb_size = sizeof(PrimitiveType) * filter_length;
-        fc_BuildCtx_update_minimum_working_buffer(bc, wb_size);
+        block->saved_sample_length = filter_length;
+        block->previous_samples = (PrimitiveType*)fc_IAllocator_allocate(bc->allocator, sizeof(block->previous_samples[0]) * block->saved_sample_length);
         return block;
       },
     };
 
-    ctorGroup->filter_length = filter_length;
+    ctorGroup->saved_sample_length = filter_length;
     return ctorGroup;
   }
 
@@ -179,40 +170,40 @@ private:
 template <typename BlockType, typename PrimitiveType>
 static StepFunc<BlockType> get_step_test_filter_length_3_func(ICtorGroup<BlockType>* ctorGroup) {
   auto func = [=](BlockType* block) {
-    //fc32_Median* median = (fc32_Median*)block; //uncomment line for when you want intellisense. Do not leave in though.
-    BlockType* median = block;
+    fc32_Delay* delay_block = (fc32_Delay*)block; //uncomment line for when you want intellisense. Do not leave in though.
+    //BlockType* delay_block = block;
+
+    const double errorTolerance = 0;
+    const size_t loopCount = 1;
 
     const int filter_length = 3;
 
-    //this test is for a Median filter of length 3
-    ASSERT_GE(median->saved_sample_length + 1, filter_length);
+    //this test is for a delay filter of length 3
+    ASSERT_GE(delay_block->saved_sample_length, filter_length);
 
-    //ensure working buffer setup
-    ASSERT_GE(median->working_buffer->size, filter_length * sizeof(median->previous_samples[0]));
+    CppX_preload(block, 0);
 
-    {
-      SCOPED_TRACE("First");
-      CppX_preload(median, 1);
-      vector<PrimitiveType> inputs = { 1, 7, 1, 1, 1 };
-      vector<PrimitiveType> expected_outputs = { 1, 1, 1, 1, 1 };
-      TestCommon::xtest_block(median, inputs, expected_outputs);
-    }
+    vector<InputOutput<PrimitiveType>> steps = {
+      InputOutput<PrimitiveType>{ 25 , 0   },
+      InputOutput<PrimitiveType>{ 44 , 0   },
+      InputOutput<PrimitiveType>{ 28 , 0   },
+      InputOutput<PrimitiveType>{ 122, 25  },
+      InputOutput<PrimitiveType>{ 100, 44  },  //step #5
+      InputOutput<PrimitiveType>{ 29 , 28  },  //step #6
+      InputOutput<PrimitiveType>{ 51 , 122 },  //step #7
+      InputOutput<PrimitiveType>{ 16 , 100 },  //step #8
+      InputOutput<PrimitiveType>{ 4  , 29  },  //step #9
+      InputOutput<PrimitiveType>{ 61 , 51  },  //step #10
+      InputOutput<PrimitiveType>{ 86 , 16  },  //step #11
+      InputOutput<PrimitiveType>{ 62 , 4   },  //step #12
+      InputOutput<PrimitiveType>{ 84 , 61  },  //step #13
+      InputOutput<PrimitiveType>{ 95 , 86  },  //step #14
+      InputOutput<PrimitiveType>{ 105, 62  },  //step #15
+      InputOutput<PrimitiveType>{ 112, 84  },  //step #16
+      InputOutput<PrimitiveType>{ 4  , 95  },  //step #17
+    };
 
-    {
-      SCOPED_TRACE("2nd");
-      CppX_preload(median, 1);
-      vector<PrimitiveType> inputs = { 1, 7, -7, 1, 1 };
-      vector<PrimitiveType> expected_outputs = { 1, 1, 1, 1, 1 };
-      TestCommon::xtest_block(median, inputs, expected_outputs);
-    }
-
-    {
-      SCOPED_TRACE("3rd");
-      CppX_preload(median, 1);
-      vector<PrimitiveType> inputs = { 1, 7, 7, 1, 1 };
-      vector<PrimitiveType> expected_outputs = { 1, 1, 7, 7, 1 };
-      TestCommon::xtest_block(median, inputs, expected_outputs);
-    }
+    TestCommon::test_steps_repeatedly(block, steps, loopCount, errorTolerance);
   };//end of test function
 
   return func;
@@ -223,9 +214,9 @@ static StepFunc<BlockType> get_step_test_filter_length_3_func(ICtorGroup<BlockTy
 
 
 //The following define which tester to use for particular types.
-template <> void* get_tester<fc8_Median>(void)   { return new MedianTester<fc8_Median>; }
-template <> void* get_tester<fc32_Median>(void)  { return new MedianTester<fc32_Median>; }
-template <> void* get_tester<fcflt_Median>(void) { return new MedianTester<fcflt_Median>; }
+template <> void* get_tester<fc8_Delay>(void)   { return new DelayTester<fc8_Delay>; }
+template <> void* get_tester<fc32_Delay>(void)  { return new DelayTester<fc32_Delay>; }
+template <> void* get_tester<fcflt_Delay>(void) { return new DelayTester<fcflt_Delay>; }
 
 
 
@@ -233,6 +224,6 @@ template <> void* get_tester<fcflt_Median>(void) { return new MedianTester<fcflt
 /**
  * Instantiate 
  */
-#undef Median
-INSTANTIATE_TYPED_TEST_CASE_P(Median, IBlockTests, TypesToTest);
+#undef Delay
+INSTANTIATE_TYPED_TEST_CASE_P(Delay, IBlockTests, TypesToTest);
 

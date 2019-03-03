@@ -22,34 +22,23 @@ void Delay_ctor(Delay* self)
 */
 Delay* Delay_new(fc_BuildCtx* bc, uint16_t history_depth)
 {
-  bool success = true;
   fc_PTYPE* array;
 
   Delay* self = allocate_or_ret_fail_ptr(bc, sizeof(Delay));
-  if (is_bad_ptr(self)) {
-    success = false;
-  }
 
   //try to allocate always to allow determining required size for full chain
   array = allocate_or_ret_fail_ptr(bc, sizeof(fc_PTYPE)*history_depth);
 
-  if (is_bad_ptr(self)) {
-    success = false;
+  if (is_bad_ptr(self) || is_bad_ptr(array)) {
+    //some part failed
+    fc_free(bc->allocator, self);
+    fc_free(bc->allocator, array);
+    self = fc_ALLOCATE_FAIL_PTR;
   }
-
-  if (success) {
+  else {
     Delay_ctor(self);
     self->saved_sample_length = history_depth;
     self->previous_samples = array;
-  }
-  else {
-    //some part failed
-    if (is_ok_ptr(self)) {
-      fc_free(bc->allocator, self);
-    }
-    if (is_ok_ptr(array)) {
-      fc_free(bc->allocator, array);
-    }
   }
 
   fc_BuildCtx_update_success_from_ptr(bc, self);
@@ -58,12 +47,20 @@ Delay* Delay_new(fc_BuildCtx* bc, uint16_t history_depth)
 }
 
 
+
+IBlock* Delay_new_iblock(fc_BuildCtx* bc, uint16_t history_depth)
+{
+  return (IBlock*)Delay_new(bc, history_depth);
+}
+
+
 /**
  * Class method.
  * Use to check if an IBlock is a Delay block.
  */
-bool Delay_Test_type(IBlock* some_block)
+bool Delay_Test_type(void* void_block)
 {
+  IBlock* some_block = (IBlock*)void_block;
   bool result = some_block->vtable->step == Delay_vtable.step;
   return result;
 }
